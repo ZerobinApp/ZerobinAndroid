@@ -21,7 +21,7 @@ class MyPageFragment : Fragment() {
     ): View? {
         myPageViewModel =
             ViewModelProvider(this).get(MypageViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_mypage, container, false)
+        val root = inflater.inflate(R.layout.fragment_my_page, container, false)
         val textView: TextView = root.findViewById(R.id.text_my_page)
         myPageViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
