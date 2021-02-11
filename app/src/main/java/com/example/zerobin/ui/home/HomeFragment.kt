@@ -4,28 +4,54 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
+import com.example.zerobin.databinding.FragmentHomeBinding
+import com.example.zerobin.ui.home.adapter.StoreAdapter
 
 class HomeFragment : Fragment() {
 
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
+
+    private val storeAdapter by lazy { StoreAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        savedInstanceState: Bundle?,
+    ): View {
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.vm = homeViewModel
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setStoreAdapter()
+        observeLiveData()
+        requestStoreList()
+
+    }
+
+    private fun setStoreAdapter() {
+        binding.storeRecyclerView.adapter = storeAdapter
+    }
+
+    private fun observeLiveData() {
+        homeViewModel.storeList.observe(viewLifecycleOwner) {
+            storeAdapter.setItem(it)
+        }
+    }
+
+    private fun requestStoreList() {
+        homeViewModel.requestStoreList()
     }
 }
