@@ -12,7 +12,7 @@ import com.example.zerobin.R
 
 class MyPageFragment : Fragment() {
 
-    private lateinit var myPageViewModel: MypageViewModel
+    private lateinit var myPageViewModel: MyPageViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,7 +20,7 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         myPageViewModel =
-            ViewModelProvider(this).get(MypageViewModel::class.java)
+            ViewModelProvider(this).get(MyPageViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_my_page, container, false)
         val textView: TextView = root.findViewById(R.id.text_my_page)
         myPageViewModel.text.observe(viewLifecycleOwner, Observer {
