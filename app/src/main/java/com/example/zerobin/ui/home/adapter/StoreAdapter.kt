@@ -26,7 +26,8 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class StoreViewHolder(private val binding: ItemStoreBinding) : RecyclerView.ViewHolder(binding.root) {
+    class StoreViewHolder(private val binding: ItemStoreBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(store: Store) {
             binding.store = store
         }

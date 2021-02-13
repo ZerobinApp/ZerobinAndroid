@@ -2,17 +2,27 @@ package com.example.zerobin.ui.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
+import com.example.zerobin.databinding.FragmentReviewBinding
+import com.example.zerobin.ui.home.adapter.ReviewAdapter
+
 
 class ReviewFragment : Fragment() {
 
     private lateinit var reviewViewModel: ReviewViewModel
+    private lateinit var binding: FragmentReviewBinding
+
+    //lateinit var reviewAdapter:ReviewAdapter
+    private val reviewAdapter by lazy { ReviewAdapter() }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,11 +31,42 @@ class ReviewFragment : Fragment() {
     ): View? {
         reviewViewModel =
             ViewModelProvider(this).get(ReviewViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_review, container, false)
-        val textView: TextView = root.findViewById(R.id.text_review)
-        reviewViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_review, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.reviewVM = reviewViewModel
+
+
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setReviewAdapter()
+        observeLiveData()
+        requestReviewList()
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> activity?.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setReviewAdapter() {
+        binding.reviewRecyclerview.adapter = reviewAdapter
+    }
+
+    private fun observeLiveData() {
+        reviewViewModel.reviewList.observe(viewLifecycleOwner) {
+            reviewAdapter.setItem(it)
+        }
+    }
+
+    private fun requestReviewList() {
+        reviewViewModel.requestReviewList()
+    }
+
 }
