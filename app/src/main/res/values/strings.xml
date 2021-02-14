@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_review">Review</string>
     <string name="title_my_page">My Page</string>
+    <string name="feature">특징</string>
+    <string name="review">후기</string>
+    <string name="make_review">리뷰작성</string>
 </resources>
