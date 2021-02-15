@@ -3,9 +3,19 @@
 
     <data>
 
+        <import type="kotlin.jvm.functions.Function1" />
+
+        <import type="kotlin.Unit" />
+
+        <import type="com.example.zerobin.model.Store"/>
+
         <variable
             name="store"
             type="com.example.zerobin.model.Store" />
+
+        <variable
+            name="onClick"
+            type="Function1&lt;Store, Unit>" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +32,8 @@
             android:background="@drawable/store_sample"
             android:paddingVertical="12dp"
             android:paddingStart="16dp"
-            android:paddingEnd="12dp">
+            android:paddingEnd="12dp"
+            android:onClick="@{() -> onClick.invoke(store)}">
 
             <TextView
                 android:id="@+id/storeName"
@@ -41,9 +52,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@{store.favorite ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
-                tools:src="@drawable/ic_favorite_24px"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_favorite_24px" />
 
             <TextView
                 android:layout_width="wrap_content"

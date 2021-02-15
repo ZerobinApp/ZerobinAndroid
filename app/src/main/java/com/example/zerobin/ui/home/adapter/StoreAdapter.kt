@@ -9,6 +9,7 @@ import com.example.zerobin.model.Store
 class StoreAdapter : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
 
     private var item = emptyArray<Store>()
+    var onClick: ((Store) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
         val binding = ItemStoreBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -16,7 +17,7 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
-        holder.bind(item[position])
+        holder.bind(item[position], onClick)
     }
 
     override fun getItemCount() = item.size
@@ -26,10 +27,10 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class StoreViewHolder(private val binding: ItemStoreBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(store: Store) {
+    class StoreViewHolder(private val binding: ItemStoreBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(store: Store, onClick: ((Store) -> Unit)?) {
             binding.store = store
+            binding.onClick = onClick
         }
     }
 }

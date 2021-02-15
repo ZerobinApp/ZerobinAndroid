@@ -1,5 +1,6 @@
 package com.example.zerobin.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentHomeBinding
 import com.example.zerobin.ui.home.adapter.StoreAdapter
+import com.example.zerobin.ui.home.store.StoreDetailActivity
 
 class HomeFragment : Fragment() {
 
@@ -38,7 +40,7 @@ class HomeFragment : Fragment() {
         setStoreAdapter()
         observeLiveData()
         requestStoreList()
-
+        setListener()
     }
 
     private fun setStoreAdapter() {
@@ -53,5 +55,14 @@ class HomeFragment : Fragment() {
 
     private fun requestStoreList() {
         homeViewModel.requestStoreList()
+    }
+    
+    private fun setListener() {
+        storeAdapter.onClick = { store ->
+            val intent = Intent(requireContext(), StoreDetailActivity::class.java).apply {
+                putExtra(StoreDetailActivity.EXTRA_STORE, store)
+            }
+            startActivity(intent)
+        }
     }
 }
