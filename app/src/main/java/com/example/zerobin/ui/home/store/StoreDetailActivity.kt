@@ -8,11 +8,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.ActivityStoreDetailBinding
 import com.example.zerobin.model.Store
+import com.example.zerobin.ui.home.adapter.StoreReviewAdapter
 
 class StoreDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoreDetailBinding
     private lateinit var storeDetailViewModel: StoreDetailViewModel
+
+    private val reviewStoreAdapter by lazy { StoreReviewAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +26,8 @@ class StoreDetailActivity : AppCompatActivity() {
         binding.vm = storeDetailViewModel
 
         requestStoreDetailData()
+        setReviewAdapter()
+        observeLiveData()
     }
 
     private fun requestStoreDetailData() {
@@ -34,6 +39,17 @@ class StoreDetailActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun observeLiveData() {
+        storeDetailViewModel.storeDetail.observe(this) {
+            reviewStoreAdapter.setItem(it)
+        }
+    }
+
+    private fun setReviewAdapter() {
+        binding.detailReviewRecyclerView.adapter = reviewStoreAdapter
+    }
+
 
     companion object {
         const val EXTRA_STORE = "EXTRA_STORE"

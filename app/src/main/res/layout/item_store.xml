@@ -7,7 +7,7 @@
 
         <import type="kotlin.Unit" />
 
-        <import type="com.example.zerobin.model.Store"/>
+        <import type="com.example.zerobin.model.Store" />
 
         <variable
             name="store"
