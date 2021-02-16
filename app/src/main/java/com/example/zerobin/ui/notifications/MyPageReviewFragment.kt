@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageReviewBinding
 import com.example.zerobin.ui.dashboard.ReviewViewModel
-import com.example.zerobin.ui.home.adapter.ReviewAdapter
+import com.example.zerobin.ui.dashboard.adapter.ReviewAdapter
 
 
 class MyPageReviewFragment : Fragment() {
@@ -20,7 +20,6 @@ class MyPageReviewFragment : Fragment() {
     private lateinit var binding: FragmentMyPageReviewBinding
     private lateinit var reviewViewModel: ReviewViewModel
 
-    //lateinit var reviewAdapter:ReviewAdapter
     private val reviewAdapter by lazy { ReviewAdapter() }
 
 
@@ -28,7 +27,7 @@ class MyPageReviewFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         reviewViewModel =
             ViewModelProvider(this).get(ReviewViewModel::class.java)
 

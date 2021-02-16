@@ -1,14 +1,11 @@
 package com.example.zerobin.ui.notifications
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageBinding
@@ -22,7 +19,7 @@ class MyPageFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         myPageViewModel =
             ViewModelProvider(this).get(MyPageViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)

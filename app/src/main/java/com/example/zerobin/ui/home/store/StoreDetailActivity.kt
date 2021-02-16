@@ -8,14 +8,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.ActivityStoreDetailBinding
 import com.example.zerobin.model.Store
-import com.example.zerobin.ui.home.adapter.StoreReviewAdapter
+import com.example.zerobin.ui.dashboard.adapter.ReviewAdapter
 
 class StoreDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoreDetailBinding
     private lateinit var storeDetailViewModel: StoreDetailViewModel
 
-    private val reviewStoreAdapter by lazy { StoreReviewAdapter() }
+    private val reviewStoreAdapter by lazy { ReviewAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class StoreDetailActivity : AppCompatActivity() {
 
     private fun observeLiveData() {
         storeDetailViewModel.storeDetail.observe(this) {
-            reviewStoreAdapter.setItem(it)
+            reviewStoreAdapter.setDetailReviewItem(it)
         }
     }
 
