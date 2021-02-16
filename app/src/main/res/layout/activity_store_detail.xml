@@ -268,6 +268,16 @@
                 app:layout_constraintBaseline_toBaselineOf="@id/review"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd" />
 
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detailReviewRecyclerView"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/review"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                tools:listitem="@layout/item_review" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

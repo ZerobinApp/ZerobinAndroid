@@ -23,17 +23,6 @@ class MainActivity : AppCompatActivity() {
 //            R.id.navigation_home, R.id.navigation_review, R.id.navigation_my_page))
         navView.setupWithNavController(navController)
 
-        setActionBar()
-
-    }
-
-    private fun setActionBar() {
-        val actionBar: ActionBar? = supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setDisplayShowTitleEnabled(false)
-            //actionBar.setTitle(title)
-        }
 
     }
 

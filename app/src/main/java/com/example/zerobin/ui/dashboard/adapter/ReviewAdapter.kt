@@ -1,12 +1,11 @@
-package com.example.zerobin.ui.home.adapter
+package com.example.zerobin.ui.dashboard.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zerobin.databinding.ItemReviewBinding
-import com.example.zerobin.databinding.ItemStoreBinding
 import com.example.zerobin.model.Review
-import com.example.zerobin.model.Store
+import com.example.zerobin.model.StoreDetail
 
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
@@ -25,6 +24,10 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
     fun setItem(arrayOfReviews: Array<Review>) {
         item = arrayOfReviews
+        notifyDataSetChanged()
+    }
+    fun setDetailReviewItem(arrayOfStores: StoreDetail) {
+        item = arrayOfStores.reviewList.toTypedArray()
         notifyDataSetChanged()
     }
 

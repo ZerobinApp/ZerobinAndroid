@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
     private fun requestStoreList() {
         homeViewModel.requestStoreList()
     }
-    
+
     private fun setListener() {
         storeAdapter.onClick = { store ->
             val intent = Intent(requireContext(), StoreDetailActivity::class.java).apply {

@@ -15,4 +15,5 @@ data class StoreDetail(
         val featureName: String,
         val featureDescription: String,
     )
+
 }
