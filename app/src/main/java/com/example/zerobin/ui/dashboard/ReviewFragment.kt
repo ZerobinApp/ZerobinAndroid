@@ -18,7 +18,6 @@ class ReviewFragment : Fragment() {
     private lateinit var reviewViewModel: ReviewViewModel
     private lateinit var binding: FragmentReviewBinding
 
-    //lateinit var reviewAdapter:ReviewAdapter
     private val reviewAdapter by lazy { ReviewAdapter() }
 
 

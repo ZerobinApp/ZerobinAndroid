@@ -9,7 +9,7 @@ import com.example.zerobin.model.StoreDetail
 
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
-    private var item = emptyArray<Review>()
+    private var item = ArrayList<Review>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewHolder {
         val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,12 +22,13 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
     override fun getItemCount() = item.size
 
-    fun setItem(arrayOfReviews: Array<Review>) {
+    fun setItem(arrayOfReviews: ArrayList<Review>) {
         item = arrayOfReviews
         notifyDataSetChanged()
     }
+
     fun setDetailReviewItem(arrayOfStores: StoreDetail) {
-        item = arrayOfStores.reviewList.toTypedArray()
+        item = arrayOfStores.reviewList
         notifyDataSetChanged()
     }
 
