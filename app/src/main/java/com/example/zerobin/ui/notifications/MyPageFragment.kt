@@ -29,6 +29,12 @@ class MyPageFragment : Fragment() {
         binding.nextBtnFavoriteReview.setOnClickListener {
             setFragment(MyPageReviewFragment())
         }
+        binding.nextBtnFavoriteStore.setOnClickListener {
+            setFragment(MyPageStoreFragment())
+        }
+        binding.nextBtnFavoriteStamp.setOnClickListener {
+            setFragment(MyPageStampFragment())
+        }
 
 
         return binding.root

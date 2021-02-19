@@ -77,10 +77,10 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
                         android:layout_height="wrap_content"
-                        android:src="@{review.favorite ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
+                        android:src="@{review.favorite ? @drawable/ic_baseline_local_florist_24 : null}"
                         app:layout_constraintTop_toTopOf="@+id/ConstraintLayoutImg"
                         app:layout_constraintEnd_toEndOf="@+id/ConstraintLayoutImg"
-                        tools:src="@drawable/ic_favorite_24px" />
+                        tools:src="@drawable/ic_baseline_local_florist_24" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>

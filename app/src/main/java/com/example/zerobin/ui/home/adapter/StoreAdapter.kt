@@ -8,7 +8,7 @@ import com.example.zerobin.model.Store
 
 class StoreAdapter : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
 
-    private var item = emptyArray<Store>()
+    private var item = ArrayList<Store>()
     var onClick: ((Store) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
@@ -22,7 +22,7 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
 
     override fun getItemCount() = item.size
 
-    fun setItem(arrayOfStores: Array<Store>) {
+    fun setItem(arrayOfStores: ArrayList<Store>) {
         item = arrayOfStores
         notifyDataSetChanged()
     }

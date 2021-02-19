@@ -1,23 +1,24 @@
-package com.example.zerobin.ui.home
+package com.example.zerobin.ui.notifications
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
-import com.example.zerobin.databinding.FragmentHomeBinding
-import com.example.zerobin.model.Store
+import com.example.zerobin.databinding.FragmentMyPageStoreBinding
 import com.example.zerobin.ui.home.adapter.StoreAdapter
 import com.example.zerobin.ui.home.store.StoreDetailActivity
 
-class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
-    private lateinit var homeViewModel: HomeViewModel
+class MyPageStoreFragment : Fragment() {
+
+    private lateinit var binding: FragmentMyPageStoreBinding
+
+    private lateinit var myPageViewModel: MyPageViewModel
 
     private val storeAdapter by lazy { StoreAdapter() }
 
@@ -26,11 +27,12 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        myPageViewModel = ViewModelProvider(this).get(MyPageViewModel::class.java)
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_store, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.vm = homeViewModel
+        binding.vm = myPageViewModel
 
         return binding.root
     }
@@ -49,15 +51,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        homeViewModel.storeList.observe(viewLifecycleOwner) {
+        myPageViewModel.myUser.observe(viewLifecycleOwner) {
+            storeAdapter.setItem(it.favoriteStore)
 
-
-            storeAdapter.setItem(it)
         }
     }
 
     private fun requestStoreList() {
-        homeViewModel.requestStoreList()
+        myPageViewModel.requestMyPage()
     }
 
     private fun setListener() {
@@ -68,4 +69,5 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
     }
+
 }

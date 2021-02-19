@@ -13,8 +13,8 @@ class ReviewViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    private val _reviewList = MutableLiveData<Array<Review>>()
-    val reviewList: LiveData<Array<Review>> = _reviewList
+    private val _reviewList = MutableLiveData<ArrayList<Review>>()
+    val reviewList: LiveData<ArrayList<Review>> = _reviewList
 
 
     fun requestReviewList() {
@@ -44,6 +44,13 @@ class ReviewViewModel : ViewModel() {
         )
 
         _reviewList.value =
-            arrayOf(tempReview1, tempReview2, tempReview3, tempReview1, tempReview2, tempReview3)
+            arrayListOf(
+                tempReview1,
+                tempReview2,
+                tempReview3,
+                tempReview1,
+                tempReview2,
+                tempReview3
+            )
     }
 }
