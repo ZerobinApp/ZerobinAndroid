@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="filter"
+            type="com.example.zerobin.ui.splash.filter.FilterViewModel" />
+
+
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.splash.filter.FilterActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/splash_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="친환경 소비에 대해 관심있는\n 키워드를 골라주세요!"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:backgroundTint="@drawable/bg_chip_color"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:text="#비건"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#EFD7AF"
+             />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@drawable/bg_chip_color"
+            app:checkedIconVisible="false"
+            android:text="#리필스테이션"
+            app:checkedIconTint="#1CD16A"
+            android:selectAllOnFocus="false"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#EFD7AF" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="30dp"
+            android:text="#생활용품"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#EFD7AF" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:text="#주방용품"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#EFD7AF" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:text="#업사이클링"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#EFD7AF" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:text="#욕실용품"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#EFD7AF" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:text="#식품"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#EFD7AF" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:text="#플라스틱 프리"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#EFD7AF" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="50dp"
+            android:text="#화장품"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#EFD7AF" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:text="#카페"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#EFD7AF" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/filterSelectNextBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="132dp"
+        android:layout_marginEnd="16dp"
+        android:text="친환경 소비 시작하기"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

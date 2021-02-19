@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentHomeBinding
-import com.example.zerobin.model.Store
 import com.example.zerobin.ui.home.adapter.StoreAdapter
 import com.example.zerobin.ui.home.store.StoreDetailActivity
 
