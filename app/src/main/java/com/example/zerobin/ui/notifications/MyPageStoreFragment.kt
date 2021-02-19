@@ -10,8 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageStoreBinding
-import com.example.zerobin.model.Store
-import com.example.zerobin.ui.home.HomeViewModel
 import com.example.zerobin.ui.home.adapter.StoreAdapter
 import com.example.zerobin.ui.home.store.StoreDetailActivity
 
@@ -19,7 +17,8 @@ import com.example.zerobin.ui.home.store.StoreDetailActivity
 class MyPageStoreFragment : Fragment() {
 
     private lateinit var binding: FragmentMyPageStoreBinding
-    private lateinit var homeViewModel: HomeViewModel
+
+    private lateinit var myPageViewModel: MyPageViewModel
 
     private val storeAdapter by lazy { StoreAdapter() }
 
@@ -28,12 +27,12 @@ class MyPageStoreFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        myPageViewModel = ViewModelProvider(this).get(MyPageViewModel::class.java)
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_store, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.vm = homeViewModel
+        binding.vm = myPageViewModel
 
         return binding.root
     }
@@ -52,19 +51,14 @@ class MyPageStoreFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        homeViewModel.storeList.observe(viewLifecycleOwner) {
-            val item = ArrayList<Store>()
-            for (i in it.indices) {
-                if (it[i].favorite) {
-                    item.add(it[i])
-                }
-            }
-            storeAdapter.setItem(item)
+        myPageViewModel.myUser.observe(viewLifecycleOwner) {
+            storeAdapter.setItem(it.favoriteStore)
+
         }
     }
 
     private fun requestStoreList() {
-        homeViewModel.requestStoreList()
+        myPageViewModel.requestMyPage()
     }
 
     private fun setListener() {

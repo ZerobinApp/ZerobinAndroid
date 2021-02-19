@@ -5,5 +5,6 @@ data class User(
     val nickname: String,
     val favoriteStoreCount: Int,
     val favoriteReviewCount: Int,
-    val ReviewList: ArrayList<Review>
+    val ReviewList: ArrayList<Review>,
+    val favoriteStore: ArrayList<Store>
 )

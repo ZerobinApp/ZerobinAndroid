@@ -13,12 +13,11 @@ import com.example.zerobin.model.Review
 import com.example.zerobin.ui.dashboard.adapter.ReviewAdapter
 
 
-
 class MyPageStampFragment : Fragment() {
 
 
     private lateinit var binding: FragmentMyPageStampBinding
-    private lateinit var homeViewModel: MyPageViewModel
+    private lateinit var myPageViewModel: MyPageViewModel
 
     private val myPageStampAdapter by lazy { ReviewAdapter() }
 
@@ -27,12 +26,12 @@ class MyPageStampFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        homeViewModel = ViewModelProvider(this).get(MyPageViewModel::class.java)
+        myPageViewModel = ViewModelProvider(this).get(MyPageViewModel::class.java)
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_stamp, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.reviewVM = homeViewModel
+        binding.reviewVM = myPageViewModel
 
         return binding.root
     }
@@ -51,7 +50,7 @@ class MyPageStampFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        homeViewModel.myUser.observe(viewLifecycleOwner) {
+        myPageViewModel.myUser.observe(viewLifecycleOwner) {
             val item = ArrayList<Review>()
             for (i in 0 until it.ReviewList.size) {
                 if (it.ReviewList[i].favorite) {
@@ -65,7 +64,7 @@ class MyPageStampFragment : Fragment() {
     }
 
     private fun requestStoreList() {
-        homeViewModel.requestMyPage()
+        myPageViewModel.requestMyPage()
     }
 
 /*    private fun setListener() {
