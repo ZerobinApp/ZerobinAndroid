@@ -21,6 +21,9 @@
         <activity android:name=".ui.home.store.StoreDetailActivity" />
         <activity android:name="com.example.zerobin.ui.splash.filter.FilterActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".ui.home.store.WriteReviewActivity" />
+        <activity android:name=".ui.home.store.WriteReviewSeedActivity" />
+
     </application>
 
 </manifest>

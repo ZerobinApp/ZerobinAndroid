@@ -10,275 +10,291 @@
             type="com.example.zerobin.ui.home.store.StoreDetailViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.home.store.StoreDetailActivity">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:context=".ui.home.store.StoreDetailActivity">
 
-            <ImageView
-                android:id="@+id/storeImage"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/store_sample"
-                app:layout_constraintDimensionRatio="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineStart"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="24dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineEnd"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="24dp" />
-
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_baseline_arrow_back_24"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{VM.storeDetail.hashTag}"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/btnBack"
-                tools:text="#해시태그  #해시태그  #해시태그" />
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:scaleType="center"
-                android:src="@{VM.storeDetail.favorite ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
-                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription"
-                tools:src="@drawable/ic_favorite_24px" />
-
-            <TextView
-                android:id="@+id/storeName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
-                android:text="@{VM.storeDetail.name}"
-                android:textColor="@color/black"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/storeImage"
-                tools:text="알맹상점" />
-
-            <TextView
-                android:id="@+id/storeAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@{VM.storeDetail.address}"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/storeName"
-                tools:text="서울특별시 마포구 월드컵로 49 2층" />
-
-            <View
-                android:id="@+id/divider1"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/storeAddress" />
-
-            <TextView
-                android:id="@+id/feature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/feature"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/divider1" />
-
-            <ImageView
-                android:id="@+id/featureImage1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="24dp"
-                android:src="@drawable/zerobin_logo_temp"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/feature"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/featureName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@{VM.storeDetail.featureList.get(0).featureName}"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@id/featureDescription1"
-                app:layout_constraintStart_toEndOf="@id/featureImage1"
-                app:layout_constraintTop_toTopOf="@id/featureImage1"
-                tools:text="특징번호 1 텍스트" />
-
-            <TextView
-                android:id="@+id/featureDescription1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{VM.storeDetail.featureList.get(0).featureDescription}"
-                app:layout_constraintBottom_toBottomOf="@id/featureImage1"
-                app:layout_constraintStart_toStartOf="@id/featureName1"
-                app:layout_constraintTop_toBottomOf="@id/featureName1"
-                tools:text="특징번호 1에 대한 부가설명" />
-
-            <ImageView
-                android:id="@+id/featureImage2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/zerobin_logo_temp"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/featureImage1"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/featureName2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@{VM.storeDetail.featureList.get(1).featureName}"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@id/featureDescription2"
-                app:layout_constraintStart_toEndOf="@id/featureImage2"
-                app:layout_constraintTop_toTopOf="@id/featureImage2"
-                tools:text="특징번호 2 텍스트" />
-
-            <TextView
-                android:id="@+id/featureDescription2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{VM.storeDetail.featureList.get(1).featureDescription}"
-                app:layout_constraintBottom_toBottomOf="@id/featureImage2"
-                app:layout_constraintStart_toStartOf="@id/featureName2"
-                app:layout_constraintTop_toBottomOf="@id/featureName2"
-                tools:text="특징번호 2에 대한 부가설명" />
-
-            <ImageView
-                android:id="@+id/featureImage3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/zerobin_logo_temp"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/featureImage2"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/featureName3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@{VM.storeDetail.featureList.get(2).featureName}"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@id/featureDescription3"
-                app:layout_constraintStart_toEndOf="@id/featureImage3"
-                app:layout_constraintTop_toTopOf="@id/featureImage3"
-                tools:text="특징번호 3 텍스트" />
-
-            <TextView
-                android:id="@+id/featureDescription3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{VM.storeDetail.featureList.get(2).featureDescription}"
-                app:layout_constraintBottom_toBottomOf="@id/featureImage3"
-                app:layout_constraintStart_toStartOf="@id/featureName3"
-                app:layout_constraintTop_toBottomOf="@id/featureName3"
-                tools:text="특징번호 3에 대한 부가설명" />
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/featureImage3" />
-
-            <TextView
-                android:id="@+id/storeDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:text="@{VM.storeDetail.storeDescription}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider2"
-                tools:text='"알맹상점은 용산구 이태원로123-45 한적한 골목에 위치한\n제로웨이스트 매장입니다. 블라블라 블라블라를 판매하고,\n일회용품과 블라블라 사용을 최소로\n하는것을 목표하고 있어요.블라블라 블라블라!"' />
-
-            <View
-                android:id="@+id/divider3"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/storeDescription" />
-
-            <TextView
-                android:id="@+id/review"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/review"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/divider3" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/make_review"
-                android:textSize="12sp"
-                app:layout_constraintBaseline_toBaselineOf="@id/review"
-                app:layout_constraintEnd_toEndOf="@id/guidelineEnd" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/detailReviewRecyclerView"
-                android:layout_marginTop="12dp"
-                app:layout_constraintTop_toBottomOf="@+id/review"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                tools:listitem="@layout/item_review" />
+                android:layout_height="match_parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/storeImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/store_sample"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
-    </androidx.core.widget.NestedScrollView>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineStart"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="24dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineEnd"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="24dp" />
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{VM.storeDetail.hashTag}"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/btnBack"
+                    tools:text="#해시태그  #해시태그  #해시태그" />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:scaleType="center"
+                    android:src="@{VM.storeDetail.favorite ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/ic_favorite_24px" />
+
+                <TextView
+                    android:id="@+id/storeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@{VM.storeDetail.name}"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/storeImage"
+                    tools:text="알맹상점" />
+
+                <TextView
+                    android:id="@+id/storeAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@{VM.storeDetail.address}"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/storeName"
+                    tools:text="서울특별시 마포구 월드컵로 49 2층" />
+
+                <View
+                    android:id="@+id/divider1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/grey"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/storeAddress" />
+
+                <TextView
+                    android:id="@+id/feature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/feature"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+                <ImageView
+                    android:id="@+id/featureImage1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="24dp"
+                    android:src="@drawable/zerobin_logo_temp"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/feature"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/featureName1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@{VM.storeDetail.featureList.get(0).featureName}"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@id/featureDescription1"
+                    app:layout_constraintStart_toEndOf="@id/featureImage1"
+                    app:layout_constraintTop_toTopOf="@id/featureImage1"
+                    tools:text="특징번호 1 텍스트" />
+
+                <TextView
+                    android:id="@+id/featureDescription1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{VM.storeDetail.featureList.get(0).featureDescription}"
+                    app:layout_constraintBottom_toBottomOf="@id/featureImage1"
+                    app:layout_constraintStart_toStartOf="@id/featureName1"
+                    app:layout_constraintTop_toBottomOf="@id/featureName1"
+                    tools:text="특징번호 1에 대한 부가설명" />
+
+                <ImageView
+                    android:id="@+id/featureImage2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/zerobin_logo_temp"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/featureImage1"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/featureName2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@{VM.storeDetail.featureList.get(1).featureName}"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@id/featureDescription2"
+                    app:layout_constraintStart_toEndOf="@id/featureImage2"
+                    app:layout_constraintTop_toTopOf="@id/featureImage2"
+                    tools:text="특징번호 2 텍스트" />
+
+                <TextView
+                    android:id="@+id/featureDescription2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{VM.storeDetail.featureList.get(1).featureDescription}"
+                    app:layout_constraintBottom_toBottomOf="@id/featureImage2"
+                    app:layout_constraintStart_toStartOf="@id/featureName2"
+                    app:layout_constraintTop_toBottomOf="@id/featureName2"
+                    tools:text="특징번호 2에 대한 부가설명" />
+
+                <ImageView
+                    android:id="@+id/featureImage3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/zerobin_logo_temp"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/featureImage2"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/featureName3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@{VM.storeDetail.featureList.get(2).featureName}"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@id/featureDescription3"
+                    app:layout_constraintStart_toEndOf="@id/featureImage3"
+                    app:layout_constraintTop_toTopOf="@id/featureImage3"
+                    tools:text="특징번호 3 텍스트" />
+
+                <TextView
+                    android:id="@+id/featureDescription3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{VM.storeDetail.featureList.get(2).featureDescription}"
+                    app:layout_constraintBottom_toBottomOf="@id/featureImage3"
+                    app:layout_constraintStart_toStartOf="@id/featureName3"
+                    app:layout_constraintTop_toBottomOf="@id/featureName3"
+                    tools:text="특징번호 3에 대한 부가설명" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/grey"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/featureImage3" />
+
+                <TextView
+                    android:id="@+id/storeDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="@{VM.storeDetail.storeDescription}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider2"
+                    tools:text='"알맹상점은 용산구 이태원로123-45 한적한 골목에 위치한\n제로웨이스트 매장입니다. 블라블라 블라블라를 판매하고,\n일회용품과 블라블라 사용을 최소로\n하는것을 목표하고 있어요.블라블라 블라블라!"' />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/grey"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/storeDescription" />
+
+                <TextView
+                    android:id="@+id/review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/review"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/make_review"
+                    android:textSize="12sp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/review"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailReviewRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="12dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/review"
+                    tools:listitem="@layout/item_review" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:backgroundTint="@color/black"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
