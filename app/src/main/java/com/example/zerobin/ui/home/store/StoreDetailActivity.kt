@@ -1,5 +1,6 @@
 package com.example.zerobin.ui.home.store
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,7 @@ class StoreDetailActivity : AppCompatActivity() {
         requestStoreDetailData()
         setReviewAdapter()
         observeLiveData()
+        setOnClickListener()
     }
 
     private fun requestStoreDetailData() {
@@ -48,6 +50,17 @@ class StoreDetailActivity : AppCompatActivity() {
 
     private fun setReviewAdapter() {
         binding.detailReviewRecyclerView.adapter = reviewStoreAdapter
+    }
+
+    private fun setOnClickListener() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
+        binding.floatingActionButton.setOnClickListener {
+            val intent = Intent(this, WriteReviewSeedActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 
