@@ -3,7 +3,6 @@ package com.example.zerobin.ui.splash.filter
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import com.example.zerobin.MainActivity
 import com.example.zerobin.R
