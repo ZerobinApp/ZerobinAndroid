@@ -18,8 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.home.store.StoreDetailActivity"/>
+        <activity android:name=".ui.home.store.StoreDetailActivity" />
+        <activity android:name=".ui.home.store.WriteReviewActivity" />
+        <activity android:name=".ui.home.store.WriteReviewSeedActivity" />
     </application>
 
 </manifest>
