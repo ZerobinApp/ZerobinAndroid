@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.zerobin.model.Review
-import com.example.zerobin.model.Store
 
 class ReviewViewModel : ViewModel() {
 
