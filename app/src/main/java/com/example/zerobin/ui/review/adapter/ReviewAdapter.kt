@@ -1,4 +1,4 @@
-package com.example.zerobin.ui.dashboard.adapter
+package com.example.zerobin.ui.review.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

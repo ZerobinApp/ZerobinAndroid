@@ -1,4 +1,4 @@
-package com.example.zerobin.ui.dashboard
+package com.example.zerobin.ui.review
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentReviewBinding
-import com.example.zerobin.ui.dashboard.adapter.ReviewAdapter
+import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
 
 class ReviewFragment : Fragment() {

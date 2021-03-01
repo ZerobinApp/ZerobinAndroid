@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="24dp"
         android:paddingTop="8dp"
-        tools:context=".ui.dashboard.ReviewFragment">
+        tools:context=".ui.review.ReviewFragment">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

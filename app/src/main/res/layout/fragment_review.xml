@@ -7,7 +7,7 @@
 
         <variable
             name="review_VM"
-            type="com.example.zerobin.ui.dashboard.ReviewViewModel" />
+            type="com.example.zerobin.ui.review.ReviewViewModel" />
 
     </data>
 
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="24dp"
         android:paddingTop="8dp"
-        tools:context=".ui.dashboard.ReviewFragment">
+        tools:context=".ui.review.ReviewFragment">
 
         <ImageView
             android:id="@+id/btnSearch"

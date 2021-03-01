@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageReviewBinding
-import com.example.zerobin.ui.dashboard.adapter.ReviewAdapter
+import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
 
 class MyPageReviewFragment : Fragment() {
@@ -25,7 +25,7 @@ class MyPageReviewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         myPageReviewViewModel =
             ViewModelProvider(this).get(MyPageViewModel::class.java)

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_review"
-        android:name="com.example.zerobin.ui.dashboard.ReviewFragment"
+        android:name="com.example.zerobin.ui.review.ReviewFragment"
         android:label="@string/title_review"
         tools:layout="@layout/fragment_review" >
     </fragment>
