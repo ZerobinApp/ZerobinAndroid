@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zerobin.databinding.ItemShopBinding
-import com.example.zerobin.model.Shop
+import com.example.zerobin.domain.entity.Shop
 
 class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
 

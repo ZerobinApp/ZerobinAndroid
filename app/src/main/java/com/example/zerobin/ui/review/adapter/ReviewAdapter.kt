@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zerobin.databinding.ItemReviewBinding
-import com.example.zerobin.model.Review
-import com.example.zerobin.model.ShopDetail
+import com.example.zerobin.domain.entity.Review
+import com.example.zerobin.domain.entity.ShopDetail
 
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
