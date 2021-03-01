@@ -1,5 +1,6 @@
-package com.example.zerobin.ui.notifications
+package com.example.zerobin.ui.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,18 +9,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
-import com.example.zerobin.databinding.FragmentMyPageStampBinding
-import com.example.zerobin.model.Review
-import com.example.zerobin.ui.review.adapter.ReviewAdapter
+import com.example.zerobin.databinding.FragmentMyPageShopBinding
+import com.example.zerobin.ui.home.adapter.ShopAdapter
+import com.example.zerobin.ui.home.shop.ShopDetailActivity
 
 
-class MyPageStampFragment : Fragment() {
+class MyPageShopFragment : Fragment() {
 
+    private lateinit var binding: FragmentMyPageShopBinding
 
-    private lateinit var binding: FragmentMyPageStampBinding
     private lateinit var myPageViewModel: MyPageViewModel
 
-    private val myPageStampAdapter by lazy { ReviewAdapter() }
+    private val shopAdapter by lazy { ShopAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,9 +30,9 @@ class MyPageStampFragment : Fragment() {
         myPageViewModel = ViewModelProvider(this).get(MyPageViewModel::class.java)
 
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_stamp, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_shop, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.reviewVM = myPageViewModel
+        binding.vm = myPageViewModel
 
         return binding.root
     }
@@ -42,23 +43,16 @@ class MyPageStampFragment : Fragment() {
         setShopAdapter()
         observeLiveData()
         requestShopList()
-        //setListener()
+        setListener()
     }
 
     private fun setShopAdapter() {
-        binding.myPageStampRecyclerView.adapter = myPageStampAdapter
+        binding.shopRecyclerView.adapter = shopAdapter
     }
 
     private fun observeLiveData() {
         myPageViewModel.myUser.observe(viewLifecycleOwner) {
-            val item = ArrayList<Review>()
-            for (i in 0 until it.ReviewList.size) {
-                if (it.ReviewList[i].favorite) {
-
-                    item.add(it.ReviewList[i])
-                }
-            }
-            myPageStampAdapter.setItem(item)
+//            shopAdapter.setItem(it.favoriteShop)
 
         }
     }
@@ -67,13 +61,13 @@ class MyPageStampFragment : Fragment() {
         myPageViewModel.requestMyPage()
     }
 
-/*    private fun setListener() {
-        myPageStampAdapter.onClick = { shop ->
+    private fun setListener() {
+        shopAdapter.onClick = { shop ->
             val intent = Intent(requireContext(), ShopDetailActivity::class.java).apply {
                 putExtra(ShopDetailActivity.EXTRA_SHOP, shop)
             }
             startActivity(intent)
         }
-    }*/
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.example.zerobin.ui.notifications
+package com.example.zerobin.ui.mypage
 
 
 import androidx.lifecycle.LiveData

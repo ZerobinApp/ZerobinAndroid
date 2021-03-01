@@ -1,4 +1,4 @@
-package com.example.zerobin.ui.notifications
+package com.example.zerobin.ui.mypage
 
 import android.os.Bundle
 import android.view.LayoutInflater
