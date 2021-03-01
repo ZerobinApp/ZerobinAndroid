@@ -29,8 +29,8 @@ class MyPageFragment : Fragment() {
         binding.nextBtnFavoriteReview.setOnClickListener {
             setFragment(MyPageReviewFragment())
         }
-        binding.nextBtnFavoriteStore.setOnClickListener {
-            setFragment(MyPageStoreFragment())
+        binding.nextBtnFavoriteShop.setOnClickListener {
+            setFragment(MyPageShopFragment())
         }
         binding.nextBtnFavoriteStamp.setOnClickListener {
             setFragment(MyPageStampFragment())

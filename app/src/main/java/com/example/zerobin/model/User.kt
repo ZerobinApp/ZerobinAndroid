@@ -3,8 +3,8 @@ package com.example.zerobin.model
 data class User(
     val email: String,
     val nickname: String,
-    val favoriteStoreCount: Int,
+    val favoriteShopCount: Int,
     val favoriteReviewCount: Int,
     val ReviewList: ArrayList<Review>,
-    val favoriteStore: ArrayList<Store>
+    val favoriteShop: ArrayList<Shop>
 )

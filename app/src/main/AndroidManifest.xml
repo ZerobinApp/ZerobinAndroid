@@ -18,12 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.home.store.StoreDetailActivity" />
+        <activity android:name=".ui.home.shop.ShopDetailActivity" />
         <activity android:name="com.example.zerobin.ui.splash.filter.FilterActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.home.store.WriteReviewActivity" />
-        <activity android:name=".ui.home.store.WriteReviewSeedActivity" />
-
+        <activity android:name=".ui.home.shop.WriteReviewActivity" />
+        <activity android:name=".ui.home.shop.WriteReviewSeedActivity" />
     </application>
 
 </manifest>

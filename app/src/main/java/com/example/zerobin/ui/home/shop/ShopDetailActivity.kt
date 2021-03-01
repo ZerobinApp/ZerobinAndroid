@@ -1,4 +1,4 @@
-package com.example.zerobin.ui.home.store
+package com.example.zerobin.ui.home.shop
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,35 +7,35 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
-import com.example.zerobin.databinding.ActivityStoreDetailBinding
-import com.example.zerobin.model.Store
+import com.example.zerobin.databinding.ActivityShopDetailBinding
+import com.example.zerobin.model.Shop
 import com.example.zerobin.ui.dashboard.adapter.ReviewAdapter
 
-class StoreDetailActivity : AppCompatActivity() {
+class ShopDetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityStoreDetailBinding
-    private lateinit var storeDetailViewModel: StoreDetailViewModel
+    private lateinit var binding: ActivityShopDetailBinding
+    private lateinit var shopDetailViewModel: ShopDetailViewModel
 
-    private val reviewStoreAdapter by lazy { ReviewAdapter() }
+    private val reviewShopAdapter by lazy { ReviewAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        storeDetailViewModel = ViewModelProvider(this).get(StoreDetailViewModel::class.java)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_store_detail)
+        shopDetailViewModel = ViewModelProvider(this).get(ShopDetailViewModel::class.java)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_shop_detail)
         binding.lifecycleOwner = this
-        binding.vm = storeDetailViewModel
+        binding.vm = shopDetailViewModel
 
-        requestStoreDetailData()
+        requestShopDetailData()
         setReviewAdapter()
         observeLiveData()
         setOnClickListener()
     }
 
-    private fun requestStoreDetailData() {
-        val store = intent?.getParcelableExtra(EXTRA_STORE) as? Store
-        store?.let {
-            storeDetailViewModel.requestStoreDetailData(it)
+    private fun requestShopDetailData() {
+        val shop = intent?.getParcelableExtra(EXTRA_SHOP) as? Shop
+        shop?.let {
+            shopDetailViewModel.requestShopDetailData(it)
         } ?: run {
             Toast.makeText(this, "잘못된 접근입니다.", Toast.LENGTH_SHORT).show()
             finish()
@@ -43,13 +43,13 @@ class StoreDetailActivity : AppCompatActivity() {
     }
 
     private fun observeLiveData() {
-        storeDetailViewModel.storeDetail.observe(this) {
-            reviewStoreAdapter.setDetailReviewItem(it)
+        shopDetailViewModel.shopDetail.observe(this) {
+            reviewShopAdapter.setDetailReviewItem(it)
         }
     }
 
     private fun setReviewAdapter() {
-        binding.detailReviewRecyclerView.adapter = reviewStoreAdapter
+        binding.detailReviewRecyclerView.adapter = reviewShopAdapter
     }
 
     private fun setOnClickListener() {
@@ -65,6 +65,6 @@ class StoreDetailActivity : AppCompatActivity() {
 
 
     companion object {
-        const val EXTRA_STORE = "EXTRA_STORE"
+        const val EXTRA_SHOP = "EXTRA_SHOP"
     }
 }

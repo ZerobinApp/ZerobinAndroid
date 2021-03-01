@@ -7,7 +7,7 @@
 
         <variable
             name="VM"
-            type="com.example.zerobin.ui.home.store.StoreDetailViewModel" />
+            type="com.example.zerobin.ui.home.shop.ShopDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,18 +17,18 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.home.store.StoreDetailActivity">
+            tools:context=".ui.home.shop.ShopDetailActivity">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/storeImage"
+                    android:id="@+id/shopImage"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/store_sample"
+                    android:src="@drawable/shop_sample"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{VM.storeDetail.hashTag}"
+                    android:text="@{VM.shopDetail.hashTag}"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/btnBack"
@@ -72,36 +72,36 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:scaleType="center"
-                    android:src="@{VM.storeDetail.favorite ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
+                    android:src="@{VM.shopDetail.favorite ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
                     tools:src="@drawable/ic_favorite_24px" />
 
                 <TextView
-                    android:id="@+id/storeName"
+                    android:id="@+id/shopName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="20dp"
-                    android:text="@{VM.storeDetail.name}"
+                    android:text="@{VM.shopDetail.name}"
                     android:textColor="@color/black"
                     android:textSize="28sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/storeImage"
+                    app:layout_constraintTop_toBottomOf="@id/shopImage"
                     tools:text="알맹상점" />
 
                 <TextView
-                    android:id="@+id/storeAddress"
+                    android:id="@+id/shopAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@{VM.storeDetail.address}"
+                    android:text="@{VM.shopDetail.address}"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                    app:layout_constraintTop_toBottomOf="@id/storeName"
+                    app:layout_constraintTop_toBottomOf="@id/shopName"
                     tools:text="서울특별시 마포구 월드컵로 49 2층" />
 
                 <View
@@ -112,7 +112,7 @@
                     android:background="@color/grey"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                    app:layout_constraintTop_toBottomOf="@id/storeAddress" />
+                    app:layout_constraintTop_toBottomOf="@id/shopAddress" />
 
                 <TextView
                     android:id="@+id/feature"
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="@{VM.storeDetail.featureList.get(0).featureName}"
+                    android:text="@{VM.shopDetail.featureList.get(0).featureName}"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toTopOf="@id/featureDescription1"
                     app:layout_constraintStart_toEndOf="@id/featureImage1"
@@ -151,7 +151,7 @@
                     android:id="@+id/featureDescription1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{VM.storeDetail.featureList.get(0).featureDescription}"
+                    android:text="@{VM.shopDetail.featureList.get(0).featureDescription}"
                     app:layout_constraintBottom_toBottomOf="@id/featureImage1"
                     app:layout_constraintStart_toStartOf="@id/featureName1"
                     app:layout_constraintTop_toBottomOf="@id/featureName1"
@@ -172,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="@{VM.storeDetail.featureList.get(1).featureName}"
+                    android:text="@{VM.shopDetail.featureList.get(1).featureName}"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toTopOf="@id/featureDescription2"
                     app:layout_constraintStart_toEndOf="@id/featureImage2"
@@ -183,7 +183,7 @@
                     android:id="@+id/featureDescription2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{VM.storeDetail.featureList.get(1).featureDescription}"
+                    android:text="@{VM.shopDetail.featureList.get(1).featureDescription}"
                     app:layout_constraintBottom_toBottomOf="@id/featureImage2"
                     app:layout_constraintStart_toStartOf="@id/featureName2"
                     app:layout_constraintTop_toBottomOf="@id/featureName2"
@@ -204,7 +204,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="@{VM.storeDetail.featureList.get(2).featureName}"
+                    android:text="@{VM.shopDetail.featureList.get(2).featureName}"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toTopOf="@id/featureDescription3"
                     app:layout_constraintStart_toEndOf="@id/featureImage3"
@@ -215,7 +215,7 @@
                     android:id="@+id/featureDescription3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{VM.storeDetail.featureList.get(2).featureDescription}"
+                    android:text="@{VM.shopDetail.featureList.get(2).featureDescription}"
                     app:layout_constraintBottom_toBottomOf="@id/featureImage3"
                     app:layout_constraintStart_toStartOf="@id/featureName3"
                     app:layout_constraintTop_toBottomOf="@id/featureName3"
@@ -232,12 +232,12 @@
                     app:layout_constraintTop_toBottomOf="@id/featureImage3" />
 
                 <TextView
-                    android:id="@+id/storeDescription"
+                    android:id="@+id/shopDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:gravity="center"
-                    android:text="@{VM.storeDetail.storeDescription}"
+                    android:text="@{VM.shopDetail.shopDescription}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/divider2"
@@ -251,7 +251,7 @@
                     android:background="@color/grey"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                    app:layout_constraintTop_toBottomOf="@id/storeDescription" />
+                    app:layout_constraintTop_toBottomOf="@id/shopDescription" />
 
                 <TextView
                     android:id="@+id/review"
