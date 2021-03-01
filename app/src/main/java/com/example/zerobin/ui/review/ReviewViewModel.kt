@@ -1,4 +1,4 @@
-package com.example.zerobin.ui.dashboard
+package com.example.zerobin.ui.review
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

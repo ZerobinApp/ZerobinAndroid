@@ -1,4 +1,4 @@
-package com.example.zerobin.ui.notifications
+package com.example.zerobin.ui.review
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,15 +9,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
-import com.example.zerobin.databinding.FragmentMyPageReviewBinding
-import com.example.zerobin.ui.dashboard.adapter.ReviewAdapter
+import com.example.zerobin.databinding.FragmentReviewBinding
+import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
 
-class MyPageReviewFragment : Fragment() {
+class ReviewFragment : Fragment() {
 
-
-    private lateinit var binding: FragmentMyPageReviewBinding
-    private lateinit var myPageReviewViewModel: MyPageViewModel
+    private lateinit var reviewViewModel: ReviewViewModel
+    private lateinit var binding: FragmentReviewBinding
 
     private val reviewAdapter by lazy { ReviewAdapter() }
 
@@ -26,15 +25,12 @@ class MyPageReviewFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        myPageReviewViewModel =
-            ViewModelProvider(this).get(MyPageViewModel::class.java)
-
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_review, container, false)
+    ): View? {
+        reviewViewModel =
+            ViewModelProvider(this).get(ReviewViewModel::class.java)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_review, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
-        binding.reviewVM = myPageReviewViewModel
+        binding.reviewVM = reviewViewModel
 
 
         return binding.root
@@ -57,17 +53,17 @@ class MyPageReviewFragment : Fragment() {
     }
 
     private fun setReviewAdapter() {
-        binding.myPageReviewRecyclerView.adapter = reviewAdapter
+        binding.reviewRecyclerView.adapter = reviewAdapter
     }
 
     private fun observeLiveData() {
-        myPageReviewViewModel.myUser.observe(viewLifecycleOwner) {
-            reviewAdapter.setItem(it.ReviewList)
+        reviewViewModel.reviewList.observe(viewLifecycleOwner) {
+            reviewAdapter.setItem(it)
         }
     }
 
     private fun requestReviewList() {
-        myPageReviewViewModel.requestMyPage()
+        reviewViewModel.requestReviewList()
     }
 
 }

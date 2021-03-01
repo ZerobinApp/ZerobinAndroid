@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -7,20 +9,18 @@
 
         <import type="kotlin.Unit" />
 
-        <import type="com.example.zerobin.model.Store" />
+        <import type="com.example.zerobin.model.Shop" />
 
         <variable
-            name="store"
-            type="com.example.zerobin.model.Store" />
+            name="shop"
+            type="com.example.zerobin.model.Shop" />
 
         <variable
             name="onClick"
-            type="Function1&lt;Store, Unit>" />
+            type="Function1&lt;Shop, Unit>" />
     </data>
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_marginBottom="24dp"
@@ -29,17 +29,17 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/store_sample"
+            android:background="@drawable/shop_sample"
             android:paddingVertical="12dp"
             android:paddingStart="16dp"
             android:paddingEnd="12dp"
-            android:onClick="@{() -> onClick.invoke(store)}">
+            android:onClick="@{() -> onClick.invoke(shop)}">
 
             <TextView
-                android:id="@+id/storeName"
+                android:id="@+id/shopName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{store.name}"
+                android:text="@{shop.name}"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -51,15 +51,16 @@
                 android:id="@+id/favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@{store.favorite ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
+                android:src="@{shop.favorite ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_favorite_24px" />
+                tools:src="@drawable/ic_favorite_24px"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{store.address}"
+                android:text="@{shop.address}"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"

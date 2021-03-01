@@ -1,4 +1,4 @@
-package com.example.zerobin.ui.notifications
+package com.example.zerobin.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,18 +9,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
-import com.example.zerobin.databinding.FragmentMyPageStoreBinding
-import com.example.zerobin.ui.home.adapter.StoreAdapter
-import com.example.zerobin.ui.home.store.StoreDetailActivity
+import com.example.zerobin.databinding.FragmentMyPageShopBinding
+import com.example.zerobin.ui.home.adapter.ShopAdapter
+import com.example.zerobin.ui.home.shop.ShopDetailActivity
 
 
-class MyPageStoreFragment : Fragment() {
+class MyPageShopFragment : Fragment() {
 
-    private lateinit var binding: FragmentMyPageStoreBinding
+    private lateinit var binding: FragmentMyPageShopBinding
 
     private lateinit var myPageViewModel: MyPageViewModel
 
-    private val storeAdapter by lazy { StoreAdapter() }
+    private val shopAdapter by lazy { ShopAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +30,7 @@ class MyPageStoreFragment : Fragment() {
         myPageViewModel = ViewModelProvider(this).get(MyPageViewModel::class.java)
 
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_store, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_shop, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = myPageViewModel
 
@@ -40,31 +40,31 @@ class MyPageStoreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setStoreAdapter()
+        setShopAdapter()
         observeLiveData()
-        requestStoreList()
+        requestShopList()
         setListener()
     }
 
-    private fun setStoreAdapter() {
-        binding.storeRecyclerView.adapter = storeAdapter
+    private fun setShopAdapter() {
+        binding.shopRecyclerView.adapter = shopAdapter
     }
 
     private fun observeLiveData() {
         myPageViewModel.myUser.observe(viewLifecycleOwner) {
-            storeAdapter.setItem(it.favoriteStore)
+//            shopAdapter.setItem(it.favoriteShop)
 
         }
     }
 
-    private fun requestStoreList() {
+    private fun requestShopList() {
         myPageViewModel.requestMyPage()
     }
 
     private fun setListener() {
-        storeAdapter.onClick = { store ->
-            val intent = Intent(requireContext(), StoreDetailActivity::class.java).apply {
-                putExtra(StoreDetailActivity.EXTRA_STORE, store)
+        shopAdapter.onClick = { shop ->
+            val intent = Intent(requireContext(), ShopDetailActivity::class.java).apply {
+                putExtra(ShopDetailActivity.EXTRA_SHOP, shop)
             }
             startActivity(intent)
         }

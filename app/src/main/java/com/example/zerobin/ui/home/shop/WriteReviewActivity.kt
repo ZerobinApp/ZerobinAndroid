@@ -1,4 +1,4 @@
-package com.example.zerobin.ui.home.store
+package com.example.zerobin.ui.home.shop
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

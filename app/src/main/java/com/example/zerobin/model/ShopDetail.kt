@@ -1,13 +1,13 @@
 package com.example.zerobin.model
 
-data class StoreDetail(
+data class ShopDetail(
     val name: String,
     val hashTag: String,
     val favorite: Boolean,
     val address: String,
     val imageUrlList: List<String>,
     val featureList: List<Feature>,
-    val storeDescription: String,
+    val shopDescription: String,
     val reviewList: ArrayList<Review>,
 ) {
     data class Feature(

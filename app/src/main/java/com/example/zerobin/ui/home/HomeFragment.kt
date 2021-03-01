@@ -10,15 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentHomeBinding
-import com.example.zerobin.ui.home.adapter.StoreAdapter
-import com.example.zerobin.ui.home.store.StoreDetailActivity
+import com.example.zerobin.ui.home.adapter.ShopAdapter
+import com.example.zerobin.ui.home.shop.ShopDetailActivity
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
 
-    private val storeAdapter by lazy { StoreAdapter() }
+    private val shopAdapter by lazy { ShopAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,32 +37,32 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setStoreAdapter()
+        setShopAdapter()
         observeLiveData()
-        requestStoreList()
+        requestShopList()
         setListener()
     }
 
-    private fun setStoreAdapter() {
-        binding.storeRecyclerView.adapter = storeAdapter
+    private fun setShopAdapter() {
+        binding.shopRecyclerView.adapter = shopAdapter
     }
 
     private fun observeLiveData() {
-        homeViewModel.storeList.observe(viewLifecycleOwner) {
+        homeViewModel.shopList.observe(viewLifecycleOwner) {
 
 
-            storeAdapter.setItem(it)
+            shopAdapter.setItem(it)
         }
     }
 
-    private fun requestStoreList() {
-        homeViewModel.requestStoreList()
+    private fun requestShopList() {
+        homeViewModel.requestShopList()
     }
 
     private fun setListener() {
-        storeAdapter.onClick = { store ->
-            val intent = Intent(requireContext(), StoreDetailActivity::class.java).apply {
-                putExtra(StoreDetailActivity.EXTRA_STORE, store)
+        shopAdapter.onClick = { shop ->
+            val intent = Intent(requireContext(), ShopDetailActivity::class.java).apply {
+                putExtra(ShopDetailActivity.EXTRA_SHOP, shop)
             }
             startActivity(intent)
         }

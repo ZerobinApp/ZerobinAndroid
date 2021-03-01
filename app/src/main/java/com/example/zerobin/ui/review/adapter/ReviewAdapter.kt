@@ -1,11 +1,11 @@
-package com.example.zerobin.ui.dashboard.adapter
+package com.example.zerobin.ui.review.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zerobin.databinding.ItemReviewBinding
 import com.example.zerobin.model.Review
-import com.example.zerobin.model.StoreDetail
+import com.example.zerobin.model.ShopDetail
 
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
@@ -27,8 +27,8 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun setDetailReviewItem(arrayOfStores: StoreDetail) {
-        item = arrayOfStores.reviewList
+    fun setDetailReviewItem(arrayOfShop: ShopDetail) {
+        item = arrayOfShop.reviewList
         notifyDataSetChanged()
     }
 

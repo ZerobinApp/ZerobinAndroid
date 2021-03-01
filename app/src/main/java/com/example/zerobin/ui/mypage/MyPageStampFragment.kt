@@ -1,4 +1,4 @@
-package com.example.zerobin.ui.notifications
+package com.example.zerobin.ui.mypage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageStampBinding
 import com.example.zerobin.model.Review
-import com.example.zerobin.ui.dashboard.adapter.ReviewAdapter
+import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
 
 class MyPageStampFragment : Fragment() {
@@ -39,13 +39,13 @@ class MyPageStampFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setStoreAdapter()
+        setShopAdapter()
         observeLiveData()
-        requestStoreList()
+        requestShopList()
         //setListener()
     }
 
-    private fun setStoreAdapter() {
+    private fun setShopAdapter() {
         binding.myPageStampRecyclerView.adapter = myPageStampAdapter
     }
 
@@ -63,14 +63,14 @@ class MyPageStampFragment : Fragment() {
         }
     }
 
-    private fun requestStoreList() {
+    private fun requestShopList() {
         myPageViewModel.requestMyPage()
     }
 
 /*    private fun setListener() {
-        myPageStampAdapter.onClick = { store ->
-            val intent = Intent(requireContext(), StoreDetailActivity::class.java).apply {
-                putExtra(StoreDetailActivity.EXTRA_STORE, store)
+        myPageStampAdapter.onClick = { shop ->
+            val intent = Intent(requireContext(), ShopDetailActivity::class.java).apply {
+                putExtra(ShopDetailActivity.EXTRA_SHOP, shop)
             }
             startActivity(intent)
         }
