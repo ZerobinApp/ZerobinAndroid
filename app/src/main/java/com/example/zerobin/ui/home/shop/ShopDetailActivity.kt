@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.ActivityShopDetailBinding
-import com.example.zerobin.model.Shop
+import com.example.zerobin.domain.entity.Shop
 import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
 class ShopDetailActivity : AppCompatActivity() {

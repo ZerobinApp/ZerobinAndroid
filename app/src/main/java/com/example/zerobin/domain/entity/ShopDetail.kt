@@ -1,4 +1,4 @@
-package com.example.zerobin.model
+package com.example.zerobin.domain.entity
 
 data class ShopDetail(
     val name: String,

@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageStampBinding
-import com.example.zerobin.model.Review
+import com.example.zerobin.domain.entity.Review
 import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
 

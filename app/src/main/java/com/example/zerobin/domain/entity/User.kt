@@ -1,4 +1,4 @@
-package com.example.zerobin.model
+package com.example.zerobin.domain.entity
 
 data class User(
     val email: String,
@@ -6,5 +6,5 @@ data class User(
     val favoriteShopCount: Int,
     val favoriteReviewCount: Int,
     val ReviewList: ArrayList<Review>,
-    val favoriteShop: ArrayList<Shop>
+    val favoriteShop: List<Shop>
 )
