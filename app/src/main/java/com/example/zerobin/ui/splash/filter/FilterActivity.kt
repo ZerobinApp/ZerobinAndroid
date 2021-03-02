@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.zerobin.MainActivity
+import com.example.zerobin.ui.MainActivity
 import com.example.zerobin.R
 import com.example.zerobin.databinding.ActivityFilterBinding
 

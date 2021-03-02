@@ -3,7 +3,7 @@ package com.example.zerobin.ui.review
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.zerobin.model.Review
+import com.example.zerobin.domain.entity.Review
 
 class ReviewViewModel : ViewModel() {
 
