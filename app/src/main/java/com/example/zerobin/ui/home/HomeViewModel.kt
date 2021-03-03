@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.zerobin.data.repository.shop.ShopRepository
+import com.example.zerobin.domain.DataResult
 import com.example.zerobin.domain.entity.Shop
 import kotlinx.coroutines.launch
 
@@ -21,16 +22,30 @@ class HomeViewModel : ViewModel() {
 
     fun requestShopList() {
         viewModelScope.launch {
-            val data = shopRepository.getShopList(listOf(1,2))
-            Log.d(TAG, data.toString())
-            var hashTagList = ""
-            data.first.forEach {
-                hashTagList += "#$it  "
-            }
-            _hashtagList.value = hashTagList
-            _shopList.value = data.second
-        }
 
+            val response = shopRepository.getShopList(listOf(1, 2))
+            Log.d(TAG, response.toString())
+
+            when (response) {
+                is DataResult.Success -> handleSuccess(response.data)
+                is DataResult.Error -> handleError(response.exception)
+                DataResult.Loading -> {
+                }
+            }
+        }
+    }
+
+    private fun handleSuccess(data: Pair<List<String>, List<Shop>>) {
+        var hashTagList = ""
+        data.first.forEach {
+            hashTagList += "#$it  "
+        }
+        _hashtagList.value = hashTagList
+        _shopList.value = data.second
+    }
+
+    private fun handleError(exception: Exception) {
+        Log.e(TAG, exception.message ?: "")
     }
 
     companion object {
