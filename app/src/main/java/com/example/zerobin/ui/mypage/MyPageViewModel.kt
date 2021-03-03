@@ -17,8 +17,8 @@ class MyPageViewModel : ViewModel() {
 
     fun requestMyPage() {
 
-        val tempReview1 = Review("야호상점", "ㅋㅋㅋ", true, "22229988", "asdfasfasfasdfsdf", "asdfad")
-        val tempReview2 = Review("나영상점", "ㅋㅋㅋ", false, "22229988", "asdfasfasfasdfsdf", "asdfad")
+        val tempReview1 = Review("땡상점", "ㅋㅋㅋ", listOf("sss","Ashhhhdf"), listOf("22229988","Asdf"), "asdfasfasfasdfsdf", nickName = "asdfad",reviewIndex = 0,stamp=true)
+        val tempReview2 = Review("나영상점", "ㅋㅋㅋ", listOf("sss","Ashhhhdf"), listOf("22229988","Asdf"), "asdfasfasfasdfsdf", nickName = "asdfad",reviewIndex = 0,stamp=true)
         val listReview: ArrayList<Review> = arrayListOf(tempReview1, tempReview2)
 //        val tempShop1 =
 //            Shop("알맹상점", "#친환경  #리필스테이션  #비건화장품", true, "서울특별시 마포구 월드컵로 49 2층", "https://image")
