@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="ActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/anim_nothing</item>
         <item name="android:activityCloseEnterAnimation">@anim/anim_nothing</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
+
+    <style name="FilterChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:backgroundTint">@drawable/selector_chip_background</item>
+        <item name="android:textAlignment">center</item>
+        <item name="chipStartPadding">30dp</item>
+        <item name="chipEndPadding">30dp</item>
+        <item name="android:textColor">@color/selector_chip_text_color</item>
+    </style>
+
 </resources>
