@@ -8,30 +8,40 @@ import com.example.zerobin.domain.mapper.DataToEntityExtension.hashtagDataToEnti
 import com.example.zerobin.domain.mapper.DataToEntityExtension.map
 import com.example.zerobin.domain.mapper.DataToEntityExtension.shopDataToEntity
 import com.example.zerobin.domain.mapper.EntityToDataExtension.shopListEntityToData
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class ShopRepository {
     private val zerobinClient = RetrofitObject.provideZerobinApi()
 
-    suspend fun getShopList(type: List<Int>): DataResult<Pair<List<String>, List<Shop>>> {
-        val response = zerobinClient.getShopList(shopListEntityToData(type))
+    suspend fun getShopList(type: List<Int>): Flow<DataResult<Pair<List<String>, List<Shop>>>> {
+        return flow {
+            emit(DataResult.Loading)
 
-        if (!response.isSuccess) {
-            return DataResult.Error(Exception(response.message))
+            val response = zerobinClient.getShopList(shopListEntityToData(type))
+
+            if (!response.isSuccess) {
+                emit(DataResult.Error(Exception(response.message)))
+            }
+
+            val hashTag = response.result.hashtag.map(::hashtagDataToEntity)
+            val shopList = response.result.shop.map(::shopDataToEntity)
+            emit(DataResult.Success(hashTag to shopList))
         }
-        val hashTag = response.result.hashtag.map(::hashtagDataToEntity)
-        val shopList = response.result.shop.map(::shopDataToEntity)
-
-        return DataResult.Success(hashTag to shopList)
     }
 
-    suspend fun getShopDetail(shopIndex: Int): DataResult<ShopDetail> {
-        val response = zerobinClient.getShopDetail(shopIndex)
+    suspend fun getShopDetail(shopIndex: Int): Flow<DataResult<ShopDetail>> {
+        return flow {
+            emit(DataResult.Loading)
 
-        if (!response.isSuccess) {
-            return DataResult.Error(Exception(response.message))
+            val response = zerobinClient.getShopDetail(shopIndex)
+
+            if (!response.isSuccess) {
+                emit(DataResult.Error(Exception(response.message)))
+            }
+
+            val result = zerobinClient.getShopDetail(shopIndex).result.map()
+            emit(DataResult.Success(result))
         }
-
-        val result = zerobinClient.getShopDetail(shopIndex).result.map()
-        return DataResult.Success(result)
     }
 }

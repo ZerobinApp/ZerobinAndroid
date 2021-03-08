@@ -9,6 +9,7 @@ import com.example.zerobin.data.repository.shop.ReviewRepository
 import com.example.zerobin.domain.DataResult
 import com.example.zerobin.domain.entity.Review
 import com.example.zerobin.ui.home.HomeViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ReviewViewModel : ViewModel() {
@@ -29,29 +30,28 @@ class ReviewViewModel : ViewModel() {
         viewModelScope.launch {
             val response = reviewRepository.getReviewList()
             Log.d(HomeViewModel.TAG, response.toString())
-
-            when (response) {
-                is DataResult.Success -> handleSuccess(response.data)
-                is DataResult.Error -> handleError(response.exception)
-                DataResult.Loading -> {
-                }
-            }
-
-
+            response.collect { handleResult(it) }
         }
-
-
-
     }
 
-    private fun handleSuccess(data: List<Review>){
+    private fun handleResult(dataResult: DataResult<List<Review>>) {
+        when (dataResult) {
+            is DataResult.Success -> handleSuccess(dataResult.data)
+            is DataResult.Error -> handleError(dataResult.exception)
+            DataResult.Loading -> {
+            }
+        }
+    }
+
+    private fun handleSuccess(data: List<Review>) {
         _reviewList.value = data
     }
-    private fun handleError(exception: Exception){
-        Log.d(TAG,exception.message ?:"")
+
+    private fun handleError(exception: Exception) {
+        Log.d(TAG, exception.message ?: "")
     }
 
     companion object {
-        val TAG: String=ReviewViewModel::class.java.simpleName
+        val TAG: String = ReviewViewModel::class.java.simpleName
     }
 }

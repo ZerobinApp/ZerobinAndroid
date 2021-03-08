@@ -3,15 +3,15 @@ package com.example.zerobin.ui.home.shop
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.ActivityShopDetailBinding
 import com.example.zerobin.domain.entity.Shop
+import com.example.zerobin.ui.common.BaseActivity
 import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
-class ShopDetailActivity : AppCompatActivity() {
+class ShopDetailActivity : BaseActivity() {
 
     private lateinit var binding: ActivityShopDetailBinding
     private lateinit var shopDetailViewModel: ShopDetailViewModel
@@ -45,6 +45,16 @@ class ShopDetailActivity : AppCompatActivity() {
     private fun observeLiveData() {
         shopDetailViewModel.shopDetail.observe(this) {
             reviewShopAdapter.setDetailReviewItem(it)
+        }
+
+        shopDetailViewModel.isLoading.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { it ->
+                if (it) {
+                    showLoading()
+                } else {
+                    hideLoading()
+                }
+            }
         }
     }
 
