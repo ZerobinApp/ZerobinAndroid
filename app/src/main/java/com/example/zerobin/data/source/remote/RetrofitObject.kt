@@ -1,5 +1,6 @@
 package com.example.zerobin.data.source.remote
 
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -16,8 +17,15 @@ object RetrofitObject {
     private fun getRetrofitBuild() = Retrofit.Builder()
         .baseUrl(devUrl)
         .client(getOkhttpClient())
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(getGsonConverterFactory())
         .build()
+
+    private fun getGsonConverterFactory(): GsonConverterFactory {
+        val gson = GsonBuilder()
+            .setDateFormat("E, dd MMMM yyyy HH:mm:ss X")
+            .create()
+        return GsonConverterFactory.create(gson)
+    }
 
     private fun getOkhttpClient() = OkHttpClient.Builder().apply {
 

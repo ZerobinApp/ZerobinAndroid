@@ -52,10 +52,10 @@ class MyPageStampFragment : Fragment() {
     private fun observeLiveData() {
         myPageViewModel.myUser.observe(viewLifecycleOwner) {
             val item = ArrayList<Review>()
-            for (i in 0 until it.ReviewList.size) {
-                if (it.ReviewList[i].stamp) {
+            for (i in 0 until it.reviewList.size) {
+                if (it.reviewList[i].stamp) {
 
-                    item.add(it.ReviewList[i])
+                    item.add(it.reviewList[i])
                 }
             }
             myPageStampAdapter.setItem(item)

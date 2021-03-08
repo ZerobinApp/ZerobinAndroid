@@ -1,19 +1,19 @@
 package com.example.zerobin.domain.entity
 
 data class ShopDetail(
+    val hashtagList: List<Hashtag>,
+    val imageList: List<String>,
+    val zzim: Boolean,
+    val shopIndex: Int,
     val name: String,
-    val hashTag: String,
-    val favorite: Boolean,
-    val address: String,
-    val imageUrlList: List<String>,
-    val featureList: List<Feature>,
-    val shopDescription: String,
+    val location: String,
+    val comment: String,
     val reviewList: List<Review>,
 ) {
-    data class Feature(
-        val featureImageUrl: String,
-        val featureName: String,
-        val featureDescription: String,
+    data class Hashtag(
+        val name: String,
+        val image: String,
+        val title: String,
+        val comment: String,
     )
-
 }
