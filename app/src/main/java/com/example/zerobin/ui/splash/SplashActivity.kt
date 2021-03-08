@@ -13,10 +13,13 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        startFilterActivity()
+    }
+
+    private fun startFilterActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, FilterActivity::class.java))
             finish()
-        }, 3000)
-
+        }, 2000)
     }
 }
