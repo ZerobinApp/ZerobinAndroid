@@ -53,7 +53,7 @@ class MyPageStampFragment : Fragment() {
         myPageViewModel.myUser.observe(viewLifecycleOwner) {
             val item = ArrayList<Review>()
             for (i in 0 until it.ReviewList.size) {
-                if (it.ReviewList[i].favorite) {
+                if (it.ReviewList[i].stamp) {
 
                     item.add(it.ReviewList[i])
                 }
@@ -67,13 +67,5 @@ class MyPageStampFragment : Fragment() {
         myPageViewModel.requestMyPage()
     }
 
-/*    private fun setListener() {
-        myPageStampAdapter.onClick = { shop ->
-            val intent = Intent(requireContext(), ShopDetailActivity::class.java).apply {
-                putExtra(ShopDetailActivity.EXTRA_SHOP, shop)
-            }
-            startActivity(intent)
-        }
-    }*/
 
 }

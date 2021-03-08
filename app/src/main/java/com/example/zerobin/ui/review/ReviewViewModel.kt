@@ -1,9 +1,15 @@
 package com.example.zerobin.ui.review
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.zerobin.data.repository.shop.ReviewRepository
+import com.example.zerobin.domain.DataResult
 import com.example.zerobin.domain.entity.Review
+import com.example.zerobin.ui.home.HomeViewModel
+import kotlinx.coroutines.launch
 
 class ReviewViewModel : ViewModel() {
 
@@ -12,44 +18,40 @@ class ReviewViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    private val _reviewList = MutableLiveData<ArrayList<Review>>()
-    val reviewList: LiveData<ArrayList<Review>> = _reviewList
+    private val _reviewList = MutableLiveData<List<Review>>()
+    val reviewList: LiveData<List<Review>> = _reviewList
+
+    private val reviewRepository = ReviewRepository()
 
 
     fun requestReviewList() {
-        val tempReview1 = Review(
-            "알맹상점",
-            "#친환경  #리필스테이션  #비건화장품",
-            true,
-            "2021년 10월 15일",
-            "오늘 처음 방문했는데 사장님이 너무 친절 하셨어요.",
-            "https://image"
-        )
-        val tempReview2 = Review(
-            "허그어웨일",
-            "#친환경  #리필스테이션  #비건화장품",
-            true,
-            "2021년 9월 4일",
-            "인테리어가 너무 맘에 들어요~~~!!",
-            "https"
-        )
-        val tempReview3 = Review(
-            "지구샵",
-            "#친환경  #리필스테이션  #비건화장품",
-            false,
-            "2021년 1월 31일",
-            "리필하니까 환경에 도움도 되고 맘이 너무 뿌듯해요",
-            "https://image"
-        )
+        //코루틴 사용....
+        viewModelScope.launch {
+            val response = reviewRepository.getReviewList()
+            Log.d(HomeViewModel.TAG, response.toString())
 
-        _reviewList.value =
-            arrayListOf(
-                tempReview1,
-                tempReview2,
-                tempReview3,
-                tempReview1,
-                tempReview2,
-                tempReview3
-            )
+            when (response) {
+                is DataResult.Success -> handleSuccess(response.data)
+                is DataResult.Error -> handleError(response.exception)
+                DataResult.Loading -> {
+                }
+            }
+
+
+        }
+
+
+
+    }
+
+    private fun handleSuccess(data: List<Review>){
+        _reviewList.value = data
+    }
+    private fun handleError(exception: Exception){
+        Log.d(TAG,exception.message ?:"")
+    }
+
+    companion object {
+        val TAG: String=ReviewViewModel::class.java.simpleName
     }
 }

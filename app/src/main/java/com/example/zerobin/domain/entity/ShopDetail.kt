@@ -8,7 +8,7 @@ data class ShopDetail(
     val imageUrlList: List<String>,
     val featureList: List<Feature>,
     val shopDescription: String,
-    val reviewList: ArrayList<Review>,
+    val reviewList: List<Review>,
 ) {
     data class Feature(
         val featureImageUrl: String,
