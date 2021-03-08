@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.zerobin.data.repository.shop.ReviewRepository
+import com.example.zerobin.domain.DataResult
 import com.example.zerobin.domain.entity.Review
 import com.example.zerobin.ui.home.HomeViewModel
 import kotlinx.coroutines.launch
@@ -26,13 +27,31 @@ class ReviewViewModel : ViewModel() {
     fun requestReviewList() {
         //코루틴 사용....
         viewModelScope.launch {
-            val data = reviewRepository.getReviewList()
-            Log.d(HomeViewModel.TAG, data.toString())
-            _reviewList.value = data
+            val response = reviewRepository.getReviewList()
+            Log.d(HomeViewModel.TAG, response.toString())
+
+            when (response) {
+                is DataResult.Success -> handleSuccess(response.data)
+                is DataResult.Error -> handleError(response.exception)
+                DataResult.Loading -> {
+                }
+            }
+
 
         }
 
 
 
+    }
+
+    private fun handleSuccess(data: List<Review>){
+        _reviewList.value = data
+    }
+    private fun handleError(exception: Exception){
+        Log.d(TAG,exception.message ?:"")
+    }
+
+    companion object {
+        val TAG: String=ReviewViewModel::class.java.simpleName
     }
 }
