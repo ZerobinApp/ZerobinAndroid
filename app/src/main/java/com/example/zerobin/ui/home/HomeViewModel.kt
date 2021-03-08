@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.zerobin.data.repository.shop.ShopRepository
 import com.example.zerobin.domain.DataResult
 import com.example.zerobin.domain.entity.Shop
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
@@ -22,15 +23,17 @@ class HomeViewModel : ViewModel() {
 
     fun requestShopList() {
         viewModelScope.launch {
-
             val response = shopRepository.getShopList(listOf(1, 2))
             Log.d(TAG, response.toString())
+            response.collect { handleResult(it) }
+        }
+    }
 
-            when (response) {
-                is DataResult.Success -> handleSuccess(response.data)
-                is DataResult.Error -> handleError(response.exception)
-                DataResult.Loading -> {
-                }
+    private fun handleResult(dataResult: DataResult<Pair<List<String>, List<Shop>>>) {
+        when (dataResult) {
+            is DataResult.Success -> handleSuccess(dataResult.data)
+            is DataResult.Error -> handleError(dataResult.exception)
+            DataResult.Loading -> {
             }
         }
     }
