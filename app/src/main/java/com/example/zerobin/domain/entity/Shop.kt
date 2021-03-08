@@ -8,6 +8,6 @@ data class Shop(
     val shopIndex: Int,
     val name: String,
     val location: String,
-    val image: List<String>,
+    val imageList: List<String>,
     val zzim: Boolean,
 ) : Parcelable

@@ -9,7 +9,7 @@ import com.example.zerobin.domain.entity.ShopDetail
 
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
-    private var item =  emptyList<Review>()
+    private var item = emptyList<Review>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewHolder {
         val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)

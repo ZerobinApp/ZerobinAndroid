@@ -62,7 +62,7 @@ class MyPageReviewFragment : Fragment() {
 
     private fun observeLiveData() {
         myPageReviewViewModel.myUser.observe(viewLifecycleOwner) {
-            reviewAdapter.setItem(it.ReviewList)
+            reviewAdapter.setItem(it.reviewList)
         }
     }
 

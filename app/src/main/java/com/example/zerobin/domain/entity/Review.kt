@@ -5,12 +5,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Review(
-        val comment: String,
-        val createdAt: String,
-        val hashtag: List<String>,
-        val image: List<String>,
-        val name: String,
-        val nickName: String,
-        val reviewIndex: Int,
-        val stamp: Boolean
-    ) : Parcelable
+    val comment: String,
+    val createdAt: String,
+    val hashtagList: List<String>,
+    val imageList: List<String>,
+    val name: String,
+    val nickName: String,
+    val reviewIndex: Int,
+    val stamp: Boolean,
+) : Parcelable

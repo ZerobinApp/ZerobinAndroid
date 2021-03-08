@@ -1,7 +1,7 @@
 package com.example.zerobin.data.source.remote.shop
 
 
-data class ShopListResult(
+data class ShopListResponse(
     val result: Result,
     val isSuccess: Boolean,
     val code: Int,
@@ -19,12 +19,8 @@ data class ShopListResult(
             val shopIndex: Int,
             val name: String?,
             val location: String?,
-            val image: List<Image>?,
+            val image: List<ImageResponse>?,
             val zzim: Int?,
-        ) {
-            data class Image(
-                val pictureUrl: String?,
-            )
-        }
+        )
     }
 }
