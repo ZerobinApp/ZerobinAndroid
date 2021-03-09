@@ -43,17 +43,17 @@ class MyPageRepository {
 
     }
 
-    suspend fun getMyPageStamp(): Flow<DataResult<List<Review>?>> {
+    suspend fun getMyPageStamp(): Flow<DataResult<List<Review>>> {
         return flow {
             emit(DataResult.Loading)
 
             val response = zerobinClient.getMyPageStamp()
 
-            if (!response.isSuccess!!) {
+            if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
             }
 
-            emit(DataResult.Success(response.result.review?.map(DataToEntityExtension::reviewDataToEntity)))
+            emit(DataResult.Success(response.result.review.map(DataToEntityExtension::reviewDataToEntity)))
         }
 
     }
@@ -67,8 +67,7 @@ class MyPageRepository {
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
             }
-            emit(DataResult.Success(response.result.map(DataToEntityExtension::UserDataToEntity)))
-            // emit(response.result.let { DataResult.Success(it.map(DataToEntityExtension::UserDataToEntity)) })
+            emit(DataResult.Success(response.result.map(DataToEntityExtension::userDataToEntity)))
         }
 
     }

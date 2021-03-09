@@ -20,13 +20,15 @@ class MyPageViewModel : ViewModel() {
 
 
     private val _myUser = MutableLiveData<User>()
-    private val _myUserReview = MutableLiveData<List<Review>>()
-    private val _myUserShop= MutableLiveData<List<Shop>>()
-    private val _myUserStamp= MutableLiveData<List<Review>>()
-
     val myUser: LiveData<User> = _myUser
+
+    private val _myUserReview = MutableLiveData<List<Review>>()
     val myUserReview: LiveData<List<Review>> = _myUserReview
+
+    private val _myUserShop= MutableLiveData<List<Shop>>()
     val myUserShop: LiveData<List<Shop>> = _myUserShop
+
+    private val _myUserStamp= MutableLiveData<List<Review>>()
     val myUserStamp: LiveData<List<Review>> = _myUserStamp
 
 
@@ -127,7 +129,7 @@ class MyPageViewModel : ViewModel() {
     }
 
     companion object {
-        val TAG: String = ReviewViewModel::class.java.simpleName
+        val TAG: String = MyPageViewModel::class.java.simpleName
     }
 
 

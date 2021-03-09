@@ -65,9 +65,9 @@ object DataToEntityExtension {
         } ?: emptyList()
     )
 
-    fun UserDataToEntity(User: UserResponse.Result)=
+    fun userDataToEntity(User: UserResponse.Result)=
         User(
-            email = User.userIndex ?: 0,
+            userIndex = User.userIndex ?: 0,
             nickname = User.nickName ?: "",
             favoriteShopCount = User.zzimnum?:0,
             favoriteReviewCount = User.reviewnum?:0
