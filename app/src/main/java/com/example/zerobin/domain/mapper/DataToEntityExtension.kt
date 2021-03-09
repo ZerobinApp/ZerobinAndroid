@@ -1,5 +1,6 @@
 package com.example.zerobin.domain.mapper
 
+import com.example.zerobin.data.source.remote.User.UserResponse
 import com.example.zerobin.data.source.remote.review.ReviewResponse
 import com.example.zerobin.data.source.remote.shop.ImageResponse
 import com.example.zerobin.data.source.remote.shop.ShopDetailResponse
@@ -7,6 +8,7 @@ import com.example.zerobin.data.source.remote.shop.ShopListResponse
 import com.example.zerobin.domain.entity.Review
 import com.example.zerobin.domain.entity.Shop
 import com.example.zerobin.domain.entity.ShopDetail
+import com.example.zerobin.domain.entity.User
 
 object DataToEntityExtension {
     fun hashtagDataToEntity(hashtag: ShopListResponse.Result.Hashtag) = hashtag.name ?: ""
@@ -36,10 +38,12 @@ object DataToEntityExtension {
 
     fun ShopDetailResponse.Result.map() = ShopDetail(
         hashtagList = this.hashtag?.map {
-            ShopDetail.Hashtag(it.name ?: "",
+            ShopDetail.Hashtag(
+                it.name ?: "",
                 it.image ?: "",
                 it.title ?: "",
-                it.comment ?: "")
+                it.comment ?: ""
+            )
         } ?: emptyList(),
         imageList = this.image?.map(::imageDataToEntity) ?: emptyList(),
         zzim = this.zzim == 1,
@@ -60,4 +64,12 @@ object DataToEntityExtension {
             )
         } ?: emptyList()
     )
+
+    fun UserDataToEntity(User: UserResponse.Result?)=
+        User(
+            email = User?.userIndex ?: 0,
+            nickname = User?.nickName ?: "",
+            favoriteShopCount = User?.zzimnum?:0,
+            favoriteReviewCount = User?.reviewnum?:0
+        )
 }

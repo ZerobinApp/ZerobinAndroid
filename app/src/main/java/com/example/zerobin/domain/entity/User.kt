@@ -1,10 +1,12 @@
 package com.example.zerobin.domain.entity
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class User(
-    val email: String,
+    val email: Int,
     val nickname: String,
     val favoriteShopCount: Int,
     val favoriteReviewCount: Int,
-    val reviewList: List<Review>,
-    val favoriteShopList: List<Shop>,
-)
+): Parcelable
