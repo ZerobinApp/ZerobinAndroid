@@ -1,8 +1,8 @@
-package com.example.zerobin.data.source.remote.Mypage
+package com.example.zerobin.data.source.remote.mypage
 
 import com.example.zerobin.data.source.remote.review.ReviewResponse
 
-data class MypageReviewResponse(
+data class MyPageReviewResponse(
     val result: Result,
     val isSuccess: Boolean,
     val code: Int?,

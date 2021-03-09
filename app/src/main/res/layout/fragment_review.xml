@@ -18,7 +18,15 @@
         android:paddingTop="8dp"
         tools:context=".ui.review.ReviewFragment">
 
-
+        <TextView
+            android:id="@+id/reviewListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리뷰모아보기"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/btnSearch"
@@ -54,14 +62,6 @@
                 tools:listitem="@layout/item_review" />
         </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="리뷰모아보기"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

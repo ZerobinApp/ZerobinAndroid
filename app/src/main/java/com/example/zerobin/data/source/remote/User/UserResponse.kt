@@ -1,8 +1,8 @@
 package com.example.zerobin.data.source.remote.User
 
 data class UserResponse(
-    val result: List<Result?>?,
-    val isSuccess: Boolean?,
+    val result: List<Result>,
+    val isSuccess: Boolean,
     val code: Int?,
     val message: String?
 ) {

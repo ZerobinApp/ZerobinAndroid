@@ -65,11 +65,11 @@ object DataToEntityExtension {
         } ?: emptyList()
     )
 
-    fun UserDataToEntity(User: UserResponse.Result?)=
+    fun UserDataToEntity(User: UserResponse.Result)=
         User(
-            email = User?.userIndex ?: 0,
-            nickname = User?.nickName ?: "",
-            favoriteShopCount = User?.zzimnum?:0,
-            favoriteReviewCount = User?.reviewnum?:0
+            email = User.userIndex ?: 0,
+            nickname = User.nickName ?: "",
+            favoriteShopCount = User.zzimnum?:0,
+            favoriteReviewCount = User.reviewnum?:0
         )
 }

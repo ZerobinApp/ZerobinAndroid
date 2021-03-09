@@ -1,8 +1,8 @@
 package com.example.zerobin.data.source.remote
 
-import com.example.zerobin.data.source.remote.Mypage.MypageReviewResponse
-import com.example.zerobin.data.source.remote.Mypage.MypageShopResponse
-import com.example.zerobin.data.source.remote.Mypage.MypageStampResponse
+import com.example.zerobin.data.source.remote.mypage.MyPageReviewResponse
+import com.example.zerobin.data.source.remote.mypage.MyPageShopResponse
+import com.example.zerobin.data.source.remote.mypage.MyPageStampResponse
 import com.example.zerobin.data.source.remote.User.UserResponse
 import com.example.zerobin.data.source.remote.review.ReviewListResponse
 import com.example.zerobin.data.source.remote.shop.ShopDetailResponse
@@ -24,15 +24,15 @@ interface ZerobinApi {
     suspend fun getShopDetail(@Path("shopIndex") shopIndex: Int): ShopDetailResponse
 
     @GET("user/shop/like")
-    suspend fun getMypageShop(): MypageShopResponse
+    suspend fun getMyPageShop(): MyPageShopResponse
 
     @GET("user/review")
-    suspend fun getMypageReview(): MypageReviewResponse
+    suspend fun getMyPageReview(): MyPageReviewResponse
 
     @GET("user/info")
-    suspend fun getMypageUser(): UserResponse
+    suspend fun getMyPageUser(): UserResponse
 
     @GET("user/review/stamp")
-    suspend fun getMypageStamp(): MypageStampResponse
+    suspend fun getMyPageStamp(): MyPageStampResponse
 }
 

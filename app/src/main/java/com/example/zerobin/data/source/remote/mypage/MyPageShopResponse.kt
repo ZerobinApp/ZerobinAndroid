@@ -1,8 +1,8 @@
-package com.example.zerobin.data.source.remote.Mypage
+package com.example.zerobin.data.source.remote.mypage
 
 import com.example.zerobin.domain.entity.Shop
 
-data class MypageShopResponse(
+data class MyPageShopResponse(
     val result: Result,
     val isSuccess: Boolean,
     val code: Int?,

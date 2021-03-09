@@ -6,10 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.zerobin.data.repository.User.UserRepository
-import com.example.zerobin.data.repository.mypage.MypageReviewRepository
-import com.example.zerobin.data.repository.mypage.MypageShopRepository
-import com.example.zerobin.data.repository.mypage.MypageStampRepository
+import com.example.zerobin.data.repository.mypage.MyPageRepository
 import com.example.zerobin.domain.DataResult
 import com.example.zerobin.domain.entity.Review
 import com.example.zerobin.domain.entity.Shop
@@ -33,15 +30,13 @@ class MyPageViewModel : ViewModel() {
     val myUserStamp: LiveData<List<Review>> = _myUserStamp
 
 
-    private val mypageReviewRepository = MypageReviewRepository()
-    private val mypageShopRepository= MypageShopRepository()
-    private val userRepository = UserRepository()
-    private val mypageStampRepository = MypageStampRepository()
+    private val myPageRepository = MyPageRepository()
+
 
     fun requestMyPage() {
 
         viewModelScope.launch {
-            val userResponse=userRepository.getMypageUser()
+            val userResponse=myPageRepository.getMyPageUser()
             userResponse.collect { handleResultUser(it)}
 
 
@@ -51,9 +46,9 @@ class MyPageViewModel : ViewModel() {
     }
     fun requestMyPageReview(){
         viewModelScope.launch {
-            val response = mypageReviewRepository.getMypageReview()
+            val response = myPageRepository.getMyPageReview()
             Log.d(HomeViewModel.TAG, response.toString())
-            response.collect { handleResult(it)}
+            response.collect { handleResultReview(it)}
 
         }
     }
@@ -61,7 +56,7 @@ class MyPageViewModel : ViewModel() {
 
     fun requestMyPageShop(){
         viewModelScope.launch {
-            val response = mypageShopRepository.getMypageShop()
+            val response = myPageRepository.getMyPageShop()
             Log.d(HomeViewModel.TAG, response.toString())
             response.collect { handleResultShop(it)}
 
@@ -70,14 +65,14 @@ class MyPageViewModel : ViewModel() {
 
     fun requestMyPageStamp(){
         viewModelScope.launch {
-            val response = mypageStampRepository.getMypageStamp()
+            val response = myPageRepository.getMyPageStamp()
             Log.d(HomeViewModel.TAG, response.toString())
             response.collect { handleResultStamp(it)}
 
         }
     }
 
-    private fun handleResult(dataResult: DataResult<List<Review>>) {
+    private fun handleResultReview(dataResult: DataResult<List<Review>>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccess(dataResult.data)
             is DataResult.Error -> handleError(dataResult.exception)
