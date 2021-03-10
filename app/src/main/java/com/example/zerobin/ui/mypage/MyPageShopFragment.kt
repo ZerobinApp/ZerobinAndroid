@@ -51,14 +51,14 @@ class MyPageShopFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        myPageViewModel.myUser.observe(viewLifecycleOwner) {
-//            shopAdapter.setItem(it.favoriteShop)
+        myPageViewModel.myUserShop.observe(viewLifecycleOwner) {
+            shopAdapter.setItem(it)
 
         }
     }
 
     private fun requestShopList() {
-        myPageViewModel.requestMyPage()
+        myPageViewModel.requestMyPageShop()
     }
 
     private fun setListener() {

@@ -1,5 +1,7 @@
 package com.example.zerobin.domain.mapper
 
+import com.example.zerobin.data.source.remote.mypage.MyPageShopResponse
+import com.example.zerobin.data.source.remote.mypage.UserResponse
 import com.example.zerobin.data.source.remote.review.ReviewResponse
 import com.example.zerobin.data.source.remote.shop.ImageResponse
 import com.example.zerobin.data.source.remote.shop.ShopDetailResponse
@@ -7,11 +9,20 @@ import com.example.zerobin.data.source.remote.shop.ShopListResponse
 import com.example.zerobin.domain.entity.Review
 import com.example.zerobin.domain.entity.Shop
 import com.example.zerobin.domain.entity.ShopDetail
+import com.example.zerobin.domain.entity.User
 
 object DataToEntityExtension {
     fun hashtagDataToEntity(hashtag: ShopListResponse.Result.Hashtag) = hashtag.name ?: ""
 
     fun shopDataToEntity(shop: ShopListResponse.Result.Shop) =
+        Shop(
+            shopIndex = shop.shopIndex,
+            name = shop.name ?: "",
+            location = shop.location ?: "",
+            imageList = shop.image?.map(::imageDataToEntity) ?: emptyList(),
+            zzim = shop.zzim == 1,
+        )
+    fun myPageShopDataToEntity(shop: MyPageShopResponse.Result.Shop) =
         Shop(
             shopIndex = shop.shopIndex,
             name = shop.name ?: "",
@@ -36,10 +47,12 @@ object DataToEntityExtension {
 
     fun ShopDetailResponse.Result.map() = ShopDetail(
         hashtagList = this.hashtag?.map {
-            ShopDetail.Hashtag(it.name ?: "",
+            ShopDetail.Hashtag(
+                it.name ?: "",
                 it.image ?: "",
                 it.title ?: "",
-                it.comment ?: "")
+                it.comment ?: ""
+            )
         } ?: emptyList(),
         imageList = this.image?.map(::imageDataToEntity) ?: emptyList(),
         zzim = this.zzim == 1,
@@ -60,4 +73,12 @@ object DataToEntityExtension {
             )
         } ?: emptyList()
     )
+
+    fun userDataToEntity(User: UserResponse.Result)=
+        User(
+            userIndex = User.userIndex ?: 0,
+            nickname = User.nickName ?: "",
+            favoriteShopCount = User.zzimnum?:0,
+            favoriteReviewCount = User.reviewnum?:0
+        )
 }

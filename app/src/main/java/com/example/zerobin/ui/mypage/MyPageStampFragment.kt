@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageStampBinding
-import com.example.zerobin.domain.entity.Review
 import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
 
@@ -50,21 +49,14 @@ class MyPageStampFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        myPageViewModel.myUser.observe(viewLifecycleOwner) {
-            val item = ArrayList<Review>()
-            for (i in 0 until it.reviewList.size) {
-                if (it.reviewList[i].stamp) {
-
-                    item.add(it.reviewList[i])
-                }
-            }
-            myPageStampAdapter.setItem(item)
+        myPageViewModel.myUserStamp.observe(viewLifecycleOwner) {
+            myPageStampAdapter.setItem(it)
 
         }
     }
 
     private fun requestShopList() {
-        myPageViewModel.requestMyPage()
+        myPageViewModel.requestMyPageStamp()
     }
 
 
