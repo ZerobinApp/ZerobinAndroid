@@ -1,6 +1,7 @@
 package com.example.zerobin.domain.mapper
 
-import com.example.zerobin.data.source.remote.User.UserResponse
+import com.example.zerobin.data.source.remote.mypage.MyPageShopResponse
+import com.example.zerobin.data.source.remote.mypage.UserResponse
 import com.example.zerobin.data.source.remote.review.ReviewResponse
 import com.example.zerobin.data.source.remote.shop.ImageResponse
 import com.example.zerobin.data.source.remote.shop.ShopDetailResponse
@@ -14,6 +15,14 @@ object DataToEntityExtension {
     fun hashtagDataToEntity(hashtag: ShopListResponse.Result.Hashtag) = hashtag.name ?: ""
 
     fun shopDataToEntity(shop: ShopListResponse.Result.Shop) =
+        Shop(
+            shopIndex = shop.shopIndex,
+            name = shop.name ?: "",
+            location = shop.location ?: "",
+            imageList = shop.image?.map(::imageDataToEntity) ?: emptyList(),
+            zzim = shop.zzim == 1,
+        )
+    fun myPageShopDataToEntity(shop: MyPageShopResponse.Result.Shop) =
         Shop(
             shopIndex = shop.shopIndex,
             name = shop.name ?: "",

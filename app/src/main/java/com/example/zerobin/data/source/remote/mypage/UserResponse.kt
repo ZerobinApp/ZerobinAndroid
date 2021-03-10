@@ -1,4 +1,4 @@
-package com.example.zerobin.data.source.remote.User
+package com.example.zerobin.data.source.remote.mypage
 
 data class UserResponse(
     val result: List<Result>,

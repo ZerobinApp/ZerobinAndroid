@@ -38,7 +38,7 @@ class MyPageRepository {
                 emit(DataResult.Error(Exception(response.message)))
             }
 
-            emit(response.result.let { DataResult.Success(it.shop) })
+            emit( DataResult.Success(response.result.shop.map(DataToEntityExtension::myPageShopDataToEntity)))
         }
 
     }

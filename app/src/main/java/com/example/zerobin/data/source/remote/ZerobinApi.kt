@@ -3,7 +3,7 @@ package com.example.zerobin.data.source.remote
 import com.example.zerobin.data.source.remote.mypage.MyPageReviewResponse
 import com.example.zerobin.data.source.remote.mypage.MyPageShopResponse
 import com.example.zerobin.data.source.remote.mypage.MyPageStampResponse
-import com.example.zerobin.data.source.remote.User.UserResponse
+import com.example.zerobin.data.source.remote.mypage.UserResponse
 import com.example.zerobin.data.source.remote.review.ReviewListResponse
 import com.example.zerobin.data.source.remote.shop.ShopDetailResponse
 import com.example.zerobin.data.source.remote.shop.ShopListRequest
