@@ -3,27 +3,22 @@ package com.example.zerobin.ui.home.shop
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
 import com.example.zerobin.R
 import com.example.zerobin.databinding.ActivityShopDetailBinding
 import com.example.zerobin.domain.entity.Shop
-import com.example.zerobin.ui.common.BaseActivity
+import com.example.zerobin.ui.common.BaseBindingActivity
 import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
-class ShopDetailActivity : BaseActivity() {
+class ShopDetailActivity : BaseBindingActivity<ActivityShopDetailBinding>(R.layout.activity_shop_detail) {
 
-    private lateinit var binding: ActivityShopDetailBinding
-    private lateinit var shopDetailViewModel: ShopDetailViewModel
+    private val shopDetailViewModel: ShopDetailViewModel by viewModels()
 
     private val reviewShopAdapter by lazy { ReviewAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        shopDetailViewModel = ViewModelProvider(this).get(ShopDetailViewModel::class.java)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_shop_detail)
-        binding.lifecycleOwner = this
         binding.vm = shopDetailViewModel
 
         requestShopDetailData()
@@ -56,6 +51,12 @@ class ShopDetailActivity : BaseActivity() {
                 }
             }
         }
+
+        shopDetailViewModel.isError.observe(this) { event ->
+            event.getContentIfNotHandled()?.let {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun setReviewAdapter() {
@@ -72,7 +73,6 @@ class ShopDetailActivity : BaseActivity() {
             startActivity(intent)
         }
     }
-
 
     companion object {
         const val EXTRA_SHOP = "EXTRA_SHOP"

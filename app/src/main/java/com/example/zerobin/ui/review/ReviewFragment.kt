@@ -1,48 +1,29 @@
 package com.example.zerobin.ui.review
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentReviewBinding
+import com.example.zerobin.ui.common.BaseBindingFragment
 import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
 
-class ReviewFragment : Fragment() {
+class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragment_review) {
 
-    private lateinit var reviewViewModel: ReviewViewModel
-    private lateinit var binding: FragmentReviewBinding
+    private val reviewViewModel: ReviewViewModel by viewModels()
 
     private val reviewAdapter by lazy { ReviewAdapter() }
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        reviewViewModel =
-            ViewModelProvider(this).get(ReviewViewModel::class.java)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_review, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.reviewVM = reviewViewModel
-
-
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.reviewVM = reviewViewModel
 
         setReviewAdapter()
         observeLiveData()
         requestReviewList()
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -59,6 +40,22 @@ class ReviewFragment : Fragment() {
     private fun observeLiveData() {
         reviewViewModel.reviewList.observe(viewLifecycleOwner) {
             reviewAdapter.setItem(it)
+        }
+
+        reviewViewModel.isLoading.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { it ->
+                if (it) {
+                    showLoading()
+                } else {
+                    hideLoading()
+                }
+            }
+        }
+
+        reviewViewModel.isError.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 

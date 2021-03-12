@@ -1,8 +1,8 @@
 package com.example.zerobin.ui.splash.filter
 
-import androidx.lifecycle.ViewModel
+import com.example.zerobin.ui.common.BaseViewModel
 
-class FilterViewModel : ViewModel() {
+class FilterViewModel : BaseViewModel() {
     fun requestFilterList() {
 
     }
