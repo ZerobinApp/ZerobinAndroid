@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.fragment.app.viewModels
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageBinding
@@ -28,15 +29,15 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
 
     private fun setListeners() {
         binding.nextBtnFavoriteReview.setOnClickListener {
-            setFragment(MyPageReviewFragment())
+            view?.findNavController()?.navigate(R.id.action_navigation_my_page_to_navigation_my_page_review)
         }
 
         binding.nextBtnFavoriteShop.setOnClickListener {
-            setFragment(MyPageShopFragment())
+            view?.findNavController()?.navigate(R.id.action_navigation_my_page_to_navigation_my_page_shop)
         }
 
         binding.nextBtnFavoriteStamp.setOnClickListener {
-            setFragment(MyPageStampFragment())
+            view?.findNavController()?.navigate(R.id.action_navigation_my_page_to_navigation_my_page_stamp)
         }
     }
 
@@ -57,12 +58,4 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
             }
         }
     }
-
-    private fun setFragment(fragment: Fragment) {
-        val transaction = parentFragmentManager.beginTransaction()
-        transaction.replace(R.id.nav_host_fragment, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
-
 }
