@@ -1,52 +1,30 @@
 package com.example.zerobin.ui.mypage
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageReviewBinding
+import com.example.zerobin.ui.common.BaseBindingFragment
 import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
 
-class MyPageReviewFragment : Fragment() {
+class MyPageReviewFragment :
+    BaseBindingFragment<FragmentMyPageReviewBinding>(R.layout.fragment_my_page_review) {
 
-
-    private lateinit var binding: FragmentMyPageReviewBinding
-    private lateinit var myPageReviewViewModel: MyPageViewModel
+    private val myPageReviewViewModel: MyPageViewModel by viewModels()
 
     private val reviewAdapter by lazy { ReviewAdapter() }
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        myPageReviewViewModel =
-            ViewModelProvider(this).get(MyPageViewModel::class.java)
-
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_review, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-
-        binding.reviewVM = myPageReviewViewModel
-
-
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.reviewVM = myPageReviewViewModel
 
         setReviewAdapter()
         observeLiveData()
         requestReviewList()
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -63,6 +41,22 @@ class MyPageReviewFragment : Fragment() {
     private fun observeLiveData() {
         myPageReviewViewModel.myUserReview.observe(viewLifecycleOwner) {
             reviewAdapter.setItem(it)
+        }
+
+        myPageReviewViewModel.isLoading.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { it ->
+                if (it) {
+                    showLoading()
+                } else {
+                    hideLoading()
+                }
+            }
+        }
+
+        myPageReviewViewModel.isError.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 

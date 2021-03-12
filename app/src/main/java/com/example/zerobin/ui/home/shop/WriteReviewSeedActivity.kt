@@ -1,20 +1,16 @@
 package com.example.zerobin.ui.home.shop
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
 import com.example.zerobin.R
 import com.example.zerobin.databinding.ActivityWriteReviewSeedBinding
+import com.example.zerobin.ui.common.BaseBindingActivity
 
-class WriteReviewSeedActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityWriteReviewSeedBinding
+class WriteReviewSeedActivity :
+    BaseBindingActivity<ActivityWriteReviewSeedBinding>(R.layout.activity_write_review_seed) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_write_review_seed)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_write_review_seed)
 
         setOnClickListener()
     }

@@ -2,43 +2,25 @@ package com.example.zerobin.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageShopBinding
+import com.example.zerobin.ui.common.BaseBindingFragment
 import com.example.zerobin.ui.home.adapter.ShopAdapter
 import com.example.zerobin.ui.home.shop.ShopDetailActivity
 
 
-class MyPageShopFragment : Fragment() {
+class MyPageShopFragment : BaseBindingFragment<FragmentMyPageShopBinding>(R.layout.fragment_my_page_shop) {
 
-    private lateinit var binding: FragmentMyPageShopBinding
-
-    private lateinit var myPageViewModel: MyPageViewModel
+    private val myPageViewModel: MyPageViewModel by viewModels()
 
     private val shopAdapter by lazy { ShopAdapter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        myPageViewModel = ViewModelProvider(this).get(MyPageViewModel::class.java)
-
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_shop, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.vm = myPageViewModel
-
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vm = myPageViewModel
 
         setShopAdapter()
         observeLiveData()
@@ -53,7 +35,22 @@ class MyPageShopFragment : Fragment() {
     private fun observeLiveData() {
         myPageViewModel.myUserShop.observe(viewLifecycleOwner) {
             shopAdapter.setItem(it)
+        }
 
+        myPageViewModel.isLoading.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { it ->
+                if (it) {
+                    showLoading()
+                } else {
+                    hideLoading()
+                }
+            }
+        }
+
+        myPageViewModel.isError.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -69,5 +66,4 @@ class MyPageShopFragment : Fragment() {
             startActivity(intent)
         }
     }
-
 }

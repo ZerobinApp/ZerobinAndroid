@@ -3,15 +3,16 @@ package com.example.zerobin.ui.home
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.zerobin.data.repository.shop.ShopRepository
 import com.example.zerobin.domain.DataResult
 import com.example.zerobin.domain.entity.Shop
+import com.example.zerobin.ui.common.BaseViewModel
+import com.example.zerobin.ui.common.Event
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel : BaseViewModel() {
 
     private val shopRepository = ShopRepository()
 
@@ -32,23 +33,19 @@ class HomeViewModel : ViewModel() {
     private fun handleResult(dataResult: DataResult<Pair<List<String>, List<Shop>>>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccess(dataResult.data)
-            is DataResult.Error -> handleError(dataResult.exception)
-            DataResult.Loading -> {
-            }
+            is DataResult.Error -> handleError(TAG, dataResult.exception)
+            DataResult.Loading -> handleLoading()
         }
     }
 
     private fun handleSuccess(data: Pair<List<String>, List<Shop>>) {
+        _isLoading.value = Event(false)
         var hashTagList = ""
         data.first.forEach {
             hashTagList += "#$it  "
         }
         _hashtagList.value = hashTagList
         _shopList.value = data.second
-    }
-
-    private fun handleError(exception: Exception) {
-        Log.e(TAG, exception.message ?: "")
     }
 
     companion object {

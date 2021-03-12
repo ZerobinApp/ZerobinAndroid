@@ -2,40 +2,24 @@ package com.example.zerobin.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentHomeBinding
+import com.example.zerobin.ui.common.BaseBindingFragment
 import com.example.zerobin.ui.home.adapter.ShopAdapter
 import com.example.zerobin.ui.home.shop.ShopDetailActivity
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    private lateinit var binding: FragmentHomeBinding
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
 
     private val shopAdapter by lazy { ShopAdapter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.vm = homeViewModel
-
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vm = homeViewModel
 
         setShopAdapter()
         observeLiveData()
@@ -49,9 +33,23 @@ class HomeFragment : Fragment() {
 
     private fun observeLiveData() {
         homeViewModel.shopList.observe(viewLifecycleOwner) {
-
-
             shopAdapter.setItem(it)
+        }
+
+        homeViewModel.isLoading.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { it ->
+                if (it) {
+                    showLoading()
+                } else {
+                    hideLoading()
+                }
+            }
+        }
+
+        homeViewModel.isError.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 

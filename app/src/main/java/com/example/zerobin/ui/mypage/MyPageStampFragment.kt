@@ -1,47 +1,28 @@
 package com.example.zerobin.ui.mypage
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.example.zerobin.R
 import com.example.zerobin.databinding.FragmentMyPageStampBinding
+import com.example.zerobin.ui.common.BaseBindingFragment
 import com.example.zerobin.ui.review.adapter.ReviewAdapter
 
 
-class MyPageStampFragment : Fragment() {
+class MyPageStampFragment : BaseBindingFragment<FragmentMyPageStampBinding>(R.layout.fragment_my_page_stamp) {
 
-
-    private lateinit var binding: FragmentMyPageStampBinding
-    private lateinit var myPageViewModel: MyPageViewModel
+    private val myPageViewModel: MyPageViewModel by viewModels()
 
     private val myPageStampAdapter by lazy { ReviewAdapter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        myPageViewModel = ViewModelProvider(this).get(MyPageViewModel::class.java)
-
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_my_page_stamp, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.reviewVM = myPageViewModel
-
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.reviewVM = myPageViewModel
 
         setShopAdapter()
         observeLiveData()
         requestShopList()
-        //setListener()
     }
 
     private fun setShopAdapter() {
@@ -51,13 +32,26 @@ class MyPageStampFragment : Fragment() {
     private fun observeLiveData() {
         myPageViewModel.myUserStamp.observe(viewLifecycleOwner) {
             myPageStampAdapter.setItem(it)
+        }
 
+        myPageViewModel.isLoading.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { it ->
+                if (it) {
+                    showLoading()
+                } else {
+                    hideLoading()
+                }
+            }
+        }
+
+        myPageViewModel.isError.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
     private fun requestShopList() {
         myPageViewModel.requestMyPageStamp()
     }
-
-
 }
