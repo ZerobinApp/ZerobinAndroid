@@ -7,7 +7,7 @@
 
         <variable
             name="userVM"
-            type="com.example.zerobin.ui.mypage.MyPageViewModel" />
+            type="com.shop.zerobin.ui.mypage.MyPageViewModel" />
 
 
     </data>

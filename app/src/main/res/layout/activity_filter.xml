@@ -7,7 +7,7 @@
 
         <variable
             name="VM"
-            type="com.example.zerobin.ui.splash.filter.FilterViewModel" />
+            type="com.shop.zerobin.ui.splash.filter.FilterViewModel" />
 
     </data>
 
