@@ -7,7 +7,7 @@
 
         <variable
             name="VM"
-            type="com.example.zerobin.ui.home.shop.ShopDetailViewModel" />
+            type="com.shop.zerobin.ui.home.shop.ShopDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

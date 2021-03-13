@@ -9,7 +9,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.example.zerobin"
+        applicationId "com.shop.zerobin"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
