@@ -33,13 +33,32 @@
         tools:layout="@layout/fragment_my_page">
         <action
             android:id="@+id/action_navigation_my_page_to_navigation_my_page_review"
-            app:destination="@id/navigation_my_page_review" />
+            app:destination="@id/navigation_my_page_review"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_navigation_my_page_to_navigation_my_page_stamp"
-            app:destination="@id/navigation_my_page_stamp" />
+            app:destination="@id/navigation_my_page_stamp"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_navigation_my_page_to_navigation_my_page_shop"
-            app:destination="@id/navigation_my_page_shop" />
+            app:destination="@id/navigation_my_page_shop"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_navigation_my_page_to_navigation_sign_in"
+            app:destination="@id/navigation_sign_in"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -47,7 +66,7 @@
         android:name="com.shop.zerobin.ui.mypage.MyPageShopFragment"
         android:label="MyPageShopFragment"
         tools:layout="@layout/fragment_my_page_shop" />
-    
+
     <fragment
         android:id="@+id/navigation_my_page_review"
         android:name="com.shop.zerobin.ui.mypage.MyPageReviewFragment"
@@ -59,4 +78,28 @@
         android:name="com.shop.zerobin.ui.mypage.MyPageStampFragment"
         android:label="MyPageStampFragment"
         tools:layout="@layout/fragment_my_page_stamp" />
+
+    <fragment
+        android:id="@+id/navigation_sign_in"
+        android:name="com.shop.zerobin.ui.mypage.sign.SignInFragment"
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_navigation_sign_in_to_navigation_sign_up"
+            app:destination="@id/navigation_sign_up"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_sign_up"
+        android:name="com.shop.zerobin.ui.mypage.sign.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_navigation_sign_up_to_navigation_my_page"
+            app:destination="@id/navigation_my_page" />
+    </fragment>
 </navigation>

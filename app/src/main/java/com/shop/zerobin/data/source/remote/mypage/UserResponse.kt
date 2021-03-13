@@ -1,7 +1,7 @@
 package com.shop.zerobin.data.source.remote.mypage
 
 data class UserResponse(
-    val result: List<Result>,
+    val result: Result,
     val isSuccess: Boolean,
     val code: Int?,
     val message: String?

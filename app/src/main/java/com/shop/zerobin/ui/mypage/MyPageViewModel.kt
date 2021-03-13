@@ -30,7 +30,7 @@ class MyPageViewModel : BaseViewModel() {
     private val _myUserStamp = MutableLiveData<List<Review>>()
     val myUserStamp: LiveData<List<Review>> = _myUserStamp
 
-    private val myPageRepository = com.shop.zerobin.data.repository.mypage.MyPageRepository()
+    private val myPageRepository = MyPageRepository()
 
     fun requestMyPage() {
         viewModelScope.launch {
@@ -71,7 +71,7 @@ class MyPageViewModel : BaseViewModel() {
         }
     }
 
-    private fun handleResultUser(dataResult: DataResult<List<User>>?) {
+    private fun handleResultUser(dataResult: DataResult<User>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccessUser(dataResult.data)
             is DataResult.Error -> handleError(TAG, dataResult.exception)
@@ -95,7 +95,7 @@ class MyPageViewModel : BaseViewModel() {
         }
     }
 
-    private fun handleSuccessUser(data: List<User>?) {
+    private fun handleSuccessUser(data: User) {
         _isLoading.value = Event(false)
         //아직 로그인을 하기전이라 유저의 정보가 없어서 임의로 하나 생성함.
         _myUser.value = User(0, "생각이안나영", 0, 0)

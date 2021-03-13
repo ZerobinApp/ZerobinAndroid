@@ -9,21 +9,23 @@
             name="userVM"
             type="com.shop.zerobin.ui.mypage.MyPageViewModel" />
 
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingHorizontal="30dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="30dp"
         tools:context=".ui.mypage.MyPageFragment">
 
         <TextView
             android:id="@+id/myPageDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
             android:text="오늘도 환경을 사랑하는 가치소비를 실천해볼까요?"
+            android:textSize="11dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,163 +33,172 @@
             android:id="@+id/myPageNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif-medium"
             android:text="@{userVM.myUser.nickname}"
-            android:textSize="28sp"
-            app:layout_constraintStart_toStartOf="@+id/myPageDetail"
-            app:layout_constraintTop_toBottomOf="@+id/myPageDetail"
+            android:textColor="#272727"
+            android:textSize="22dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/myPageDetail"
             tools:text="ny" />
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_marginTop="20dp"
-            android:background="#000000"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/myPageNickname"
-            app:layout_constraintTop_toBottomOf="@+id/myPageNickname" />
-
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/favoriteShopTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
             android:text="찜한가게"
-            app:layout_constraintEnd_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/myPageNickname" />
+            android:textColor="#272727"
+            android:textSize="11dp"
+            app:layout_constraintEnd_toStartOf="@id/reviewTitle"
+            app:layout_constraintTop_toTopOf="@id/myPageNickname" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/reviewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:text="내가 쓴 리뷰"
+            android:textColor="#272727"
+            android:textSize="11dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView3" />
+            app:layout_constraintTop_toTopOf="@id/favoriteShopTitle" />
 
         <TextView
-            android:id="@+id/favoriteShop"
+            android:id="@+id/favoriteShopCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{String.valueOf(userVM.myUser.favoriteShopCount)}"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            android:text="@{String.valueOf(userVM.myUser.favoriteShopCount) + '건'}"
+            android:textColor="#272727"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="@id/favoriteShopTitle"
+            app:layout_constraintTop_toBottomOf="@id/favoriteShopTitle"
             tools:text="0건" />
 
         <TextView
-            android:id="@+id/favoriteReview"
+            android:id="@+id/favoriteReviewCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{String.valueOf(userVM.myUser.favoriteReviewCount)}"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            android:text="@{String.valueOf(userVM.myUser.favoriteReviewCount) + '곳'}"
+            android:textColor="#272727"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="@id/reviewTitle"
+            app:layout_constraintTop_toBottomOf="@id/reviewTitle"
             tools:text="0곳" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutFavoriteShop"
+        <View
+            android:id="@+id/divider"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:background="#60565656"
+            app:layout_constraintEnd_toEndOf="@id/reviewTitle"
+            app:layout_constraintStart_toStartOf="@id/myPageNickname"
+            app:layout_constraintTop_toBottomOf="@id/myPageNickname" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/myFavoriteShopLayout"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="18dp"
             android:background="@drawable/mypage_rectangle"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/view">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="10dp"
                 android:text="찜한가게"
+                android:textSize="11dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/nextBtnFavoriteShop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_baseline_arrow_forward_24"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/arrow_right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutFavoriteReview"
+            android:id="@+id/myReviewLayout"
             android:layout_width="0dp"
-
-            android:layout_height="50dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/mypage_rectangle"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutFavoriteShop">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/myFavoriteShopLayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="10dp"
                 android:text="내가 쓴 리뷰"
+                android:textSize="11dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/nextBtnFavoriteReview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_baseline_arrow_forward_24"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/arrow_right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/myStampLayout"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/mypage_rectangle"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutFavoriteReview">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/myReviewLayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="10dp"
                 android:text="새싹 스탬프"
+                android:textSize="11dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/nextBtnFavoriteStamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_baseline_arrow_forward_24"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/arrow_right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg_long_button"
-            android:text="@string/logout_btn"
+            android:text="@string/login"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-             />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
