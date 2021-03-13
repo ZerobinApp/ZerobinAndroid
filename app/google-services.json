@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1043411734164",
+    "project_id": "zerobin-8f496",
+    "storage_bucket": "zerobin-8f496.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043411734164:android:ec75189a8e496560d9ee81",
+        "android_client_info": {
+          "package_name": "com.shop.zerobin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043411734164-bv7h6i1n13qep27md4poj675nu9icaap.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCVhbLPA-5gDx7GMoAi8beyl78R9JtuC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043411734164-bv7h6i1n13qep27md4poj675nu9icaap.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
