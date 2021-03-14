@@ -3,9 +3,8 @@ package com.shop.zerobin.ui.mypage
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
@@ -28,16 +27,20 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
     }
 
     private fun setListeners() {
-        binding.nextBtnFavoriteReview.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_navigation_my_page_to_navigation_my_page_review)
+        binding.myReviewLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_my_page_to_navigation_my_page_review)
         }
 
-        binding.nextBtnFavoriteShop.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_navigation_my_page_to_navigation_my_page_shop)
+        binding.myFavoriteShopLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_my_page_to_navigation_my_page_shop)
         }
 
-        binding.nextBtnFavoriteStamp.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_navigation_my_page_to_navigation_my_page_stamp)
+        binding.myStampLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_my_page_to_navigation_my_page_stamp)
+        }
+
+        binding.btnLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_my_page_to_navigation_sign_in)
         }
     }
 

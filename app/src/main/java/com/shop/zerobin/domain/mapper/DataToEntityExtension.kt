@@ -22,6 +22,7 @@ object DataToEntityExtension {
             imageList = shop.image?.map(::imageDataToEntity) ?: emptyList(),
             zzim = shop.zzim == 1,
         )
+
     fun myPageShopDataToEntity(shop: MyPageShopResponse.Result.Shop) =
         Shop(
             shopIndex = shop.shopIndex,
@@ -74,11 +75,10 @@ object DataToEntityExtension {
         } ?: emptyList()
     )
 
-    fun userDataToEntity(User: UserResponse.Result)=
-        User(
-            userIndex = User.userIndex ?: 0,
-            nickname = User.nickName ?: "",
-            favoriteShopCount = User.zzimnum?:0,
-            favoriteReviewCount = User.reviewnum?:0
-        )
+    fun UserResponse.Result.map() = User(
+        userIndex = this.userIndex ?: 0,
+        nickname = this.nickName ?: "",
+        favoriteShopCount = this.zzimnum ?: 0,
+        favoriteReviewCount = this.reviewnum ?: 0
+    )
 }

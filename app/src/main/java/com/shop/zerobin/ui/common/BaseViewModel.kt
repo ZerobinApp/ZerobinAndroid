@@ -16,7 +16,7 @@ open class BaseViewModel : ViewModel() {
     protected val _isLoading = MutableLiveData<Event<Boolean>>()
     val isLoading: LiveData<Event<Boolean>> = _isLoading
 
-    private val _isError = MutableLiveData<Event<String>>()
+    protected val _isError = MutableLiveData<Event<String>>()
     val isError: LiveData<Event<String>> = _isError
 
     protected fun handleError(tag: String, exception: Exception) {
