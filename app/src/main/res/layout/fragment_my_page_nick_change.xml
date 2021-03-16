@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="vm"
+            type="com.shop.zerobin.ui.mypage.MyPageViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.mypage.MyPageNickChangeFragment">
+
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="닉네임 변경"
+        app:layout_constraintStart_toStartOf="@+id/nickNameChangeBackButton"
+        app:layout_constraintTop_toBottomOf="@+id/nickNameChangeBackButton" />
+
+    <ImageButton
+        android:id="@+id/nickNameChangeBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="54dp"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutTextPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/mypage_stroke_rectangle"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextNickName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="14dp"
+            android:background="@null"
+            android:ems="10"
+            android:maxLength="10"
+            android:text="@={vm.inputNickName}"
+            android:hint="닉네임 입력(10자 이내)"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNickChangeComplete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_long_button"
+        android:text="닉네임 변경 완료"
+        android:onClick="@{() -> vm.onClickComplete()}"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayoutTextPersonName"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayoutTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutTextPersonName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

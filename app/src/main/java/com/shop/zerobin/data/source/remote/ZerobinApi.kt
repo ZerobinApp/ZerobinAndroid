@@ -5,10 +5,7 @@ import com.shop.zerobin.data.source.remote.review.ReviewListResponse
 import com.shop.zerobin.data.source.remote.shop.ShopDetailResponse
 import com.shop.zerobin.data.source.remote.shop.ShopListRequest
 import com.shop.zerobin.data.source.remote.shop.ShopListResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ZerobinApi {
     @POST("shop/info")
@@ -37,5 +34,8 @@ interface ZerobinApi {
 
     @POST("login")
     suspend fun signIn(@Body body: SignInRequest): SignInResponse
+
+    @PATCH("user/nickname")
+    suspend fun nickNameChange(@Body body: MyPageNickNameChangeRequest) : MyPageNickNameChangeResponse
 }
 

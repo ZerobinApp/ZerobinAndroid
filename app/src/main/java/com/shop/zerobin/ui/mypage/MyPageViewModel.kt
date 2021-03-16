@@ -17,6 +17,13 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MyPageViewModel : BaseViewModel() {
+    val inputNickName = MutableLiveData("")
+
+    private val _nickNameFinish = MutableLiveData<Event<Unit>>()
+    val nickNameChangeFinish: LiveData<Event<Unit>> = _nickNameFinish
+
+    private val _inputCheckComplete = MutableLiveData<Event<Unit>>()
+    val inputCheckComplete: LiveData<Event<Unit>> = _inputCheckComplete
 
     private val _myUser = MutableLiveData<User>()
     val myUser: LiveData<User> = _myUser
@@ -32,11 +39,46 @@ class MyPageViewModel : BaseViewModel() {
 
     private val myPageRepository = MyPageRepository()
 
+    fun onClickComplete() {
+        if (!inputCheck()) return
+
+        changeNickname()
+    }
+    private fun inputCheck(): Boolean {
+        if (inputNickName.value?.isBlank() == true) {
+            _isError.value = Event("닉네임을 입력하세요.")
+            return false
+        }
+
+        return true
+    }
+    private fun changeNickname() {
+        _inputCheckComplete.value = Event(Unit)
+    }
     fun requestMyPage() {
         viewModelScope.launch {
             val userResponse = myPageRepository.getMyPageUser()
             userResponse.collect { handleResultUser(it) }
         }
+    }
+
+    fun requestNickNameChange(nickname: String) {
+
+        viewModelScope.launch {
+            val response = myPageRepository.nickNameChange(nickname)
+            response.collect { handleResult(it) }
+        }
+    }
+    private fun handleResult(dataResult: DataResult<Unit>) {
+        when (dataResult) {
+            is DataResult.Success -> handleSuccess()
+            is DataResult.Error -> handleError(MyPageViewModel.TAG, dataResult.exception)
+            is DataResult.Loading -> handleLoading()
+        }
+    }
+    private fun handleSuccess() {
+        _isError.value = Event("닉네임 변경 성공")
+        _nickNameFinish.value = Event(Unit)
     }
 
     fun requestMyPageReview() {
