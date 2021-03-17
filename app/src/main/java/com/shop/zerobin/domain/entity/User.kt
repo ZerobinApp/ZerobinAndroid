@@ -9,4 +9,4 @@ data class User(
     val nickname: String,
     val favoriteShopCount: Int,
     val favoriteReviewCount: Int,
-): Parcelable
+) : Parcelable

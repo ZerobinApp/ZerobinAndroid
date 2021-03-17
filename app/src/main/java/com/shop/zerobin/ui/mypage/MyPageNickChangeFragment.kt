@@ -9,7 +9,8 @@ import com.shop.zerobin.databinding.FragmentMyPageNickChangeBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 
 
-class MyPageNickChangeFragment : BaseBindingFragment<FragmentMyPageNickChangeBinding>(R.layout.fragment_my_page_nick_change) {
+class MyPageNickChangeFragment :
+    BaseBindingFragment<FragmentMyPageNickChangeBinding>(R.layout.fragment_my_page_nick_change) {
 
 
     private val myPageViewModel: MyPageViewModel by viewModels()
@@ -17,23 +18,22 @@ class MyPageNickChangeFragment : BaseBindingFragment<FragmentMyPageNickChangeBin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm=myPageViewModel
+        binding.vm = myPageViewModel
 
         setListeners()
         observeLiveData()
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.nickNameChangeBackButton.setOnClickListener {
             findNavController().popBackStack()
         }
     }
 
-    private fun observeLiveData(){
-        myPageViewModel.isLoading.observe(viewLifecycleOwner){
-            event ->
+    private fun observeLiveData() {
+        myPageViewModel.isLoading.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
-                if(it){
+                if (it) {
                     showLoading()
                 } else {
                     hideLoading()
@@ -42,7 +42,7 @@ class MyPageNickChangeFragment : BaseBindingFragment<FragmentMyPageNickChangeBin
         }
         myPageViewModel.inputCheckComplete.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
-                changeNikName(
+                changeNickName(
                     myPageViewModel.inputNickName.value ?: return@observe,
                 )
             }
@@ -54,11 +54,10 @@ class MyPageNickChangeFragment : BaseBindingFragment<FragmentMyPageNickChangeBin
         }
     }
 
-    private fun changeNikName(nickname :String){
-        showLoading()
+    private fun changeNickName(nickname: String) {
         myPageViewModel.requestNickNameChange(nickname)
 
     }
 
-   
+
 }

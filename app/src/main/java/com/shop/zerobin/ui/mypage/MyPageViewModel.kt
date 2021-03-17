@@ -44,6 +44,7 @@ class MyPageViewModel : BaseViewModel() {
 
         changeNickname()
     }
+
     private fun inputCheck(): Boolean {
         if (inputNickName.value?.isBlank() == true) {
             _isError.value = Event("닉네임을 입력하세요.")
@@ -52,9 +53,11 @@ class MyPageViewModel : BaseViewModel() {
 
         return true
     }
+
     private fun changeNickname() {
         _inputCheckComplete.value = Event(Unit)
     }
+
     fun requestMyPage() {
         viewModelScope.launch {
             val userResponse = myPageRepository.getMyPageUser()
@@ -66,16 +69,18 @@ class MyPageViewModel : BaseViewModel() {
 
         viewModelScope.launch {
             val response = myPageRepository.nickNameChange(nickname)
-            response.collect { handleResult(it) }
+            response.collect { handleResultNickNameChange(it) }
         }
     }
-    private fun handleResult(dataResult: DataResult<Unit>) {
+
+    private fun handleResultNickNameChange(dataResult: DataResult<Unit>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccess()
             is DataResult.Error -> handleError(MyPageViewModel.TAG, dataResult.exception)
             is DataResult.Loading -> handleLoading()
         }
     }
+
     private fun handleSuccess() {
         _isError.value = Event("닉네임 변경 성공")
         _nickNameFinish.value = Event(Unit)

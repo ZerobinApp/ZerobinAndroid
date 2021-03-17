@@ -42,7 +42,7 @@ class MyPageRepository {
                 emit(DataResult.Error(Exception(response.message)))
             }
 
-            emit( DataResult.Success(response.result.shop.map(DataToEntityExtension::myPageShopDataToEntity)))
+            emit(DataResult.Success(response.result.shop.map(DataToEntityExtension::myPageShopDataToEntity)))
         }
 
     }
@@ -76,7 +76,7 @@ class MyPageRepository {
         }
     }
 
-    suspend fun signUp(email: String, password: String, nickname: String) : Flow<DataResult<Unit>> {
+    suspend fun signUp(email: String, password: String, nickname: String): Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
 
@@ -104,7 +104,7 @@ class MyPageRepository {
         }
     }
 
-    suspend fun nickNameChange(nickname: String):Flow<DataResult<Unit>>{
+    suspend fun nickNameChange(nickname: String): Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
 

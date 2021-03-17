@@ -5,7 +5,8 @@ import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ActivityWriteReviewBinding
 import com.shop.zerobin.ui.common.BaseBindingActivity
 
-class WriteReviewActivity : BaseBindingActivity<ActivityWriteReviewBinding>(R.layout.activity_write_review) {
+class WriteReviewActivity :
+    BaseBindingActivity<ActivityWriteReviewBinding>(R.layout.activity_write_review) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

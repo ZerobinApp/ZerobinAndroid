@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.navigation_review -> showBottomNav()
                 R.id.navigation_home -> showBottomNav()
-                R.id.navigation_my_page-> showBottomNav()
+                R.id.navigation_my_page -> showBottomNav()
                 else -> hideBottomNav()
             }
         }

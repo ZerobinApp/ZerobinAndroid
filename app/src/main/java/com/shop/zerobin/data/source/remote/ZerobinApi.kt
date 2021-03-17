@@ -36,6 +36,6 @@ interface ZerobinApi {
     suspend fun signIn(@Body body: SignInRequest): SignInResponse
 
     @PATCH("user/nickname")
-    suspend fun nickNameChange(@Body body: MyPageNickNameChangeRequest) : MyPageNickNameChangeResponse
+    suspend fun nickNameChange(@Body body: MyPageNickNameChangeRequest): MyPageNickNameChangeResponse
 }
 
