@@ -59,6 +59,22 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_my_page_to_navigation_nick_change"
+            app:destination="@id/navigation_my_page_nick_change"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_my_page_nick_change"
+        android:name="com.shop.zerobin.ui.mypage.MyPageNickChangeFragment"
+        android:label="MyPageShopFragment"
+        tools:layout="@layout/fragment_my_page_nick_change" >
+    <action
+        android:id="@+id/action_navigation_nick_change_to_navigation_my_page"
+        app:destination="@id/navigation_my_page" />
     </fragment>
 
     <fragment

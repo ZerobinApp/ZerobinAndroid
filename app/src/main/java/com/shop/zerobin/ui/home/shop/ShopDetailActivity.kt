@@ -10,7 +10,8 @@ import com.shop.zerobin.domain.entity.Shop
 import com.shop.zerobin.ui.common.BaseBindingActivity
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
 
-class ShopDetailActivity : BaseBindingActivity<ActivityShopDetailBinding>(R.layout.activity_shop_detail) {
+class ShopDetailActivity :
+    BaseBindingActivity<ActivityShopDetailBinding>(R.layout.activity_shop_detail) {
 
     private val shopDetailViewModel: ShopDetailViewModel by viewModels()
 

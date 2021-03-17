@@ -12,7 +12,8 @@ import com.shop.zerobin.ui.home.adapter.ShopAdapter
 import com.shop.zerobin.ui.home.shop.ShopDetailActivity
 
 
-class MyPageShopFragment : BaseBindingFragment<FragmentMyPageShopBinding>(R.layout.fragment_my_page_shop) {
+class MyPageShopFragment :
+    BaseBindingFragment<FragmentMyPageShopBinding>(R.layout.fragment_my_page_shop) {
 
     private val myPageViewModel: MyPageViewModel by viewModels()
 

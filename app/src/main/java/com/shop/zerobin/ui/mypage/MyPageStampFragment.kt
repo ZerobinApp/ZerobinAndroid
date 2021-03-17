@@ -10,7 +10,8 @@ import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
 
 
-class MyPageStampFragment : BaseBindingFragment<FragmentMyPageStampBinding>(R.layout.fragment_my_page_stamp) {
+class MyPageStampFragment :
+    BaseBindingFragment<FragmentMyPageStampBinding>(R.layout.fragment_my_page_stamp) {
 
     private val myPageViewModel: MyPageViewModel by viewModels()
 

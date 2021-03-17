@@ -78,7 +78,11 @@ class SignUpFragment : BaseBindingFragment<FragmentSignUpBinding>(R.layout.fragm
                     signUpViewModel.requestSignUp(auth.uid ?: return@addOnCompleteListener)
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(requireContext(), "회원가입 실패\n${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "회원가입 실패\n${task.exception?.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 hideLoading()
             }

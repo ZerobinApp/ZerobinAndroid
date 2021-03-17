@@ -20,7 +20,8 @@ import kotlinx.coroutines.launch
  *  Copyright © 2020 Shinhan Bank. All rights reserved.
  */
 
-abstract class BaseBindingFragment<B : ViewDataBinding>(@LayoutRes private val layoutResId: Int) : Fragment() {
+abstract class BaseBindingFragment<B : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
+    Fragment() {
 
     protected lateinit var binding: B
         private set

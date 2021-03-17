@@ -200,5 +200,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnNickChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/myPageNickname"
+            app:layout_constraintStart_toEndOf="@+id/myPageNickname"
+            app:layout_constraintTop_toTopOf="@+id/myPageNickname"
+            app:srcCompat="@drawable/nick_change" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

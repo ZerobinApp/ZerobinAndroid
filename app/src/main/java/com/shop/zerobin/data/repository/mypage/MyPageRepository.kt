@@ -7,6 +7,7 @@ import com.shop.zerobin.domain.entity.Shop
 import com.shop.zerobin.domain.entity.User
 import com.shop.zerobin.domain.mapper.DataToEntityExtension
 import com.shop.zerobin.domain.mapper.DataToEntityExtension.map
+import com.shop.zerobin.domain.mapper.EntityToDataExtension.nickNameChangeEntityToData
 import com.shop.zerobin.domain.mapper.EntityToDataExtension.signInEntityToData
 import com.shop.zerobin.domain.mapper.EntityToDataExtension.signUpEntityToData
 import kotlinx.coroutines.flow.Flow
@@ -41,7 +42,7 @@ class MyPageRepository {
                 emit(DataResult.Error(Exception(response.message)))
             }
 
-            emit( DataResult.Success(response.result.shop.map(DataToEntityExtension::myPageShopDataToEntity)))
+            emit(DataResult.Success(response.result.shop.map(DataToEntityExtension::myPageShopDataToEntity)))
         }
 
     }
@@ -75,7 +76,7 @@ class MyPageRepository {
         }
     }
 
-    suspend fun signUp(email: String, password: String, nickname: String) : Flow<DataResult<Unit>> {
+    suspend fun signUp(email: String, password: String, nickname: String): Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
 
@@ -100,6 +101,20 @@ class MyPageRepository {
             }
 
             emit(DataResult.Success(response.result?.jwt ?: return@flow))
+        }
+    }
+
+    suspend fun nickNameChange(nickname: String): Flow<DataResult<Unit>> {
+        return flow {
+            emit(DataResult.Loading)
+
+            val response = zerobinClient.nickNameChange(nickNameChangeEntityToData(nickname))
+
+            if (!response.isSuccess) {
+                emit(DataResult.Error(Exception(response.message)))
+            }
+
+            emit(DataResult.Success(Unit))
         }
     }
 }

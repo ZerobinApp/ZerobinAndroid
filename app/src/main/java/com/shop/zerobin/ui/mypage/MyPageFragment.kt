@@ -42,6 +42,11 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
         binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_my_page_to_navigation_sign_in)
         }
+
+        binding.btnNickChange.setOnClickListener {
+            //mypagenickchangefragment로 이동!
+            findNavController().navigate(R.id.action_navigation_my_page_to_navigation_nick_change)
+        }
     }
 
     private fun observeLiveData() {
