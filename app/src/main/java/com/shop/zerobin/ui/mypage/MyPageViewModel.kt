@@ -142,7 +142,7 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
     private fun handleSuccessUser(data: User) {
         _isLoading.value = Event(false)
         //아직 로그인을 하기전이라 유저의 정보가 없어서 임의로 하나 생성함.
-        _myUser.value = User(0, "생각이안나영", 0, 0)
+        _myUser.value = data
     }
 
     private fun handleSuccessReview(data: List<Review>) {

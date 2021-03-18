@@ -6,27 +6,36 @@
     <data>
 
         <variable
-            name="VM"
-            type="com.shop.zerobin.ui.splash.filter.FilterViewModel" />
-
+            name="vm"
+            type="com.shop.zerobin.ui.review.ReviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingVertical="30dp"
-        tools:context=".ui.splash.filter.FilterActivity">
+        tools:context=".ui.review.ReviewFilterActivity">
+
 
         <ImageView
-            android:id="@+id/zerobinLogo"
-            android:layout_width="30dp"
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/signUpTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/zerobin_logo_temp"
+            android:text="키워드 선택"
+            android:textSize="18dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/filterDescription1"
@@ -34,13 +43,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:gravity="center"
-            android:text="@string/filter_description1"
+            android:text="@string/review_filter_description1"
             android:textColor="#272727"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/zerobinLogo" />
+            app:layout_constraintTop_toBottomOf="@+id/signUpTitle" />
 
         <TextView
             android:id="@+id/filterDescription2"
@@ -55,10 +64,10 @@
             app:layout_constraintTop_toBottomOf="@id/filterDescription1" />
 
         <include
-            app:layout_constraintTop_toBottomOf="@id/filterDescription2"
+            layout="@layout/layout_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/layout_filter"/>
+            app:layout_constraintTop_toBottomOf="@id/filterDescription2" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNext"
