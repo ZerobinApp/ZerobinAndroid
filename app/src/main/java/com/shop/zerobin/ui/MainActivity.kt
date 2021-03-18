@@ -1,7 +1,6 @@
 package com.shop.zerobin.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -26,19 +25,19 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.navigation_review -> showBottomNav()
-                R.id.navigation_home -> showBottomNav()
-                R.id.navigation_my_page -> showBottomNav()
+                R.id.navigation_review, R.id.navigation_home, R.id.navigation_my_page -> showBottomNav()
                 else -> hideBottomNav()
             }
         }
     }
 
     private fun showBottomNav() {
-        bottomNavigationView.visibility = View.VISIBLE
+        bottomNavigationView.translationY = 0f
     }
 
     private fun hideBottomNav() {
-        bottomNavigationView.visibility = View.GONE
+        bottomNavigationView.animate()
+            .setDuration(500)
+            .translationY(bottomNavigationView.y)
     }
 }

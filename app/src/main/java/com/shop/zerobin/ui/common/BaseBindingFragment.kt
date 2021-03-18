@@ -13,13 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-/**
- *  BaseBindingFragment.kt
- *
- *  Created by Donghyun An on 2021/03/11
- *  Copyright © 2020 Shinhan Bank. All rights reserved.
- */
-
 abstract class BaseBindingFragment<B : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
     Fragment() {
 
