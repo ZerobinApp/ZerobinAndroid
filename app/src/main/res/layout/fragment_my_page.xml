@@ -17,7 +17,7 @@
         android:clipToPadding="false"
         android:paddingHorizontal="30dp"
         android:paddingTop="20dp"
-        android:paddingBottom="30dp"
+        android:paddingBottom="86dp"
         tools:context=".ui.mypage.MyPageFragment">
 
         <TextView

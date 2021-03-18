@@ -13,11 +13,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:paddingHorizontal="30dp"
         android:paddingTop="20dp"
         android:paddingBottom="30dp"
         tools:context=".ui.mypage.MyPageNickChangeFragment">
-
 
         <TextView
             android:id="@+id/textView"

@@ -19,6 +19,7 @@ class ReviewRepository {
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
+                return@flow
             }
 
             emit(DataResult.Success(response.result.review.map(::reviewDataToEntity)))

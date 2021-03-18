@@ -25,6 +25,7 @@ class MyPageRepository {
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
+                return@flow
             }
 
             emit(DataResult.Success(response.result.review.map(DataToEntityExtension::reviewDataToEntity)))
@@ -40,6 +41,7 @@ class MyPageRepository {
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
+                return@flow
             }
 
             emit(DataResult.Success(response.result.shop.map(DataToEntityExtension::myPageShopDataToEntity)))
@@ -55,6 +57,7 @@ class MyPageRepository {
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
+                return@flow
             }
 
             emit(DataResult.Success(response.result.review.map(DataToEntityExtension::reviewDataToEntity)))
@@ -70,6 +73,7 @@ class MyPageRepository {
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
+                return@flow
             }
 
             emit(DataResult.Success(response.result.map()))
@@ -84,6 +88,7 @@ class MyPageRepository {
 
             if (response.isSuccess == false) {
                 emit(DataResult.Error(Exception(response.message)))
+                return@flow
             }
 
             emit(DataResult.Success(Unit))
@@ -98,6 +103,7 @@ class MyPageRepository {
 
             if (response.isSuccess == false) {
                 emit(DataResult.Error(Exception(response.message)))
+                return@flow
             }
 
             emit(DataResult.Success(response.result?.jwt ?: return@flow))
@@ -112,6 +118,7 @@ class MyPageRepository {
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
+                return@flow
             }
 
             emit(DataResult.Success(Unit))
