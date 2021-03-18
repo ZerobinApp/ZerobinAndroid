@@ -70,4 +70,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:20.0.3'
     implementation 'com.google.firebase:firebase-messaging-ktx:21.0.1'
     implementation 'com.google.firebase:firebase-storage-ktx:19.2.1'
+
+    // Koin
+    implementation "org.koin:koin-android:2.2.2"
+    implementation "org.koin:koin-android-viewmodel:2.2.2"
 }

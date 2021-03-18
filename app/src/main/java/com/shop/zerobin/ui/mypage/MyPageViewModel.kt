@@ -16,7 +16,7 @@ import com.shop.zerobin.ui.home.HomeViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MyPageViewModel : BaseViewModel() {
+class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseViewModel() {
     val inputNickName = MutableLiveData("")
 
     private val _nickNameFinish = MutableLiveData<Event<Unit>>()
@@ -36,8 +36,6 @@ class MyPageViewModel : BaseViewModel() {
 
     private val _myUserStamp = MutableLiveData<List<Review>>()
     val myUserStamp: LiveData<List<Review>> = _myUserStamp
-
-    private val myPageRepository = MyPageRepository()
 
     fun onClickComplete() {
         if (!inputCheck()) return

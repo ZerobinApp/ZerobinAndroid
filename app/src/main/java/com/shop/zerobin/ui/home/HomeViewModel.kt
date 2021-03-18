@@ -12,9 +12,7 @@ import com.shop.zerobin.ui.common.Event
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class HomeViewModel : BaseViewModel() {
-
-    private val shopRepository = ShopRepository()
+class HomeViewModel(private val shopRepository: ShopRepository) : BaseViewModel() {
 
     private val _hashtagList = MutableLiveData<String>()
     val hashtagList: LiveData<String> = _hashtagList

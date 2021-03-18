@@ -4,18 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageShopBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.home.adapter.ShopAdapter
 import com.shop.zerobin.ui.home.shop.ShopDetailActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class MyPageShopFragment :
     BaseBindingFragment<FragmentMyPageShopBinding>(R.layout.fragment_my_page_shop) {
 
-    private val myPageViewModel: MyPageViewModel by viewModels()
+    private val myPageViewModel: MyPageViewModel by viewModel()
 
     private val shopAdapter by lazy { ShopAdapter() }
 

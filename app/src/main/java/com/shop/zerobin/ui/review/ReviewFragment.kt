@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentReviewBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragment_review) {
 
-    private val reviewViewModel: ReviewViewModel by viewModels()
+    private val reviewViewModel: ReviewViewModel by viewModel()
 
     private val reviewAdapter by lazy { ReviewAdapter() }
 

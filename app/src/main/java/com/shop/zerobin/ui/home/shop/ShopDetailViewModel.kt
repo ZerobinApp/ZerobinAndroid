@@ -13,9 +13,7 @@ import com.shop.zerobin.ui.common.Event
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class ShopDetailViewModel : BaseViewModel() {
-
-    private val shopRepository = ShopRepository()
+class ShopDetailViewModel(private val shopRepository: ShopRepository) : BaseViewModel() {
 
     private val _shopDetail = MutableLiveData<ShopDetail>()
     val shopDetail: LiveData<ShopDetail> = _shopDetail
