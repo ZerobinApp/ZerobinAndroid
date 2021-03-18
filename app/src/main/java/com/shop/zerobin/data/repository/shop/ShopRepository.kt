@@ -22,6 +22,7 @@ class ShopRepository {
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
+                return@flow
             }
 
             val hashTag = response.result.hashtag.map(::hashtagDataToEntity)
@@ -38,6 +39,7 @@ class ShopRepository {
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
+                return@flow
             }
 
             val result = zerobinClient.getShopDetail(shopIndex).result.map()
