@@ -14,7 +14,6 @@ class MyPageNickChangeFragment :
     BaseBindingFragment<FragmentMyPageNickChangeBinding>(R.layout.fragment_my_page_nick_change) {
 
     private val myPageViewModel: MyPageViewModel by viewModel()
-    private val myPageViewModel: MyPageViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
