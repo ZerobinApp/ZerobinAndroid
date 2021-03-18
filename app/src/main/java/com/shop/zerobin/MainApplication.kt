@@ -44,7 +44,7 @@ val myViewModel = module {
 }
 
 val myModule = module {
-    single { MyPageRepository() }
-    single { ShopRepository() }
-    single { ReviewRepository() }
+    single { MyPageRepository(get()) }
+    single { ShopRepository(get()) }
+    single { ReviewRepository(get()) }
 }
