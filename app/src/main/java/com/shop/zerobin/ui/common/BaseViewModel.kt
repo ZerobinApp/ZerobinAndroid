@@ -5,13 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-/**
- *  BaseViewModel.kt
- *
- *  Created by Donghyun An on 2021/03/11
- *  Copyright © 2020 Shinhan Bank. All rights reserved.
- */
-
 open class BaseViewModel : ViewModel() {
     protected val _isLoading = MutableLiveData<Event<Boolean>>()
     val isLoading: LiveData<Event<Boolean>> = _isLoading
