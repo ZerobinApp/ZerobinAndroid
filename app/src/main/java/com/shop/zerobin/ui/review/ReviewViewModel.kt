@@ -13,7 +13,7 @@ import com.shop.zerobin.ui.home.HomeViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class ReviewViewModel : BaseViewModel() {
+class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
@@ -22,8 +22,6 @@ class ReviewViewModel : BaseViewModel() {
 
     private val _reviewList = MutableLiveData<List<Review>>()
     val reviewList: LiveData<List<Review>> = _reviewList
-
-    private val reviewRepository = ReviewRepository()
 
     fun requestReviewList() {
         //코루틴 사용....

@@ -10,7 +10,7 @@ import com.shop.zerobin.ui.common.Event
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class SignUpViewModel : BaseViewModel() {
+class SignUpViewModel(private val myPageRepository: MyPageRepository) : BaseViewModel() {
     val inputEmail = MutableLiveData("")
     val inputPassword = MutableLiveData("")
     val inputPasswordConfirm = MutableLiveData("")
@@ -21,8 +21,6 @@ class SignUpViewModel : BaseViewModel() {
 
     private val _signUpFinish = MutableLiveData<Event<Unit>>()
     val signUpFinish: LiveData<Event<Unit>> = _signUpFinish
-
-    private val myPageRepository = MyPageRepository()
 
     fun onClickComplete() {
         if (!inputCheck()) return

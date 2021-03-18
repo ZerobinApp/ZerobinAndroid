@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageReviewBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
-
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MyPageReviewFragment :
     BaseBindingFragment<FragmentMyPageReviewBinding>(R.layout.fragment_my_page_review) {
 
-    private val myPageReviewViewModel: MyPageViewModel by viewModels()
+    private val myPageReviewViewModel: MyPageViewModel by viewModel()
 
     private val reviewAdapter by lazy { ReviewAdapter() }
 

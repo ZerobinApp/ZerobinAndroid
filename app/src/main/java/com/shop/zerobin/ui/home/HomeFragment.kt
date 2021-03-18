@@ -4,17 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentHomeBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.home.adapter.ShopAdapter
 import com.shop.zerobin.ui.home.shop.ShopDetailActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModel()
 
     private val shopAdapter by lazy { ShopAdapter() }
 

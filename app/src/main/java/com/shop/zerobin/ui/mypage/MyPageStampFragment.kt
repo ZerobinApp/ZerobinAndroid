@@ -3,17 +3,17 @@ package com.shop.zerobin.ui.mypage
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageStampBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class MyPageStampFragment :
     BaseBindingFragment<FragmentMyPageStampBinding>(R.layout.fragment_my_page_stamp) {
 
-    private val myPageViewModel: MyPageViewModel by viewModels()
+    private val myPageViewModel: MyPageViewModel by viewModel()
 
     private val myPageStampAdapter by lazy { ReviewAdapter() }
 

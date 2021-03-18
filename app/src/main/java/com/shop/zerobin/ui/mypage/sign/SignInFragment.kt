@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -12,10 +11,11 @@ import com.google.firebase.ktx.Firebase
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentSignInBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class SignInFragment : BaseBindingFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
 
-    private val signInViewModel: SignInViewModel by viewModels()
+    private val signInViewModel: SignInViewModel by viewModel()
     private val auth: FirebaseAuth by lazy { Firebase.auth }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
