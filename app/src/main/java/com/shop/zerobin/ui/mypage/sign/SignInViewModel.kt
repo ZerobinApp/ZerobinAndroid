@@ -50,16 +50,17 @@ class SignInViewModel(private val myPageRepository: MyPageRepository) : BaseView
         }
     }
 
-    private fun handleResult(dataResult: DataResult<String>) {
+    private fun handleResult(dataResult: DataResult<Unit>) {
         when (dataResult) {
-            is DataResult.Success -> handleSuccess(dataResult.data)
+            is DataResult.Success -> handleSuccess()
             is DataResult.Error -> handleError(TAG, dataResult.exception)
             is DataResult.Loading -> handleLoading()
         }
     }
 
-    private fun handleSuccess(jwt: String) {
-        Log.d(TAG, "로그인 성공 $jwt")
+    private fun handleSuccess() {
+        Log.d(TAG, "로그인 성공")
+        _isError.value = Event("로그인 성공")
         _signInFinish.value = Event(Unit)
     }
 

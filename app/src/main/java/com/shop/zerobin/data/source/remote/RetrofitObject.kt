@@ -1,6 +1,7 @@
 package com.shop.zerobin.data.source.remote
 
 import com.google.gson.GsonBuilder
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,11 +13,11 @@ object RetrofitObject {
     private const val testUrl = "http://test.zerobin.shop/"
     private const val realUrl = "https://zerobin.shop/"
 
-    fun provideZerobinApi(): ZerobinApi = getRetrofitBuild().create(ZerobinApi::class.java)
+    fun provideZerobinApi(jwt: String): ZerobinApi = getRetrofitBuild(jwt).create(ZerobinApi::class.java)
 
-    private fun getRetrofitBuild() = Retrofit.Builder()
+    private fun getRetrofitBuild(jwt: String) = Retrofit.Builder()
         .baseUrl(devUrl)
-        .client(getOkhttpClient())
+        .client(getOkhttpClient(jwt))
         .addConverterFactory(getGsonConverterFactory())
         .build()
 
@@ -27,7 +28,7 @@ object RetrofitObject {
         return GsonConverterFactory.create(gson)
     }
 
-    private fun getOkhttpClient() = OkHttpClient.Builder().apply {
+    private fun getOkhttpClient(jwt: String) = OkHttpClient.Builder().apply {
 
         //TimeOut 시간을 지정합니다.
         readTimeout(60, TimeUnit.SECONDS)
@@ -36,8 +37,18 @@ object RetrofitObject {
 
         // 이 클라이언트를 통해 오고 가는 네트워크 요청/응답을 로그로 표시하도록 합니다.
         addInterceptor(getLoggingInterceptor())
+        addInterceptor(getTokenInterceptor(jwt))
     }.build()
 
     private fun getLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+
+    private fun getTokenInterceptor(jwt: String) = Interceptor {
+        val request = it.request()
+            .newBuilder()
+            .addHeader("X-ACCESS-TOKEN", jwt)
+            .build()
+
+        return@Interceptor it.proceed(request)
+    }
 }
