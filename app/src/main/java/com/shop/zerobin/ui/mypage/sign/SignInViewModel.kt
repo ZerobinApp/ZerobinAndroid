@@ -1,5 +1,6 @@
 package com.shop.zerobin.ui.mypage.sign
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -10,7 +11,7 @@ import com.shop.zerobin.ui.common.Event
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class SignInViewModel : BaseViewModel() {
+class SignInViewModel(private val myPageRepository: MyPageRepository) : BaseViewModel() {
     val inputEmail = MutableLiveData("")
     val inputPassword = MutableLiveData("")
 
@@ -19,8 +20,6 @@ class SignInViewModel : BaseViewModel() {
 
     private val _signInFinish = MutableLiveData<Event<Unit>>()
     val signInFinish: LiveData<Event<Unit>> = _signInFinish
-
-    private val myPageRepository = MyPageRepository()
 
     fun onClickLogin() {
         if (!inputCheck()) return
@@ -59,8 +58,8 @@ class SignInViewModel : BaseViewModel() {
         }
     }
 
-    private fun handleSuccess(data: String) {
-        _isError.value = Event("로그인 성공 $data")
+    private fun handleSuccess(jwt: String) {
+        Log.d(TAG, "로그인 성공 $jwt")
         _signInFinish.value = Event(Unit)
     }
 

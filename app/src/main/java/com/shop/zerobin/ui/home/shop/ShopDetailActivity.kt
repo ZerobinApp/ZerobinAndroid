@@ -3,17 +3,17 @@ package com.shop.zerobin.ui.home.shop
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ActivityShopDetailBinding
 import com.shop.zerobin.domain.entity.Shop
 import com.shop.zerobin.ui.common.BaseBindingActivity
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ShopDetailActivity :
     BaseBindingActivity<ActivityShopDetailBinding>(R.layout.activity_shop_detail) {
 
-    private val shopDetailViewModel: ShopDetailViewModel by viewModels()
+    private val shopDetailViewModel: ShopDetailViewModel by viewModel()
 
     private val reviewShopAdapter by lazy { ReviewAdapter() }
 

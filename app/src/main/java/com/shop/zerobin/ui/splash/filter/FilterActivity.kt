@@ -3,15 +3,15 @@ package com.shop.zerobin.ui.splash.filter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ActivityFilterBinding
 import com.shop.zerobin.ui.MainActivity
 import com.shop.zerobin.ui.common.BaseBindingActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
 
-    private val filterViewModel: FilterViewModel by viewModels()
+    private val filterViewModel: FilterViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

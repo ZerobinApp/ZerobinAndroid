@@ -16,12 +16,11 @@ import com.shop.zerobin.ui.home.HomeViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MyPageViewModel : BaseViewModel() {
+class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseViewModel() {
     val inputNickName = MutableLiveData("")
 
-
-    private val _nickNameFinish = MutableLiveData<Event<Unit>>()
-    val nickNameChangeFinish: LiveData<Event<Unit>> = _nickNameFinish
+    private val _nickNameChangeFinish = MutableLiveData<Event<Unit>>()
+    val nickNameChangeFinish: LiveData<Event<Unit>> = _nickNameChangeFinish
 
     private val _inputCheckComplete = MutableLiveData<Event<Unit>>()
     val inputCheckComplete: LiveData<Event<Unit>> = _inputCheckComplete
@@ -37,8 +36,6 @@ class MyPageViewModel : BaseViewModel() {
 
     private val _myUserStamp = MutableLiveData<List<Review>>()
     val myUserStamp: LiveData<List<Review>> = _myUserStamp
-
-    private val myPageRepository = MyPageRepository()
 
     fun onClickComplete() {
         if (!inputCheck()) return
@@ -67,7 +64,6 @@ class MyPageViewModel : BaseViewModel() {
     }
 
     fun requestNickNameChange(nickname: String) {
-
         viewModelScope.launch {
             val response = myPageRepository.nickNameChange(nickname)
             response.collect { handleResultNickNameChange(it) }
@@ -76,15 +72,15 @@ class MyPageViewModel : BaseViewModel() {
 
     private fun handleResultNickNameChange(dataResult: DataResult<Unit>) {
         when (dataResult) {
-            is DataResult.Success -> handleSuccess()
-            is DataResult.Error -> handleError(MyPageViewModel.TAG, dataResult.exception)
+            is DataResult.Success -> handleSuccessNickNameChange()
+            is DataResult.Error -> handleError(TAG, dataResult.exception)
             is DataResult.Loading -> handleLoading()
         }
     }
 
-    private fun handleSuccess() {
+    private fun handleSuccessNickNameChange() {
         _isError.value = Event("닉네임 변경 성공")
-        _nickNameFinish.value = Event(Unit)
+        _nickNameChangeFinish.value = Event(Unit)
     }
 
     fun requestMyPageReview() {
@@ -113,7 +109,7 @@ class MyPageViewModel : BaseViewModel() {
 
     private fun handleResultReview(dataResult: DataResult<List<Review>>) {
         when (dataResult) {
-            is DataResult.Success -> handleSuccess(dataResult.data)
+            is DataResult.Success -> handleSuccessReview(dataResult.data)
             is DataResult.Error -> handleError(TAG, dataResult.exception)
             DataResult.Loading -> handleLoading()
         }
@@ -146,11 +142,10 @@ class MyPageViewModel : BaseViewModel() {
     private fun handleSuccessUser(data: User) {
         _isLoading.value = Event(false)
         //아직 로그인을 하기전이라 유저의 정보가 없어서 임의로 하나 생성함.
-        _myUser.value = data
-        Log.d("useraaaaaaaaaaaa",data.nickname)
+        _myUser.value = User(0, "생각이안나영", 0, 0)
     }
 
-    private fun handleSuccess(data: List<Review>) {
+    private fun handleSuccessReview(data: List<Review>) {
         _isLoading.value = Event(false)
         _myUserReview.value = data
     }
