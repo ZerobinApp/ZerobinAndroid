@@ -1,14 +1,14 @@
 package com.shop.zerobin.ui.mypage
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageShopBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.home.adapter.ShopAdapter
-import com.shop.zerobin.ui.home.shop.ShopDetailActivity
+import com.shop.zerobin.ui.home.shop.ShopDetailFragmentDirections
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -61,10 +61,8 @@ class MyPageShopFragment :
 
     private fun setListener() {
         shopAdapter.onClick = { shop ->
-            val intent = Intent(requireContext(), ShopDetailActivity::class.java).apply {
-                putExtra(ShopDetailActivity.EXTRA_SHOP, shop)
-            }
-            startActivity(intent)
+            val action = ShopDetailFragmentDirections.actionGlobalNavigationShopDetail(shop)
+            findNavController().navigate(action)
         }
     }
 }

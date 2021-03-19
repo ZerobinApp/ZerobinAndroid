@@ -17,7 +17,7 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_navigation_home_to_navigation_review2"
+            android:id="@+id/action_navigation_home_to_navigation_review"
             app:destination="@id/navigation_review"
             app:popUpTo="@id/navigation_home" />
         <action
@@ -115,4 +115,72 @@
             android:id="@+id/action_navigation_sign_up_to_navigation_my_page"
             app:destination="@id/navigation_my_page" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_shop_detail"
+        android:name="com.shop.zerobin.ui.home.shop.ShopDetailFragment"
+        android:label="ShopDetailFragment"
+        tools:layout="@layout/fragment_shop_detail">
+        <argument
+            android:name="shop"
+            android:defaultValue="@null"
+            app:argType="com.shop.zerobin.domain.entity.Shop"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_navigation_shop_detail_to_navigation_write_review_seed"
+            app:destination="@id/navigation_write_review_seed"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/anim_nothing"
+            app:popEnterAnim="@anim/anim_nothing"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_navigation_shop_detail"
+        app:destination="@id/navigation_shop_detail"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/anim_nothing"
+        app:popEnterAnim="@anim/anim_nothing"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/navigation_write_review_seed"
+        android:name="com.shop.zerobin.ui.home.shop.WriteReviewSeedFragment"
+        android:label="WriteReviewSeedFragment"
+        tools:layout="@layout/fragment_write_review_seed">
+        <argument
+            android:name="shop"
+            android:defaultValue="@null"
+            app:argType="com.shop.zerobin.domain.entity.Shop"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_navigation_write_review_seed_to_navigation_write_review"
+            app:destination="@id/navigation_write_review"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/anim_nothing"
+            app:popEnterAnim="@anim/anim_nothing"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_write_review"
+        android:name="com.shop.zerobin.ui.home.shop.WriteReviewFragment"
+        android:label="WriteReviewFragment"
+        tools:layout="@layout/fragment_write_review">
+        <argument
+            android:name="shop"
+            android:defaultValue="@null"
+            app:argType="com.shop.zerobin.domain.entity.Shop"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_navigation_write_review_to_navigation_shop_detail"
+            app:destination="@id/navigation_shop_detail"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/anim_nothing"
+            app:popEnterAnim="@anim/anim_nothing"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/navigation_shop_detail"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation>
