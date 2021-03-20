@@ -32,7 +32,7 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
     private fun setListeners(){
         binding.btnFilter.setOnClickListener {
             //리뷰 필터 액티비티로 넘어가기
-            startActivity(Intent(context,ReviewFilterActivity::class.java))
+            findNavController().navigate(R.id.action_navigation_review_to_navigation_review_filter)
         }
     }
 

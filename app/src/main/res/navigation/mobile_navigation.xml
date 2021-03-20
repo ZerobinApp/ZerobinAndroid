@@ -9,7 +9,18 @@
         android:id="@+id/navigation_review"
         android:name="com.shop.zerobin.ui.review.ReviewFragment"
         android:label="@string/title_review"
-        tools:layout="@layout/fragment_review" />
+        tools:layout="@layout/fragment_review" >
+        <action
+            android:id="@+id/action_navigation_review_to_navigation_review_filter"
+            app:destination="@+id/navigation_review_filter"
+            app:popUpTo="@id/navigation_review"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_review_filter"
+        android:name="com.shop.zerobin.ui.review.ReviewFilterFragment"
+        
+        tools:layout="@layout/fragment_review_filter" />
 
     <fragment
         android:id="@+id/navigation_home"
