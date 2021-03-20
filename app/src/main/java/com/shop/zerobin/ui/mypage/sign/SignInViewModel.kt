@@ -65,6 +65,6 @@ class SignInViewModel(private val myPageRepository: MyPageRepository) : BaseView
     }
 
     companion object {
-        private val TAG: String = this::class.java.simpleName
+        private val TAG: String = SignInViewModel::class.java.simpleName
     }
 }

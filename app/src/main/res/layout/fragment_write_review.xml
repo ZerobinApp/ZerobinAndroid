@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.shop.WriteReviewActivity">
+        android:background="@color/white"
+        tools:context=".ui.home.shop.WriteReviewFragment">
 
         <ImageView
             android:id="@+id/btnBack"
@@ -27,12 +28,12 @@
             android:id="@+id/writeReviewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="24dp"
             android:text="@string/make_review"
             android:textSize="20sp"
-            android:layout_margin="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/scrollView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
@@ -40,10 +41,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:paddingHorizontal="24dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/writeReviewTitle"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/writeReviewTitle">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -54,9 +55,9 @@
                     android:id="@+id/pictureTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/picture"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:text="@string/picture"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,10 +65,10 @@
                     android:id="@+id/pictureLayout"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
-                    android:background="@color/grey"
                     android:layout_marginTop="12dp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@color/grey"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/pictureTitle">
 
                     <ImageView
@@ -75,34 +76,34 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_home_black_24dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintVertical_chainStyle="packed"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/pictureDescription"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed"
                         tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/pictureDescription"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:text="@string/review_picture_description"
                         android:textSize="12sp"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/pictureDescriptionImage" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_margin="4dp"
                         android:text="@string/review_picture_initial_count"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         tools:text="0/3" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -111,10 +112,10 @@
                     android:id="@+id/reviewTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     android:layout_marginTop="12dp"
                     android:text="@string/review"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/pictureLayout" />
 
@@ -123,8 +124,8 @@
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_marginTop="12dp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/reviewTitle">
 
                     <ImageView
@@ -132,34 +133,34 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_home_black_24dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintVertical_chainStyle="packed"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/textDescription"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed"
                         tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/textDescription"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:text="@string/review_text_description"
                         android:textSize="12sp"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/textDescriptionImage" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_margin="4dp"
                         android:text="@string/review_text_initial_count"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         tools:text="0/200" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -168,10 +169,10 @@
                     android:id="@+id/hashTagTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     android:layout_marginTop="12dp"
                     android:text="@string/hashtag"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textLayout" />
 
@@ -179,10 +180,10 @@
                     android:id="@+id/hashTagDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/select_hashtag_description"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hashTagTitle"
-                    android:text="@string/select_hashtag_description" />
+                    app:layout_constraintTop_toBottomOf="@id/hashTagTitle" />
 
                 <!-- 스플래시 이후에 사용되는 해시태그 선택 레이아웃 재사용 예정
                 <include
@@ -193,14 +194,14 @@
                     android:id="@+id/btnComplete"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
+                    android:layout_marginTop="60dp"
                     android:layout_marginBottom="50dp"
                     android:text="@string/complete"
-                    android:layout_marginTop="60dp"
                     android:textSize="20sp"
-                    app:layout_constraintTop_toBottomOf="@id/hashTagDescription"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hashTagDescription" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

@@ -98,6 +98,6 @@ class SignUpFragment : BaseBindingFragment<FragmentSignUpBinding>(R.layout.fragm
     }
 
     companion object {
-        private val TAG: String = this::class.java.simpleName
+        private val TAG: String = SignUpFragment::class.java.simpleName
     }
 }
