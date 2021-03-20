@@ -6,6 +6,7 @@ import com.shop.zerobin.data.repository.shop.ReviewRepository
 import com.shop.zerobin.data.repository.shop.ShopRepository
 import com.shop.zerobin.ui.home.HomeViewModel
 import com.shop.zerobin.ui.home.shop.ShopDetailViewModel
+import com.shop.zerobin.ui.home.shop.WriteReviewViewModel
 import com.shop.zerobin.ui.mypage.MyPageViewModel
 import com.shop.zerobin.ui.mypage.sign.SignInViewModel
 import com.shop.zerobin.ui.mypage.sign.SignUpViewModel
@@ -41,6 +42,7 @@ val myViewModel = module {
     viewModel { SignUpViewModel(get()) }
     viewModel { ShopDetailViewModel(get()) }
     viewModel { FilterViewModel(get()) }
+    viewModel { WriteReviewViewModel(get()) }
 }
 
 val myModule = module {

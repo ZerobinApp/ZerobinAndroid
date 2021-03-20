@@ -3,6 +3,7 @@
     package="com.shop.zerobin">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MainApplication"
@@ -13,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zerobin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.review.ReviewFilterActivity"></activity>
+        <activity android:name=".ui.review.ReviewFilterActivity"/>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:label="@string/app_name">

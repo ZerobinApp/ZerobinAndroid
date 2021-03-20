@@ -11,18 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
+        android:clipToPadding="false"
+        android:paddingHorizontal="30dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="30dp"
         tools:context=".ui.home.shop.WriteReviewSeedFragment">
 
         <ImageView
             android:id="@+id/btnBack"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="24dp"
-            android:scaleType="center"
-            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/arrow_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/seedInfo"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_circle_info"
+            app:layout_constraintBottom_toTopOf="@id/seedDescription1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/seedDescription1"
@@ -30,6 +43,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/review_seed_description1"
+            android:textColor="#272727"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@id/seedDescription2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +58,7 @@
             android:fontFamily="sans-serif-black"
             android:gravity="center"
             android:text="@string/review_seed_description2"
+            android:textColor="#272727"
             android:textSize="20sp"
             android:textStyle="bold"
             android:typeface="sans"
@@ -54,25 +69,25 @@
 
         <ImageView
             android:id="@+id/seedImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/ic_favorite_border_24px"
-            android:backgroundTint="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:src="@drawable/ic_pistachio"
             app:layout_constraintBottom_toTopOf="@id/btnNext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/seedDescription2"
             tools:ignore="ContentDescription" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNext"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_long_button"
             android:text="@string/next"
-            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
