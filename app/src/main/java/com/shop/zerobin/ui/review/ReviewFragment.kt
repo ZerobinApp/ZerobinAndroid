@@ -1,9 +1,11 @@
 package com.shop.zerobin.ui.review
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentReviewBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
@@ -24,13 +26,14 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
         setReviewAdapter()
         observeLiveData()
         requestReviewList()
+        setListeners()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> activity?.onBackPressed()
+    private fun setListeners(){
+        binding.btnFilter.setOnClickListener {
+            //리뷰 필터 액티비티로 넘어가기
+            startActivity(Intent(context,ReviewFilterActivity::class.java))
         }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun setReviewAdapter() {
