@@ -1,5 +1,6 @@
 package com.shop.zerobin.data.repository.mypage
 
+import android.content.Context
 import com.shop.zerobin.data.source.remote.RetrofitObject
 import com.shop.zerobin.domain.DataResult
 import com.shop.zerobin.domain.entity.Review
@@ -13,9 +14,11 @@ import com.shop.zerobin.domain.mapper.EntityToDataExtension.signUpEntityToData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class MyPageRepository {
+class MyPageRepository(val context: Context) {
 
-    private val zerobinClient = RetrofitObject.provideZerobinApi()
+    private val pref = context.getSharedPreferences(PREF_DEFAULT, Context.MODE_PRIVATE)
+
+    private val zerobinClient = RetrofitObject.provideZerobinApi(getJWT())
 
     suspend fun getMyPageReview(): Flow<DataResult<List<Review>>> {
         return flow {
@@ -80,7 +83,11 @@ class MyPageRepository {
         }
     }
 
-    suspend fun signUp(email: String, password: String, nickname: String): Flow<DataResult<Unit>> {
+    suspend fun signUp(
+        email: String,
+        password: String,
+        nickname: String,
+    ): Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
 
@@ -90,12 +97,13 @@ class MyPageRepository {
                 emit(DataResult.Error(Exception(response.message)))
                 return@flow
             }
-
+            val jwt: String = response.result?.jwt ?: return@flow
+            saveJWT(jwt)
             emit(DataResult.Success(Unit))
         }
     }
 
-    suspend fun signIn(email: String, password: String): Flow<DataResult<String>> {
+    suspend fun signIn(email: String, password: String): Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
 
@@ -106,7 +114,9 @@ class MyPageRepository {
                 return@flow
             }
 
-            emit(DataResult.Success(response.result?.jwt ?: return@flow))
+            val jwt: String = response.result?.jwt ?: return@flow
+            saveJWT(jwt)
+            emit(DataResult.Success(Unit))
         }
     }
 
@@ -123,5 +133,18 @@ class MyPageRepository {
 
             emit(DataResult.Success(Unit))
         }
+    }
+
+    private fun getJWT() = pref.getString(PREF_JWT, "") ?: ""
+
+    private fun saveJWT(jwt: String) {
+        pref.edit()
+            .putString(PREF_JWT, jwt)
+            .apply()
+    }
+
+    companion object {
+        const val PREF_DEFAULT = "PREF_DEFAULT"
+        const val PREF_JWT = "PREF_JWT"
     }
 }
