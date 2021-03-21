@@ -18,7 +18,8 @@ class ShopRepository(val context: Context) {
     private val pref =
         context.getSharedPreferences(MyPageRepository.PREF_DEFAULT, Context.MODE_PRIVATE)
 
-    private val zerobinClient = RetrofitObject.provideZerobinApi(getJWT())
+    private val zerobinClient
+        get() = RetrofitObject.provideZerobinApi(getJWT())
 
     private fun getJWT() = pref.getString(MyPageRepository.PREF_JWT, "") ?: ""
 
