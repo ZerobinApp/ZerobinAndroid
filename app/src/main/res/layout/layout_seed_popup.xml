@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="25dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp">
+
+        <TextView
+            android:id="@+id/seedInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="66dp"
+            android:gravity="center"
+            android:text="내가 남긴 새싹 스탬프로\n친환경 스토어를 칭찬하세요!"
+            android:textColor="#272727"
+            android:textSize="19dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bloomImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/ic_pistachio_bloom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/seedInfo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="60dp"
+            android:gravity="center"
+            android:text="칭찬 스탬프 누적이 많아질수록\n해당 스토어는 목록에 먼저 노출됩니다.\n가게도 나도 더 열심히 환경을 아낄 수 있겠죠?"
+            android:textColor="#656565"
+            android:textSize="13dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bloomImage" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

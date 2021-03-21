@@ -172,6 +172,10 @@
             android:defaultValue="@null"
             app:argType="com.shop.zerobin.domain.entity.Shop"
             app:nullable="true" />
+        <argument
+            android:name="seed"
+            android:defaultValue="false"
+            app:argType="boolean"/>
         <action
             android:id="@+id/action_navigation_write_review_to_navigation_shop_detail"
             app:destination="@id/navigation_shop_detail"

@@ -18,7 +18,8 @@ class MyPageRepository(val context: Context) {
 
     private val pref = context.getSharedPreferences(PREF_DEFAULT, Context.MODE_PRIVATE)
 
-    private val zerobinClient = RetrofitObject.provideZerobinApi(getJWT())
+    private val zerobinClient
+        get() = RetrofitObject.provideZerobinApi(getJWT())
 
     suspend fun getMyPageReview(): Flow<DataResult<List<Review>>> {
         return flow {
@@ -33,7 +34,6 @@ class MyPageRepository(val context: Context) {
 
             emit(DataResult.Success(response.result.review.map(DataToEntityExtension::reviewDataToEntity)))
         }
-
     }
 
     suspend fun getMyPageShop(): Flow<DataResult<List<Shop>>> {
@@ -49,7 +49,6 @@ class MyPageRepository(val context: Context) {
 
             emit(DataResult.Success(response.result.shop.map(DataToEntityExtension::myPageShopDataToEntity)))
         }
-
     }
 
     suspend fun getMyPageStamp(): Flow<DataResult<List<Review>>> {
@@ -65,7 +64,6 @@ class MyPageRepository(val context: Context) {
 
             emit(DataResult.Success(response.result.review.map(DataToEntityExtension::reviewDataToEntity)))
         }
-
     }
 
     suspend fun getMyPageUser(): Flow<DataResult<User>> {
