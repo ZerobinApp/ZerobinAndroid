@@ -4,7 +4,9 @@ import com.shop.zerobin.data.source.remote.mypage.*
 import com.shop.zerobin.data.source.remote.review.DefaultResponse
 import com.shop.zerobin.data.source.remote.review.ReviewListResponse
 import com.shop.zerobin.data.source.remote.review.ReviewRequest
-import com.shop.zerobin.data.source.remote.shop.*
+import com.shop.zerobin.data.source.remote.shop.ShopDetailResponse
+import com.shop.zerobin.data.source.remote.shop.ShopListRequest
+import com.shop.zerobin.data.source.remote.shop.ShopListResponse
 import retrofit2.http.*
 
 interface ZerobinApi {
@@ -39,6 +41,9 @@ interface ZerobinApi {
     suspend fun nickNameChange(@Body body: MyPageNickNameChangeRequest): MyPageNickNameChangeResponse
 
     @POST("shop/{shopIndex}/review")
-    suspend fun postReview(@Path("shopIndex") shopIndex: Int, @Body body: ReviewRequest): DefaultResponse
+    suspend fun postReview(
+        @Path("shopIndex") shopIndex: Int,
+        @Body body: ReviewRequest
+    ): DefaultResponse
 }
 

@@ -13,7 +13,8 @@ object RetrofitObject {
     private const val testUrl = "http://test.zerobin.shop/"
     private const val realUrl = "https://zerobin.shop/"
 
-    fun provideZerobinApi(jwt: String): ZerobinApi = getRetrofitBuild(jwt).create(ZerobinApi::class.java)
+    fun provideZerobinApi(jwt: String): ZerobinApi =
+        getRetrofitBuild(jwt).create(ZerobinApi::class.java)
 
     private fun getRetrofitBuild(jwt: String) = Retrofit.Builder()
         .baseUrl(devUrl)

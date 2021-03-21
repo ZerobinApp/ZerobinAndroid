@@ -28,13 +28,24 @@
                 android:id="@+id/shopName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{review.nickName}"
+                android:text="@{review.name}"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="알맹상점" />
 
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@{review.nickName}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/reviewMenu"
+                app:layout_constraintTop_toTopOf="@+id/shopName"
+                tools:text="안나영" />
 
             <TextView
                 android:id="@+id/reviewHashTag"
@@ -107,6 +118,14 @@
                 android:layout_marginTop="12dp"
                 app:layout_constraintEnd_toEndOf="@+id/reviewText"
                 app:layout_constraintTop_toBottomOf="@+id/reviewText" />
+
+            <ImageView
+                android:id="@+id/reviewMenu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/userName"
+                app:srcCompat="@drawable/review_menu" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
