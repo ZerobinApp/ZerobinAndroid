@@ -25,6 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="닉네임 변경"
+            android:textColor="@color/black"
+            android:textSize="13dp"
             app:layout_constraintStart_toStartOf="@+id/nickNameChangeBackButton"
             app:layout_constraintTop_toBottomOf="@+id/nickNameChangeBackButton" />
 
@@ -36,18 +38,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <EditText
             android:id="@+id/editTextNickName"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/mypage_stroke_rectangle"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:hint="닉네임 입력(10자 이내)"
             android:inputType="textPersonName"
             android:maxLength="10"
+            android:paddingStart="10dp"
             android:text="@={vm.inputNickName}"
+            android:textColor="#272727"
+            android:textSize="13dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -60,6 +64,8 @@
             android:background="@drawable/bg_long_button"
             android:onClick="@{() -> vm.onClickComplete()}"
             android:text="닉네임 변경 완료"
+            android:textColor="@color/white"
+            android:textSize="15dp"
             app:layout_constraintEnd_toEndOf="@+id/editTextNickName"
             app:layout_constraintStart_toStartOf="@+id/editTextNickName"
             app:layout_constraintTop_toBottomOf="@+id/editTextNickName" />

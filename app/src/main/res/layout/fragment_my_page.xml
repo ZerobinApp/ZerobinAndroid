@@ -34,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:fontFamily="sans-serif-medium"
             android:text="@{userVM.myUser.nickname}"
             android:textColor="#272727"
             android:textSize="22dp"

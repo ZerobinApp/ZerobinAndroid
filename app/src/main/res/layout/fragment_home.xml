@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="환경을 보호하는 가치있는 소비,\n시작해볼까요?"
                     android:textColor="@color/black"
-                    android:textSize="24sp"
+                    android:textSize="22dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -88,7 +88,7 @@
                         android:layout_height="30dp"
                         android:gravity="center_vertical"
                         android:text="@{VM.hashtagList}"
-                        android:textSize="16sp"
+                        android:textSize="13dp"
                         tools:text="#해시태그  #해시태그  #해시태그  #해시태그  #해시태그  #해시태그  #해시태그 " />
 
                 </HorizontalScrollView>
