@@ -20,8 +20,6 @@ class HomeViewModel(private val shopRepository: ShopRepository) : BaseViewModel(
     private val _shopList = MutableLiveData<List<Shop>>()
     val shopList: LiveData<List<Shop>> = _shopList
 
-    private val _shopSearchList = MutableLiveData<List<Shop>>()
-    val shopSearchList: LiveData<List<Shop>> = _shopSearchList
 
     fun requestShopList() {
         viewModelScope.launch {
@@ -49,7 +47,7 @@ class HomeViewModel(private val shopRepository: ShopRepository) : BaseViewModel(
 
     private fun handleSearchShopSuccess(data: List<Shop>) {
         _isLoading.value = Event(false)
-        _shopSearchList.value = data
+        _shopList.value = data
     }
 
     private fun handleResult(dataResult: DataResult<Pair<List<String>, List<Shop>>>) {

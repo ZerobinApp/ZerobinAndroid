@@ -28,11 +28,12 @@ class SearchShopFragment :
 
 
         observeLiveData()
+        setShopAdapter()
         setListener()
         setSearchListener()
     }
 
-    fun setSearchListener() {
+    private fun setSearchListener() {
         binding.editTextSearchShop.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {}
@@ -47,10 +48,7 @@ class SearchShopFragment :
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if (binding.editTextSearchShop.text.isNotEmpty()) {
                         homeViewModel.requestSearchShopList(s.toString())
-
-                        setShopAdapter()
                         binding.shopRecyclerView.isVisible = true
-                        binding.shopRecyclerView.adapter?.notifyDataSetChanged()
                     } else {
                         binding.shopRecyclerView.isVisible = false
                     }
@@ -63,7 +61,7 @@ class SearchShopFragment :
     }
 
     private fun observeLiveData() {
-        homeViewModel.shopSearchList.observe(viewLifecycleOwner) {
+        homeViewModel.shopList.observe(viewLifecycleOwner) {
             shopAdapter.setItem(it)
         }
 

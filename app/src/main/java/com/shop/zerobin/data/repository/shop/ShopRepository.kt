@@ -9,7 +9,6 @@ import com.shop.zerobin.domain.entity.ShopDetail
 import com.shop.zerobin.domain.mapper.DataToEntityExtension.hashtagDataToEntity
 import com.shop.zerobin.domain.mapper.DataToEntityExtension.map
 import com.shop.zerobin.domain.mapper.DataToEntityExtension.shopDataToEntity
-import com.shop.zerobin.domain.mapper.DataToEntityExtension.shopSearchDataToEntity
 import com.shop.zerobin.domain.mapper.EntityToDataExtension.shopListEntityToData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -68,7 +67,7 @@ class ShopRepository(val context: Context) {
                 return@flow
             }
 
-            val result = zerobinClient.searchShop(name).result.shop.map(::shopSearchDataToEntity)
+            val result = zerobinClient.searchShop(name).result.shop.map(::shopDataToEntity)
             emit(DataResult.Success(result))
         }
     }

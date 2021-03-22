@@ -4,7 +4,6 @@ import com.shop.zerobin.data.source.remote.mypage.MyPageShopResponse
 import com.shop.zerobin.data.source.remote.mypage.UserResponse
 import com.shop.zerobin.data.source.remote.review.ReviewResponse
 import com.shop.zerobin.data.source.remote.shop.ImageResponse
-import com.shop.zerobin.data.source.remote.shop.SearchShopListResponse
 import com.shop.zerobin.data.source.remote.shop.ShopDetailResponse
 import com.shop.zerobin.data.source.remote.shop.ShopListResponse
 import com.shop.zerobin.domain.entity.Review
@@ -24,14 +23,6 @@ object DataToEntityExtension {
             zzim = shop.zzim == 1,
         )
 
-    fun shopSearchDataToEntity(shop: SearchShopListResponse.Result.Shop) =
-        Shop(
-            shopIndex = shop.shopIndex,
-            name = shop.name ?: "",
-            location = shop.location ?: "",
-            imageList = shop.image?.map(::imageDataToEntity) ?: emptyList(),
-            zzim = shop.zzim == 1,
-        )
 
     fun myPageShopDataToEntity(shop: MyPageShopResponse.Result.Shop) =
         Shop(
