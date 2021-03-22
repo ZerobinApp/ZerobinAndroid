@@ -284,7 +284,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/review"
                     android:textColor="#272727"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/divider3" />
 
@@ -292,7 +292,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/make_review"
-                    android:textSize="12sp"
+                    android:textSize="12dp"
                     app:layout_constraintBaseline_toBaselineOf="@id/review"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd" />
 
@@ -310,7 +310,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>ㄴ
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
