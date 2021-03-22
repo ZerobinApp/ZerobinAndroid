@@ -9,5 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#C1C1C1</color>
     <color name="transparent">#00000000</color>
+    <color name="colorBottomDialogDefaultButton">#3983f1</color>
+    <color name="colorDefaultBottomDialogBackground">#f0f0f0</color>
+    <color name="titleColor">#767772</color>
+    <color name="colorError">#ff5757</color>
+    <color name="SeparatorColor">#BABAB8</color>
 </resources>
 

@@ -41,11 +41,9 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
             }
 
             override fun onMenuClick() {
-                val dialog = ReviewMenuDialogFragment.newInstance(
-                    itemClick = {
-                        if (it) Toast.makeText(context, "수정", Toast.LENGTH_SHORT).show()
-                    })
-                dialog.show(requireActivity().supportFragmentManager, dialog.tag)
+                DialogArticleTap().show(requireActivity().supportFragmentManager, "dialog.tag")
+
+
             }
 
         })
