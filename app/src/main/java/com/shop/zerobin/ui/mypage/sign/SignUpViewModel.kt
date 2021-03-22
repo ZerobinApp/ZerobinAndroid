@@ -79,6 +79,7 @@ class SignUpViewModel(private val myPageRepository: MyPageRepository) : BaseView
     }
 
     private fun handleSuccess() {
+        _isLoading.value = Event(false)
         _isError.value = Event("회원가입 성공")
         _signUpFinish.value = Event(Unit)
     }

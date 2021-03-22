@@ -59,6 +59,7 @@ class SignInViewModel(private val myPageRepository: MyPageRepository) : BaseView
     }
 
     private fun handleSuccess() {
+        _isLoading.value = Event(false)
         Log.d(TAG, "로그인 성공")
         _isError.value = Event("로그인 성공")
         _signInFinish.value = Event(Unit)
