@@ -17,5 +17,38 @@
         <item name="chipEndPadding">30dp</item>
         <item name="android:textColor">@color/selector_chip_text_color</item>
     </style>
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
 
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottomsheet_bg</item>
+    </style>
+
+    <style name="BottomDiaologTitleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#767772</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:background">@drawable/bottom_dialog_rounded_corner_button_first</item>
+
+    </style>
+
+    <style name="ButtonDialogButtonText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBottomDialogDefaultButton</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+    <style name="BottomDialogButtonsSeparator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#BABAB8</item>
+    </style>
 </resources>

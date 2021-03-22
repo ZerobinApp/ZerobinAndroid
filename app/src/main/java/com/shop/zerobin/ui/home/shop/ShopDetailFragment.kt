@@ -82,7 +82,8 @@ class ShopDetailFragment :
         binding.floatingActionButton.setOnClickListener {
             val action =
                 ShopDetailFragmentDirections.actionNavigationShopDetailToNavigationWriteReviewSeed(
-                    args?.shop)
+                    args?.shop
+                )
             findNavController().navigate(action)
         }
     }

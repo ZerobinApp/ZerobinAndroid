@@ -44,8 +44,10 @@ class ReviewRepository(val context: Context) {
         return flow {
             emit(DataResult.Loading)
 
-            val response = zerobinClient.postReview(shopIndex,
-                postReviewEntityToData(imageUrlList, inputText, hashTagList))
+            val response = zerobinClient.postReview(
+                shopIndex,
+                postReviewEntityToData(imageUrlList, inputText, hashTagList)
+            )
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))

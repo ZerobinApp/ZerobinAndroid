@@ -28,13 +28,24 @@
                 android:id="@+id/shopName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{review.nickName}"
+                android:text="@{review.name}"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="알맹상점" />
 
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@{review.nickName}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/reviewMenu"
+                app:layout_constraintTop_toTopOf="@+id/shopName"
+                tools:text="안나영" />
 
             <TextView
                 android:id="@+id/reviewHashTag"
@@ -49,12 +60,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/CardViewImg"
-                app:cardCornerRadius="20dp"
-                android:layout_marginTop="12dp"
-                app:layout_constraintStart_toStartOf="@+id/shopName"
-                app:layout_constraintTop_toBottomOf="@+id/shopName"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintStart_toStartOf="@+id/shopName"
+                app:layout_constraintTop_toBottomOf="@+id/shopName">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/ConstraintLayoutImg"
@@ -74,12 +85,12 @@
                     <ImageView
                         android:id="@+id/favorite"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
-                        android:layout_height="wrap_content"
                         android:src="@{review.stamp ? @drawable/ic_baseline_local_florist_24 : null}"
-                        app:layout_constraintTop_toTopOf="@+id/ConstraintLayoutImg"
                         app:layout_constraintEnd_toEndOf="@+id/ConstraintLayoutImg"
+                        app:layout_constraintTop_toTopOf="@+id/ConstraintLayoutImg"
                         tools:src="@drawable/ic_baseline_local_florist_24" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -90,23 +101,31 @@
                 android:id="@+id/reviewText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{review.comment}"
-                tools:text="샴푸 리필하러 갔었는데 사장님도 너무 친절 하시고
-상점 인테리어도 너무너무 맘에 들었어요"
                 android:layout_marginTop="12dp"
+                android:text="@{review.comment}"
                 app:layout_constraintEnd_toEndOf="@+id/CardViewImg"
                 app:layout_constraintStart_toStartOf="@+id/reviewHashTag"
-                app:layout_constraintTop_toBottomOf="@+id/reviewHashTag" />
+                app:layout_constraintTop_toBottomOf="@+id/reviewHashTag"
+                tools:text="샴푸 리필하러 갔었는데 사장님도 너무 친절 하시고
+상점 인테리어도 너무너무 맘에 들었어요" />
 
             <TextView
                 android:id="@+id/reviewDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{review.createdAt}"
-                tools:text="2021년 01월 12일"
                 android:layout_marginTop="12dp"
+                android:text="@{review.createdAt}"
                 app:layout_constraintEnd_toEndOf="@+id/reviewText"
-                app:layout_constraintTop_toBottomOf="@+id/reviewText" />
+                app:layout_constraintTop_toBottomOf="@+id/reviewText"
+                tools:text="2021년 01월 12일" />
+
+            <ImageView
+                android:id="@+id/reviewMenu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/userName"
+                app:srcCompat="@drawable/review_menu" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

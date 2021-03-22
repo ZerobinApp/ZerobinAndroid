@@ -1,13 +1,12 @@
 package com.shop.zerobin.ui.review
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentReviewBinding
+import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -29,11 +28,27 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
         setListeners()
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.btnFilter.setOnClickListener {
             //리뷰 필터 액티비티로 넘어가기
-            startActivity(Intent(context,ReviewFilterActivity::class.java))
+            findNavController().navigate(R.id.action_navigation_review_to_navigation_review_filter)
         }
+
+        reviewAdapter.setOnItemClickListener(object : ReviewAdapter.OnItemClickListener {
+            //상점이름을 클릭시 상점 상세페이지로 넘어가기 ...
+            override fun onItemClick(review: Review) {
+                Toast.makeText(context, review.name, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onMenuClick() {
+                DialogArticleTap().show(requireActivity().supportFragmentManager, "dialog.tag")
+
+
+            }
+
+        })
+
+
     }
 
     private fun setReviewAdapter() {

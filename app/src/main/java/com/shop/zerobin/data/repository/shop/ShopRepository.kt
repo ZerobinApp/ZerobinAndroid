@@ -55,4 +55,20 @@ class ShopRepository(val context: Context) {
             emit(DataResult.Success(result))
         }
     }
+
+    suspend fun getSearchShopList(name: String): Flow<DataResult<List<Shop>>> {
+        return flow {
+            emit(DataResult.Loading)
+
+            val response = zerobinClient.searchShop(name)
+
+            if (!response.isSuccess) {
+                emit(DataResult.Error(Exception(response.message)))
+                return@flow
+            }
+
+            val result = zerobinClient.searchShop(name).result.shop.map(::shopDataToEntity)
+            emit(DataResult.Success(result))
+        }
+    }
 }

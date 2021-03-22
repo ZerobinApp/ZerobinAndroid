@@ -17,67 +17,67 @@
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip1"
-            android:tag="1"
             style="@style/FilterChip"
             android:layout_marginStart="10dp"
+            android:tag="1"
             android:text="#비건"
             tools:checked="true" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip2"
-            android:tag="2"
             style="@style/FilterChip"
+            android:tag="2"
             android:text="#리필스테이션"
             tools:checked="true" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip3"
-            android:tag="3"
             style="@style/FilterChip"
+            android:tag="3"
             android:text="#생활용품" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip4"
-            android:tag="4"
             style="@style/FilterChip"
+            android:tag="4"
             android:text="#주방용품" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip5"
-            android:tag="5"
             style="@style/FilterChip"
             android:layout_marginStart="20dp"
+            android:tag="5"
             android:text="#업사이클링" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip6"
-            android:tag="6"
             style="@style/FilterChip"
+            android:tag="6"
             android:text="#욕실용품" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip7"
-            android:tag="7"
             style="@style/FilterChip"
+            android:tag="7"
             android:text="#식품" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip8"
-            android:tag="8"
             style="@style/FilterChip"
+            android:tag="8"
             android:text="#플라스틱 프리" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip9"
-            android:tag="9"
             style="@style/FilterChip"
             android:layout_marginStart="30dp"
+            android:tag="9"
             android:text="#화장품" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip10"
-            android:tag="10"
             style="@style/FilterChip"
+            android:tag="10"
             android:text="#카페" />
 
     </com.google.android.material.chip.ChipGroup>

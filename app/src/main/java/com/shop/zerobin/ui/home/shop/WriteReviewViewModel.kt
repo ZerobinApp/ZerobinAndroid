@@ -63,10 +63,12 @@ class WriteReviewViewModel(private val reviewRepository: ReviewRepository) : Bas
     fun postReview(hashTagList: List<Int>) {
         viewModelScope.launch {
             shop.value?.shopIndex?.let { shopIndex ->
-                val response = reviewRepository.postReview(shopIndex,
+                val response = reviewRepository.postReview(
+                    shopIndex,
                     imageUrlList.value,
                     inputText.value,
-                    hashTagList)
+                    hashTagList
+                )
                 response.collect { handleResult(it) }
             }
         }

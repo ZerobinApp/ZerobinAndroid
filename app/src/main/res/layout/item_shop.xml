@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -30,10 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shop_sample"
+            android:onClick="@{() -> onClick.invoke(shop)}"
             android:paddingVertical="12dp"
             android:paddingStart="16dp"
-            android:paddingEnd="12dp"
-            android:onClick="@{() -> onClick.invoke(shop)}">
+            android:paddingEnd="12dp">
 
             <TextView
                 android:id="@+id/shopName"
@@ -54,8 +54,8 @@
                 android:src="@{shop.zzim ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_favorite_24px"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/ic_favorite_24px" />
 
             <TextView
                 android:layout_width="wrap_content"

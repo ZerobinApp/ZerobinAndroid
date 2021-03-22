@@ -9,7 +9,18 @@
         android:id="@+id/navigation_review"
         android:name="com.shop.zerobin.ui.review.ReviewFragment"
         android:label="@string/title_review"
-        tools:layout="@layout/fragment_review" />
+        tools:layout="@layout/fragment_review" >
+        <action
+            android:id="@+id/action_navigation_review_to_navigation_review_filter"
+            app:destination="@+id/navigation_review_filter"
+            app:popUpTo="@id/navigation_review"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_review_filter"
+        android:name="com.shop.zerobin.ui.review.ReviewFilterFragment"
+        
+        tools:layout="@layout/fragment_review_filter" />
 
     <fragment
         android:id="@+id/navigation_home"
@@ -24,6 +35,20 @@
             android:id="@+id/action_navigation_home_to_navigation_my_page"
             app:destination="@id/navigation_my_page"
             app:popUpTo="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_search"
+            app:destination="@+id/navigation_search_shop"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/anim_nothing"
+            app:popEnterAnim="@anim/anim_nothing"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/navigation_home"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_search_shop"
+        android:name="com.shop.zerobin.ui.home.SearchShopFragment"
+        tools:layout="@layout/fragment_search_shop">
+
     </fragment>
 
     <fragment

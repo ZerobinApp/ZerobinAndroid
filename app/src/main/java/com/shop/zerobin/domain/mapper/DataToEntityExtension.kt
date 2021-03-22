@@ -23,6 +23,7 @@ object DataToEntityExtension {
             zzim = shop.zzim == 1,
         )
 
+
     fun myPageShopDataToEntity(shop: MyPageShopResponse.Result.Shop) =
         Shop(
             shopIndex = shop.shopIndex,
