@@ -51,7 +51,7 @@ class ShopRepository(val context: Context) {
                 return@flow
             }
 
-            val result = zerobinClient.getShopDetail(shopIndex).result.map()
+            val result = response.result.map()
             emit(DataResult.Success(result))
         }
     }
@@ -67,7 +67,7 @@ class ShopRepository(val context: Context) {
                 return@flow
             }
 
-            val result = zerobinClient.searchShop(name).result.shop.map(::shopDataToEntity)
+            val result = response.result.shop.map(::shopDataToEntity)
             emit(DataResult.Success(result))
         }
     }

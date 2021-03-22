@@ -19,7 +19,7 @@ object DataToEntityExtension {
             shopIndex = shop.shopIndex,
             name = shop.name ?: "",
             location = shop.location ?: "",
-            imageList = shop.image?.map(::imageDataToEntity) ?: emptyList(),
+            imageUrl = shop.image?.map(::imageDataToEntity)?.get(0) ?: "",
             zzim = shop.zzim == 1,
         )
 
@@ -29,7 +29,7 @@ object DataToEntityExtension {
             shopIndex = shop.shopIndex,
             name = shop.name ?: "",
             location = shop.location ?: "",
-            imageList = shop.image?.map(::imageDataToEntity) ?: emptyList(),
+            imageUrl = shop.image?.map(::imageDataToEntity)?.get(0) ?: "",
             zzim = shop.zzim == 1,
         )
 

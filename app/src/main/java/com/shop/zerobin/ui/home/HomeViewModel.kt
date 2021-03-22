@@ -20,10 +20,9 @@ class HomeViewModel(private val shopRepository: ShopRepository) : BaseViewModel(
     private val _shopList = MutableLiveData<List<Shop>>()
     val shopList: LiveData<List<Shop>> = _shopList
 
-
-    fun requestShopList() {
+    fun requestShopList(hashtagList: List<Int>) {
         viewModelScope.launch {
-            val response = shopRepository.getShopList(listOf(1, 2))
+            val response = shopRepository.getShopList(hashtagList)
             Log.d(TAG, response.toString())
             response.collect { handleResult(it) }
         }
@@ -35,7 +34,6 @@ class HomeViewModel(private val shopRepository: ShopRepository) : BaseViewModel(
             response.collect { handleSearchShopResult(it) }
         }
     }
-
 
     private fun handleSearchShopResult(dataResult: DataResult<List<Shop>>) {
         when (dataResult) {
@@ -51,6 +49,7 @@ class HomeViewModel(private val shopRepository: ShopRepository) : BaseViewModel(
     }
 
     private fun handleResult(dataResult: DataResult<Pair<List<String>, List<Shop>>>) {
+        Log.d(TAG, dataResult.toString())
         when (dataResult) {
             is DataResult.Success -> handleSuccess(dataResult.data)
             is DataResult.Error -> handleError(TAG, dataResult.exception)

@@ -23,25 +23,34 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:layout_marginBottom="24dp"
-        app:cardCornerRadius="20dp">
+        android:layout_marginBottom="30dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/shop_sample"
-            android:onClick="@{() -> onClick.invoke(shop)}"
-            android:paddingVertical="12dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="12dp">
+            android:onClick="@{() -> onClick.invoke(shop)}">
+
+            <ImageView
+                android:id="@+id/shopImage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/shop_sample" />
 
             <TextView
                 android:id="@+id/shopName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:text="@{shop.name}"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="19dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -51,6 +60,8 @@
                 android:id="@+id/favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
                 android:src="@{shop.zzim ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -60,9 +71,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="11dp"
                 android:text="@{shop.location}"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="서울특별시 마포구 월드컵로 49 2층" />

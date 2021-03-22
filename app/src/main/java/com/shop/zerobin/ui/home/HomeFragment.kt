@@ -1,7 +1,10 @@
 package com.shop.zerobin.ui.home
 
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
@@ -16,6 +19,11 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     private val homeViewModel: HomeViewModel by viewModel()
 
     private val shopAdapter by lazy { ShopAdapter() }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        Log.e(TAG, "eeeeee")
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,7 +62,8 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     }
 
     private fun requestShopList() {
-        homeViewModel.requestShopList()
+        val hashtagList = emptyList<Int>()
+        homeViewModel.requestShopList(hashtagList)
     }
 
     private fun setListener() {
@@ -65,5 +74,9 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
         binding.btnSearch.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_search)
         }
+    }
+
+    companion object {
+        private val TAG : String = HomeFragment::class.java.simpleName
     }
 }
