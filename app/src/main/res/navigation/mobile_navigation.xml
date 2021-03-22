@@ -35,6 +35,16 @@
             android:id="@+id/action_navigation_home_to_navigation_my_page"
             app:destination="@id/navigation_my_page"
             app:popUpTo="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_search"
+            app:destination="@+id/navigation_search_shop"
+            app:popUpTo="@id/navigation_home"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_search_shop"
+        android:name="com.shop.zerobin.ui.home.SearchShopFragment"
+        tools:layout="@layout/fragment_search_shop">
+
     </fragment>
 
     <fragment

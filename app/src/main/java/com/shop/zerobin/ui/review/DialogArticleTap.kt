@@ -6,11 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.shop.zerobin.R
 
 class DialogArticleTap() : BottomSheetDialogFragment() {
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,10 +27,20 @@ class DialogArticleTap() : BottomSheetDialogFragment() {
         )
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         (view?.parent as View).setBackgroundColor(Color.TRANSPARENT)
+
+        requireView().findViewById<TextView>(R.id.btnEditArticle).setOnClickListener {
+            Toast.makeText(context, "리뷰수정", Toast.LENGTH_SHORT).show()
+        }
+        requireView().findViewById<TextView>(R.id.btnDeleteArticle).setOnClickListener {
+            Toast.makeText(context, "리뷰삭제", Toast.LENGTH_SHORT).show()
+        }
+        requireView().findViewById<TextView>(R.id.btnCancelDialog).setOnClickListener {
+            Toast.makeText(context, "리뷰취소", Toast.LENGTH_SHORT).show()
+        }
 
         val resources = resources
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {

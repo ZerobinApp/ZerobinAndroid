@@ -1,30 +1,61 @@
 package com.shop.zerobin.ui.home
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
-import com.shop.zerobin.databinding.FragmentHomeBinding
+import com.shop.zerobin.databinding.FragmentSearchShopBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.home.adapter.ShopAdapter
 import com.shop.zerobin.ui.home.shop.ShopDetailFragmentDirections
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+class SearchShopFragment :
+    BaseBindingFragment<FragmentSearchShopBinding>(R.layout.fragment_search_shop) {
 
     private val homeViewModel: HomeViewModel by viewModel()
 
     private val shopAdapter by lazy { ShopAdapter() }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = homeViewModel
 
-        setShopAdapter()
+
         observeLiveData()
-        requestShopList()
         setListener()
+        setSearchListener()
+    }
+
+    fun setSearchListener() {
+        binding.editTextSearchShop.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {}
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (binding.editTextSearchShop.text.isNotEmpty()) {
+                        homeViewModel.requestSearchShopList(s.toString())
+
+                        setShopAdapter()
+                        binding.shopRecyclerView.isVisible = true
+                        binding.shopRecyclerView.adapter?.notifyDataSetChanged()
+                    } else {
+                        binding.shopRecyclerView.isVisible = false
+                    }
+                }
+            })
     }
 
     private fun setShopAdapter() {
@@ -32,7 +63,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     }
 
     private fun observeLiveData() {
-        homeViewModel.shopList.observe(viewLifecycleOwner) {
+        homeViewModel.shopSearchList.observe(viewLifecycleOwner) {
             shopAdapter.setItem(it)
         }
 
@@ -53,17 +84,13 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
         }
     }
 
-    private fun requestShopList() {
-        homeViewModel.requestShopList()
-    }
-
     private fun setListener() {
         shopAdapter.onClick = { shop ->
             val action = ShopDetailFragmentDirections.actionGlobalNavigationShopDetail(shop)
             findNavController().navigate(action)
         }
-        binding.btnSearch.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_navigation_search)
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 }

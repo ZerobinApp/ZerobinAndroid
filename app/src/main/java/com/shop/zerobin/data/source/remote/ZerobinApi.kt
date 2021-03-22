@@ -4,6 +4,7 @@ import com.shop.zerobin.data.source.remote.mypage.*
 import com.shop.zerobin.data.source.remote.review.DefaultResponse
 import com.shop.zerobin.data.source.remote.review.ReviewListResponse
 import com.shop.zerobin.data.source.remote.review.ReviewRequest
+import com.shop.zerobin.data.source.remote.shop.SearchShopListResponse
 import com.shop.zerobin.data.source.remote.shop.ShopDetailResponse
 import com.shop.zerobin.data.source.remote.shop.ShopListRequest
 import com.shop.zerobin.data.source.remote.shop.ShopListResponse
@@ -45,5 +46,10 @@ interface ZerobinApi {
         @Path("shopIndex") shopIndex: Int,
         @Body body: ReviewRequest
     ): DefaultResponse
+
+    @GET("shop/info")
+    suspend fun searchShop(
+        @Query("name") shopName: String
+    ): SearchShopListResponse
 }
 

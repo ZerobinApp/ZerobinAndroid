@@ -9,6 +9,7 @@ import com.shop.zerobin.domain.entity.ShopDetail
 import com.shop.zerobin.domain.mapper.DataToEntityExtension.hashtagDataToEntity
 import com.shop.zerobin.domain.mapper.DataToEntityExtension.map
 import com.shop.zerobin.domain.mapper.DataToEntityExtension.shopDataToEntity
+import com.shop.zerobin.domain.mapper.DataToEntityExtension.shopSearchDataToEntity
 import com.shop.zerobin.domain.mapper.EntityToDataExtension.shopListEntityToData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -52,6 +53,22 @@ class ShopRepository(val context: Context) {
             }
 
             val result = zerobinClient.getShopDetail(shopIndex).result.map()
+            emit(DataResult.Success(result))
+        }
+    }
+
+    suspend fun getSearchShopList(name: String): Flow<DataResult<List<Shop>>> {
+        return flow {
+            emit(DataResult.Loading)
+
+            val response = zerobinClient.searchShop(name)
+
+            if (!response.isSuccess) {
+                emit(DataResult.Error(Exception(response.message)))
+                return@flow
+            }
+
+            val result = zerobinClient.searchShop(name).result.shop.map(::shopSearchDataToEntity)
             emit(DataResult.Success(result))
         }
     }
