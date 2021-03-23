@@ -3,16 +3,17 @@ package com.shop.zerobin.domain.mapper
 import com.shop.zerobin.data.source.remote.mypage.MyPageShopResponse
 import com.shop.zerobin.data.source.remote.mypage.UserResponse
 import com.shop.zerobin.data.source.remote.review.ReviewResponse
+import com.shop.zerobin.data.source.remote.shop.HashtagResponse
 import com.shop.zerobin.data.source.remote.shop.ImageResponse
 import com.shop.zerobin.data.source.remote.shop.ShopDetailResponse
 import com.shop.zerobin.data.source.remote.shop.ShopListResponse
-import com.shop.zerobin.domain.entity.Review
-import com.shop.zerobin.domain.entity.Shop
-import com.shop.zerobin.domain.entity.ShopDetail
-import com.shop.zerobin.domain.entity.User
+import com.shop.zerobin.domain.entity.*
 
 object DataToEntityExtension {
     fun hashtagDataToEntity(hashtag: ShopListResponse.Result.Hashtag) = hashtag.name ?: ""
+
+    fun hashtagListDataToEntity(hashtagResponse: HashtagResponse) =
+        Hashtag(hashtagResponse.hashtagIndex, hashtagResponse.name)
 
     fun shopDataToEntity(shop: ShopListResponse.Result.Shop) =
         Shop(

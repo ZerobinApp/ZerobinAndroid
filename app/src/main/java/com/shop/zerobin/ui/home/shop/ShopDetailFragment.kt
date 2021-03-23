@@ -7,8 +7,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -16,7 +14,6 @@ import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentShopDetailBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
-import com.shop.zerobin.util.Extensions.px
 import com.shop.zerobin.util.GlideApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

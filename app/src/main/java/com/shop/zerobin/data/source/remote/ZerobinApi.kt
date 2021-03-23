@@ -4,6 +4,7 @@ import com.shop.zerobin.data.source.remote.mypage.*
 import com.shop.zerobin.data.source.remote.review.DefaultResponse
 import com.shop.zerobin.data.source.remote.review.ReviewListResponse
 import com.shop.zerobin.data.source.remote.review.ReviewRequest
+import com.shop.zerobin.data.source.remote.shop.HashtagListResponse
 import com.shop.zerobin.data.source.remote.shop.ShopDetailResponse
 import com.shop.zerobin.data.source.remote.shop.ShopListRequest
 import com.shop.zerobin.data.source.remote.shop.ShopListResponse
@@ -50,5 +51,8 @@ interface ZerobinApi {
     suspend fun searchShop(
         @Query("name") shopName: String
     ): ShopListResponse
+
+    @GET("hashtag")
+    suspend fun getHashtag(): HashtagListResponse
 }
 
