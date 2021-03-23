@@ -1,7 +1,10 @@
 package com.shop.zerobin.data.source.remote
 
 import com.shop.zerobin.data.source.remote.mypage.*
-import com.shop.zerobin.data.source.remote.review.*
+import com.shop.zerobin.data.source.remote.review.DefaultResponse
+import com.shop.zerobin.data.source.remote.review.ReviewListRequest
+import com.shop.zerobin.data.source.remote.review.ReviewListResponse
+import com.shop.zerobin.data.source.remote.review.ReviewRequest
 import com.shop.zerobin.data.source.remote.shop.HashtagListResponse
 import com.shop.zerobin.data.source.remote.shop.ShopDetailResponse
 import com.shop.zerobin.data.source.remote.shop.ShopListRequest
@@ -56,6 +59,6 @@ interface ZerobinApi {
     @POST("review/{reviewIndex}/report")
     suspend fun reportReview(
         @Path("reviewIndex") reviewIndex: Int
-    ): ReviewReportResponse
+    ): DefaultResponse
 }
 

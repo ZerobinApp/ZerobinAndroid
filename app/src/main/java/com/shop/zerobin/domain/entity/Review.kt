@@ -13,5 +13,5 @@ data class Review(
     val nickName: String,
     val reviewIndex: Int,
     val stamp: Boolean,
-    val owner: Int
+    val owner: Boolean
 ) : Parcelable

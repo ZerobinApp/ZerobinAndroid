@@ -40,7 +40,7 @@ class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activ
         filterViewModel.hashtagList.observe(this) {
 
             for (i in it.indices) {
-                findViewById<Chip>(R.id.chip + it[i].hashtagIndex).text = it[i].name
+                findViewById<Chip>(R.id.chip + it[i].hashtagIndex).text = "#" + it[i].name
             }
         }
 

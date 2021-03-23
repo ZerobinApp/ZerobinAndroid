@@ -11,7 +11,7 @@ data class ReviewResponse(
     val nickName: String?,
     val reviewIndex: Int,
     val stamp: Int?,
-    val owner: Int,
+    val owner: Int?,
 ) {
     data class Hashtag(
         val name: String?,
