@@ -40,9 +40,18 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                 Toast.makeText(context, review.name, Toast.LENGTH_SHORT).show()
             }
 
-            override fun onMenuClick() {
-                DialogArticleTap().show(requireActivity().supportFragmentManager, "dialog.tag")
-
+            override fun onMenuClick(review: Review) {
+                if (review.owner == 1) {
+                    DialogArticleTap(R.layout.bottomsheet_dialog_owner).show(
+                        requireActivity().supportFragmentManager,
+                        "dialog.tag"
+                    )
+                } else {
+                    DialogArticleTap(R.layout.bottomsheet_dialog).show(
+                        requireActivity().supportFragmentManager,
+                        "dialog.tag"
+                    )
+                }
 
             }
 

@@ -8,13 +8,19 @@
     app:behavior_peekHeight="0dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
+    <TextView
+        android:id="@+id/btnEditArticle"
+        style="@style/ButtonDialogButtonText"
+        android:background="@drawable/bottom_dialog_rounded_corner_button_first"
+        android:text="수정" />
 
+    <View style="@style/BottomDialogButtonsSeparator" />
 
     <TextView
-        android:id="@+id/btnReportArticle"
+        android:id="@+id/btnDeleteArticle"
         style="@style/ButtonDialogButtonText"
-        android:background="@drawable/bottom_dialog_rounded_corner_button_very_last"
-        android:text="신고"
+        android:background="@drawable/bottom_dialog_rounded_corner_button_end"
+        android:text="삭제"
         android:textColor="@color/colorError" />
 
     <TextView

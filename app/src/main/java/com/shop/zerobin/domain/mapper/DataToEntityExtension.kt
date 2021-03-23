@@ -43,6 +43,7 @@ object DataToEntityExtension {
             name = review.name ?: "",
             nickName = review.nickName ?: "",
             stamp = review.stamp == 1,
+            owner = review.owner,
             reviewIndex = review.reviewIndex
         )
 
@@ -73,6 +74,7 @@ object DataToEntityExtension {
                 imageList = it.image?.map { it.pictureUrl ?: "" } ?: emptyList(),
                 stamp = it.stamp == 1,
                 hashtagList = it.hashtag?.map { it.name ?: "" } ?: emptyList(),
+                owner = it.owner
             )
         } ?: emptyList()
     )

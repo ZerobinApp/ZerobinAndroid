@@ -46,7 +46,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(review: Review)
-        fun onMenuClick()
+        fun onMenuClick(review: Review)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -62,7 +62,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
                 listener?.onItemClick(review = review)
             }
             binding.reviewMenu.setOnClickListener {
-                listener?.onMenuClick()
+                listener?.onMenuClick(review = review)
             }
 
             setImageFromFirebase(review)

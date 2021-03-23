@@ -8,11 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.shop.zerobin.R
 
-class DialogArticleTap() : BottomSheetDialogFragment() {
+class DialogArticleTap(
+    @LayoutRes
+    private val layoutResId: Int
+) : BottomSheetDialogFragment() {
 
 
     override fun onCreateView(
@@ -21,7 +25,7 @@ class DialogArticleTap() : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(
-            R.layout.bottomsheet_dialog,
+            layoutResId,
             container,
             false
         )
@@ -40,6 +44,9 @@ class DialogArticleTap() : BottomSheetDialogFragment() {
         }
         requireView().findViewById<TextView>(R.id.btnCancelDialog).setOnClickListener {
             Toast.makeText(context, "리뷰취소", Toast.LENGTH_SHORT).show()
+        }
+        requireView().findViewById<TextView>(R.id.btnReportArticle).setOnClickListener {
+            Toast.makeText(context, "리뷰신고", Toast.LENGTH_SHORT).show()
         }
 
         val resources = resources
