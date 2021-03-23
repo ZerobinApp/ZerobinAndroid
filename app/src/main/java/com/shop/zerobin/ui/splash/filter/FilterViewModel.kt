@@ -9,8 +9,6 @@ import com.shop.zerobin.domain.DataResult
 import com.shop.zerobin.domain.entity.Hashtag
 import com.shop.zerobin.ui.common.BaseViewModel
 import com.shop.zerobin.ui.common.Event
-import com.shop.zerobin.ui.home.HomeViewModel
-import com.shop.zerobin.ui.review.ReviewViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -22,7 +20,7 @@ class FilterViewModel(private val shopRepository: ShopRepository) : BaseViewMode
     fun requestFilterList() {
         viewModelScope.launch {
             val response = shopRepository.getHashtag()
-            Log.d(HomeViewModel.TAG, response.toString())
+            Log.d(TAG, response.toString())
             response.collect { handleResult(it) }
         }
     }
@@ -30,7 +28,7 @@ class FilterViewModel(private val shopRepository: ShopRepository) : BaseViewMode
     private fun handleResult(dataResult: DataResult<List<Hashtag>>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccess(dataResult.data)
-            is DataResult.Error -> handleError(ReviewViewModel.TAG, dataResult.exception)
+            is DataResult.Error -> handleError(TAG, dataResult.exception)
             DataResult.Loading -> handleLoading()
         }
     }
@@ -38,5 +36,9 @@ class FilterViewModel(private val shopRepository: ShopRepository) : BaseViewMode
     private fun handleSuccess(data: List<Hashtag>) {
         _isLoading.value = Event(false)
         _hashtagList.value = data
+    }
+
+    companion object {
+        val TAG: String = FilterViewModel::class.java.simpleName
     }
 }

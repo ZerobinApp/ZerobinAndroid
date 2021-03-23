@@ -42,12 +42,12 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
 
             override fun onMenuClick(review: Review) {
                 if (review.owner == 1) {
-                    DialogArticleTap(R.layout.bottomsheet_dialog_owner).show(
+                    DialogArticleTap(R.layout.bottomsheet_dialog_owner, review.reviewIndex).show(
                         requireActivity().supportFragmentManager,
                         "dialog.tag"
                     )
                 } else {
-                    DialogArticleTap(R.layout.bottomsheet_dialog).show(
+                    DialogArticleTap(R.layout.bottomsheet_dialog, review.reviewIndex).show(
                         requireActivity().supportFragmentManager,
                         "dialog.tag"
                     )
@@ -87,7 +87,8 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
     }
 
     private fun requestReviewList() {
-        reviewViewModel.requestReviewList()
+        val hashtagList = emptyList<Int>()
+        reviewViewModel.requestReviewList(hashtagList)
     }
 
 }
