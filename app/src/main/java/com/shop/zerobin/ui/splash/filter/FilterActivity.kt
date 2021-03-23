@@ -3,6 +3,7 @@ package com.shop.zerobin.ui.splash.filter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import com.google.android.material.chip.Chip
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ActivityFilterBinding
 import com.shop.zerobin.ui.MainActivity
@@ -34,6 +35,12 @@ class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activ
                 } else {
                     hideLoading()
                 }
+            }
+        }
+        filterViewModel.hashtagList.observe(this) {
+
+            for (i in it.indices) {
+                findViewById<Chip>(R.id.chip + it[i].hashtagIndex).text = "#" + it[i].name
             }
         }
 

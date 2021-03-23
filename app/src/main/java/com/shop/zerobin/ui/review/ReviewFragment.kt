@@ -40,12 +40,48 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                 Toast.makeText(context, review.name, Toast.LENGTH_SHORT).show()
             }
 
-            override fun onMenuClick() {
-                DialogArticleTap().show(requireActivity().supportFragmentManager, "dialog.tag")
-
-
+            override fun onMenuClick(review: Review) {
+                if (review.owner) {
+                    DialogArticleTap().apply {
+                        viewType = DialogArticleTap.ViewType.MINE
+                        onClick = { clickType ->
+                            when (clickType) {
+                                DialogArticleTap.ClickType.EDIT -> Toast.makeText(
+                                    requireContext(),
+                                    "리뷰수정",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                DialogArticleTap.ClickType.DELETE -> Toast.makeText(
+                                    requireContext(),
+                                    "리뷰삭제",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                else -> Toast.makeText(
+                                    requireContext(),
+                                    "잘못된 접근",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }.show(childFragmentManager, "dialog.tag")
+                } else {
+                    DialogArticleTap().apply {
+                        viewType = DialogArticleTap.ViewType.OTHER
+                        onClick = { clickType ->
+                            when (clickType) {
+                                DialogArticleTap.ClickType.REPORT -> reviewViewModel.requestReviewReport(
+                                    review.reviewIndex
+                                )
+                                else -> Toast.makeText(
+                                    requireContext(),
+                                    "잘못된 접근",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }.show(childFragmentManager, "dialog.tag")
+                }
             }
-
         })
 
 
@@ -78,7 +114,8 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
     }
 
     private fun requestReviewList() {
-        reviewViewModel.requestReviewList()
+        val hashtagList = emptyList<Int>()
+        reviewViewModel.requestReviewList(hashtagList)
     }
 
 }

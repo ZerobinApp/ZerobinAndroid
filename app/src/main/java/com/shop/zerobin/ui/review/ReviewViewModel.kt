@@ -23,12 +23,29 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
     private val _reviewList = MutableLiveData<List<Review>>()
     val reviewList: LiveData<List<Review>> = _reviewList
 
-    fun requestReviewList() {
+    fun requestReviewList(hashtagList: List<Int>) {
         //코루틴 사용....
         viewModelScope.launch {
-            val response = reviewRepository.getReviewList()
+            val response = reviewRepository.getReviewList(hashtagList)
             Log.d(HomeViewModel.TAG, response.toString())
             response.collect { handleResult(it) }
+        }
+    }
+
+    fun requestReviewReport(reviewIndex: Int) {
+        viewModelScope.launch {
+            val response = reviewRepository.reportReview(reviewIndex)
+            Log.d(HomeViewModel.TAG, response.toString())
+            response.collect { handleResultReport(it) }
+        }
+
+    }
+
+    private fun handleResultReport(dataResult: DataResult<Unit>) {
+        when (dataResult) {
+            is DataResult.Success -> handleSuccessReport(dataResult.data)
+            is DataResult.Error -> handleError(TAG, dataResult.exception)
+            DataResult.Loading -> handleLoading()
         }
     }
 
@@ -43,6 +60,10 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
     private fun handleSuccess(data: List<Review>) {
         _isLoading.value = Event(false)
         _reviewList.value = data
+    }
+
+    private fun handleSuccessReport(data: Unit) {
+        Log.d("신고", data.toString())
     }
 
     companion object {

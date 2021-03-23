@@ -5,8 +5,9 @@ import com.shop.zerobin.data.repository.mypage.MyPageRepository
 import com.shop.zerobin.data.source.remote.RetrofitObject
 import com.shop.zerobin.domain.DataResult
 import com.shop.zerobin.domain.entity.Review
-import com.shop.zerobin.domain.mapper.DataToEntityExtension.reviewDataToEntity
+import com.shop.zerobin.domain.mapper.DataToEntityExtension
 import com.shop.zerobin.domain.mapper.EntityToDataExtension.postReviewEntityToData
+import com.shop.zerobin.domain.mapper.EntityToDataExtension.reviewListEntityToData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -20,18 +21,36 @@ class ReviewRepository(val context: Context) {
 
     private fun getJWT() = pref.getString(MyPageRepository.PREF_JWT, "") ?: ""
 
-    suspend fun getReviewList(): Flow<DataResult<List<Review>>> {
+    suspend fun getReviewList(type: List<Int>): Flow<DataResult<List<Review>>> {
         return flow {
             emit(DataResult.Loading)
 
-            val response = zerobinClient.getReviewList()
+            val response = zerobinClient.getReviewList(reviewListEntityToData(type))
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
                 return@flow
             }
 
-            emit(DataResult.Success(response.result.review.map(::reviewDataToEntity)))
+            val reviewList = response.result.review.map(DataToEntityExtension::reviewDataToEntity)
+
+            emit(DataResult.Success(reviewList))
+
+        }
+    }
+
+    suspend fun reportReview(reviewIndex: Int): Flow<DataResult<Unit>> {
+        return flow {
+            emit(DataResult.Loading)
+
+            val response = zerobinClient.reportReview(reviewIndex)
+
+            if (!response.isSuccess) {
+                emit(DataResult.Error(Exception(response.message)))
+                return@flow
+            }
+
+            emit(DataResult.Success(Unit))
         }
     }
 

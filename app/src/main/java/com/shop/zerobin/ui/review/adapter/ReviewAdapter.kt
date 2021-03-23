@@ -46,7 +46,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(review: Review)
-        fun onMenuClick()
+        fun onMenuClick(review: Review)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -62,7 +62,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
                 listener?.onItemClick(review = review)
             }
             binding.reviewMenu.setOnClickListener {
-                listener?.onMenuClick()
+                listener?.onMenuClick(review = review)
             }
 
             setImageFromFirebase(review)
@@ -80,7 +80,12 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
                 Log.e(TAG, spaceReference.toString())
                 GlideApp.with(binding.reviewImg.context)
                     .load(spaceReference)
-                    .error(ContextCompat.getDrawable(binding.reviewImg.context, R.drawable.no_image))
+                    .error(
+                        ContextCompat.getDrawable(
+                            binding.reviewImg.context,
+                            R.drawable.no_image
+                        )
+                    )
                     .transform(CenterCrop(), RoundedCorners(20.px))
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(binding.reviewImg)
