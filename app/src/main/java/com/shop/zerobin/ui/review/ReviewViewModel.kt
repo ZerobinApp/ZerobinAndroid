@@ -23,6 +23,8 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
     private val _reviewList = MutableLiveData<List<Review>>()
     val reviewList: LiveData<List<Review>> = _reviewList
 
+
+
     fun requestReviewList(hashtagList: List<Int>) {
         //코루틴 사용....
         viewModelScope.launch {
@@ -41,9 +43,25 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
 
     }
 
+    fun requestReviewDelete(reviewIndex: Int,shopIndex:Int) {
+        viewModelScope.launch {
+            val response = reviewRepository.deleteReview(reviewIndex,shopIndex)
+            Log.d(HomeViewModel.TAG, response.toString())
+            response.collect { handleResultDelete(it) }
+        }
+
+    }
+
     private fun handleResultReport(dataResult: DataResult<Unit>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccessReport(dataResult.data)
+            is DataResult.Error -> handleError(TAG, dataResult.exception)
+            DataResult.Loading -> handleLoading()
+        }
+    }
+    private fun handleResultDelete(dataResult: DataResult<Unit>) {
+        when (dataResult) {
+            is DataResult.Success -> handleSuccessDelete(dataResult.data)
             is DataResult.Error -> handleError(TAG, dataResult.exception)
             DataResult.Loading -> handleLoading()
         }
@@ -64,6 +82,10 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
 
     private fun handleSuccessReport(data: Unit) {
         Log.d("신고", data.toString())
+    }
+
+    private fun handleSuccessDelete(data: Unit) {
+        Log.d("삭제", data.toString())
     }
 
     companion object {

@@ -78,6 +78,9 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
         binding.btnSearch.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_search)
         }
+        binding.btnFilter.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_navigation_filter)
+        }
     }
 
     companion object {

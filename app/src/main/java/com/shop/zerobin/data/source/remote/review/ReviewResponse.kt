@@ -10,6 +10,7 @@ data class ReviewResponse(
     val name: String?,
     val nickName: String?,
     val reviewIndex: Int,
+    val shopIndex: Int,
     val stamp: Int?,
     val owner: Int?,
 ) {

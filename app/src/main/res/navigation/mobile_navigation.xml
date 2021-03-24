@@ -19,8 +19,18 @@
     <fragment
         android:id="@+id/navigation_review_filter"
         android:name="com.shop.zerobin.ui.review.ReviewFilterFragment"
-        
-        tools:layout="@layout/fragment_review_filter" />
+        tools:layout="@layout/fragment_review_filter" >
+        <action
+            android:id="@+id/action_navigation_review_filter_to_navigation_review"
+            app:destination="@+id/navigation_review"
+            app:popUpTo="@id/navigation_review_filter"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_shop_filter"
+        android:name="com.shop.zerobin.ui.review.FilterShopFragment"
+        tools:layout="@layout/fragment_filter_shop" >
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_home"
@@ -38,6 +48,14 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_search"
             app:destination="@+id/navigation_search_shop"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/anim_nothing"
+            app:popEnterAnim="@anim/anim_nothing"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/navigation_home"/>
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_filter"
+            app:destination="@+id/navigation_shop_filter"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/anim_nothing"
             app:popEnterAnim="@anim/anim_nothing"

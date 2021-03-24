@@ -20,7 +20,9 @@
     <string name="review_seed_description_bloom">착한 매장, 착한 소비로\n새싹이 피어났어요!</string>
     <string name="filter_description1">친환경 소비에 대해 관심있는\n 키워드를 골라주세요!</string>
     <string name="filter_description2">당신에게 딱 맞는 스토어를 가장 먼저 보여드릴게요.</string>
+    <string name="review_filter_description2">관련된 리뷰를 가장 먼저 보여드릴게요.</string>
     <string name="filter_button_text">친환경 소비 시작하기</string>
+    <string name="review_filter_button_text">적용</string>
     <string name="logout">로그아웃</string>
     <string name="login">로그인</string>
     <string name="review_filter_description1">원하는 친환경 키워드를\n 자유롭게 골라보세요!</string>

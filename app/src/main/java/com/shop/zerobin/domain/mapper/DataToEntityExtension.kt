@@ -44,7 +44,8 @@ object DataToEntityExtension {
             nickName = review.nickName ?: "",
             stamp = review.stamp == 1,
             owner = review.owner == 1,
-            reviewIndex = review.reviewIndex
+            reviewIndex = review.reviewIndex,
+            shopIndex=review.shopIndex
         )
 
     private fun imageDataToEntity(image: ImageResponse) = image.pictureUrl ?: ""
@@ -67,6 +68,7 @@ object DataToEntityExtension {
         reviewList = this.review?.map {
             Review(
                 reviewIndex = it.reviewIndex,
+                shopIndex=it.shopIndex,
                 nickName = it.nickName ?: "",
                 comment = it.comment ?: "",
                 createdAt = it.createdAt ?: "",

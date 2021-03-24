@@ -7,17 +7,21 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.shop.zerobin.R
+import com.shop.zerobin.databinding.FragmentFilterShopBinding
 import com.shop.zerobin.databinding.FragmentReviewFilterBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
+import com.shop.zerobin.ui.home.HomeViewModel
 import com.shop.zerobin.ui.splash.filter.FilterViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ReviewFilterFragment :
-    BaseBindingFragment<FragmentReviewFilterBinding>(R.layout.fragment_review_filter) {
+class FilterShopFragment :
+    BaseBindingFragment<FragmentFilterShopBinding>(R.layout.fragment_filter_shop) {
 
-    private val reviewFilterViewModel: ReviewViewModel by viewModel()
+    private val homeViewModel: HomeViewModel by viewModel()
     private val filterViewModel: FilterViewModel by viewModel()
+
     var hashtagList= mutableListOf<Int>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = filterViewModel
@@ -37,16 +41,17 @@ class ReviewFilterFragment :
                     hashtagList.add(i)
                 }
             }
-            requestReviewList()
-            findNavController().navigate(R.id.action_navigation_review_filter_to_navigation_review)
+            requestShopList()
+            findNavController().popBackStack()
 
         }
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
     }
-    private fun requestReviewList() {
-        reviewFilterViewModel.requestReviewList(hashtagList)
+    private fun requestShopList() {
+        val hashtagList = emptyList<Int>()
+        homeViewModel.requestShopList(hashtagList)
     }
 
 

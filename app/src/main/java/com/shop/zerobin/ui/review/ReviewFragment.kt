@@ -51,11 +51,7 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                                     "리뷰수정",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                DialogArticleTap.ClickType.DELETE -> Toast.makeText(
-                                    requireContext(),
-                                    "리뷰삭제",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                DialogArticleTap.ClickType.DELETE -> reviewViewModel.requestReviewDelete(review.reviewIndex,review.shopIndex)
                                 else -> Toast.makeText(
                                     requireContext(),
                                     "잘못된 접근",
@@ -114,7 +110,7 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
     }
 
     private fun requestReviewList() {
-        val hashtagList = emptyList<Int>()
+        val hashtagList = mutableListOf<Int>()
         reviewViewModel.requestReviewList(hashtagList)
     }
 
