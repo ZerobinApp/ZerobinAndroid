@@ -3,6 +3,7 @@ package com.shop.zerobin.ui.review
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentReviewBinding
@@ -24,7 +25,13 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
 
         setReviewAdapter()
         observeLiveData()
-        requestReviewList()
+        if (arguments?.getIntegerArrayList("hashtag") == null) {
+            val hashtagList = emptyList<Int>()
+            requestReviewList(hashtagList)
+        } else {
+            requestReviewList(arguments?.getIntegerArrayList("hashtag")!!)
+
+        }
         setListeners()
     }
 
@@ -51,7 +58,10 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                                     "리뷰수정",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                DialogArticleTap.ClickType.DELETE -> reviewViewModel.requestReviewDelete(review.reviewIndex,review.shopIndex)
+                                DialogArticleTap.ClickType.DELETE -> reviewViewModel.requestReviewDelete(
+                                    review.reviewIndex,
+                                    review.shopIndex
+                                )
                                 else -> Toast.makeText(
                                     requireContext(),
                                     "잘못된 접근",
@@ -89,6 +99,7 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
 
     private fun observeLiveData() {
         reviewViewModel.reviewList.observe(viewLifecycleOwner) {
+
             reviewAdapter.setItem(it)
         }
 
@@ -109,8 +120,7 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
         }
     }
 
-    private fun requestReviewList() {
-        val hashtagList = mutableListOf<Int>()
+    private fun requestReviewList(hashtagList: List<Int>) {
         reviewViewModel.requestReviewList(hashtagList)
     }
 

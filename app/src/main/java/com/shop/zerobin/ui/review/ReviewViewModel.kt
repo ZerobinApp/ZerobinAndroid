@@ -24,7 +24,6 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
     val reviewList: LiveData<List<Review>> = _reviewList
 
 
-
     fun requestReviewList(hashtagList: List<Int>) {
         //코루틴 사용....
         viewModelScope.launch {
@@ -33,6 +32,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
             response.collect { handleResult(it) }
         }
     }
+
 
     fun requestReviewReport(reviewIndex: Int) {
         viewModelScope.launch {
@@ -43,9 +43,9 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
 
     }
 
-    fun requestReviewDelete(reviewIndex: Int,shopIndex:Int) {
+    fun requestReviewDelete(reviewIndex: Int, shopIndex: Int) {
         viewModelScope.launch {
-            val response = reviewRepository.deleteReview(reviewIndex,shopIndex)
+            val response = reviewRepository.deleteReview(reviewIndex, shopIndex)
             Log.d(HomeViewModel.TAG, response.toString())
             response.collect { handleResultDelete(it) }
         }
@@ -59,6 +59,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
             DataResult.Loading -> handleLoading()
         }
     }
+
     private fun handleResultDelete(dataResult: DataResult<Unit>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccessDelete(dataResult.data)

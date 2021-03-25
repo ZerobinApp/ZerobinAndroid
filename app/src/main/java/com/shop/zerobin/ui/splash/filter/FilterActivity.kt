@@ -3,7 +3,9 @@ package com.shop.zerobin.ui.splash.filter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.observe
 import com.google.android.material.chip.Chip
+import com.shop.zerobin.MainApplication
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ActivityFilterBinding
 import com.shop.zerobin.ui.MainActivity
@@ -13,6 +15,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
 
     private val filterViewModel: FilterViewModel by viewModel()
+    var hashtagList = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,13 @@ class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activ
 
     private fun startMainActivity() {
         binding.btnNext.setOnClickListener {
+            for (i in 1..10) {
+
+                if (findViewById<Chip>(R.id.chip + i).isChecked) {
+                    hashtagList.add(i)
+                }
+            }
+            MainApplication.prefs.setStringArrayPref("hashtag", hashtagList)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

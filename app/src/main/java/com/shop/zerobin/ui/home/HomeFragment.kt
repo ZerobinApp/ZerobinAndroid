@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.shop.zerobin.MainApplication
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentHomeBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
@@ -35,7 +37,13 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
 
         setShopAdapter()
         observeLiveData()
-        requestShopList()
+        if (MainApplication.prefs.getStringArrayPref("hashtag") == null) {
+            val hashtagList = emptyList<Int>()
+            requestShopList(hashtagList)
+        } else {
+            requestShopList(MainApplication.prefs.getStringArrayPref("hashtag")!!)
+
+        }
         setListener()
     }
 
@@ -65,8 +73,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
         }
     }
 
-    private fun requestShopList() {
-        val hashtagList = emptyList<Int>()
+    private fun requestShopList(hashtagList: List<Int>) {
         homeViewModel.requestShopList(hashtagList)
     }
 

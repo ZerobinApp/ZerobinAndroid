@@ -53,11 +53,12 @@ class ReviewRepository(val context: Context) {
             emit(DataResult.Success(Unit))
         }
     }
-    suspend fun deleteReview(reviewIndex: Int,shopIndex: Int): Flow<DataResult<Unit>> {
+
+    suspend fun deleteReview(reviewIndex: Int, shopIndex: Int): Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
 
-            val response = zerobinClient.deleteReview(reviewIndex,shopIndex)
+            val response = zerobinClient.deleteReview(reviewIndex, shopIndex)
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
@@ -67,6 +68,7 @@ class ReviewRepository(val context: Context) {
             emit(DataResult.Success(Unit))
         }
     }
+
     suspend fun postReview(
         shopIndex: Int,
         imageUrlList: List<String>?,
