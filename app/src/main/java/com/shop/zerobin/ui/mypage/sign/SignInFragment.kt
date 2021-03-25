@@ -56,8 +56,8 @@ class SignInFragment : BaseBindingFragment<FragmentSignInBinding>(R.layout.fragm
         signInViewModel.inputCheckComplete.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 signIn(
-                    signInViewModel.inputEmail.value ?: return@observe,
-                    signInViewModel.inputPassword.value ?: return@observe
+                        signInViewModel.inputEmail.value ?: return@observe,
+                        signInViewModel.inputPassword.value ?: return@observe
                 )
             }
         }
@@ -74,21 +74,21 @@ class SignInFragment : BaseBindingFragment<FragmentSignInBinding>(R.layout.fragm
         showLoading()
 
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithEmail:success")
+                .addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "signInWithEmail:success")
 
-                    val user = auth.currentUser
-                    signInViewModel.requestSignIn(auth.uid ?: return@addOnCompleteListener)
-                } else {
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        requireContext(), "로그인 실패\n${task.exception?.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        val user = auth.currentUser
+                        signInViewModel.requestSignIn(auth.uid ?: return@addOnCompleteListener)
+                    } else {
+                        Log.w(TAG, "signInWithEmail:failure", task.exception)
+                        Toast.makeText(
+                                requireContext(), "로그인 실패\n${task.exception?.message}",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    hideLoading()
                 }
-                hideLoading()
-            }
     }
 
     companion object {

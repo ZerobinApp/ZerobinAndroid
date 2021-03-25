@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun hideBottomNav() {
         bottomNavigationView.animate()
-            .setDuration(500)
-            .translationY(bottomNavigationView.y)
+                .setDuration(500)
+                .translationY(bottomNavigationView.y)
     }
 }

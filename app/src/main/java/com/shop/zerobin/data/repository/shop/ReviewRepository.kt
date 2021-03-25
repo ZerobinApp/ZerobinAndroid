@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flow
 class ReviewRepository(val context: Context) {
 
     private val pref =
-        context.getSharedPreferences(MyPageRepository.PREF_DEFAULT, Context.MODE_PRIVATE)
+            context.getSharedPreferences(MyPageRepository.PREF_DEFAULT, Context.MODE_PRIVATE)
 
     private val zerobinClient
         get() = RetrofitObject.provideZerobinApi(getJWT())
@@ -70,17 +70,17 @@ class ReviewRepository(val context: Context) {
     }
 
     suspend fun postReview(
-        shopIndex: Int,
-        imageUrlList: List<String>?,
-        inputText: String?,
-        hashTagList: List<Int>?,
+            shopIndex: Int,
+            imageUrlList: List<String>?,
+            inputText: String?,
+            hashTagList: List<Int>?,
     ): Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
 
             val response = zerobinClient.postReview(
-                shopIndex,
-                postReviewEntityToData(imageUrlList, inputText, hashTagList)
+                    shopIndex,
+                    postReviewEntityToData(imageUrlList, inputText, hashTagList)
             )
 
             if (!response.isSuccess) {

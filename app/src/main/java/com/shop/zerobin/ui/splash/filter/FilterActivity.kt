@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.observe
 import com.google.android.material.chip.Chip
-import com.shop.zerobin.MainApplication
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ActivityFilterBinding
 import com.shop.zerobin.ui.MainActivity
@@ -29,6 +28,7 @@ class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activ
     private fun requestFilterList() {
         filterViewModel.requestFilterList()
     }
+
 
     private fun observeLiveData() {
         filterViewModel.isLoading.observe(this) { event ->
@@ -62,7 +62,7 @@ class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activ
                     hashtagList.add(i)
                 }
             }
-            MainApplication.prefs.setStringArrayPref("hashtag", hashtagList)
+            filterViewModel.requestHashTagList(hashtagList)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

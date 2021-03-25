@@ -4,7 +4,6 @@ import android.app.Application
 import com.shop.zerobin.data.repository.mypage.MyPageRepository
 import com.shop.zerobin.data.repository.shop.ReviewRepository
 import com.shop.zerobin.data.repository.shop.ShopRepository
-import com.shop.zerobin.ui.common.MySharedPreference
 import com.shop.zerobin.ui.home.HomeViewModel
 import com.shop.zerobin.ui.home.shop.ShopDetailViewModel
 import com.shop.zerobin.ui.home.shop.WriteReviewViewModel
@@ -20,14 +19,8 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 class MainApplication : Application() {
-    companion object {
-        lateinit var prefs: MySharedPreference
-    }
-
 
     override fun onCreate() {
-        prefs = MySharedPreference(applicationContext)
-
         super.onCreate()
 
         startKoin {

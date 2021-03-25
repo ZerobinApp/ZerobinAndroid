@@ -14,7 +14,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 abstract class BaseBindingFragment<B : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
-    Fragment() {
+        Fragment() {
 
     protected lateinit var binding: B
         private set
@@ -22,9 +22,9 @@ abstract class BaseBindingFragment<B : ViewDataBinding>(@LayoutRes private val l
     private var progressDialog: ProgressDialog? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View {
         initBinding(inflater, container)
         return binding.root

@@ -2,12 +2,12 @@ package com.shop.zerobin.data.source.remote.review
 
 
 data class ReviewListResponse(
-    val code: Int,
-    val isSuccess: Boolean,
-    val message: String,
-    val result: Result,
+        val code: Int,
+        val isSuccess: Boolean,
+        val message: String,
+        val result: Result,
 ) {
     data class Result(
-        val review: List<ReviewResponse>,
+            val review: List<ReviewResponse>,
     )
 }

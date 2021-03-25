@@ -36,6 +36,7 @@ class MyPageRepository(val context: Context) {
         }
     }
 
+
     suspend fun getMyPageShop(): Flow<DataResult<List<Shop>>> {
         return flow {
             emit(DataResult.Loading)
@@ -82,9 +83,9 @@ class MyPageRepository(val context: Context) {
     }
 
     suspend fun signUp(
-        email: String,
-        password: String,
-        nickname: String,
+            email: String,
+            password: String,
+            nickname: String,
     ): Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
@@ -137,8 +138,8 @@ class MyPageRepository(val context: Context) {
 
     private fun saveJWT(jwt: String) {
         pref.edit()
-            .putString(PREF_JWT, jwt)
-            .apply()
+                .putString(PREF_JWT, jwt)
+                .apply()
     }
 
     companion object {

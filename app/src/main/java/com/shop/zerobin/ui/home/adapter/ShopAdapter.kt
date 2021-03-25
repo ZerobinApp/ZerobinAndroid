@@ -35,7 +35,7 @@ class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
     }
 
     class ShopViewHolder(private val binding: ItemShopBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+            RecyclerView.ViewHolder(binding.root) {
         fun bind(shop: Shop, onClick: ((Shop) -> Unit)?) {
             binding.shop = shop
             binding.onClick = onClick
@@ -47,11 +47,11 @@ class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
             val spaceReference = Firebase.storage.reference.child(shop.imageUrl)
             Log.e(TAG, spaceReference.toString())
             GlideApp.with(binding.shopImage.context)
-                .load(spaceReference)
-                .centerCrop()
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .error(ContextCompat.getDrawable(binding.shopImage.context, R.drawable.no_image))
-                .into(binding.shopImage)
+                    .load(spaceReference)
+                    .centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .error(ContextCompat.getDrawable(binding.shopImage.context, R.drawable.no_image))
+                    .into(binding.shopImage)
         }
     }
 

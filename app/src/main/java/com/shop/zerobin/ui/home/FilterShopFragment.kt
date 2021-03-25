@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
-import com.shop.zerobin.MainApplication
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentFilterShopBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
@@ -14,7 +13,7 @@ import com.shop.zerobin.ui.splash.filter.FilterViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class FilterShopFragment :
-    BaseBindingFragment<FragmentFilterShopBinding>(R.layout.fragment_filter_shop) {
+        BaseBindingFragment<FragmentFilterShopBinding>(R.layout.fragment_filter_shop) {
 
     private val filterViewModel: FilterViewModel by viewModel()
 
@@ -39,8 +38,7 @@ class FilterShopFragment :
                     hashtagList.add(i)
                 }
             }
-            MainApplication.prefs.setStringArrayPref("hashtag", hashtagList)
-            //val bundle = bundleOf("hashtag" to hashtagList)
+            filterViewModel.requestHashTagList(hashtagList)
             findNavController().navigate(R.id.action_navigation_shop_filter_to_navigation_home)
 
         }
@@ -68,7 +66,7 @@ class FilterShopFragment :
 
             for (i in it.indices) {
                 requireView().findViewById<Chip>(R.id.chip + it[i].hashtagIndex).text =
-                    "#" + it[i].name
+                        "#" + it[i].name
             }
         }
 

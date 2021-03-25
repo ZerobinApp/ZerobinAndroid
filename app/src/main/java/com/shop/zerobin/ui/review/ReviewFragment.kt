@@ -54,18 +54,18 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                         onClick = { clickType ->
                             when (clickType) {
                                 DialogArticleTap.ClickType.EDIT -> Toast.makeText(
-                                    requireContext(),
-                                    "리뷰수정",
-                                    Toast.LENGTH_SHORT
+                                        requireContext(),
+                                        "리뷰수정",
+                                        Toast.LENGTH_SHORT
                                 ).show()
                                 DialogArticleTap.ClickType.DELETE -> reviewViewModel.requestReviewDelete(
-                                    review.reviewIndex,
-                                    review.shopIndex
+                                        review.reviewIndex,
+                                        review.shopIndex
                                 )
                                 else -> Toast.makeText(
-                                    requireContext(),
-                                    "잘못된 접근",
-                                    Toast.LENGTH_SHORT
+                                        requireContext(),
+                                        "잘못된 접근",
+                                        Toast.LENGTH_SHORT
                                 ).show()
                             }
                         }
@@ -76,12 +76,12 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                         onClick = { clickType ->
                             when (clickType) {
                                 DialogArticleTap.ClickType.REPORT -> reviewViewModel.requestReviewReport(
-                                    review.reviewIndex
+                                        review.reviewIndex
                                 )
                                 else -> Toast.makeText(
-                                    requireContext(),
-                                    "잘못된 접근",
-                                    Toast.LENGTH_SHORT
+                                        requireContext(),
+                                        "잘못된 접근",
+                                        Toast.LENGTH_SHORT
                                 ).show()
                             }
                         }

@@ -14,18 +14,18 @@ object RetrofitObject {
     private const val realUrl = "https://zerobin.shop/"
 
     fun provideZerobinApi(jwt: String): ZerobinApi =
-        getRetrofitBuild(jwt).create(ZerobinApi::class.java)
+            getRetrofitBuild(jwt).create(ZerobinApi::class.java)
 
     private fun getRetrofitBuild(jwt: String) = Retrofit.Builder()
-        .baseUrl(devUrl)
-        .client(getOkhttpClient(jwt))
-        .addConverterFactory(getGsonConverterFactory())
-        .build()
+            .baseUrl(devUrl)
+            .client(getOkhttpClient(jwt))
+            .addConverterFactory(getGsonConverterFactory())
+            .build()
 
     private fun getGsonConverterFactory(): GsonConverterFactory {
         val gson = GsonBuilder()
-            .setDateFormat("E, dd MMMM yyyy HH:mm:ss X")
-            .create()
+                .setDateFormat("E, dd MMMM yyyy HH:mm:ss X")
+                .create()
         return GsonConverterFactory.create(gson)
     }
 
@@ -42,13 +42,13 @@ object RetrofitObject {
     }.build()
 
     private fun getLoggingInterceptor(): HttpLoggingInterceptor =
-        HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+            HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
 
     private fun getTokenInterceptor(jwt: String) = Interceptor {
         val request = it.request()
-            .newBuilder()
-            .addHeader("X-ACCESS-TOKEN", jwt)
-            .build()
+                .newBuilder()
+                .addHeader("X-ACCESS-TOKEN", jwt)
+                .build()
 
         return@Interceptor it.proceed(request)
     }

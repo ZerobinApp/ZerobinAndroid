@@ -13,7 +13,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class MyPageShopFragment :
-    BaseBindingFragment<FragmentMyPageShopBinding>(R.layout.fragment_my_page_shop) {
+        BaseBindingFragment<FragmentMyPageShopBinding>(R.layout.fragment_my_page_shop) {
 
     private val myPageViewModel: MyPageViewModel by viewModel()
 

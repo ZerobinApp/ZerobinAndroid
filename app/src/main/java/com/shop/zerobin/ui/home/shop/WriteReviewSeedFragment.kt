@@ -16,7 +16,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class WriteReviewSeedFragment :
-    BaseBindingFragment<FragmentWriteReviewSeedBinding>(R.layout.fragment_write_review_seed) {
+        BaseBindingFragment<FragmentWriteReviewSeedBinding>(R.layout.fragment_write_review_seed) {
 
     private val args: WriteReviewSeedFragmentArgs? by navArgs()
 
@@ -40,9 +40,9 @@ class WriteReviewSeedFragment :
 
         binding.btnNext.setOnClickListener {
             val action =
-                WriteReviewSeedFragmentDirections.actionNavigationWriteReviewSeedToNavigationWriteReview(
-                    args?.shop, viewModel.seed.value!!
-                )
+                    WriteReviewSeedFragmentDirections.actionNavigationWriteReviewSeedToNavigationWriteReview(
+                            args?.shop, viewModel.seed.value!!
+                    )
             findNavController().navigate(action)
         }
 
@@ -64,12 +64,12 @@ class WriteReviewSeedFragment :
     @SuppressLint("InflateParams")
     private fun showPopupWindow(view: View) {
         PopupWindow(
-            view,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+                view,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
         ).apply {
             contentView =
-                LayoutInflater.from(requireContext()).inflate(R.layout.layout_seed_popup, null)
+                    LayoutInflater.from(requireContext()).inflate(R.layout.layout_seed_popup, null)
             isFocusable = true
             elevation = 12f
             animationStyle = android.R.style.Animation_Dialog

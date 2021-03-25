@@ -13,19 +13,19 @@ object EntityToDataExtension {
     fun reviewListEntityToData(type: List<Int>) = ReviewListRequest(type)
 
     fun signUpEntityToData(email: String, password: String, nickname: String) =
-        SignUpRequest(email, password, nickname)
+            SignUpRequest(email, password, nickname)
 
     fun signInEntityToData(email: String, password: String) = SignInRequest(email, password)
 
     fun nickNameChangeEntityToData(nickname: String) = MyPageNickNameChangeRequest(nickname)
 
     fun postReviewEntityToData(
-        imageUrlList: List<String>?,
-        inputText: String?,
-        hashTagList: List<Int>?,
+            imageUrlList: List<String>?,
+            inputText: String?,
+            hashTagList: List<Int>?,
     ) = ReviewRequest(
-        imageUrlList ?: emptyList(),
-        inputText ?: "",
-        hashTagList ?: emptyList()
+            imageUrlList ?: emptyList(),
+            inputText ?: "",
+            hashTagList ?: emptyList()
     )
 }

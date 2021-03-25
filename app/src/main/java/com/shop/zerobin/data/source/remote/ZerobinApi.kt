@@ -44,13 +44,13 @@ interface ZerobinApi {
 
     @POST("shop/{shopIndex}/review")
     suspend fun postReview(
-        @Path("shopIndex") shopIndex: Int,
-        @Body body: ReviewRequest
+            @Path("shopIndex") shopIndex: Int,
+            @Body body: ReviewRequest
     ): DefaultResponse
 
     @GET("shop/info")
     suspend fun searchShop(
-        @Query("name") shopName: String
+            @Query("name") shopName: String
     ): ShopListResponse
 
     @GET("hashtag")
@@ -58,13 +58,13 @@ interface ZerobinApi {
 
     @POST("review/{reviewIndex}/report")
     suspend fun reportReview(
-        @Path("reviewIndex") reviewIndex: Int
+            @Path("reviewIndex") reviewIndex: Int
     ): DefaultResponse
 
     @DELETE("shop/{shopIndex}/review/{reviewIndex}")
     suspend fun deleteReview(
-        @Path("shopIndex") shopIndex: Int,
-        @Path("reviewIndex") reviewIndex: Int
+            @Path("shopIndex") shopIndex: Int,
+            @Path("reviewIndex") reviewIndex: Int
     ): DefaultResponse
 }
 
