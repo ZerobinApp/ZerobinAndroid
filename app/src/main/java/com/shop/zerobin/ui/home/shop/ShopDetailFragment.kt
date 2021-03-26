@@ -74,6 +74,17 @@ class ShopDetailFragment :
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
             }
         }
+
+        shopDetailViewModel.zzimSuccess.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { zzim ->
+                args?.shop?.zzim = zzim
+                if (zzim) {
+                    binding.btnZzim.setImageResource(R.drawable.ic_favorite_24px)
+                } else {
+                    binding.btnZzim.setImageResource(R.drawable.ic_favorite_border_24px)
+                }
+            }
+        }
     }
 
     private fun setReviewAdapter() {
@@ -86,11 +97,21 @@ class ShopDetailFragment :
         }
 
         binding.floatingActionButton.setOnClickListener {
-            val action =
-                ShopDetailFragmentDirections.actionNavigationShopDetailToNavigationWriteReviewSeed(
-                    args?.shop
-                )
-            findNavController().navigate(action)
+            writeReviewPage()
+        }
+
+        binding.writeReview.setOnClickListener {
+            writeReviewPage()
+        }
+
+        binding.btnZzim.setOnClickListener {
+            if (shopDetailViewModel.isLogin.value == true) {
+                args?.shop?.let { shop ->
+                    shopDetailViewModel.requestZzimShop(shop.shopIndex, shop.zzim.not())
+                }
+            } else {
+                showLoginDialog()
+            }
         }
     }
 
@@ -108,6 +129,18 @@ class ShopDetailFragment :
                 .error(ContextCompat.getDrawable(binding.shopImage.context, R.drawable.no_image))
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.shopImage)
+        }
+    }
+
+    private fun writeReviewPage() {
+        if (shopDetailViewModel.isLogin.value == true) {
+            val action =
+                ShopDetailFragmentDirections.actionNavigationShopDetailToNavigationWriteReviewSeed(
+                    args?.shop
+                )
+            findNavController().navigate(action)
+        } else {
+            showLoginDialog()
         }
     }
 

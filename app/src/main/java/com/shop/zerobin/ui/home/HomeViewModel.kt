@@ -21,9 +21,10 @@ class HomeViewModel(private val shopRepository: ShopRepository) : BaseViewModel(
     val shopList: LiveData<List<Shop>> = _shopList
 
     fun requestShopList() {
+        _isLogin.value = shopRepository.isLogin()
         viewModelScope.launch {
             val response = shopRepository.getShopList()
-            response.collect { handleResult(it) }
+            response.collect { handleShopListResult(it) }
         }
     }
 
@@ -32,6 +33,26 @@ class HomeViewModel(private val shopRepository: ShopRepository) : BaseViewModel(
             val response = shopRepository.getSearchShopList(name)
             response.collect { handleSearchShopResult(it) }
         }
+    }
+
+    fun requestZzimShop(shopIndex: Int) {
+        viewModelScope.launch {
+            val response = shopRepository.zzimShop(shopIndex)
+            response.collect { handleZzimShopResult(it) }
+        }
+    }
+
+    private fun handleZzimShopResult(dataResult: DataResult<Unit>) {
+        when (dataResult) {
+            is DataResult.Success -> handleZzimShopSuccess()
+            is DataResult.Error -> handleError(TAG, dataResult.exception)
+            is DataResult.Loading -> handleLoading()
+        }
+    }
+
+    private fun handleZzimShopSuccess() {
+        _isLoading.value = Event(false)
+        Log.d(TAG, "매장 찜 성공")
     }
 
     private fun handleSearchShopResult(dataResult: DataResult<List<Shop>>) {
@@ -47,16 +68,16 @@ class HomeViewModel(private val shopRepository: ShopRepository) : BaseViewModel(
         _shopList.value = data
     }
 
-    private fun handleResult(dataResult: DataResult<Pair<List<String>, List<Shop>>>) {
+    private fun handleShopListResult(dataResult: DataResult<Pair<List<String>, List<Shop>>>) {
         Log.d(TAG, dataResult.toString())
         when (dataResult) {
-            is DataResult.Success -> handleSuccess(dataResult.data)
+            is DataResult.Success -> handleShopListSuccess(dataResult.data)
             is DataResult.Error -> handleError(TAG, dataResult.exception)
             DataResult.Loading -> handleLoading()
         }
     }
 
-    private fun handleSuccess(data: Pair<List<String>, List<Shop>>) {
+    private fun handleShopListSuccess(data: Pair<List<String>, List<Shop>>) {
         _isLoading.value = Event(false)
         var hashTagList = ""
         data.first.forEach {

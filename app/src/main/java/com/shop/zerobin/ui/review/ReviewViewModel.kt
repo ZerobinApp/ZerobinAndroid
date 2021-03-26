@@ -82,6 +82,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
     }
 
     private fun handleSuccessReport(data: Unit) {
+        _isLoading.value = Event(false)
         Log.d("신고", data.toString())
     }
 

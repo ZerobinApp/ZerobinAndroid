@@ -21,6 +21,10 @@ class MyPageRepository(val context: Context) {
     private val zerobinClient
         get() = RetrofitObject.provideZerobinApi(getJWT())
 
+    fun isLogin(): Boolean {
+        return getJWT().isNotEmpty()
+    }
+
     suspend fun getMyPageReview(): Flow<DataResult<List<Review>>> {
         return flow {
             emit(DataResult.Loading)
@@ -92,7 +96,7 @@ class MyPageRepository(val context: Context) {
 
             val response = zerobinClient.signUp(signUpEntityToData(email, password, nickname))
 
-            if (response.isSuccess == false) {
+            if (response.isSuccess != true) {
                 emit(DataResult.Error(Exception(response.message)))
                 return@flow
             }
@@ -108,7 +112,7 @@ class MyPageRepository(val context: Context) {
 
             val response = zerobinClient.signIn(signInEntityToData(email, password))
 
-            if (response.isSuccess == false) {
+            if (response.isSuccess != true) {
                 emit(DataResult.Error(Exception(response.message)))
                 return@flow
             }
@@ -139,6 +143,12 @@ class MyPageRepository(val context: Context) {
     private fun saveJWT(jwt: String) {
         pref.edit()
             .putString(PREF_JWT, jwt)
+            .apply()
+    }
+
+    fun deleteJWT() {
+        pref.edit()
+            .remove(PREF_JWT)
             .apply()
     }
 

@@ -9,5 +9,5 @@ data class Shop(
     val name: String,
     val location: String,
     val imageUrl: String,
-    val zzim: Boolean,
+    var zzim: Boolean,
 ) : Parcelable

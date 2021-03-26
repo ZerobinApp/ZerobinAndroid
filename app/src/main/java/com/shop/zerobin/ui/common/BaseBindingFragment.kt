@@ -8,6 +8,9 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.shop.zerobin.R
+import com.shop.zerobin.ui.mypage.sign.SignInFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -37,6 +40,8 @@ abstract class BaseBindingFragment<B : ViewDataBinding>(@LayoutRes private val l
     }
 
     fun showLoading() {
+        if (progressDialog != null) return
+
         progressDialog = ProgressDialog(requireContext())
         CoroutineScope(Dispatchers.Main).launch {
             delay(1000)
@@ -47,5 +52,14 @@ abstract class BaseBindingFragment<B : ViewDataBinding>(@LayoutRes private val l
     fun hideLoading() {
         progressDialog?.dismiss()
         progressDialog = null
+    }
+
+    fun showLoginDialog() {
+        LoginDialog(requireContext(), R.style.LoginDialog).apply {
+            onClickYes = {
+                val action = SignInFragmentDirections.actionGlobalNavigationSignIn()
+                findNavController().navigate(action)
+            }
+        }.show()
     }
 }

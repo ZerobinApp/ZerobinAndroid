@@ -26,6 +26,10 @@ class ShopRepository(val context: Context) {
     private val zerobinClient
         get() = RetrofitObject.provideZerobinApi(getJWT())
 
+    fun isLogin(): Boolean {
+        return getJWT().isNotEmpty()
+    }
+
     private fun getJWT() = pref.getString(MyPageRepository.PREF_JWT, "") ?: ""
 
     fun saveHashTagList(list: List<Int>) {
@@ -121,6 +125,21 @@ class ShopRepository(val context: Context) {
 
             val result = response.result.map(::hashtagListDataToEntity)
             emit(DataResult.Success(result))
+        }
+    }
+
+    suspend fun zzimShop(shopIndex: Int): Flow<DataResult<Unit>> {
+        return flow {
+            emit(DataResult.Loading)
+
+            val response = zerobinClient.zzimShop(shopIndex)
+
+            if (response.isSuccess != true) {
+                emit(DataResult.Error(Exception(response.message)))
+                return@flow
+            }
+
+            emit(DataResult.Success(Unit))
         }
     }
 

@@ -86,8 +86,8 @@ class SignInFragment : BaseBindingFragment<FragmentSignInBinding>(R.layout.fragm
                         requireContext(), "로그인 실패\n${task.exception?.message}",
                         Toast.LENGTH_SHORT
                     ).show()
+                    hideLoading()
                 }
-                hideLoading()
             }
     }
 

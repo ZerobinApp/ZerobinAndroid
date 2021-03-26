@@ -29,7 +29,6 @@
             android:id="@+id/action_navigation_review_filter_to_navigation_review"
             app:destination="@+id/navigation_review"
             app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/anim_nothing"
             app:popEnterAnim="@anim/anim_nothing"
             app:popExitAnim="@anim/anim_nothing"
             app:popUpTo="@id/navigation_review"
@@ -49,10 +48,18 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_review"
             app:destination="@id/navigation_review"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             app:popUpTo="@id/navigation_home" />
         <action
             android:id="@+id/action_navigation_home_to_navigation_my_page"
             app:destination="@id/navigation_my_page"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
             app:popUpTo="@id/navigation_home" />
         <action
             android:id="@+id/action_navigation_home_to_navigation_search"
@@ -99,13 +106,6 @@
         <action
             android:id="@+id/action_navigation_my_page_to_navigation_my_page_shop"
             app:destination="@id/navigation_my_page_shop"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/anim_nothing"
-            app:popEnterAnim="@anim/anim_nothing"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_navigation_my_page_to_navigation_sign_in"
-            app:destination="@id/navigation_sign_in"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/anim_nothing"
             app:popEnterAnim="@anim/anim_nothing"
@@ -189,6 +189,14 @@
     <action
         android:id="@+id/action_global_navigation_shop_detail"
         app:destination="@id/navigation_shop_detail"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/anim_nothing"
+        app:popEnterAnim="@anim/anim_nothing"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/action_global_navigation_sign_in"
+        app:destination="@id/navigation_sign_in"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/anim_nothing"
         app:popEnterAnim="@anim/anim_nothing"

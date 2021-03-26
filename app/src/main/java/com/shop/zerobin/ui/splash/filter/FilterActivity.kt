@@ -74,5 +74,6 @@ class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activ
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+        overridePendingTransition(0, R.anim.fade_out)
     }
 }

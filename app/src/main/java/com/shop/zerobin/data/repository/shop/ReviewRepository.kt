@@ -45,7 +45,7 @@ class ReviewRepository(val context: Context) {
 
             val response = zerobinClient.reportReview(reviewIndex)
 
-            if (!response.isSuccess) {
+            if (response.isSuccess != true) {
                 emit(DataResult.Error(Exception(response.message)))
                 return@flow
             }
@@ -60,7 +60,7 @@ class ReviewRepository(val context: Context) {
 
             val response = zerobinClient.deleteReview(reviewIndex, shopIndex)
 
-            if (!response.isSuccess) {
+            if (response.isSuccess != true) {
                 emit(DataResult.Error(Exception(response.message)))
                 return@flow
             }
@@ -83,7 +83,7 @@ class ReviewRepository(val context: Context) {
                 postReviewEntityToData(imageUrlList, inputText, hashTagList)
             )
 
-            if (!response.isSuccess) {
+            if (response.isSuccess != true) {
                 emit(DataResult.Error(Exception(response.message)))
                 return@flow
             }

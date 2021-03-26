@@ -5,6 +5,10 @@
 
     <data>
 
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="android.graphics.Color" />
+
         <variable
             name="userVM"
             type="com.shop.zerobin.ui.mypage.MyPageViewModel" />
@@ -25,19 +29,21 @@
             android:id="@+id/myPageDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="오늘도 환경을 사랑하는 가치소비를 실천해볼까요?"
-            android:textSize="11dp"
+            android:text="@{userVM.isLogin ? @string/my_page_guide_login_after : @string/my_page_guide_login_before}"
+            android:textColor='@{userVM.isLogin ? Color.parseColor("#C4C4C4") : Color.parseColor("#1CD16A")}'
+            android:textSize="13dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="오늘도 환경을 사랑하는 가치소비를 실천해볼까요?" />
 
         <TextView
             android:id="@+id/myPageNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@{userVM.myUser.nickname}"
+            android:text="@{userVM.isLogin ? userVM.myUser.nickname : @string/login}"
             android:textColor="#272727"
-            android:textSize="22dp"
+            android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/myPageDetail"
             tools:text="ny" />
@@ -49,7 +55,7 @@
             android:layout_marginEnd="32dp"
             android:text="찜한가게"
             android:textColor="#272727"
-            android:textSize="11dp"
+            android:textSize="13dp"
             app:layout_constraintEnd_toStartOf="@id/reviewTitle"
             app:layout_constraintTop_toTopOf="@id/myPageNickname" />
 
@@ -59,7 +65,7 @@
             android:layout_height="wrap_content"
             android:text="내가 쓴 리뷰"
             android:textColor="#272727"
-            android:textSize="11dp"
+            android:textSize="13dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/favoriteShopTitle" />
 
@@ -67,10 +73,9 @@
             android:id="@+id/favoriteShopCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:text="@{String.valueOf(userVM.myUser.favoriteShopCount) + '건'}"
             android:textColor="#272727"
-            android:textSize="15dp"
+            android:textSize="17dp"
             app:layout_constraintStart_toStartOf="@id/favoriteShopTitle"
             app:layout_constraintTop_toBottomOf="@id/favoriteShopTitle"
             tools:text="0건" />
@@ -79,10 +84,9 @@
             android:id="@+id/favoriteReviewCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:text="@{String.valueOf(userVM.myUser.favoriteReviewCount) + '곳'}"
             android:textColor="#272727"
-            android:textSize="15dp"
+            android:textSize="17dp"
             app:layout_constraintStart_toStartOf="@id/reviewTitle"
             app:layout_constraintTop_toBottomOf="@id/reviewTitle"
             tools:text="0곳" />
@@ -100,19 +104,22 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/myFavoriteShopLayout"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/mypage_rectangle"
+            android:foreground='@{userVM.isLogin ? 0 : Color.parseColor("#B3FFFFFF")}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider">
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            tools:background="@drawable/mypage_rectangle">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="12dp"
                 android:text="찜한가게"
-                android:textSize="11dp"
+                android:textColor="#272727"
+                android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -121,8 +128,9 @@
                 android:id="@+id/nextBtnFavoriteShop"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/arrow_right"
+                android:layout_marginEnd="12dp"
+                android:foregroundTint="@color/white"
+                android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -131,9 +139,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/myReviewLayout"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/mypage_rectangle"
+            android:foreground='@{userVM.isLogin ? 0 : Color.parseColor("#B3FFFFFF")}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/myFavoriteShopLayout">
@@ -141,9 +150,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="12dp"
                 android:text="내가 쓴 리뷰"
-                android:textSize="11dp"
+                android:textColor="#272727"
+                android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -152,8 +162,8 @@
                 android:id="@+id/nextBtnFavoriteReview"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/arrow_right"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -162,9 +172,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/myStampLayout"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/mypage_rectangle"
+            android:foreground='@{userVM.isLogin ? 0 : Color.parseColor("#B3FFFFFF")}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/myReviewLayout">
@@ -172,9 +183,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="12dp"
                 android:text="새싹 스탬프"
-                android:textSize="11dp"
+                android:textColor="#272727"
+                android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -183,26 +195,44 @@
                 android:id="@+id/nextBtnFavoriteStamp"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/arrow_right"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+            visible="@{userVM.isLogin}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/delete_account"
+            android:textColor="#C4C4C4"
+            android:textSize="13dp"
+            app:layout_constraintBottom_toTopOf="@id/btnLogin"
+            app:layout_constraintEnd_toEndOf="@id/btnLogin"
+            app:layout_constraintStart_toStartOf="@id/btnLogin" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:background="@drawable/bg_long_button"
-            android:text="@string/login"
+            android:layout_height="wrap_content"
+            android:background="@{userVM.isLogin ? @drawable/bg_long_button_grey : @drawable/bg_long_button}"
+            android:padding="0dp"
+            android:text="@{userVM.isLogin ? @string/logout : @string/login}"
             android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:background="@drawable/bg_long_button"
+            tools:text="@string/login" />
 
         <ImageButton
             android:id="@+id/btnNickChange"
+            visible="@{userVM.isLogin}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

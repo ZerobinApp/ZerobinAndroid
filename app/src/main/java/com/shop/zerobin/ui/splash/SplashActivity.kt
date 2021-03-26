@@ -20,6 +20,7 @@ class SplashActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, FilterActivity::class.java))
             finish()
-        }, 2000)
+            overridePendingTransition(0, R.anim.fade_out)
+        }, 1000)
     }
 }

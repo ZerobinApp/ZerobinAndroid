@@ -17,6 +17,7 @@ class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
 
     private var item = emptyList<Shop>()
     var onClick: ((Shop) -> Unit)? = null
+    var onZzimClick: ((Shop, Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopViewHolder {
         val binding = ItemShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,7 +25,7 @@ class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ShopViewHolder, position: Int) {
-        holder.bind(item[position], onClick)
+        holder.bind(position, item[position], onClick, onZzimClick)
     }
 
     override fun getItemCount() = item.size
@@ -36,9 +37,16 @@ class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
 
     class ShopViewHolder(private val binding: ItemShopBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(shop: Shop, onClick: ((Shop) -> Unit)?) {
+        fun bind(
+            position: Int,
+            shop: Shop,
+            onClick: ((Shop) -> Unit)?,
+            onZzimClick: ((Shop, Int) -> Unit)?,
+        ) {
             binding.shop = shop
             binding.onClick = onClick
+            binding.onZzimClick = onZzimClick
+            binding.position = position
 
             setImageFromFirebase(shop)
         }

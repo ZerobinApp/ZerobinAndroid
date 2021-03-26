@@ -74,6 +74,7 @@
                     tools:text="#해시태그  #해시태그  #해시태그" />
 
                 <ImageView
+                    android:id="@+id/btnZzim"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="20dp"
@@ -131,10 +132,10 @@
 
                 <ImageView
                     android:id="@+id/featureImage1"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="24dp"
-                    android:src="@drawable/zerobin_logo_temp"
+                    android:src="@drawable/zerobin_logo_small"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/feature"
                     tools:ignore="ContentDescription" />
@@ -168,10 +169,10 @@
                 <ImageView
                     android:id="@+id/featureImage2"
                     visible="@{VM.shopDetail.hashtagList.size() >= 2}"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/zerobin_logo_temp"
+                    android:src="@drawable/zerobin_logo_small"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/featureImage1"
                     tools:ignore="ContentDescription" />
@@ -207,10 +208,10 @@
                 <ImageView
                     android:id="@+id/featureImage3"
                     visible="@{VM.shopDetail.hashtagList.size() >= 3}"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/zerobin_logo_temp"
+                    android:src="@drawable/zerobin_logo_small"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/featureImage2"
                     tools:ignore="ContentDescription" />
@@ -289,6 +290,7 @@
                     app:layout_constraintTop_toBottomOf="@id/divider3" />
 
                 <TextView
+                    android:id="@+id/writeReview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/make_review"
