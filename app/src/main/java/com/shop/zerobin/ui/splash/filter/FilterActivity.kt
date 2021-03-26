@@ -3,7 +3,6 @@ package com.shop.zerobin.ui.splash.filter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.observe
 import com.google.android.material.chip.Chip
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ActivityFilterBinding
@@ -14,21 +13,25 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
 
     private val filterViewModel: FilterViewModel by viewModel()
-    var hashtagList = ArrayList<Int>()
+    var selectedHashTagList = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = filterViewModel
 
+        if (!filterViewModel.isFirstEnter()) {
+            startMainActivity()
+            return
+        }
+
         requestFilterList()
         observeLiveData()
-        startMainActivity()
+        setListeners()
     }
 
     private fun requestFilterList() {
         filterViewModel.requestFilterList()
     }
-
 
     private fun observeLiveData() {
         filterViewModel.isLoading.observe(this) { event ->
@@ -54,18 +57,22 @@ class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activ
         }
     }
 
-    private fun startMainActivity() {
+    private fun setListeners() {
         binding.btnNext.setOnClickListener {
             for (i in 1..10) {
-
                 if (findViewById<Chip>(R.id.chip + i).isChecked) {
-                    hashtagList.add(i)
+                    selectedHashTagList.add(i)
                 }
             }
-            filterViewModel.requestHashTagList(hashtagList)
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            filterViewModel.saveHashTagList(selectedHashTagList)
+            filterViewModel.saveFirstEnter()
+            startMainActivity()
         }
+    }
+
+    private fun startMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

@@ -3,7 +3,6 @@ package com.shop.zerobin.ui.review
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentReviewBinding

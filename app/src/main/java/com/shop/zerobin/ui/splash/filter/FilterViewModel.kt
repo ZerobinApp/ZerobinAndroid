@@ -25,12 +25,20 @@ class FilterViewModel(private val shopRepository: ShopRepository) : BaseViewMode
         }
     }
 
-    fun requestHashTagList(hashTag: ArrayList<Int>) {
-        shopRepository.setHashTagList("hashtag", hashTag)
+    fun saveHashTagList(hashTagList: List<Int>) {
+        shopRepository.saveHashTagList(hashTagList)
     }
 
-    fun responseHashTagList(): ArrayList<Int> {
-        return shopRepository.getHashTagList()
+    fun getSavedHashTagList(): List<Int> {
+        return shopRepository.getSavedHashTagList()
+    }
+
+    fun saveFirstEnter() {
+        shopRepository.saveFirstEnter()
+    }
+
+    fun isFirstEnter(): Boolean {
+        return shopRepository.isFirstEnter()
     }
 
     private fun handleResult(dataResult: DataResult<List<Hashtag>>) {

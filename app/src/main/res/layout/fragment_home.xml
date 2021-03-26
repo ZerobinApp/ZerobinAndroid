@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:paddingHorizontal="30dp"
         android:paddingTop="8dp"
         android:paddingBottom="56dp"
@@ -84,9 +85,10 @@
 
                     <TextView
                         android:id="@+id/hashTag"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:gravity="center_vertical"
+                        android:maxLines="1"
                         android:text="@{VM.hashtagList}"
                         android:textSize="13dp"
                         tools:text="#해시태그  #해시태그  #해시태그  #해시태그  #해시태그  #해시태그  #해시태그 " />

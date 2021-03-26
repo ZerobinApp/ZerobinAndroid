@@ -20,10 +20,9 @@ class HomeViewModel(private val shopRepository: ShopRepository) : BaseViewModel(
     private val _shopList = MutableLiveData<List<Shop>>()
     val shopList: LiveData<List<Shop>> = _shopList
 
-    fun requestShopList(hashtagList: List<Int>) {
+    fun requestShopList() {
         viewModelScope.launch {
-            val response = shopRepository.getShopList(hashtagList)
-            Log.d(TAG, response.toString())
+            val response = shopRepository.getShopList()
             response.collect { handleResult(it) }
         }
     }
