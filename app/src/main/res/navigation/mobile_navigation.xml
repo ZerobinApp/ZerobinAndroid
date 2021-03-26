@@ -29,7 +29,7 @@
             app:exitAnim="@anim/anim_nothing"
             app:popEnterAnim="@anim/anim_nothing"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/navigation_review_filter"/>
+            app:popUpTo="@id/navigation_review"/>
     </fragment>
 
     <fragment
@@ -44,7 +44,7 @@
             app:exitAnim="@anim/anim_nothing"
             app:popEnterAnim="@anim/anim_nothing"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/navigation_shop_filter"/>
+            app:popUpTo="@id/navigation_home"/>
     </fragment>
 
     <fragment
