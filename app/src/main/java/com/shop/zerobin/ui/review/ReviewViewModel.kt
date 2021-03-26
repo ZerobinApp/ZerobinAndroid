@@ -37,7 +37,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
     fun requestReviewReport(reviewIndex: Int) {
         viewModelScope.launch {
             val response = reviewRepository.reportReview(reviewIndex)
-            Log.d(HomeViewModel.TAG, response.toString())
+            Log.d(TAG, response.toString())
             response.collect { handleResultReport(it) }
         }
 
@@ -46,7 +46,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
     fun requestReviewDelete(reviewIndex: Int, shopIndex: Int) {
         viewModelScope.launch {
             val response = reviewRepository.deleteReview(reviewIndex, shopIndex)
-            Log.d(HomeViewModel.TAG, response.toString())
+            Log.d(TAG, response.toString())
             response.collect { handleResultDelete(it) }
         }
 
