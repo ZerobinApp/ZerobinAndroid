@@ -54,7 +54,7 @@ class WriteReviewViewModel(private val reviewRepository: ReviewRepository) : Bas
 
     private fun inputCheck(): Boolean {
         if (inputText.value?.length!! < 10) {
-            _isError.value = Event("후기를 최소 10자 이상 입력해주세요.")
+            _isError.value = Event("리뷰를 최소 10자 이상 입력해주세요.")
             return false
         }
         return true

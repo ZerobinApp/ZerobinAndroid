@@ -57,6 +57,7 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
     }
 
     fun requestMyPage() {
+        _isLogin.value = myPageRepository.isLogin()
         viewModelScope.launch {
             val userResponse = myPageRepository.getMyPageUser()
             userResponse.collect { handleResultUser(it) }
@@ -106,6 +107,11 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
             Log.d(HomeViewModel.TAG, response.toString())
             response.collect { handleResultStamp(it) }
         }
+    }
+
+    fun requestLogout() {
+        myPageRepository.deleteJWT()
+        _isError.value = Event("로그아웃 완료")
     }
 
     private fun handleResultReview(dataResult: DataResult<List<Review>>) {

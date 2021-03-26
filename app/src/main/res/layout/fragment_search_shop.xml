@@ -14,9 +14,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:clipToPadding="false"
         android:paddingHorizontal="30dp"
-        android:background="@color/white"
         android:paddingTop="20dp"
         android:paddingBottom="30dp">
 
@@ -31,13 +31,15 @@
         <EditText
             android:id="@+id/editTextSearchShop"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/search_bg"
             android:ems="10"
             android:gravity="center"
             android:hint="매장 이름을 입력해주세요"
             android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textSize="17dp"
             app:layout_constraintBottom_toBottomOf="@+id/btnBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnBack"

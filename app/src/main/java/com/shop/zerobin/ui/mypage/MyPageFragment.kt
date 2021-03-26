@@ -4,48 +4,67 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
+import com.shop.zerobin.ui.mypage.sign.SignInFragmentDirections
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
 
     private val myPageViewModel: MyPageViewModel by viewModel()
+    private val auth: FirebaseAuth by lazy { Firebase.auth }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.userVM = myPageViewModel
 
-        requestReviewList()
+        requestMyPage()
         setListeners()
         observeLiveData()
     }
 
-    private fun requestReviewList() {
+    private fun requestMyPage() {
         myPageViewModel.requestMyPage()
     }
 
     private fun setListeners() {
         binding.myReviewLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_my_page_to_navigation_my_page_review)
+            if (myPageViewModel.isLogin.value == true) {
+                findNavController().navigate(R.id.action_navigation_my_page_to_navigation_my_page_review)
+            }
         }
 
         binding.myFavoriteShopLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_my_page_to_navigation_my_page_shop)
+            if (myPageViewModel.isLogin.value == true) {
+                findNavController().navigate(R.id.action_navigation_my_page_to_navigation_my_page_shop)
+            }
         }
 
         binding.myStampLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_my_page_to_navigation_my_page_stamp)
+            if (myPageViewModel.isLogin.value == true) {
+                findNavController().navigate(R.id.action_navigation_my_page_to_navigation_my_page_stamp)
+            }
         }
 
         binding.btnLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_my_page_to_navigation_sign_in)
+            if (myPageViewModel.isLogin.value == true) {
+                Firebase.auth.signOut()
+                myPageViewModel.requestLogout()
+                myPageViewModel.requestMyPage()
+            } else {
+                val action = SignInFragmentDirections.actionGlobalNavigationSignIn()
+                findNavController().navigate(action)
+            }
         }
 
         binding.btnNickChange.setOnClickListener {
-            //mypagenickchangefragment로 이동!
-            findNavController().navigate(R.id.action_navigation_my_page_to_navigation_nick_change)
+            if (myPageViewModel.isLogin.value == true) {
+                findNavController().navigate(R.id.action_navigation_my_page_to_navigation_nick_change)
+            }
         }
     }
 

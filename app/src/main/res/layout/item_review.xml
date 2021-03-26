@@ -67,11 +67,11 @@
             visible="@{review.stamp}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@{review.stamp ? @drawable/ic_baseline_local_florist_24 : null}"
+            android:src="@{review.stamp ? @drawable/ic_stamp : null}"
             app:layout_constraintBottom_toBottomOf="@id/reviewHashTag"
             app:layout_constraintEnd_toStartOf="@id/reviewHashTag"
             app:layout_constraintTop_toTopOf="@id/reviewHashTag"
-            tools:src="@drawable/ic_baseline_local_florist_24" />
+            tools:src="@drawable/ic_stamp" />
 
         <TextView
             android:id="@+id/reviewHashTag"

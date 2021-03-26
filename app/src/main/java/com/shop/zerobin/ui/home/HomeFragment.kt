@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentHomeBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
@@ -28,6 +29,8 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     }
 
     private fun setShopAdapter() {
+        (binding.shopRecyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
+            false
         binding.shopRecyclerView.adapter = shopAdapter
     }
 
@@ -62,6 +65,17 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
             val action = ShopDetailFragmentDirections.actionGlobalNavigationShopDetail(shop)
             findNavController().navigate(action)
         }
+
+        shopAdapter.onZzimClick = { shop, position ->
+            if (homeViewModel.isLogin.value == true) {
+                homeViewModel.requestZzimShop(shop.shopIndex)
+                shop.zzim = shop.zzim.not()
+                shopAdapter.notifyItemChanged(position)
+            } else {
+                showLoginDialog()
+            }
+        }
+
         binding.btnSearch.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_search)
         }

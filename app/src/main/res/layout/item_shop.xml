@@ -18,6 +18,13 @@
         <variable
             name="onClick"
             type="Function1&lt;Shop, Unit>" />
+
+        <variable
+            name="onZzimClick"
+            type="kotlin.jvm.functions.Function2" />
+        <variable
+            name="position"
+            type="Integer" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -61,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:onClick="@{() -> onZzimClick.invoke(shop, position)}"
                 android:layout_marginEnd="10dp"
                 android:src="@{shop.zzim ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
                 app:layout_constraintEnd_toEndOf="parent"

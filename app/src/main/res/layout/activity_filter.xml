@@ -22,7 +22,7 @@
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/zerobin_logo_temp"
+            android:src="@drawable/zerobin_logo_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
