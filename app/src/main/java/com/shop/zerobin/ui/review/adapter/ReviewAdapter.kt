@@ -54,7 +54,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
     }
 
     inner class ReviewHolder(private val binding: ItemReviewBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(review: Review) {
             binding.review = review
@@ -71,24 +71,24 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         private fun setImageFromFirebase(review: Review) {
             if (review.imageList.isEmpty()) {
                 GlideApp.with(binding.reviewImg.context)
-                        .load(ContextCompat.getDrawable(binding.reviewImg.context, R.drawable.no_image))
-                        .transform(CenterCrop(), RoundedCorners(20.px))
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(binding.reviewImg)
+                    .load(ContextCompat.getDrawable(binding.reviewImg.context, R.drawable.no_image))
+                    .transform(CenterCrop(), RoundedCorners(20.px))
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(binding.reviewImg)
             } else {
                 val spaceReference = Firebase.storage.reference.child(review.imageList[0])
                 Log.e(TAG, spaceReference.toString())
                 GlideApp.with(binding.reviewImg.context)
-                        .load(spaceReference)
-                        .error(
-                                ContextCompat.getDrawable(
-                                        binding.reviewImg.context,
-                                        R.drawable.no_image
-                                )
+                    .load(spaceReference)
+                    .error(
+                        ContextCompat.getDrawable(
+                            binding.reviewImg.context,
+                            R.drawable.no_image
                         )
-                        .transform(CenterCrop(), RoundedCorners(20.px))
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(binding.reviewImg)
+                    )
+                    .transform(CenterCrop(), RoundedCorners(20.px))
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(binding.reviewImg)
             }
         }
     }

@@ -20,7 +20,7 @@ import org.json.JSONException
 class ShopRepository(val context: Context) {
 
     private val pref =
-            context.getSharedPreferences(MyPageRepository.PREF_DEFAULT, Context.MODE_PRIVATE)
+        context.getSharedPreferences(MyPageRepository.PREF_DEFAULT, Context.MODE_PRIVATE)
 
 
     private val zerobinClient
@@ -29,8 +29,8 @@ class ShopRepository(val context: Context) {
     private fun getJWT() = pref.getString(MyPageRepository.PREF_JWT, "") ?: ""
 
     fun setHashTagList(
-            key: String,
-            values: ArrayList<Int>
+        key: String,
+        values: ArrayList<Int>
     ) {
         val editor = pref.edit()
         val a = JSONArray()

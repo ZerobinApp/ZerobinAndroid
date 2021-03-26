@@ -11,7 +11,7 @@ import com.shop.zerobin.ui.review.adapter.ReviewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MyPageReviewFragment :
-        BaseBindingFragment<FragmentMyPageReviewBinding>(R.layout.fragment_my_page_review) {
+    BaseBindingFragment<FragmentMyPageReviewBinding>(R.layout.fragment_my_page_review) {
 
     private val myPageReviewViewModel: MyPageViewModel by viewModel()
 

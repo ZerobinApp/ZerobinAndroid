@@ -13,7 +13,7 @@ import com.shop.zerobin.ui.splash.filter.FilterViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class FilterShopFragment :
-        BaseBindingFragment<FragmentFilterShopBinding>(R.layout.fragment_filter_shop) {
+    BaseBindingFragment<FragmentFilterShopBinding>(R.layout.fragment_filter_shop) {
 
     private val filterViewModel: FilterViewModel by viewModel()
 
@@ -66,7 +66,7 @@ class FilterShopFragment :
 
             for (i in it.indices) {
                 requireView().findViewById<Chip>(R.id.chip + it[i].hashtagIndex).text =
-                        "#" + it[i].name
+                    "#" + it[i].name
             }
         }
 

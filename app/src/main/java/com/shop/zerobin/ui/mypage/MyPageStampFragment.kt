@@ -11,7 +11,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class MyPageStampFragment :
-        BaseBindingFragment<FragmentMyPageStampBinding>(R.layout.fragment_my_page_stamp) {
+    BaseBindingFragment<FragmentMyPageStampBinding>(R.layout.fragment_my_page_stamp) {
 
     private val myPageViewModel: MyPageViewModel by viewModel()
 

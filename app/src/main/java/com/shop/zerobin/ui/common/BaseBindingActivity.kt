@@ -11,7 +11,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 abstract class BaseBindingActivity<B : ViewDataBinding>(@LayoutRes private val layoutResId: Int) :
-        AppCompatActivity() {
+    AppCompatActivity() {
     protected lateinit var binding: B
     private var progressDialog: ProgressDialog? = null
 

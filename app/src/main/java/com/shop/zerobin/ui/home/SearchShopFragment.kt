@@ -3,9 +3,11 @@ package com.shop.zerobin.ui.home
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentSearchShopBinding
@@ -15,7 +17,7 @@ import com.shop.zerobin.ui.home.shop.ShopDetailFragmentDirections
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SearchShopFragment :
-        BaseBindingFragment<FragmentSearchShopBinding>(R.layout.fragment_search_shop) {
+    BaseBindingFragment<FragmentSearchShopBinding>(R.layout.fragment_search_shop) {
 
     private val homeViewModel: HomeViewModel by viewModel()
 
@@ -35,25 +37,30 @@ class SearchShopFragment :
 
     private fun setSearchListener() {
         binding.editTextSearchShop.addTextChangedListener(
-                object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {}
-                    override fun beforeTextChanged(
-                            s: CharSequence?,
-                            start: Int,
-                            count: Int,
-                            after: Int
-                    ) {
-                    }
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {}
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        if (binding.editTextSearchShop.text.isNotEmpty()) {
-                            homeViewModel.requestSearchShopList(s.toString())
-                            binding.shopRecyclerView.isVisible = true
-                        } else {
-                            binding.shopRecyclerView.isVisible = false
-                        }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (binding.editTextSearchShop.text.isNotEmpty()) {
+                        homeViewModel.requestSearchShopList(s.toString())
+                        binding.shopRecyclerView.isVisible = true
+                        binding.imageViewSearchEmpty.isVisible = false
+                        binding.textViewSearchEmpty.isVisible = false
+                    } else {
+                        binding.shopRecyclerView.isVisible = false
+                        binding.imageViewSearchEmpty.isVisible = true
+                        binding.textViewSearchEmpty.isVisible = true
+
                     }
-                })
+                }
+            })
     }
 
     private fun setShopAdapter() {

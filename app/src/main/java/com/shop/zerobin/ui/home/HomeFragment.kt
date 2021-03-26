@@ -25,9 +25,9 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     private val shopAdapter by lazy { ShopAdapter() }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         Log.e(TAG, "eeeeee")
         return super.onCreateView(inflater, container, savedInstanceState)

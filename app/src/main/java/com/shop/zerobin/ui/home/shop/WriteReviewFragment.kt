@@ -19,14 +19,14 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class WriteReviewFragment :
-        BaseBindingFragment<FragmentWriteReviewBinding>(R.layout.fragment_write_review) {
+    BaseBindingFragment<FragmentWriteReviewBinding>(R.layout.fragment_write_review) {
 
     private val args: WriteReviewFragmentArgs? by navArgs()
 
     private val viewModel: WriteReviewViewModel by viewModel()
 
     private val requestGallery1 = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
+        ActivityResultContracts.StartActivityForResult()
     ) { activityResult ->
         Log.d(TAG, activityResult.toString())
         if (activityResult.resultCode == Activity.RESULT_OK) {
@@ -37,7 +37,7 @@ class WriteReviewFragment :
     }
 
     private val requestGallery2 = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
+        ActivityResultContracts.StartActivityForResult()
     ) { activityResult ->
         Log.d(TAG, activityResult.toString())
         if (activityResult.resultCode == Activity.RESULT_OK) {
@@ -48,7 +48,7 @@ class WriteReviewFragment :
     }
 
     private val requestGallery3 = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
+        ActivityResultContracts.StartActivityForResult()
     ) { activityResult ->
         Log.d(TAG, activityResult.toString())
         if (activityResult.resultCode == Activity.RESULT_OK) {
@@ -129,9 +129,9 @@ class WriteReviewFragment :
         viewModel.successEvent.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 val action =
-                        WriteReviewFragmentDirections.actionNavigationWriteReviewToNavigationShopDetail(
-                                args?.shop
-                        )
+                    WriteReviewFragmentDirections.actionNavigationWriteReviewToNavigationShopDetail(
+                        args?.shop
+                    )
                 findNavController().navigate(action)
             }
         }

@@ -26,12 +26,12 @@ class DialogArticleTap : BottomSheetDialogFragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val layoutResId =
-                if (viewType == ViewType.OTHER) R.layout.bottomsheet_dialog else R.layout.bottomsheet_dialog_owner
+            if (viewType == ViewType.OTHER) R.layout.bottomsheet_dialog else R.layout.bottomsheet_dialog_owner
         return inflater.inflate(layoutResId, container, false)
     }
 
@@ -69,10 +69,10 @@ class DialogArticleTap : BottomSheetDialogFragment() {
             val parent = view.parent as View
             val layoutParams = parent.layoutParams as CoordinatorLayout.LayoutParams
             layoutParams.setMargins(
-                    resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin),
-                    0,
-                    resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin),
-                    0
+                resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin),
+                0,
+                resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin),
+                0
             )
             parent.layoutParams = layoutParams
         }

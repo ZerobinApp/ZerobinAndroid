@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ShopDetailFragment :
-        BaseBindingFragment<FragmentShopDetailBinding>(R.layout.fragment_shop_detail) {
+    BaseBindingFragment<FragmentShopDetailBinding>(R.layout.fragment_shop_detail) {
 
     private val shopDetailViewModel: ShopDetailViewModel by viewModel()
 
@@ -87,9 +87,9 @@ class ShopDetailFragment :
 
         binding.floatingActionButton.setOnClickListener {
             val action =
-                    ShopDetailFragmentDirections.actionNavigationShopDetailToNavigationWriteReviewSeed(
-                            args?.shop
-                    )
+                ShopDetailFragmentDirections.actionNavigationShopDetailToNavigationWriteReviewSeed(
+                    args?.shop
+                )
             findNavController().navigate(action)
         }
     }
@@ -97,17 +97,17 @@ class ShopDetailFragment :
     private fun setImageFromFirebase(imageList: List<String>) {
         if (imageList.isEmpty()) {
             GlideApp.with(binding.shopImage.context)
-                    .load(ContextCompat.getDrawable(binding.shopImage.context, R.drawable.no_image))
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(binding.shopImage)
+                .load(ContextCompat.getDrawable(binding.shopImage.context, R.drawable.no_image))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.shopImage)
         } else {
             val spaceReference = Firebase.storage.reference.child(imageList[0])
             Log.e(TAG, spaceReference.toString())
             GlideApp.with(binding.shopImage.context)
-                    .load(spaceReference)
-                    .error(ContextCompat.getDrawable(binding.shopImage.context, R.drawable.no_image))
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(binding.shopImage)
+                .load(spaceReference)
+                .error(ContextCompat.getDrawable(binding.shopImage.context, R.drawable.no_image))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.shopImage)
         }
     }
 

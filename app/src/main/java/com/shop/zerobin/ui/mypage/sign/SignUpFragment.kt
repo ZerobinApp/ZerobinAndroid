@@ -52,8 +52,8 @@ class SignUpFragment : BaseBindingFragment<FragmentSignUpBinding>(R.layout.fragm
         signUpViewModel.inputCheckComplete.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 createAccount(
-                        signUpViewModel.inputEmail.value ?: return@observe,
-                        signUpViewModel.inputPassword.value ?: return@observe
+                    signUpViewModel.inputEmail.value ?: return@observe,
+                    signUpViewModel.inputPassword.value ?: return@observe
                 )
             }
         }
@@ -70,31 +70,31 @@ class SignUpFragment : BaseBindingFragment<FragmentSignUpBinding>(R.layout.fragm
         showLoading()
 
         auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        Log.d(TAG, "createUserWithEmail:success")
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "createUserWithEmail:success")
 
-                        val user = auth.currentUser
-                        signUpViewModel.requestSignUp(auth.uid ?: return@addOnCompleteListener)
-                    } else {
-                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(
-                                requireContext(),
-                                "회원가입 실패\n${task.exception?.message}",
-                                Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                    hideLoading()
+                    val user = auth.currentUser
+                    signUpViewModel.requestSignUp(auth.uid ?: return@addOnCompleteListener)
+                } else {
+                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        requireContext(),
+                        "회원가입 실패\n${task.exception?.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+                hideLoading()
+            }
     }
 
     private fun resetPassword(emailAddress: String) {
         auth.sendPasswordResetEmail(emailAddress)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.d(TAG, "Email sent.")
-                    }
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "Email sent.")
                 }
+            }
     }
 
     companion object {

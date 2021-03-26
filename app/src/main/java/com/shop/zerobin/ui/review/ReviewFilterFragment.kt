@@ -14,7 +14,7 @@ import com.shop.zerobin.ui.splash.filter.FilterViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ReviewFilterFragment :
-        BaseBindingFragment<FragmentReviewFilterBinding>(R.layout.fragment_review_filter) {
+    BaseBindingFragment<FragmentReviewFilterBinding>(R.layout.fragment_review_filter) {
 
     private val filterViewModel: FilterViewModel by viewModel()
     var hashtagList = arrayListOf<Int>()
@@ -40,8 +40,8 @@ class ReviewFilterFragment :
 
             val bundle = bundleOf("hashtag" to hashtagList)
             findNavController().navigate(
-                    R.id.action_navigation_review_filter_to_navigation_review,
-                    bundle
+                R.id.action_navigation_review_filter_to_navigation_review,
+                bundle
             )
 
         }
@@ -69,7 +69,7 @@ class ReviewFilterFragment :
 
             for (i in it.indices) {
                 requireView().findViewById<Chip>(R.id.chip + it[i].hashtagIndex).text =
-                        "#" + it[i].name
+                    "#" + it[i].name
             }
         }
 
