@@ -12,11 +12,14 @@ import com.shop.zerobin.databinding.FragmentHomeBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.home.adapter.ShopAdapter
 import com.shop.zerobin.ui.home.shop.ShopDetailFragmentDirections
+import com.shop.zerobin.ui.splash.filter.FilterViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by viewModel()
+
+    private val filterViewModel: FilterViewModel by viewModel()
 
     private val shopAdapter by lazy { ShopAdapter() }
 
@@ -35,7 +38,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
 
         setShopAdapter()
         observeLiveData()
-        requestShopList()
+        requestShopList(filterViewModel.responseHashTagList())
         setListener()
     }
 
@@ -65,8 +68,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
         }
     }
 
-    private fun requestShopList() {
-        val hashtagList = emptyList<Int>()
+    private fun requestShopList(hashtagList: List<Int>) {
         homeViewModel.requestShopList(hashtagList)
     }
 
@@ -77,6 +79,9 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
         }
         binding.btnSearch.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_search)
+        }
+        binding.btnFilter.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_navigation_filter)
         }
     }
 

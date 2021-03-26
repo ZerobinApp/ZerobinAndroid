@@ -3,9 +3,11 @@ package com.shop.zerobin.ui.home
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentSearchShopBinding
@@ -49,8 +51,13 @@ class SearchShopFragment :
                     if (binding.editTextSearchShop.text.isNotEmpty()) {
                         homeViewModel.requestSearchShopList(s.toString())
                         binding.shopRecyclerView.isVisible = true
+                        binding.imageViewSearchEmpty.isVisible = false
+                        binding.textViewSearchEmpty.isVisible = false
                     } else {
                         binding.shopRecyclerView.isVisible = false
+                        binding.imageViewSearchEmpty.isVisible = true
+                        binding.textViewSearchEmpty.isVisible = true
+
                     }
                 }
             })

@@ -25,6 +25,14 @@ class FilterViewModel(private val shopRepository: ShopRepository) : BaseViewMode
         }
     }
 
+    fun requestHashTagList(hashTag: ArrayList<Int>) {
+        shopRepository.setHashTagList("hashtag", hashTag)
+    }
+
+    fun responseHashTagList(): ArrayList<Int> {
+        return shopRepository.getHashTagList()
+    }
+
     private fun handleResult(dataResult: DataResult<List<Hashtag>>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccess(dataResult.data)

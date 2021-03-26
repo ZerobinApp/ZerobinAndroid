@@ -34,6 +34,7 @@ class MainApplication : Application() {
     }
 }
 
+
 val myViewModel = module {
     viewModel { HomeViewModel(get()) }
     viewModel { ReviewViewModel(get()) }

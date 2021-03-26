@@ -64,5 +64,27 @@
             app:layout_constraintTop_toTopOf="@+id/editTextSearchShop"
             app:srcCompat="@drawable/search" />
 
+        <ImageView
+            android:id="@+id/imageViewSearchEmpty"
+            android:layout_width="110dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="100dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/shopRecyclerView"
+            app:layout_constraintStart_toStartOf="@+id/shopRecyclerView"
+            app:layout_constraintTop_toTopOf="@+id/shopRecyclerView"
+            app:srcCompat="@drawable/search_empty" />
+
+        <TextView
+            android:id="@+id/textViewSearchEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:visibility="invisible"
+            android:text="@string/search_description"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewSearchEmpty"
+            app:layout_constraintStart_toStartOf="@+id/imageViewSearchEmpty"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewSearchEmpty" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

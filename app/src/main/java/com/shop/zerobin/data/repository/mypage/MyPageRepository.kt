@@ -36,6 +36,7 @@ class MyPageRepository(val context: Context) {
         }
     }
 
+
     suspend fun getMyPageShop(): Flow<DataResult<List<Shop>>> {
         return flow {
             emit(DataResult.Loading)

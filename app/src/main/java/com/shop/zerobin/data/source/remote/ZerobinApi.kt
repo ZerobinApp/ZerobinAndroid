@@ -60,5 +60,11 @@ interface ZerobinApi {
     suspend fun reportReview(
         @Path("reviewIndex") reviewIndex: Int
     ): DefaultResponse
+
+    @DELETE("shop/{shopIndex}/review/{reviewIndex}")
+    suspend fun deleteReview(
+        @Path("shopIndex") shopIndex: Int,
+        @Path("reviewIndex") reviewIndex: Int
+    ): DefaultResponse
 }
 

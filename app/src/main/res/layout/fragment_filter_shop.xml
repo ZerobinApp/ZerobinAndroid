@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:paddingVertical="30dp"
         tools:context=".ui.review.ReviewFilterActivity">
 
@@ -29,7 +30,7 @@
             android:id="@+id/signUpTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="키워드 필터"
+            android:text="키워드 선택"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,16 +38,30 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/filterDescription1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="@string/review_filter_description1"
+            android:textColor="#272727"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signUpTitle" />
+
+        <TextView
             android:id="@+id/filterDescription2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="47dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="@string/review_filter_description2"
+            android:text="@string/filter_description2"
             android:textColor="#1CD16A"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signUpTitle" />
+            app:layout_constraintTop_toBottomOf="@id/filterDescription1" />
 
         <include
             layout="@layout/layout_filter"
@@ -63,7 +78,7 @@
             android:layout_height="50dp"
             android:layout_marginHorizontal="30dp"
             android:background="@drawable/bg_long_button"
-            android:text="@string/review_filter_button_text"
+            android:text="@string/filter_button_text"
             android:textColor="@color/white"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
