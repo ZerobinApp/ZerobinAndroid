@@ -3,7 +3,6 @@ package com.shop.zerobin.ui.home
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.shop.zerobin.R
@@ -17,7 +16,7 @@ class FilterShopFragment :
 
     private val filterViewModel: FilterViewModel by viewModel()
 
-    var hashtagList = ArrayList<Int>()
+    var selectedHashtagList = mutableListOf<Int>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,11 +34,11 @@ class FilterShopFragment :
             for (i in 1..10) {
 
                 if (requireView().findViewById<Chip>(R.id.chip + i).isChecked) {
-                    hashtagList.add(i)
+                    selectedHashtagList.add(i)
                 }
             }
-            filterViewModel.requestHashTagList(hashtagList)
-            findNavController().navigate(R.id.action_navigation_shop_filter_to_navigation_home)
+            filterViewModel.saveHashTagList(selectedHashtagList)
+            findNavController().popBackStack()
 
         }
         binding.btnBack.setOnClickListener {
@@ -62,11 +61,16 @@ class FilterShopFragment :
                 }
             }
         }
-        filterViewModel.hashtagList.observe(viewLifecycleOwner) {
+        filterViewModel.hashtagList.observe(viewLifecycleOwner) { hashTagList ->
+            val savedHashTagList = filterViewModel.getSavedHashTagList()
+            for (i in hashTagList.indices) {
+                requireView().findViewById<Chip>(R.id.chip + hashTagList[i].hashtagIndex).text =
+                    "#" + hashTagList[i].name
+            }
 
-            for (i in it.indices) {
-                requireView().findViewById<Chip>(R.id.chip + it[i].hashtagIndex).text =
-                    "#" + it[i].name
+            savedHashTagList.forEach {
+                requireView().findViewById<Chip>(R.id.chip + it).isChecked =
+                    true
             }
         }
 

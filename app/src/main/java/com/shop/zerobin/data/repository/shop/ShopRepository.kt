@@ -28,26 +28,23 @@ class ShopRepository(val context: Context) {
 
     private fun getJWT() = pref.getString(MyPageRepository.PREF_JWT, "") ?: ""
 
-    fun setHashTagList(
-        key: String,
-        values: ArrayList<Int>
-    ) {
+    fun saveHashTagList(list: List<Int>) {
         val editor = pref.edit()
-        val a = JSONArray()
-        for (i in 0 until values.size) {
-            a.put(values[i])
+        val json = JSONArray()
+        for (hashTag in list) {
+            json.put(hashTag)
         }
-        if (values.isNotEmpty()) {
-            editor.putString(key, a.toString())
+        if (list.isNotEmpty()) {
+            editor.putString(PREF_HASH_TAG_LIST, json.toString())
         } else {
-            editor.putString(key, null)
+            editor.putString(PREF_HASH_TAG_LIST, null)
         }
         editor.apply()
     }
 
-    fun getHashTagList(): ArrayList<Int> {
-        val json = pref.getString("hashtag", null)
-        val hashTagList = ArrayList<Int>()
+    fun getSavedHashTagList(): List<Int> {
+        val json = pref.getString(PREF_HASH_TAG_LIST, null)
+        val hashTagList = mutableListOf<Int>()
         if (json != null) {
             try {
                 val a = JSONArray(json)
@@ -62,11 +59,11 @@ class ShopRepository(val context: Context) {
         return hashTagList
     }
 
-    suspend fun getShopList(type: List<Int>): Flow<DataResult<Pair<List<String>, List<Shop>>>> {
+    suspend fun getShopList(): Flow<DataResult<Pair<List<String>, List<Shop>>>> {
         return flow {
             emit(DataResult.Loading)
 
-            val response = zerobinClient.getShopList(shopListEntityToData(type))
+            val response = zerobinClient.getShopList(shopListEntityToData(getSavedHashTagList()))
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
@@ -125,5 +122,20 @@ class ShopRepository(val context: Context) {
             val result = response.result.map(::hashtagListDataToEntity)
             emit(DataResult.Success(result))
         }
+    }
+
+    fun saveFirstEnter() {
+        pref.edit()
+            .putBoolean(PREF_IS_FIRST_ENTER, false)
+            .apply()
+    }
+
+    fun isFirstEnter(): Boolean {
+        return pref.getBoolean(PREF_IS_FIRST_ENTER, true)
+    }
+
+    companion object {
+        const val PREF_HASH_TAG_LIST = "PREF_HASH_TAG_LIST"
+        const val PREF_IS_FIRST_ENTER = "PREF_IS_FIRST_ENTER"
     }
 }
