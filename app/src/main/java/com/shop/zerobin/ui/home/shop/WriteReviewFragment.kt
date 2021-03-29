@@ -10,9 +10,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -20,6 +23,7 @@ import com.google.firebase.storage.ktx.storage
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentWriteReviewBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
+import com.shop.zerobin.util.Extensions.px
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -105,6 +109,24 @@ class WriteReviewFragment :
         binding.pictureIndex3.setOnClickListener {
             pickFromGallery(3)
         }
+
+        binding.pictureCancel1.setOnClickListener {
+            binding.pictureCancel1.isVisible = false
+            binding.pictureIndex1.setImageResource(R.drawable.ic_select_picture)
+            binding.pictureIndex1.tag = null
+        }
+
+        binding.pictureCancel2.setOnClickListener {
+            binding.pictureCancel2.isVisible = false
+            binding.pictureIndex2.setImageResource(R.drawable.ic_select_picture)
+            binding.pictureIndex2.tag = null
+        }
+
+        binding.pictureCancel3.setOnClickListener {
+            binding.pictureCancel3.isVisible = false
+            binding.pictureIndex3.setImageResource(R.drawable.ic_select_picture)
+            binding.pictureIndex3.tag = null
+        }
     }
 
     private fun observeLiveData() {
@@ -163,15 +185,27 @@ class WriteReviewFragment :
     private fun setImage(imgUri: Uri, index: Int) {
         when (index) {
             1 -> {
-                Glide.with(requireContext()).load(imgUri).into(binding.pictureIndex1)
+                Glide.with(requireContext())
+                    .load(imgUri)
+                    .transform(CenterCrop(), RoundedCorners(15.px))
+                    .into(binding.pictureIndex1)
+                binding.pictureCancel1.isVisible = true
                 binding.pictureIndex1.tag = imgUri
             }
             2 -> {
-                Glide.with(requireContext()).load(imgUri).into(binding.pictureIndex2)
+                Glide.with(requireContext())
+                    .load(imgUri)
+                    .transform(CenterCrop(), RoundedCorners(15.px))
+                    .into(binding.pictureIndex2)
+                binding.pictureCancel2.isVisible = true
                 binding.pictureIndex2.tag = imgUri
             }
             3 -> {
-                Glide.with(requireContext()).load(imgUri).into(binding.pictureIndex3)
+                Glide.with(requireContext())
+                    .load(imgUri)
+                    .transform(CenterCrop(), RoundedCorners(15.px))
+                    .into(binding.pictureIndex3)
+                binding.pictureCancel3.isVisible = true
                 binding.pictureIndex3.tag = imgUri
             }
         }
@@ -205,7 +239,7 @@ class WriteReviewFragment :
         val uploadTask = reviewRef.putBytes(compressedImage)
         uploadTask.addOnSuccessListener {
             Log.d(TAG, "uploadImage > onSuccess : $it")
-            viewModel.addImageUrl(reviewRef.path)
+            viewModel.addImageUrl(reviewRef.path.substring(1)) // 경로의 맨 앞에 "/" 지우기 위해 substring(1)
             uploadState[imgUri] = true
             postReview()
         }.addOnFailureListener {
