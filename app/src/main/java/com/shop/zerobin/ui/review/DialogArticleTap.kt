@@ -50,12 +50,10 @@ class DialogArticleTap : BottomSheetDialogFragment() {
         } else {
             //자신일때
             view.findViewById<TextView>(R.id.btnEditArticle).setOnClickListener {
-                Toast.makeText(context, "리뷰수정", Toast.LENGTH_SHORT).show()
                 onClick?.invoke(ClickType.EDIT)
                 dismiss()
             }
             view.findViewById<TextView>(R.id.btnDeleteArticle).setOnClickListener {
-                Toast.makeText(context, "리뷰삭제", Toast.LENGTH_SHORT).show()
                 onClick?.invoke(ClickType.DELETE)
                 dismiss()
             }
