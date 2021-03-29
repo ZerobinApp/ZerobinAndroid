@@ -68,6 +68,7 @@ class WriteReviewFragment :
     }
 
     private fun setViewModelData() {
+        viewModel.setHashTagList()
         if (args?.seed == true) viewModel.bloomSeed()
         args?.shop?.let {
             viewModel.setShop(it)
@@ -77,10 +78,6 @@ class WriteReviewFragment :
     private fun setOnClickListener() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
-            binding.hashtagLayout.chipGroup.checkedChipIds.forEach {
-                val chip = view?.findViewById<Chip>(it)
-                Log.e(TAG, chip?.tag.toString())
-            }
         }
 
         binding.pictureIndex1.setOnClickListener {
@@ -113,10 +110,17 @@ class WriteReviewFragment :
             }
         }
 
+        viewModel.hashTagList.observe(viewLifecycleOwner) { hashTagList ->
+            for (i in 0 until binding.hashTagContainer.chipGroup.childCount) {
+                view?.findViewWithTag<Chip>("${hashTagList[i].hashtagIndex}")?.text =
+                    getString(R.string.hash_tag_format, hashTagList[i].name)
+            }
+        }
+
         viewModel.inputCheckComplete.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 val hashTagList = mutableListOf<Int>()
-                binding.hashtagLayout.chipGroup.checkedChipIds.forEach { checkedId ->
+                binding.hashTagContainer.chipGroup.checkedChipIds.forEach { checkedId ->
                     val chip = view?.findViewById<Chip>(checkedId)
                     val index = chip?.tag.toString().toInt()
                     Log.d(TAG, "해시태그 선택된 index : $index")
