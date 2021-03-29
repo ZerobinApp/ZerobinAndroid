@@ -1,6 +1,7 @@
 package com.shop.zerobin.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -16,8 +17,6 @@ class FilterShopFragment :
 
     private val filterViewModel: FilterViewModel by viewModel()
 
-    var selectedHashtagList = mutableListOf<Int>()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = filterViewModel
@@ -30,14 +29,14 @@ class FilterShopFragment :
 
     private fun setListeners() {
         binding.btnNext.setOnClickListener {
-            //필터 걸러지는 버튼
-            for (i in 1..10) {
-
-                if (requireView().findViewById<Chip>(R.id.chip + i).isChecked) {
-                    selectedHashtagList.add(i)
-                }
+            val selectedHashTagList = mutableListOf<Int>()
+            binding.hashTagContainer.chipGroup.checkedChipIds.forEach { checkedId ->
+                val chip = view?.findViewById<Chip>(checkedId)
+                val index = chip?.tag.toString().toInt()
+                Log.d(TAG, "해시태그 선택된 index : $index")
+                selectedHashTagList.add(index)
             }
-            filterViewModel.saveHashTagList(selectedHashtagList)
+            filterViewModel.saveHashTagList(selectedHashTagList)
             findNavController().popBackStack()
 
         }
@@ -63,14 +62,13 @@ class FilterShopFragment :
         }
         filterViewModel.hashtagList.observe(viewLifecycleOwner) { hashTagList ->
             val savedHashTagList = filterViewModel.getSavedHashTagList()
-            for (i in hashTagList.indices) {
-                requireView().findViewById<Chip>(R.id.chip + hashTagList[i].hashtagIndex).text =
-                    "#" + hashTagList[i].name
+            for (i in 0 until binding.hashTagContainer.chipGroup.childCount) {
+                view?.findViewWithTag<Chip>("${hashTagList[i].hashtagIndex}")?.text =
+                    getString(R.string.hash_tag_format, hashTagList[i].name)
             }
 
             savedHashTagList.forEach {
-                requireView().findViewById<Chip>(R.id.chip + it).isChecked =
-                    true
+                view?.findViewWithTag<Chip>("$it")?.isChecked = true
             }
         }
 
@@ -79,5 +77,9 @@ class FilterShopFragment :
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    companion object {
+        private val TAG: String = FilterShopFragment::class.java.simpleName
     }
 }

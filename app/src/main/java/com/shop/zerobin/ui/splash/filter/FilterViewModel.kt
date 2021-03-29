@@ -19,7 +19,7 @@ class FilterViewModel(private val shopRepository: ShopRepository) : BaseViewMode
 
     fun requestFilterList() {
         viewModelScope.launch {
-            val response = shopRepository.getHashtag()
+            val response = shopRepository.getHashTag()
             Log.d(TAG, response.toString())
             response.collect { handleResult(it) }
         }

@@ -1,6 +1,7 @@
 package com.shop.zerobin.ui.review
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -16,7 +17,7 @@ class ReviewFilterFragment :
     BaseBindingFragment<FragmentReviewFilterBinding>(R.layout.fragment_review_filter) {
 
     private val filterViewModel: FilterViewModel by viewModel()
-    var hashtagList = arrayListOf<Int>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = filterViewModel
@@ -24,20 +25,19 @@ class ReviewFilterFragment :
         requestFilterList()
         observeLiveData()
         setListeners()
-
     }
 
     private fun setListeners() {
         binding.btnNext.setOnClickListener {
-            //필터 걸러지는 버튼
-            for (i in 1..10) {
-
-                if (requireView().findViewById<Chip>(R.id.chip + i).isChecked) {
-                    hashtagList.add(i)
-                }
+            val selectedHashTagList = mutableListOf<Int>()
+            binding.hashTagContainer.chipGroup.checkedChipIds.forEach { checkedId ->
+                val chip = view?.findViewById<Chip>(checkedId)
+                val index = chip?.tag.toString().toInt()
+                Log.d(TAG, "해시태그 선택된 index : $index")
+                selectedHashTagList.add(index)
             }
 
-            val bundle = bundleOf("hashtag" to hashtagList)
+            val bundle = bundleOf("hashtag" to selectedHashTagList)
             findNavController().navigate(
                 R.id.action_navigation_review_filter_to_navigation_review,
                 bundle
@@ -64,11 +64,10 @@ class ReviewFilterFragment :
                 }
             }
         }
-        filterViewModel.hashtagList.observe(viewLifecycleOwner) {
-
-            for (i in it.indices) {
-                requireView().findViewById<Chip>(R.id.chip + it[i].hashtagIndex).text =
-                    "#" + it[i].name
+        filterViewModel.hashtagList.observe(viewLifecycleOwner) { hashTagList ->
+            for (i in 0 until binding.hashTagContainer.chipGroup.childCount) {
+                view?.findViewWithTag<Chip>("${hashTagList[i].hashtagIndex}")?.text =
+                    getString(R.string.hash_tag_format, hashTagList[i].name)
             }
         }
 
@@ -77,5 +76,9 @@ class ReviewFilterFragment :
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    companion object {
+        private val TAG: String = ReviewFilterFragment::class.java.simpleName
     }
 }

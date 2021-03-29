@@ -13,7 +13,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activity_filter) {
 
     private val filterViewModel: FilterViewModel by viewModel()
-    var selectedHashTagList = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +42,10 @@ class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activ
                 }
             }
         }
-        filterViewModel.hashtagList.observe(this) {
-
-            for (i in it.indices) {
-                findViewById<Chip>(R.id.chip + it[i].hashtagIndex).text = "#" + it[i].name
+        filterViewModel.hashtagList.observe(this) { hashTagList ->
+            for (i in 0 until binding.hashTagContainer.chipGroup.childCount) {
+                binding.root.findViewWithTag<Chip>("${hashTagList[i].hashtagIndex}")?.text =
+                    getString(R.string.hash_tag_format, hashTagList[i].name)
             }
         }
 
@@ -59,10 +58,11 @@ class FilterActivity : BaseBindingActivity<ActivityFilterBinding>(R.layout.activ
 
     private fun setListeners() {
         binding.btnNext.setOnClickListener {
-            for (i in 1..10) {
-                if (findViewById<Chip>(R.id.chip + i).isChecked) {
-                    selectedHashTagList.add(i)
-                }
+            val selectedHashTagList = mutableListOf<Int>()
+            binding.hashTagContainer.chipGroup.checkedChipIds.forEach { checkedId ->
+                val chip = findViewById<Chip>(checkedId)
+                val index = chip.tag.toString().toInt()
+                selectedHashTagList.add(index)
             }
             filterViewModel.saveHashTagList(selectedHashTagList)
             filterViewModel.saveFirstEnter()

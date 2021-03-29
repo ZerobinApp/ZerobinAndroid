@@ -14,7 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:paddingVertical="30dp"
+        android:clipToPadding="false"
+        android:paddingTop="20dp"
+        android:paddingBottom="30dp"
         tools:context=".ui.review.ReviewFilterActivity">
 
         <ImageView
@@ -31,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="키워드 선택"
+            android:textColor="@color/black"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,6 +67,7 @@
             app:layout_constraintTop_toBottomOf="@id/filterDescription1" />
 
         <include
+            android:id="@+id/hashTagContainer"
             layout="@layout/layout_filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

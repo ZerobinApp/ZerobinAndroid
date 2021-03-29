@@ -112,7 +112,7 @@ class ShopRepository(val context: Context) {
         }
     }
 
-    suspend fun getHashtag(): Flow<DataResult<List<Hashtag>>> {
+    suspend fun getHashTag(): Flow<DataResult<List<Hashtag>>> {
         return flow {
             emit(DataResult.Loading)
 

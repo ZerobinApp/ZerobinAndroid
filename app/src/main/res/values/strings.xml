@@ -33,4 +33,5 @@
     <string name="need_login_description">먼저 로그인이 필요해요 :D\n로그인 페이지로 이동하시겠어요?</string>
     <string name="yes">예</string>
     <string name="no">아니오</string>
+    <string name="hash_tag_format">#%s</string>
 </resources>
