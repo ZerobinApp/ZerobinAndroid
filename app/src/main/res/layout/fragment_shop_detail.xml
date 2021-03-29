@@ -65,7 +65,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="@{VM.shopDetail.hashtagList.toString()}"
                     android:textColor="@color/white"
                     android:textSize="14dp"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
@@ -312,7 +311,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.core.widget.NestedScrollView>ㄴ
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
