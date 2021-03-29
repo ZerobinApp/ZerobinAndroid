@@ -59,8 +59,12 @@ class SignUpFragment : BaseBindingFragment<FragmentSignUpBinding>(R.layout.fragm
         }
 
         signUpViewModel.signUpFinish.observe(viewLifecycleOwner) { event ->
-            event.getContentIfNotHandled()?.let {
-                findNavController().navigate(R.id.action_navigation_sign_up_to_navigation_my_page)
+            event.getContentIfNotHandled()?.let { success ->
+                if (success) {
+                    findNavController().navigate(R.id.action_navigation_sign_up_to_navigation_my_page)
+                } else {
+                    auth.currentUser?.delete()
+                }
             }
         }
     }

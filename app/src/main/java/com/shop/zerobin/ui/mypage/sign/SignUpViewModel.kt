@@ -19,8 +19,8 @@ class SignUpViewModel(private val myPageRepository: MyPageRepository) : BaseView
     private val _inputCheckComplete = MutableLiveData<Event<Unit>>()
     val inputCheckComplete: LiveData<Event<Unit>> = _inputCheckComplete
 
-    private val _signUpFinish = MutableLiveData<Event<Unit>>()
-    val signUpFinish: LiveData<Event<Unit>> = _signUpFinish
+    private val _signUpFinish = MutableLiveData<Event<Boolean>>()
+    val signUpFinish: LiveData<Event<Boolean>> = _signUpFinish
 
     fun onClickComplete() {
         if (!inputCheck()) return
@@ -78,10 +78,15 @@ class SignUpViewModel(private val myPageRepository: MyPageRepository) : BaseView
         }
     }
 
+    override fun handleError(tag: String, exception: Exception) {
+        super.handleError(tag, exception)
+        _signUpFinish.value = Event(false)
+    }
+
     private fun handleSuccess() {
         _isLoading.value = Event(false)
         _isError.value = Event("회원가입 성공")
-        _signUpFinish.value = Event(Unit)
+        _signUpFinish.value = Event(true)
     }
 
     companion object {
