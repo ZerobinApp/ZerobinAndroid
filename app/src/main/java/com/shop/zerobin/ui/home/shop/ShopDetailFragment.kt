@@ -149,7 +149,7 @@ class ShopDetailFragment :
     private fun drawHashTagList(hashtagList: List<ShopDetail.Hashtag>) {
         var hashTagString = ""
         hashtagList.forEach {
-            hashTagString += "#${it.name} "
+            hashTagString += getString(R.string.hash_tag_format, it.name) + "  "
         }
         binding.hashTag.text = hashTagString
     }
