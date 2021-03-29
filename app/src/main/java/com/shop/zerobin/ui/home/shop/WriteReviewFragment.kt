@@ -2,6 +2,8 @@ package com.shop.zerobin.ui.home.shop
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +24,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.io.ByteArrayOutputStream
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.io.InputStream
 
 
 class WriteReviewFragment :
@@ -194,7 +200,9 @@ class WriteReviewFragment :
         val fileName = "${Firebase.auth.currentUser?.email}_${imgUri.lastPathSegment}"
         val reviewRef = Firebase.storage.reference.child("reviews/${fileName}")
 
-        val uploadTask = reviewRef.putFile(imgUri)
+        val compressedImage = compressImage(imgUri)
+
+        val uploadTask = reviewRef.putBytes(compressedImage)
         uploadTask.addOnSuccessListener {
             Log.d(TAG, "uploadImage > onSuccess : $it")
             viewModel.addImageUrl(reviewRef.path)
@@ -205,6 +213,27 @@ class WriteReviewFragment :
             Toast.makeText(requireContext(), "사진 업로드 실패 ${it.message}", Toast.LENGTH_SHORT).show()
             hideLoading()
         }
+    }
+
+    private fun compressImage(imgUri: Uri): ByteArray {
+        var imageStream: InputStream? = null
+        try {
+            imageStream = requireContext().contentResolver.openInputStream(imgUri)
+        } catch (e: FileNotFoundException) {
+            Log.e(TAG, e.message ?: "")
+        }
+
+        val bmp = BitmapFactory.decodeStream(imageStream)
+
+        val stream = ByteArrayOutputStream()
+        bmp.compress(Bitmap.CompressFormat.JPEG, 25, stream)
+        val byteArray: ByteArray = stream.toByteArray()
+        try {
+            stream.close()
+        } catch (e: IOException) {
+            Log.e(TAG, e.message ?: "")
+        }
+        return byteArray
     }
 
     private fun postReview() {
@@ -221,6 +250,7 @@ class WriteReviewFragment :
         }
         if (selectedHashTagList.size > 8) {
             Toast.makeText(requireContext(), "해시태그는 최대 8개까지 선택 가능합니다.", Toast.LENGTH_SHORT).show()
+            hideLoading()
             return
         }
         viewModel.postReview(selectedHashTagList)
