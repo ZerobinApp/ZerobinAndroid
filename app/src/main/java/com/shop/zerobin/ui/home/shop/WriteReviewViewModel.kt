@@ -25,10 +25,7 @@ class WriteReviewViewModel(
     private val _shop = MutableLiveData<Shop>()
     val shop: LiveData<Shop> = _shop
 
-    private val _imageList = MutableLiveData<List<String>>()
-    val imageList: LiveData<List<String>> = _imageList
-
-    private val _imageUrlList = MutableLiveData<List<String>>()
+    private val _imageUrlList = MutableLiveData<List<String>>(emptyList())
     val imageUrlList: LiveData<List<String>> = _imageUrlList
 
     private val _hashTagList = MutableLiveData<List<Hashtag>>()
@@ -61,7 +58,16 @@ class WriteReviewViewModel(
         }
     }
 
+    fun addImageUrl(url: String) {
+        _imageUrlList.value = _imageUrlList.value?.plus(url)
+    }
+
+    private fun clearImageUrl() {
+        _imageUrlList.value = emptyList()
+    }
+
     fun onClickComplete() {
+        clearImageUrl()
         if (!inputCheck()) return
 
         _inputCheckComplete.value = Event(Unit)
