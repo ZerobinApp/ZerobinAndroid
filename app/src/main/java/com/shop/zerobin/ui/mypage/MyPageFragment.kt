@@ -66,6 +66,10 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
                 findNavController().navigate(R.id.action_navigation_my_page_to_navigation_nick_change)
             }
         }
+
+        binding.btnDeleteAccount.setOnClickListener {
+            // todo : 회원탈퇴 (서버 api 통신 -> firebase 탈퇴)
+        }
     }
 
     private fun observeLiveData() {
@@ -84,5 +88,9 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
                 Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    companion object {
+        private val TAG : String = MyPageFragment::class.java.simpleName
     }
 }

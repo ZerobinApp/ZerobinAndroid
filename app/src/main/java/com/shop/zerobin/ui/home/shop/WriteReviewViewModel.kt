@@ -67,7 +67,8 @@ class WriteReviewViewModel(private val reviewRepository: ReviewRepository) : Bas
                     shopIndex,
                     imageUrlList.value,
                     inputText.value,
-                    hashTagList
+                    hashTagList,
+                    _seed.value ?: false
                 )
                 response.collect { handleResult(it) }
             }

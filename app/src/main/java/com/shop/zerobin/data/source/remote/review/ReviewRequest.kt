@@ -4,4 +4,5 @@ data class ReviewRequest(
     val image: List<String>,
     val comment: String,
     val hashtag: List<Int>,
+    val stamp: Int,
 )

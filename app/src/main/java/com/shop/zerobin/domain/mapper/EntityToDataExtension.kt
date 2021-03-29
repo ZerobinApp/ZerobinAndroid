@@ -23,9 +23,11 @@ object EntityToDataExtension {
         imageUrlList: List<String>?,
         inputText: String?,
         hashTagList: List<Int>?,
+        stamp: Boolean,
     ) = ReviewRequest(
-        imageUrlList ?: emptyList(),
-        inputText ?: "",
-        hashTagList ?: emptyList()
+        image = imageUrlList ?: emptyList(),
+        comment = inputText ?: "",
+        hashtag = hashTagList ?: emptyList(),
+        stamp = if (stamp) 1 else 0
     )
 }
