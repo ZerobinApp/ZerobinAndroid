@@ -12,6 +12,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentShopDetailBinding
+import com.shop.zerobin.domain.entity.ShopDetail
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
 import com.shop.zerobin.util.GlideApp
@@ -57,6 +58,7 @@ class ShopDetailFragment :
         shopDetailViewModel.shopDetail.observe(viewLifecycleOwner) {
             reviewShopAdapter.setDetailReviewItem(it)
             setImageFromFirebase(it.imageList)
+            drawHashTagList(it.hashtagList)
         }
 
         shopDetailViewModel.isLoading.observe(viewLifecycleOwner) { event ->
@@ -142,6 +144,14 @@ class ShopDetailFragment :
         } else {
             showLoginDialog()
         }
+    }
+
+    private fun drawHashTagList(hashtagList: List<ShopDetail.Hashtag>) {
+        var hashTagString = ""
+        hashtagList.forEach {
+            hashTagString += getString(R.string.hash_tag_format, it.name) + "  "
+        }
+        binding.hashTag.text = hashTagString
     }
 
     companion object {

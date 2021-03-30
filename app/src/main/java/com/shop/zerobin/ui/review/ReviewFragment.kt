@@ -58,8 +58,8 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 DialogArticleTap.ClickType.DELETE -> reviewViewModel.requestReviewDelete(
-                                    review.reviewIndex,
-                                    review.shopIndex
+                                    review.shopIndex,
+                                    review.reviewIndex
                                 )
                                 else -> Toast.makeText(
                                     requireContext(),

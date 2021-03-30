@@ -43,13 +43,12 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
 
     }
 
-    fun requestReviewDelete(reviewIndex: Int, shopIndex: Int) {
+    fun requestReviewDelete(shopIndex: Int, reviewIndex: Int) {
         viewModelScope.launch {
-            val response = reviewRepository.deleteReview(reviewIndex, shopIndex)
+            val response = reviewRepository.deleteReview(shopIndex, reviewIndex)
             Log.d(TAG, response.toString())
             response.collect { handleResultDelete(it) }
         }
-
     }
 
     private fun handleResultReport(dataResult: DataResult<Unit>) {
@@ -83,11 +82,15 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
 
     private fun handleSuccessReport(data: Unit) {
         _isLoading.value = Event(false)
+        _isError.value = Event("신고 완료되었습니다.")
         Log.d("신고", data.toString())
     }
 
     private fun handleSuccessDelete(data: Unit) {
+        _isLoading.value = Event(false)
+        _isError.value = Event("삭제 완료되었습니다.")
         Log.d("삭제", data.toString())
+        requestReviewList(emptyList())
     }
 
     companion object {

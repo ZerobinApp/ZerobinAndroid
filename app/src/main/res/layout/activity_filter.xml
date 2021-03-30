@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:paddingVertical="30dp"
         tools:context=".ui.splash.filter.FilterActivity">
 
@@ -55,6 +56,7 @@
             app:layout_constraintTop_toBottomOf="@id/filterDescription1" />
 
         <include
+            android:id="@+id/hashTagContainer"
             layout="@layout/layout_filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

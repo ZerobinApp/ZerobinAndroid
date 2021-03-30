@@ -57,6 +57,9 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(review: Review) {
+            setImageFromFirebase(review)
+            drawHashTagList(review.hashtagList)
+
             binding.review = review
             binding.shopName.setOnClickListener {
                 listener?.onItemClick(review = review)
@@ -64,8 +67,6 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
             binding.reviewMenu.setOnClickListener {
                 listener?.onMenuClick(review = review)
             }
-
-            setImageFromFirebase(review)
         }
 
         private fun setImageFromFirebase(review: Review) {
@@ -90,6 +91,14 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(binding.reviewImg)
             }
+        }
+
+        private fun drawHashTagList(hashTagList: List<String>) {
+            var hashTagString = ""
+            hashTagList.forEach {
+                hashTagString += binding.root.context.getString(R.string.hash_tag_format, it) + "  "
+            }
+            binding.reviewHashTag.text = hashTagString
         }
     }
 

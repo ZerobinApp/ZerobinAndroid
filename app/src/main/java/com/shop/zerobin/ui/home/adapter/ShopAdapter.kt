@@ -43,12 +43,12 @@ class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
             onClick: ((Shop) -> Unit)?,
             onZzimClick: ((Shop, Int) -> Unit)?,
         ) {
+            setImageFromFirebase(shop)
+
             binding.shop = shop
             binding.onClick = onClick
             binding.onZzimClick = onZzimClick
             binding.position = position
-
-            setImageFromFirebase(shop)
         }
 
         private fun setImageFromFirebase(shop: Shop) {
