@@ -1,5 +1,8 @@
 package com.shop.zerobin.ui.home.shop
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -123,6 +126,16 @@ class ShopDetailFragment :
             } else {
                 showLoginDialog()
             }
+        }
+
+        binding.addressCopy.setOnClickListener {
+            val clipboard =
+                requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+            val textToCopy = shopDetailViewModel.shopDetail.value?.location
+            val clip = ClipData.newPlainText("text", textToCopy)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(requireContext(), "주소가 복사되었습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
