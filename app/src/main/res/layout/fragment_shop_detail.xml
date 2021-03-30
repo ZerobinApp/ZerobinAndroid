@@ -65,6 +65,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:shadowColor="#B3000000"
+                    android:shadowDy="2"
+                    android:shadowRadius="2"
                     android:textColor="@color/white"
                     android:textSize="14dp"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
@@ -194,7 +197,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/review"
                     android:textColor="#272727"
-                    android:textSize="16dp"
+                    android:textSize="17dp"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/divider3" />
 
@@ -203,9 +206,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/make_review"
-                    android:textSize="12dp"
-                    app:layout_constraintBaseline_toBaselineOf="@id/review"
-                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd" />
+                    android:textColor="#1CD16A"
+                    android:textSize="13dp"
+                    app:layout_constraintBottom_toBottomOf="@id/review"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                    app:layout_constraintTop_toTopOf="@id/review" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/detailReviewRecyclerView"
@@ -222,18 +227,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="24dp"
-            android:src="@drawable/ic_fab"
-            app:fabCustomSize="44dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="44dp"
-            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

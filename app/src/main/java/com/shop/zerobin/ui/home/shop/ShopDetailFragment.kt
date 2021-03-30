@@ -110,10 +110,6 @@ class ShopDetailFragment :
             findNavController().popBackStack()
         }
 
-        binding.floatingActionButton.setOnClickListener {
-            writeReviewPage()
-        }
-
         binding.writeReview.setOnClickListener {
             writeReviewPage()
         }
