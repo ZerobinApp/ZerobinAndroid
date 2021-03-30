@@ -14,6 +14,7 @@ import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentShopDetailBinding
 import com.shop.zerobin.domain.entity.ShopDetail
 import com.shop.zerobin.ui.common.BaseBindingFragment
+import com.shop.zerobin.ui.home.adapter.FeatureAdapter
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
 import com.shop.zerobin.util.GlideApp
 import kotlinx.coroutines.CoroutineScope
@@ -29,6 +30,8 @@ class ShopDetailFragment :
 
     private val reviewShopAdapter by lazy { ReviewAdapter() }
 
+    private val featureAdapter by lazy { FeatureAdapter() }
+
     private val args: ShopDetailFragmentArgs? by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,6 +40,7 @@ class ShopDetailFragment :
 
         requestShopDetailData()
         setReviewAdapter()
+        setFeatureAdapter()
         observeLiveData()
         setOnClickListener()
     }
@@ -57,6 +61,7 @@ class ShopDetailFragment :
     private fun observeLiveData() {
         shopDetailViewModel.shopDetail.observe(viewLifecycleOwner) {
             reviewShopAdapter.setDetailReviewItem(it)
+            featureAdapter.setItem(it.hashtagList)
             setImageFromFirebase(it.imageList)
             drawHashTagList(it.hashtagList)
         }
@@ -81,9 +86,9 @@ class ShopDetailFragment :
             event.getContentIfNotHandled()?.let { zzim ->
                 args?.shop?.zzim = zzim
                 if (zzim) {
-                    binding.btnZzim.setImageResource(R.drawable.ic_favorite_24px)
+                    binding.btnZzim.setImageResource(R.drawable.ic_entypo_heart)
                 } else {
-                    binding.btnZzim.setImageResource(R.drawable.ic_favorite_border_24px)
+                    binding.btnZzim.setImageResource(R.drawable.ic_codicon_heart)
                 }
             }
         }
@@ -91,6 +96,10 @@ class ShopDetailFragment :
 
     private fun setReviewAdapter() {
         binding.detailReviewRecyclerView.adapter = reviewShopAdapter
+    }
+
+    private fun setFeatureAdapter() {
+        binding.featureRecyclerView.adapter = featureAdapter
     }
 
     private fun setOnClickListener() {
@@ -146,9 +155,9 @@ class ShopDetailFragment :
         }
     }
 
-    private fun drawHashTagList(hashtagList: List<ShopDetail.Hashtag>) {
+    private fun drawHashTagList(hashTagList: List<ShopDetail.Hashtag>) {
         var hashTagString = ""
-        hashtagList.forEach {
+        hashTagList.forEach {
             hashTagString += getString(R.string.hash_tag_format, it.name) + "  "
         }
         binding.hashTag.text = hashTagString

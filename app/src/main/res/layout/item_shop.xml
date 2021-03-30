@@ -22,6 +22,7 @@
         <variable
             name="onZzimClick"
             type="kotlin.jvm.functions.Function2" />
+
         <variable
             name="position"
             type="Integer" />
@@ -55,6 +56,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
+                android:shadowColor="#99000000"
+                android:shadowDy="2"
+                android:shadowRadius="3"
                 android:text="@{shop.name}"
                 android:textColor="@color/white"
                 android:textSize="19dp"
@@ -68,19 +72,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:onClick="@{() -> onZzimClick.invoke(shop, position)}"
                 android:layout_marginEnd="10dp"
-                android:src="@{shop.zzim ? @drawable/ic_favorite_24px : @drawable/ic_favorite_border_24px}"
+                android:onClick="@{() -> onZzimClick.invoke(shop, position)}"
+                android:src="@{shop.zzim ? @drawable/ic_entypo_heart : @drawable/ic_codicon_heart}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription"
-                tools:src="@drawable/ic_favorite_24px" />
+                tools:src="@drawable/ic_entypo_heart" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="11dp"
+                android:shadowColor="#B3000000"
+                android:shadowDy="2"
+                android:shadowRadius="2"
                 android:text="@{shop.location}"
                 android:textColor="@color/white"
                 android:textSize="12dp"
