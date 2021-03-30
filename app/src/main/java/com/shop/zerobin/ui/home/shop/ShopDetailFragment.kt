@@ -154,6 +154,14 @@ class ShopDetailFragment :
 
     private fun writeReviewPage() {
         if (shopDetailViewModel.isLogin.value == true) {
+
+            shopDetailViewModel.shopDetail.value?.reviewList?.forEach {
+                if (it.owner) {
+                    Toast.makeText(requireContext(), "이미 작성한 리뷰가 있습니다.", Toast.LENGTH_LONG).show()
+                    return
+                }
+            }
+
             val action =
                 ShopDetailFragmentDirections.actionNavigationShopDetailToNavigationWriteReviewSeed(
                     args?.shop
