@@ -68,7 +68,9 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
         }
 
         binding.btnDeleteAccount.setOnClickListener {
-            // todo : 회원탈퇴 (서버 api 통신 -> firebase 탈퇴)
+            if (myPageViewModel.isLogin.value == true) {
+                findNavController().navigate(R.id.action_navigation_my_page_to_navigation_delete_account_fragment)
+            }
         }
     }
 
@@ -91,6 +93,6 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
     }
 
     companion object {
-        private val TAG : String = MyPageFragment::class.java.simpleName
+        private val TAG: String = MyPageFragment::class.java.simpleName
     }
 }
