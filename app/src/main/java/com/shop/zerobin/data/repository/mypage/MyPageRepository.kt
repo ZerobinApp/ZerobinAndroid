@@ -138,6 +138,21 @@ class MyPageRepository(val context: Context) {
         }
     }
 
+    suspend fun deleteAccount(): Flow<DataResult<Unit>> {
+        return flow {
+            emit(DataResult.Loading)
+
+            val response = zerobinClient.deleteAccount()
+
+            if (response.isSuccess != true) {
+                emit(DataResult.Error(Exception(response.message)))
+                return@flow
+            }
+
+            emit(DataResult.Success(Unit))
+        }
+    }
+
     private fun getJWT() = pref.getString(PREF_JWT, "") ?: ""
 
     private fun saveJWT(jwt: String) {

@@ -117,7 +117,21 @@
             app:exitAnim="@anim/anim_nothing"
             app:popEnterAnim="@anim/anim_nothing"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_navigation_my_page_to_navigation_delete_account"
+            app:destination="@id/navigation_my_page_delete_account"
+            app:popUpTo="@id/navigation_my_page_delete_account"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/anim_nothing"
+            app:popEnterAnim="@anim/anim_nothing"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_my_page_delete_account"
+        android:name="com.shop.zerobin.ui.mypage.MyPageDeleteAccountFragment"
+        android:label="MyPageDeleteAccountFragment"
+        tools:layout="@layout/fragment_my_page_delete_account" />
 
     <fragment
         android:id="@+id/navigation_my_page_nick_change"
