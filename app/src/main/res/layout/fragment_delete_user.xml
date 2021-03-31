@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="vm"
-            type="com.shop.zerobin.ui.mypage.sign.SignUpViewModel" />
+            type="com.shop.zerobin.ui.mypage.sign.DeleteUserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,10 +28,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/signUpTitle"
+            android:id="@+id/deleteTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="회원가입"
+            android:text="@string/delete_account"
             android:textColor="#272727"
             android:textSize="18dp"
             android:textStyle="bold"
@@ -41,24 +42,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="만나서 반가워요!"
+            android:gravity="center"
+            android:text="아쉽지만\n또 만날수 있겠죠?"
             android:textColor="#272727"
             android:textSize="25dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signUpTitle"
+            app:layout_constraintTop_toBottomOf="@id/deleteTitle"
             app:layout_constraintVertical_bias="0.1" />
 
-        <EditText
-            android:id="@+id/inputEmail"
+        <TextView
+            android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/bg_signup_input"
             android:gravity="center"
-            android:hint="이메일"
-            android:text="@={vm.inputEmail}"
+            android:text="@{vm.email}"
             android:textColor="@color/black"
             android:textSize="15dp"
             app:layout_constraintBottom_toTopOf="@id/inputPassword"
@@ -66,7 +67,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="이메일주소" />
 
         <EditText
             android:id="@+id/inputPassword"
@@ -80,57 +82,56 @@
             android:text="@={vm.inputPassword}"
             android:textColor="@color/black"
             android:textSize="15dp"
-            app:layout_constraintBottom_toTopOf="@id/inputPasswordConfirm"
+            app:layout_constraintBottom_toTopOf="@id/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inputEmail" />
+            app:layout_constraintTop_toBottomOf="@id/email" />
 
-        <EditText
-            android:id="@+id/inputPasswordConfirm"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+        <TextView
+            android:id="@+id/resetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/bg_signup_input"
-            android:gravity="center"
-            android:hint="비밀번호 확인"
-            android:inputType="textPassword"
-            android:text="@={vm.inputPasswordConfirm}"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            app:layout_constraintBottom_toTopOf="@id/inputNickname"
+            android:text="비밀번호를 잊으셨나요?"
+            android:textColor="#505050"
+            android:textSize="11dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/inputPassword" />
 
-        <EditText
-            android:id="@+id/inputNickname"
+        <View
+            android:id="@+id/divider"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_signup_input"
-            android:gravity="center"
-            android:hint="닉네임"
-            android:text="@={vm.inputNickname}"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:background="#60565656"
+            app:layout_constraintBottom_toTopOf="@id/deleteDescription"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inputPasswordConfirm" />
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/deleteDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="회원탈퇴시 찜해놓은 스토어 및 새싹 스탬프 기록이 사라집니다"
+            android:textColor="#505050"
+            android:textSize="11dp"
+            app:layout_constraintBottom_toTopOf="@id/btnDelete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnComplete"
+            android:id="@+id/btnDelete"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/bg_long_button"
-            android:onClick="@{() -> vm.onClickComplete()}"
-            android:text="완료"
+            android:text="탈퇴"
             android:textColor="@color/white"
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

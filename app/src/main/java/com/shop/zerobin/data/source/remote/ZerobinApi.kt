@@ -69,5 +69,8 @@ interface ZerobinApi {
 
     @PATCH("/shop/{shopIndex}/like")
     suspend fun zzimShop(@Path("shopIndex") shopIndex: Int): DefaultResponse
+
+    @DELETE("user")
+    suspend fun deleteUser() : DefaultResponse
 }
 

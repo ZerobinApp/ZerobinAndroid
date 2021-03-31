@@ -1,21 +1,21 @@
 package com.shop.zerobin.ui.home.shop
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentShopDetailBinding
 import com.shop.zerobin.domain.entity.ShopDetail
 import com.shop.zerobin.ui.common.BaseBindingFragment
+import com.shop.zerobin.ui.home.adapter.FeatureAdapter
+import com.shop.zerobin.ui.home.adapter.ShopImageAdapter
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
-import com.shop.zerobin.util.GlideApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -29,6 +29,10 @@ class ShopDetailFragment :
 
     private val reviewShopAdapter by lazy { ReviewAdapter() }
 
+    private val featureAdapter by lazy { FeatureAdapter() }
+
+    private val shopImageAdapter by lazy { ShopImageAdapter() }
+
     private val args: ShopDetailFragmentArgs? by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,6 +41,8 @@ class ShopDetailFragment :
 
         requestShopDetailData()
         setReviewAdapter()
+        setFeatureAdapter()
+        setShopImageAdapter()
         observeLiveData()
         setOnClickListener()
     }
@@ -57,7 +63,8 @@ class ShopDetailFragment :
     private fun observeLiveData() {
         shopDetailViewModel.shopDetail.observe(viewLifecycleOwner) {
             reviewShopAdapter.setDetailReviewItem(it)
-            setImageFromFirebase(it.imageList)
+            featureAdapter.setItem(it.hashtagList)
+            shopImageAdapter.setItem(it.imageList)
             drawHashTagList(it.hashtagList)
         }
 
@@ -81,9 +88,9 @@ class ShopDetailFragment :
             event.getContentIfNotHandled()?.let { zzim ->
                 args?.shop?.zzim = zzim
                 if (zzim) {
-                    binding.btnZzim.setImageResource(R.drawable.ic_favorite_24px)
+                    binding.btnZzim.setImageResource(R.drawable.ic_entypo_heart)
                 } else {
-                    binding.btnZzim.setImageResource(R.drawable.ic_favorite_border_24px)
+                    binding.btnZzim.setImageResource(R.drawable.ic_codicon_heart)
                 }
             }
         }
@@ -93,13 +100,18 @@ class ShopDetailFragment :
         binding.detailReviewRecyclerView.adapter = reviewShopAdapter
     }
 
+    private fun setFeatureAdapter() {
+        binding.featureRecyclerView.adapter = featureAdapter
+    }
+
+    private fun setShopImageAdapter() {
+        binding.shopImageViewPager.adapter = shopImageAdapter
+        binding.dotsIndicator.setViewPager2(binding.shopImageViewPager)
+    }
+
     private fun setOnClickListener() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
-        }
-
-        binding.floatingActionButton.setOnClickListener {
-            writeReviewPage()
         }
 
         binding.writeReview.setOnClickListener {
@@ -115,27 +127,28 @@ class ShopDetailFragment :
                 showLoginDialog()
             }
         }
-    }
 
-    private fun setImageFromFirebase(imageList: List<String>) {
-        if (imageList.isEmpty()) {
-            GlideApp.with(binding.shopImage.context)
-                .load(ContextCompat.getDrawable(binding.shopImage.context, R.drawable.no_image))
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.shopImage)
-        } else {
-            val spaceReference = Firebase.storage.reference.child(imageList[0])
-            Log.e(TAG, spaceReference.toString())
-            GlideApp.with(binding.shopImage.context)
-                .load(spaceReference)
-                .error(ContextCompat.getDrawable(binding.shopImage.context, R.drawable.no_image))
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.shopImage)
+        binding.addressCopy.setOnClickListener {
+            val clipboard =
+                requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+            val textToCopy = shopDetailViewModel.shopDetail.value?.location
+            val clip = ClipData.newPlainText("text", textToCopy)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(requireContext(), "주소가 복사되었습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun writeReviewPage() {
         if (shopDetailViewModel.isLogin.value == true) {
+
+            shopDetailViewModel.shopDetail.value?.reviewList?.forEach {
+                if (it.owner) {
+                    Toast.makeText(requireContext(), "이미 작성한 리뷰가 있습니다.", Toast.LENGTH_LONG).show()
+                    return
+                }
+            }
+
             val action =
                 ShopDetailFragmentDirections.actionNavigationShopDetailToNavigationWriteReviewSeed(
                     args?.shop
@@ -146,9 +159,9 @@ class ShopDetailFragment :
         }
     }
 
-    private fun drawHashTagList(hashtagList: List<ShopDetail.Hashtag>) {
+    private fun drawHashTagList(hashTagList: List<ShopDetail.Hashtag>) {
         var hashTagString = ""
-        hashtagList.forEach {
+        hashTagList.forEach {
             hashTagString += getString(R.string.hash_tag_format, it.name) + "  "
         }
         binding.hashTag.text = hashTagString
