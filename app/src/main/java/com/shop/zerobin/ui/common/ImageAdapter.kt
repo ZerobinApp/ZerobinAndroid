@@ -1,4 +1,4 @@
-package com.shop.zerobin.ui.home.adapter
+package com.shop.zerobin.ui.common
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,23 +9,21 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.shop.zerobin.R
-import com.shop.zerobin.databinding.ItemShopImageBinding
+import com.shop.zerobin.databinding.ItemImageBinding
 import com.shop.zerobin.util.GlideApp
 
-class ShopImageAdapter : RecyclerView.Adapter<ShopImageAdapter.ShopImageViewHolder>() {
+class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     private var item = emptyList<String>()
 
-    var onClick: ((Int) -> Unit)? = null
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopImageViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val binding =
-            ItemShopImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ShopImageViewHolder(binding)
+            ItemImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ImageViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ShopImageViewHolder, position: Int) {
-        holder.bind(item[position],position)
+    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+        holder.bind(item[position])
     }
 
     override fun getItemCount() = item.size
@@ -35,12 +33,11 @@ class ShopImageAdapter : RecyclerView.Adapter<ShopImageAdapter.ShopImageViewHold
         notifyDataSetChanged()
     }
 
-    inner class ShopImageViewHolder(private val binding: ItemShopImageBinding) :
+    inner class ImageViewHolder(private val binding: ItemImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(imgUrl: String, position: Int) {
+
+        fun bind(imgUrl: String) {
             setImageFromFirebase(imgUrl)
-            binding.position = position
-            binding.onClick = onClick
         }
 
         private fun setImageFromFirebase(imgUrl: String) {
@@ -48,15 +45,15 @@ class ShopImageAdapter : RecyclerView.Adapter<ShopImageAdapter.ShopImageViewHold
 
             val spaceReference = Firebase.storage.reference.child(imgUrl)
             Log.e(TAG, spaceReference.toString())
-            GlideApp.with(binding.shopImage.context)
+            GlideApp.with(binding.image.context)
                 .load(spaceReference)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .error(ContextCompat.getDrawable(binding.shopImage.context, R.drawable.no_image))
-                .into(binding.shopImage)
+                .error(ContextCompat.getDrawable(binding.image.context, R.drawable.no_image))
+                .into(binding.image)
         }
     }
 
     companion object {
-        private val TAG: String = ShopImageAdapter::class.java.simpleName
+        private val TAG: String = ImageAdapter::class.java.simpleName
     }
 }

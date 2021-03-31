@@ -5,6 +5,19 @@
 
     <data>
 
+        <import type="kotlin.Unit" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="reviewIndex"
+            type="Integer" />
+
+        <variable
+            name="onImageClick"
+            type="kotlin.jvm.functions.Function2&lt;Integer,Integer, Unit>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +28,7 @@
             android:id="@+id/reviewImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:onClick="@{() -> onImageClick.invoke(reviewIndex, position)}"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
