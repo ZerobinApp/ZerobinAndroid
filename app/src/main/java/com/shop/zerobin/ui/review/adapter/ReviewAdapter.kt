@@ -77,6 +77,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(binding.reviewImg)
             } else {
+                if (review.imageList[0].isBlank()) return
                 val spaceReference = Firebase.storage.reference.child(review.imageList[0])
                 Log.e(TAG, spaceReference.toString())
                 GlideApp.with(binding.reviewImg.context)

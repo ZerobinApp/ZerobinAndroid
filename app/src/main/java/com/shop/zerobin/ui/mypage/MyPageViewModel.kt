@@ -19,8 +19,6 @@ import kotlinx.coroutines.launch
 class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseViewModel() {
     val inputNickName = MutableLiveData("")
 
-    val inputEmail = MutableLiveData("")
-    val inputPassword = MutableLiveData("")
 
     private val _nickNameChangeFinish = MutableLiveData<Event<Unit>>()
     val nickNameChangeFinish: LiveData<Event<Unit>> = _nickNameChangeFinish
@@ -74,12 +72,7 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
         }
     }
 
-    fun requestDeleteAccount(){
-        viewModelScope.launch {
-            val response = myPageRepository.deleteAccount()
-            response.collect{ handleResultDeleteAccount(it)}
-        }
-    }
+
 
     private fun handleResultNickNameChange(dataResult: DataResult<Unit>) {
         when (dataResult) {
@@ -140,13 +133,7 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
         }
     }
 
-    private fun handleResultDeleteAccount(dataResult: DataResult<Unit>) {
-        when (dataResult) {
-            is DataResult.Success -> handleSuccessDeleteAccount(dataResult.data)
-            is DataResult.Error -> handleError(TAG, dataResult.exception)
-            DataResult.Loading -> handleLoading()
-        }
-    }
+
 
     private fun handleResultShop(dataResult: DataResult<List<Shop>>) {
         when (dataResult) {
@@ -169,10 +156,7 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
         _myUser.value = data
     }
 
-    private fun handleSuccessDeleteAccount(data: Unit) {
-        _isLoading.value = Event(false)
 
-    }
 
     private fun handleSuccessReview(data: List<Review>) {
         _isLoading.value = Event(false)
