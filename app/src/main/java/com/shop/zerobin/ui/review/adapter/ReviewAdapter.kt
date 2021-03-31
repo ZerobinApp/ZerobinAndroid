@@ -1,26 +1,20 @@
 package com.shop.zerobin.ui.review.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import androidx.viewpager2.widget.ViewPager2
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ItemReviewBinding
 import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.domain.entity.ShopDetail
-import com.shop.zerobin.util.Extensions.px
-import com.shop.zerobin.util.GlideApp
 
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
     private var item = emptyList<Review>()
     var onClick: ((Review) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewHolder {
         val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ReviewHolder(binding)
@@ -57,7 +51,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(review: Review) {
-            setImageFromFirebase(review)
+            setReviewImageAdapter(review.imageList)
             drawHashTagList(review.hashtagList)
 
             binding.review = review
@@ -69,29 +63,27 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
             }
         }
 
-        private fun setImageFromFirebase(review: Review) {
-            if (review.imageList.isEmpty()) {
-                GlideApp.with(binding.reviewImg.context)
-                    .load(ContextCompat.getDrawable(binding.reviewImg.context, R.drawable.no_image))
-                    .transform(CenterCrop(), RoundedCorners(20.px))
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(binding.reviewImg)
-            } else {
-                if (review.imageList[0].isBlank()) return
-                val spaceReference = Firebase.storage.reference.child(review.imageList[0])
-                Log.e(TAG, spaceReference.toString())
-                GlideApp.with(binding.reviewImg.context)
-                    .load(spaceReference)
-                    .error(
-                        ContextCompat.getDrawable(
-                            binding.reviewImg.context,
-                            R.drawable.no_image
-                        )
-                    )
-                    .transform(CenterCrop(), RoundedCorners(20.px))
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(binding.reviewImg)
+        private fun setReviewImageAdapter(imageList: List<String>) {
+            val filteredImageList = imageList.filter { it.isNotBlank() }
+            binding.reviewViewPager.isVisible = filteredImageList.isNotEmpty()
+
+            if (filteredImageList.isEmpty()) return
+
+            val reviewImageAdapter = ReviewImageAdapter()
+            binding.reviewViewPager.adapter = reviewImageAdapter
+            val onPageSelectedCallback = object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    val pageText = binding.root.context.getString(R.string.review_image_page_format,
+                        position + 1,
+                        filteredImageList.size)
+                    binding.page.text = pageText
+                }
             }
+            binding.reviewViewPager.registerOnPageChangeCallback(onPageSelectedCallback)
+            reviewImageAdapter.setItem(filteredImageList)
+
+            onPageSelectedCallback.onPageSelected(0)
         }
 
         private fun drawHashTagList(hashTagList: List<String>) {

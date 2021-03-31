@@ -42,6 +42,8 @@ class FeatureAdapter : RecyclerView.Adapter<FeatureAdapter.FeatureViewHolder>() 
         }
 
         private fun setImageFromFirebase(imageUrl: String) {
+            if (imageUrl.isBlank()) return
+
             val spaceReference = Firebase.storage.reference.child(imageUrl)
             Log.e(TAG, spaceReference.toString())
             GlideApp.with(binding.root.context)

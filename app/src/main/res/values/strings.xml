@@ -35,4 +35,5 @@
     <string name="yes">예</string>
     <string name="no">아니오</string>
     <string name="hash_tag_format">#%s</string>
+    <string name="review_image_page_format">%d/%d</string>
 </resources>
