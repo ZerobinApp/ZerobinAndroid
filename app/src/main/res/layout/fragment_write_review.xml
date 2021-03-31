@@ -158,6 +158,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/pictureIndex1" />
 
+                <TextView
+                    android:id="@+id/reviewDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/select_hashtag_description"
+                    android:textColor="#272727"
+                    android:textSize="13dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reviewTitle" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/textLayout"
                     android:layout_width="0dp"
@@ -166,7 +177,7 @@
                     android:background="@drawable/bg_write_review_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reviewTitle">
+                    app:layout_constraintTop_toBottomOf="@id/reviewDescription">
 
                     <ImageView
                         android:id="@+id/textDescriptionImage"

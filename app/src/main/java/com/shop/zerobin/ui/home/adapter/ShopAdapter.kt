@@ -52,6 +52,8 @@ class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
         }
 
         private fun setImageFromFirebase(shop: Shop) {
+            if (shop.imageUrl.isBlank()) return
+
             val spaceReference = Firebase.storage.reference.child(shop.imageUrl)
             Log.e(TAG, spaceReference.toString())
             GlideApp.with(binding.shopImage.context)

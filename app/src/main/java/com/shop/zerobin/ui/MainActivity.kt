@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNav() {
         bottomNavigationView = findViewById(R.id.nav_view)
+        bottomNavigationView.itemIconTintList = null
 
         val navController = findNavController(R.id.nav_host_fragment)
         bottomNavigationView.setupWithNavController(navController)

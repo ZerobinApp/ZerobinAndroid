@@ -24,17 +24,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/shopImage"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/shopImageViewPager"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintDimensionRatio="1"
+                    android:layout_height="500dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription"
-                    tools:src="@drawable/shop_sample" />
+                    tools:background="@drawable/shop_sample" />
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/dotsIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    app:dotsColor="#CDCDCD"
+                    app:dotsSize="8dp"
+                    app:dotsSpacing="6dp"
+                    app:dotsWidthFactor="2.5"
+                    app:layout_constraintBottom_toBottomOf="@id/shopImageViewPager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:progressMode="false"
+                    app:selectedDotColor="@color/white" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelineStart"
@@ -65,6 +77,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:shadowColor="#B3000000"
+                    android:shadowDy="2"
+                    android:shadowRadius="2"
                     android:textColor="@color/white"
                     android:textSize="14dp"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
@@ -77,7 +92,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="20dp"
-                    android:src="@{VM.shopDetail.zzim ? @drawable/ic_favorite_24px : @drawable/ic_codicon_heart}"
+                    android:src="@{VM.shopDetail.zzim ? @drawable/ic_entypo_heart : @drawable/ic_codicon_heart}"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
@@ -93,7 +108,7 @@
                     android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                    app:layout_constraintTop_toBottomOf="@id/shopImage"
+                    app:layout_constraintTop_toBottomOf="@id/shopImageViewPager"
                     tools:text="알맹상점" />
 
                 <TextView
@@ -107,6 +122,18 @@
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/shopName"
                     tools:text="서울특별시 마포구 월드컵로 49 2층" />
+
+                <TextView
+                    android:id="@+id/addressCopy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="COPY"
+                    android:textColor="#939393"
+                    android:textSize="11dp"
+                    app:layout_constraintBottom_toBottomOf="@id/shopAddress"
+                    app:layout_constraintStart_toEndOf="@id/shopAddress"
+                    app:layout_constraintTop_toTopOf="@id/shopAddress" />
 
                 <View
                     android:id="@+id/divider1"
@@ -129,129 +156,27 @@
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/divider1" />
 
-                <ImageView
-                    android:id="@+id/featureImage1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="24dp"
-                    android:src="@drawable/zerobin_logo_small"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/featureRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/feature"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:id="@+id/featureName1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@{VM.shopDetail.hashtagList.get(0).title}"
-                    android:textColor="#272727"
-                    android:textSize="13dp"
-                    app:layout_constraintBottom_toTopOf="@id/featureDescription1"
-                    app:layout_constraintStart_toEndOf="@id/featureImage1"
-                    app:layout_constraintTop_toTopOf="@id/featureImage1"
-                    tools:text="특징번호 1 텍스트" />
-
-                <TextView
-                    android:id="@+id/featureDescription1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@{VM.shopDetail.hashtagList.get(0).comment}"
-                    android:textColor="#939393"
-                    android:textSize="11dp"
-                    app:layout_constraintBottom_toBottomOf="@id/featureImage1"
-                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-                    app:layout_constraintStart_toStartOf="@id/featureName1"
-                    app:layout_constraintTop_toBottomOf="@id/featureName1"
-                    tools:text="특징번호 1에 대한 부가설명" />
-
-                <ImageView
-                    android:id="@+id/featureImage2"
-                    visible="@{VM.shopDetail.hashtagList.size() >= 2}"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="12dp"
-                    android:src="@drawable/zerobin_logo_small"
-                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                    app:layout_constraintTop_toBottomOf="@id/featureImage1"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:id="@+id/featureName2"
-                    visible="@{VM.shopDetail.hashtagList.size() >= 2}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text='@{VM.shopDetail.hashtagList.size() >= 2 ? VM.shopDetail.hashtagList.get(1).title : ""}'
-                    android:textColor="#272727"
-                    android:textSize="13dp"
-                    app:layout_constraintBottom_toTopOf="@id/featureDescription2"
-                    app:layout_constraintStart_toEndOf="@id/featureImage2"
-                    app:layout_constraintTop_toTopOf="@id/featureImage2"
-                    tools:text="특징번호 2 텍스트" />
-
-                <TextView
-                    android:id="@+id/featureDescription2"
-                    visible="@{VM.shopDetail.hashtagList.size() >= 2}"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text='@{VM.shopDetail.hashtagList.size() >= 2 ? VM.shopDetail.hashtagList.get(1).comment : ""}'
-                    android:textColor="#939393"
-                    android:textSize="11dp"
-                    app:layout_constraintBottom_toBottomOf="@id/featureImage2"
-                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-                    app:layout_constraintStart_toStartOf="@id/featureName2"
-                    app:layout_constraintTop_toBottomOf="@id/featureName2"
-                    tools:text="특징번호 2에 대한 부가설명" />
-
-                <ImageView
-                    android:id="@+id/featureImage3"
-                    visible="@{VM.shopDetail.hashtagList.size() >= 3}"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="12dp"
-                    android:src="@drawable/zerobin_logo_small"
-                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                    app:layout_constraintTop_toBottomOf="@id/featureImage2"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:id="@+id/featureName3"
-                    visible="@{VM.shopDetail.hashtagList.size() >= 3}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text='@{VM.shopDetail.hashtagList.size() >= 3 ? VM.shopDetail.hashtagList.get(2).title : ""}'
-                    android:textColor="#272727"
-                    android:textSize="13dp"
-                    app:layout_constraintBottom_toTopOf="@id/featureDescription3"
-                    app:layout_constraintStart_toEndOf="@id/featureImage3"
-                    app:layout_constraintTop_toTopOf="@id/featureImage3"
-                    tools:text="특징번호 3 텍스트" />
-
-                <TextView
-                    android:id="@+id/featureDescription3"
-                    visible="@{VM.shopDetail.hashtagList.size() >= 3}"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text='@{VM.shopDetail.hashtagList.size() >= 3 ? VM.shopDetail.hashtagList.get(2).comment : ""}'
-                    android:textColor="#939393"
-                    android:textSize="11dp"
-                    app:layout_constraintBottom_toBottomOf="@id/featureImage3"
-                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-                    app:layout_constraintStart_toStartOf="@id/featureName3"
-                    app:layout_constraintTop_toBottomOf="@id/featureName3"
-                    tools:text="특징번호 3에 대한 부가설명" />
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_feature" />
 
                 <View
                     android:id="@+id/divider2"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="20dp"
                     android:background="@color/divider"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                    app:layout_constraintTop_toBottomOf="@id/featureImage3" />
+                    app:layout_constraintTop_toBottomOf="@id/featureRecyclerView" />
 
                 <TextView
                     android:id="@+id/shopDescription"
@@ -284,7 +209,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/review"
                     android:textColor="#272727"
-                    android:textSize="16dp"
+                    android:textSize="17dp"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/divider3" />
 
@@ -293,9 +218,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/make_review"
-                    android:textSize="12dp"
-                    app:layout_constraintBaseline_toBaselineOf="@id/review"
-                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd" />
+                    android:textColor="#1CD16A"
+                    android:textSize="13dp"
+                    app:layout_constraintBottom_toBottomOf="@id/review"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                    app:layout_constraintTop_toTopOf="@id/review" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/detailReviewRecyclerView"
@@ -312,18 +239,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="24dp"
-            android:src="@drawable/ic_fab"
-            app:fabCustomSize="44dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="44dp"
-            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

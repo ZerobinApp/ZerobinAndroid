@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="hashTag"
+            type="com.shop.zerobin.domain.entity.ShopDetail.Hashtag" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <ImageView
+            android:id="@+id/featureImage"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/zerobin_logo_small" />
+
+        <TextView
+            android:id="@+id/featureName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@{hashTag.title}"
+            android:textColor="#272727"
+            android:textSize="13dp"
+            app:layout_constraintBottom_toTopOf="@id/featureDescription"
+            app:layout_constraintStart_toEndOf="@id/featureImage"
+            app:layout_constraintTop_toTopOf="@id/featureImage"
+            tools:text="특징번호 1 텍스트" />
+
+        <TextView
+            android:id="@+id/featureDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{hashTag.comment}"
+            android:textColor="#939393"
+            android:textSize="11dp"
+            app:layout_constraintBottom_toBottomOf="@id/featureImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/featureName"
+            app:layout_constraintTop_toBottomOf="@id/featureName"
+            tools:text="특징번호 1에 대한 부가설명" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

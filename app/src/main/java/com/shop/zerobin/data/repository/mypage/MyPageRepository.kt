@@ -153,6 +153,22 @@ class MyPageRepository(val context: Context) {
             .apply()
     }
 
+    suspend fun deleteUser(): Flow<DataResult<Unit>> {
+        return flow {
+            emit(DataResult.Loading)
+
+            val response = zerobinClient.deleteUser()
+
+            if (response.isSuccess != true) {
+                emit(DataResult.Error(Exception(response.message)))
+                return@flow
+            }
+
+            deleteJWT()
+            emit(DataResult.Success(Unit))
+        }
+    }
+
     companion object {
         const val PREF_DEFAULT = "PREF_DEFAULT"
         const val PREF_JWT = "PREF_JWT"

@@ -13,6 +13,7 @@
     <string name="review_picture_initial_count">0/3</string>
     <string name="review_text_initial_count">%s/200</string>
     <string name="select_hashtag_description">매장과 관련된 해시태그를 골라주세요! (최대 8개)</string>
+    <string name="review_text_length_description">10글자 이상 자유롭게 후기를 적어주세요!</string>
     <string name="next">다음</string>
     <string name="complete">완료</string>
     <string name="review_seed_description1">방문한 가게에서 환경보호를 위한\n노력이 느껴졌다면,</string>
@@ -34,4 +35,5 @@
     <string name="yes">예</string>
     <string name="no">아니오</string>
     <string name="hash_tag_format">#%s</string>
+    <string name="review_image_page_format">%d/%d</string>
 </resources>
