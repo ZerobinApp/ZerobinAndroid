@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentReviewBinding
@@ -112,8 +113,11 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
 
     private fun observeLiveData() {
         reviewViewModel.reviewList.observe(viewLifecycleOwner) {
-
             reviewAdapter.setItem(it)
+            if (it.isEmpty()) {
+                binding.reviewEmptyImageView.isVisible = true
+                binding.reviewEmptyTextView.isVisible = true
+            }
         }
 
         reviewViewModel.isLoading.observe(viewLifecycleOwner) { event ->

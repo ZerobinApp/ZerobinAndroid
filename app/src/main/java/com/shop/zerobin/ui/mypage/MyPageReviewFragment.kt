@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageReviewBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
@@ -31,9 +33,10 @@ class MyPageReviewFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.reviewVM = myPageReviewViewModel
 
+        requestReviewList()
         setReviewAdapter()
         observeLiveData()
-        requestReviewList()
+        setOnClickListener()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -50,6 +53,10 @@ class MyPageReviewFragment :
     private fun observeLiveData() {
         myPageReviewViewModel.myUserReview.observe(viewLifecycleOwner) {
             reviewAdapter.setItem(it)
+            if (it.isEmpty()) {
+                binding.reviewEmptyImageView.isVisible = true
+                binding.reviewEmptyTextView.isVisible = true
+            }
         }
 
         myPageReviewViewModel.isLoading.observe(viewLifecycleOwner) { event ->
@@ -66,6 +73,12 @@ class MyPageReviewFragment :
             event.getContentIfNotHandled()?.let { message ->
                 Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    private fun setOnClickListener() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 

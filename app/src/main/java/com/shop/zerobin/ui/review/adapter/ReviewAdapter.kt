@@ -34,11 +34,6 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun setDetailReviewItem(arrayOfShop: ShopDetail) {
-        item = arrayOfShop.reviewList
-        notifyDataSetChanged()
-    }
-
     private var listener: OnItemClickListener? = null
 
     interface OnItemClickListener {
