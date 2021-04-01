@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="VM"
+            type="com.shop.zerobin.ui.review.ReviewViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clipToPadding="false"
+        android:paddingTop="20dp"
+        >
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/writeReviewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리뷰수"
+            android:textColor="#000000"
+            android:textSize="17dp"
+            app:layout_constraintBottom_toBottomOf="@id/btnBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnBack" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingHorizontal="30dp"
+            android:paddingBottom="30dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/writeReviewTitle">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+                <TextView
+                    android:id="@+id/seedTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="#272727"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:text="새싹 스탬프"/>
+                <TextView
+                    android:id="@+id/seedSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#272727"
+                    android:textSize="13dp"
+                    app:layout_constraintStart_toStartOf="@+id/seedTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/seedTitle"
+                    android:text="친환경 스토어를 칭찬하는 새싹 스탬프를 찍어주세요!"/>
+
+}                <ImageView
+                    android:id="@+id/imageSeed"
+                    app:layout_constraintStart_toStartOf="@+id/seedSubTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/seedSubTitle"
+                    android:layout_width="59dp"
+                    android:background="@{VM.reviewDetail.stamp ? @drawable/seed_bg : @drawable/seed_bg_bloom}"
+                    android:src="@{VM.reviewDetail.stamp ? @drawable/ic_pistachio : @drawable/ic_pistachio_bloom}"
+                    android:layout_height="59dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/pictureTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/picture"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#272727"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/imageSeed"
+                    app:layout_constraintTop_toBottomOf="@+id/imageSeed" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="0/3"
+                    android:textColor="#797979"
+                    android:textSize="13dp"
+                    app:layout_constraintBottom_toBottomOf="@id/pictureTitle"
+                    app:layout_constraintStart_toEndOf="@id/pictureTitle"
+                    app:layout_constraintTop_toTopOf="@id/pictureTitle" />
+
+                <ImageView
+                    android:id="@+id/pictureIndex1"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_select_picture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pictureTitle" />
+
+                <ImageView
+                    android:id="@+id/pictureCancel1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="54dp"
+                    android:layout_marginBottom="54dp"
+                    android:src="@drawable/ic_cancel_24"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/pictureIndex1"
+                    app:layout_constraintStart_toStartOf="@id/pictureIndex1"
+                    tools:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/pictureIndex2"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/ic_select_picture"
+                    app:layout_constraintBottom_toBottomOf="@id/pictureIndex1"
+                    app:layout_constraintStart_toEndOf="@id/pictureIndex1"
+                    app:layout_constraintTop_toTopOf="@id/pictureIndex1" />
+
+                <ImageView
+                    android:id="@+id/pictureCancel2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="54dp"
+                    android:layout_marginBottom="54dp"
+                    android:src="@drawable/ic_cancel_24"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/pictureIndex2"
+                    app:layout_constraintStart_toStartOf="@id/pictureIndex2" />
+
+                <ImageView
+                    android:id="@+id/pictureIndex3"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/ic_select_picture"
+                    app:layout_constraintBottom_toBottomOf="@id/pictureIndex1"
+                    app:layout_constraintStart_toEndOf="@id/pictureIndex2"
+                    app:layout_constraintTop_toTopOf="@id/pictureIndex1" />
+
+                <ImageView
+                    android:id="@+id/pictureCancel3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="54dp"
+                    android:layout_marginBottom="54dp"
+                    android:src="@drawable/ic_cancel_24"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/pictureIndex3"
+                    app:layout_constraintStart_toStartOf="@id/pictureIndex3" />
+
+                <TextView
+                    android:id="@+id/reviewTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/review"
+                    android:textColor="#272727"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pictureIndex1" />
+
+                <TextView
+                    android:id="@+id/reviewDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/select_hashtag_description"
+                    android:textColor="#272727"
+                    android:textSize="13dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reviewTitle" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/textLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_write_review_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reviewDescription">
+
+
+
+                    <EditText
+                        android:id="@+id/inputReview"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginHorizontal="14dp"
+                        android:layout_marginVertical="10dp"
+                        android:background="@null"
+                        android:gravity="start"
+                        android:inputType="textMultiLine"
+                        android:scrollbars="vertical"
+                        android:text="@{VM.reviewDetail.comment.toString()}"
+                        android:textColor="#797979"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@{@string/review_text_initial_count(VM.reviewDetail.comment.length())}"
+                        android:textSize="11dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="0/200" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/hashTagTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/hashtag"
+                    android:textColor="#272727"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textLayout" />
+
+                <TextView
+                    android:id="@+id/hashTagDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/select_hashtag_description"
+                    android:textColor="#272727"
+                    android:textSize="13dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hashTagTitle" />
+
+                <include
+                    android:id="@+id/hashTagContainer"
+                    layout="@layout/layout_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hashTagDescription" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnComplete"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="100dp"
+                    android:background="@drawable/bg_long_button"
+                    android:text="@string/complete"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hashTagContainer" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

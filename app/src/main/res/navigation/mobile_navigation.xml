@@ -19,6 +19,13 @@
             app:popEnterAnim="@anim/anim_nothing"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/navigation_review" />
+        <action
+            android:id="@+id/action_navigation_dialog_article_tap_to_navigation_review_modify_fragment"
+            app:destination="@id/navigation_review_modify"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/anim_nothing"
+            app:popEnterAnim="@anim/anim_nothing"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -126,6 +133,15 @@
             app:popEnterAnim="@anim/anim_nothing"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_review_modify"
+        android:name="com.shop.zerobin.ui.review.ReviewModifyFragment"
+        android:label="ReviewModifyFragment"
+        tools:layout="@layout/fragment_review_modify" />
+
+
+
 
 
     <fragment

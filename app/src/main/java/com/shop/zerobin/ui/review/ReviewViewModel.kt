@@ -5,23 +5,77 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.shop.zerobin.data.repository.shop.ReviewRepository
+import com.shop.zerobin.data.repository.shop.ShopRepository
 import com.shop.zerobin.domain.DataResult
+import com.shop.zerobin.domain.entity.Hashtag
 import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.ui.common.BaseViewModel
 import com.shop.zerobin.ui.common.Event
 import com.shop.zerobin.ui.home.HomeViewModel
+import com.shop.zerobin.ui.home.shop.WriteReviewViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseViewModel() {
+class ReviewViewModel(private val reviewRepository: ReviewRepository, private val shopRepository: ShopRepository,) : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
+
+
+    private val _hashTagList = MutableLiveData<List<Hashtag>>()
+    val hashTagList: LiveData<List<Hashtag>> = _hashTagList
 
     private val _reviewList = MutableLiveData<List<Review>>()
     val reviewList: LiveData<List<Review>> = _reviewList
+
+    private val _reviewDetail = MutableLiveData<Review>()
+    val reviewDetail: LiveData<Review> = _reviewDetail
+
+
+    fun setHashTagList() {
+        viewModelScope.launch {
+            val response = shopRepository.getHashTag()
+            response.collect { handleHashTagResult(it) }
+        }
+    }
+
+    private fun handleHashTagResult(dataResult: DataResult<List<Hashtag>>) {
+        when (dataResult) {
+            is DataResult.Success -> handleHashTagSuccess(dataResult.data)
+            is DataResult.Error -> handleError(ReviewViewModel.TAG, dataResult.exception)
+            is DataResult.Loading -> handleLoading()
+        }
+    }
+
+    private fun handleHashTagSuccess(data: List<Hashtag>) {
+        _isLoading.value = Event(false)
+        _hashTagList.value = data
+    }
+
+
+    fun requestGetReview(shopIndex: Int,reviewIndex: Int){
+        viewModelScope.launch {
+            val response= reviewRepository.getReviewDetail(shopIndex,reviewIndex)
+            Log.d("리뷰가져오기",response.toString())
+
+            response.collect { handleResultReviewDetail(it)
+                Log.d("리뷰가져오기",it.toString())
+
+            }
+        }
+    }
+
+
+
+    private fun handleResultReviewDetail(dataResult: DataResult<Review>) {
+        when (dataResult) {
+            is DataResult.Success -> handleSuccessReviewDetail(dataResult.data)
+            is DataResult.Error -> handleError(ReviewViewModel.TAG, dataResult.exception)
+        }
+    }
+
+    private fun handleSuccessReviewDetail(data: Review) {
+        Log.d("리뷰가져오기",data.comment.toString())
+        _reviewDetail.value=data
+    }
 
 
     fun requestReviewList(hashtagList: List<Int>) {
@@ -42,6 +96,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
         }
 
     }
+
 
     fun requestReviewDelete(shopIndex: Int, reviewIndex: Int) {
         viewModelScope.launch {
@@ -74,6 +129,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
             DataResult.Loading -> handleLoading()
         }
     }
+
 
     private fun handleSuccess(data: List<Review>) {
         _isLoading.value = Event(false)

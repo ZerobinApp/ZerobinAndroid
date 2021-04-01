@@ -3,6 +3,7 @@ package com.shop.zerobin.ui.review
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentReviewBinding
@@ -15,6 +16,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragment_review) {
 
     private val reviewViewModel: ReviewViewModel by viewModel()
+
 
     private val reviewAdapter by lazy { ReviewAdapter() }
 
@@ -52,11 +54,13 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                         viewType = DialogArticleTap.ViewType.MINE
                         onClick = { clickType ->
                             when (clickType) {
-                                DialogArticleTap.ClickType.EDIT -> Toast.makeText(
-                                    requireContext(),
-                                    "리뷰수정",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                DialogArticleTap.ClickType.EDIT -> {
+                                    val list= mutableListOf<Int>(review.shopIndex,review.reviewIndex)
+                                    val bundle = bundleOf("list" to list)
+
+                                    findNavController().navigate(R.id.action_navigation_dialog_article_tap_to_navigation_review_modify_fragment,bundle)
+
+                                }
                                 DialogArticleTap.ClickType.DELETE -> reviewViewModel.requestReviewDelete(
                                     review.shopIndex,
                                     review.reviewIndex

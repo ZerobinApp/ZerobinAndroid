@@ -4,6 +4,7 @@ import com.shop.zerobin.data.source.remote.mypage.MyPageNickNameChangeRequest
 import com.shop.zerobin.data.source.remote.mypage.SignInRequest
 import com.shop.zerobin.data.source.remote.mypage.SignUpRequest
 import com.shop.zerobin.data.source.remote.review.ReviewListRequest
+import com.shop.zerobin.data.source.remote.review.ReviewModifyRequest
 import com.shop.zerobin.data.source.remote.review.ReviewRequest
 import com.shop.zerobin.data.source.remote.shop.ShopListRequest
 
@@ -29,5 +30,21 @@ object EntityToDataExtension {
         comment = inputText ?: "",
         hashtag = hashTagList ?: emptyList(),
         stamp = if (stamp) 1 else 0
+    )
+
+    fun setReviewEntityToData(
+        comment:String,
+        deletehashtag:List<Int>,
+        updatehashtag:List<Int>,
+        deleteimage:List<String>,
+        updateimage:List<String>,
+        stamp: Int,
+    )= ReviewModifyRequest(
+        comment=comment,
+        deletehashtag = deletehashtag ?: emptyList(),
+        updatehashtag = updatehashtag,
+        deleteimage = deleteimage,
+        updateimage = updateimage,
+        stamp = stamp,
     )
 }
