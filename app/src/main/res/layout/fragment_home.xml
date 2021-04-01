@@ -16,7 +16,6 @@
         android:background="@color/white"
         android:paddingHorizontal="30dp"
         android:paddingTop="20dp"
-        android:paddingBottom="56dp"
         tools:context=".ui.home.HomeFragment">
 
         <ImageView

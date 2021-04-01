@@ -13,7 +13,10 @@ import com.shop.zerobin.domain.entity.ShopDetail
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
     private var item = emptyList<Review>()
-    var onClick: ((Review) -> Unit)? = null
+
+    var onImageClick: ((Int, Int) -> Unit)? = null
+
+    private var reviewIndex = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewHolder {
         val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,7 +24,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ReviewHolder, position: Int) {
-        holder.bind(item[position])
+        holder.bind(item[position], position)
     }
 
     override fun getItemCount() = item.size
@@ -50,11 +53,13 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
     inner class ReviewHolder(private val binding: ItemReviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(review: Review) {
+        fun bind(review: Review, position: Int) {
+            reviewIndex = position
             setReviewImageAdapter(review.imageList)
             drawHashTagList(review.hashtagList)
 
             binding.review = review
+
             binding.shopName.setOnClickListener {
                 listener?.onItemClick(review = review)
             }
@@ -69,7 +74,10 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
             if (filteredImageList.isEmpty()) return
 
-            val reviewImageAdapter = ReviewImageAdapter()
+            val reviewImageAdapter = ReviewImageAdapter().apply {
+                onImageClick = this@ReviewAdapter.onImageClick
+                reviewIndex = this@ReviewAdapter.reviewIndex
+            }
             binding.reviewViewPager.adapter = reviewImageAdapter
             val onPageSelectedCallback = object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {

@@ -3,6 +3,7 @@ package com.shop.zerobin.ui.home.shop
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,6 +14,7 @@ import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentShopDetailBinding
 import com.shop.zerobin.domain.entity.ShopDetail
 import com.shop.zerobin.ui.common.BaseBindingFragment
+import com.shop.zerobin.ui.common.ImageViewPagerActivity
 import com.shop.zerobin.ui.home.adapter.FeatureAdapter
 import com.shop.zerobin.ui.home.adapter.ShopImageAdapter
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
@@ -27,11 +29,34 @@ class ShopDetailFragment :
 
     private val shopDetailViewModel: ShopDetailViewModel by viewModel()
 
-    private val reviewShopAdapter by lazy { ReviewAdapter() }
+    private val reviewShopAdapter by lazy {
+        ReviewAdapter().apply {
+            onImageClick = { reviewIndex, position ->
+                val intent = Intent(requireContext(), ImageViewPagerActivity::class.java)
+                val imageList: Array<String> =
+                    shopDetailViewModel.shopDetail.value?.reviewList?.get(reviewIndex)?.imageList?.toTypedArray()
+                        ?: emptyArray()
+                intent.putExtra(ImageViewPagerActivity.EXTRA_IMAGE_LIST, imageList)
+                intent.putExtra(ImageViewPagerActivity.EXTRA_IMAGE_INDEX, position)
+                startActivity(intent)
+            }
+        }
+    }
 
     private val featureAdapter by lazy { FeatureAdapter() }
 
-    private val shopImageAdapter by lazy { ShopImageAdapter() }
+    private val shopImageAdapter by lazy {
+        ShopImageAdapter().apply {
+            onClick = { position ->
+                val intent = Intent(requireContext(), ImageViewPagerActivity::class.java)
+                val imageList: Array<String> =
+                    shopDetailViewModel.shopDetail.value?.imageList?.toTypedArray() ?: emptyArray()
+                intent.putExtra(ImageViewPagerActivity.EXTRA_IMAGE_LIST, imageList)
+                intent.putExtra(ImageViewPagerActivity.EXTRA_IMAGE_INDEX, position)
+                startActivity(intent)
+            }
+        }
+    }
 
     private val args: ShopDetailFragmentArgs? by navArgs()
 

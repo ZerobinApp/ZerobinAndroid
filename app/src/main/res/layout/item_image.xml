@@ -5,17 +5,6 @@
 
     <data>
 
-        <import type="kotlin.jvm.functions.Function1" />
-
-        <import type="kotlin.Unit" />
-
-        <variable
-            name="position"
-            type="Integer" />
-
-        <variable
-            name="onClick"
-            type="Function1&lt;Integer, Unit>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,11 +12,9 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/shopImage"
+            android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="@{() -> onClick.invoke(position)}"
-            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

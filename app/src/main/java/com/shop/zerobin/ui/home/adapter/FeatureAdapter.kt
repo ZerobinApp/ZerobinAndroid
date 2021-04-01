@@ -33,7 +33,7 @@ class FeatureAdapter : RecyclerView.Adapter<FeatureAdapter.FeatureViewHolder>() 
         notifyDataSetChanged()
     }
 
-    class FeatureViewHolder(private val binding: ItemFeatureBinding) :
+    inner class FeatureViewHolder(private val binding: ItemFeatureBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(hashTag: ShopDetail.Hashtag) {
             setImageFromFirebase(hashTag.image)
