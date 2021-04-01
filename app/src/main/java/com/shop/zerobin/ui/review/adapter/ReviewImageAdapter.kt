@@ -19,6 +19,10 @@ class ReviewImageAdapter : RecyclerView.Adapter<ReviewImageAdapter.ReviewImageVi
 
     private var item = emptyList<String>()
 
+    var onImageClick: ((Int, Int) -> Unit)? = null
+
+    var reviewIndex = 0
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewImageViewHolder {
         val binding =
             ItemReviewImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -26,7 +30,7 @@ class ReviewImageAdapter : RecyclerView.Adapter<ReviewImageAdapter.ReviewImageVi
     }
 
     override fun onBindViewHolder(holder: ReviewImageViewHolder, position: Int) {
-        holder.bind(item[position])
+        holder.bind(item[position], position)
     }
 
     override fun getItemCount() = item.size
@@ -36,10 +40,13 @@ class ReviewImageAdapter : RecyclerView.Adapter<ReviewImageAdapter.ReviewImageVi
         notifyDataSetChanged()
     }
 
-    class ReviewImageViewHolder(private val binding: ItemReviewImageBinding) :
+    inner class ReviewImageViewHolder(private val binding: ItemReviewImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(imgUrl: String) {
+        fun bind(imgUrl: String, position: Int) {
             setImageFromFirebase(imgUrl)
+            binding.position = position
+            binding.reviewIndex = reviewIndex
+            binding.onImageClick = onImageClick
         }
 
         private fun setImageFromFirebase(imgUrl: String) {

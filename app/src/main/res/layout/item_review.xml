@@ -9,6 +9,15 @@
             name="review"
             type="com.shop.zerobin.domain.entity.Review" />
 
+        <import type="kotlin.Unit" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="onImageClick"
+            type="kotlin.jvm.functions.Function1&lt;Integer, Unit>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

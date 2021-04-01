@@ -47,7 +47,6 @@
             android:layout_marginTop="24dp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:paddingHorizontal="30dp"
             android:paddingBottom="30dp"
             android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -61,6 +60,20 @@
                 android:clipChildren="false"
                 android:clipToPadding="false">
 
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineStart"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="30dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineEnd"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="30dp" />
+
                 <TextView
                     android:id="@+id/pictureTitle"
                     android:layout_width="wrap_content"
@@ -69,7 +82,7 @@
                     android:textColor="#272727"
                     android:textSize="15dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -89,7 +102,7 @@
                     android:layout_height="70dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/ic_select_picture"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/pictureTitle" />
 
                 <ImageView
@@ -155,7 +168,7 @@
                     android:textColor="#272727"
                     android:textSize="15dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/pictureIndex1" />
 
                 <TextView
@@ -163,10 +176,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/select_hashtag_description"
+                    android:text="@string/review_text_length_description"
                     android:textColor="#272727"
                     android:textSize="13dp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/reviewTitle" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -175,8 +188,8 @@
                     android:layout_height="200dp"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/bg_write_review_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/reviewDescription">
 
                     <ImageView
@@ -246,7 +259,7 @@
                     android:textColor="#272727"
                     android:textSize="15dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/textLayout" />
 
                 <TextView
@@ -257,7 +270,7 @@
                     android:text="@string/select_hashtag_description"
                     android:textColor="#272727"
                     android:textSize="13dp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/hashTagTitle" />
 
                 <include
@@ -281,8 +294,8 @@
                     android:textColor="@color/white"
                     android:textSize="15dp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/hashTagContainer" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
