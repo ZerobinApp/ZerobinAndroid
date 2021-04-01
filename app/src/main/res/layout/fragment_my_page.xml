@@ -30,8 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{userVM.isLogin ? @string/my_page_guide_login_after : @string/my_page_guide_login_before}"
-            android:textColor='@{userVM.isLogin ? Color.parseColor("#C4C4C4") : Color.parseColor("#1CD16A")}'
+            android:textColor="#1CD16A"
             android:textSize="13dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="오늘도 환경을 사랑하는 가치소비를 실천해볼까요?" />
@@ -106,8 +107,8 @@
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginTop="18dp"
+            android:alpha="@{userVM.isLogin ? 1.0f : 0.4f}"
             android:background="@drawable/mypage_rectangle"
-            android:foreground='@{userVM.isLogin ? 0 : Color.parseColor("#B3FFFFFF")}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider"
@@ -141,8 +142,8 @@
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginTop="10dp"
+            android:alpha="@{userVM.isLogin ? 1.0f : 0.4f}"
             android:background="@drawable/mypage_rectangle"
-            android:foreground='@{userVM.isLogin ? 0 : Color.parseColor("#B3FFFFFF")}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/myFavoriteShopLayout">
@@ -174,8 +175,8 @@
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginTop="10dp"
+            android:alpha="@{userVM.isLogin ? 1.0f : 0.4f}"
             android:background="@drawable/mypage_rectangle"
-            android:foreground='@{userVM.isLogin ? 0 : Color.parseColor("#B3FFFFFF")}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/myReviewLayout">
