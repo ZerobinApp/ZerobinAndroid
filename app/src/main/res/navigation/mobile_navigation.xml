@@ -171,7 +171,9 @@
         tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_navigation_sign_up_to_navigation_my_page"
-            app:destination="@id/navigation_my_page" />
+            app:destination="@id/navigation_my_page"
+            app:popUpTo="@id/navigation_my_page"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
