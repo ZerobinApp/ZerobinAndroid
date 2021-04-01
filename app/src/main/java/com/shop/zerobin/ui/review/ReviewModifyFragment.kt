@@ -54,16 +54,11 @@ class ReviewModifyFragment: BaseBindingFragment<FragmentReviewModifyBinding>(R.l
 
                 for(j in 1..10){
                     val chip = view?.findViewById<Chip>(R.id.chip+j)
-                    if(chip?.text?.contains(it.hashtagList[i]) == true) {
+                    if(chip?.tag==(it.hashtagList[i].hashtagIndex)) {
                         chip.isChecked = true
                     }
                 }
             }
-
-
-
-
-
 
         }
         reviewViewModel.isLoading.observe(viewLifecycleOwner) { event ->

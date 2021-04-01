@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ItemReviewBinding
+import com.shop.zerobin.domain.entity.Hashtag
 import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.domain.entity.ShopDetail
 
@@ -87,7 +88,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
             onPageSelectedCallback.onPageSelected(0)
         }
 
-        private fun drawHashTagList(hashTagList: List<String>) {
+        private fun drawHashTagList(hashTagList: List<Hashtag>) {
             var hashTagString = ""
             hashTagList.forEach {
                 hashTagString += binding.root.context.getString(R.string.hash_tag_format, it) + "  "

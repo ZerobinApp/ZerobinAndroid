@@ -1,7 +1,5 @@
 package com.shop.zerobin.data.source.remote.review
 
-import com.shop.zerobin.data.source.remote.shop.ImageResponse
-
 data class ReviewModifyRequest(
     val comment: String,
     val deletehashtag: List<Int>,

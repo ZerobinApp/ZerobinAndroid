@@ -32,7 +32,7 @@
             android:id="@+id/writeReviewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="리뷰수"
+            android:text="리뷰수정"
             android:textColor="#000000"
             android:textSize="17dp"
             app:layout_constraintBottom_toBottomOf="@id/btnBack"
@@ -79,15 +79,15 @@
                     app:layout_constraintStart_toStartOf="@+id/seedTitle"
                     app:layout_constraintTop_toBottomOf="@+id/seedTitle"
                     android:text="친환경 스토어를 칭찬하는 새싹 스탬프를 찍어주세요!"/>
-
-}                <ImageView
+                <ImageView
                     android:id="@+id/imageSeed"
                     app:layout_constraintStart_toStartOf="@+id/seedSubTitle"
                     app:layout_constraintTop_toBottomOf="@+id/seedSubTitle"
-                    android:layout_width="59dp"
+                    android:layout_width="70dp"
+                    android:padding="10dp"
                     android:background="@{VM.reviewDetail.stamp ? @drawable/seed_bg : @drawable/seed_bg_bloom}"
                     android:src="@{VM.reviewDetail.stamp ? @drawable/ic_pistachio : @drawable/ic_pistachio_bloom}"
-                    android:layout_height="59dp"
+                    android:layout_height="70dp"
                     android:layout_marginTop="10dp"/>
 
                 <TextView

@@ -12,7 +12,7 @@
     <color name="colorBottomDialogDefaultButton">#3983f1</color>
     <color name="colorDefaultBottomDialogBackground">#f0f0f0</color>
     <color name="titleColor">#767772</color>
-    <color name="colorError">#ff5757</color>
+    <color name="colorError">#ED4956</color>
     <color name="SeparatorColor">#BABAB8</color>
 </resources>
 

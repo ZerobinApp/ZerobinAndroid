@@ -12,7 +12,6 @@ import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.ui.common.BaseViewModel
 import com.shop.zerobin.ui.common.Event
 import com.shop.zerobin.ui.home.HomeViewModel
-import com.shop.zerobin.ui.home.shop.WriteReviewViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -40,7 +39,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository, private va
     private fun handleHashTagResult(dataResult: DataResult<List<Hashtag>>) {
         when (dataResult) {
             is DataResult.Success -> handleHashTagSuccess(dataResult.data)
-            is DataResult.Error -> handleError(ReviewViewModel.TAG, dataResult.exception)
+            is DataResult.Error -> handleError(TAG, dataResult.exception)
             is DataResult.Loading -> handleLoading()
         }
     }
@@ -54,26 +53,20 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository, private va
     fun requestGetReview(shopIndex: Int,reviewIndex: Int){
         viewModelScope.launch {
             val response= reviewRepository.getReviewDetail(shopIndex,reviewIndex)
-            Log.d("리뷰가져오기",response.toString())
-
             response.collect { handleResultReviewDetail(it)
-                Log.d("리뷰가져오기",it.toString())
-
             }
         }
     }
 
-
-
     private fun handleResultReviewDetail(dataResult: DataResult<Review>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccessReviewDetail(dataResult.data)
-            is DataResult.Error -> handleError(ReviewViewModel.TAG, dataResult.exception)
+            is DataResult.Error -> handleError(TAG, dataResult.exception)
+            DataResult.Loading -> handleLoading()
         }
     }
 
     private fun handleSuccessReviewDetail(data: Review) {
-        Log.d("리뷰가져오기",data.comment.toString())
         _reviewDetail.value=data
     }
 

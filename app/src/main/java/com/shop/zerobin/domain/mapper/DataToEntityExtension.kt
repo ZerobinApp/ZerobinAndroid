@@ -39,7 +39,10 @@ object DataToEntityExtension {
         Review(
             comment = review.comment ?: "",
             createdAt = review.createdAt ?: "",
-            hashtagList = review.hashtag?.map { it.name ?: "" } ?: emptyList(),
+            hashtagList = review.hashtag?.map { Hashtag(
+                it.hashtagIndex,
+                it.name ?:"",
+            )} ?: emptyList(),
             imageList = review.image?.map(::imageDataToEntity) ?: emptyList(),
             name = review.name ?: "",
             nickName = review.nickName ?: "",
@@ -55,7 +58,10 @@ object DataToEntityExtension {
         comment = this.comment ?: "",
         createdAt = this.createdAt ?: "",
         hashtagList = this.hashtag?.map {
-                it.name ?: ""
+                Hashtag(
+                    it.hashtagIndex,
+                    it.name ?:"",
+                )
 
         } ?: emptyList(),
         imageList = this.image?.map(::imageDataToEntity) ?: emptyList(),
@@ -93,7 +99,10 @@ object DataToEntityExtension {
                 name = it.name ?: "",
                 imageList = it.image?.map { it.pictureUrl ?: "" } ?: emptyList(),
                 stamp = it.stamp == 1,
-                hashtagList = it.hashtag?.map { it.name ?: "" } ?: emptyList(),
+                hashtagList = it.hashtag?.map { Hashtag(
+                    it.hashtagIndex,
+                    it.name ?:"",
+                ) } ?: emptyList(),
                 owner = it.owner == 1
             )
         } ?: emptyList()
