@@ -49,15 +49,9 @@ class ReviewModifyFragment: BaseBindingFragment<FragmentReviewModifyBinding>(R.l
             }
         }
         reviewViewModel.reviewDetail.observe(viewLifecycleOwner){
+            it.hashtagList.forEach{
+                hashtag ->view?.findViewWithTag<Chip>("${hashtag.hashtagIndex}")?.isChecked=true
 
-            for(i in it.hashtagList.indices) {
-
-                for(j in 1..10){
-                    val chip = view?.findViewById<Chip>(R.id.chip+j)
-                    if(chip?.tag==(it.hashtagList[i].hashtagIndex)) {
-                        chip.isChecked = true
-                    }
-                }
             }
 
         }

@@ -36,4 +36,5 @@
     <string name="no">아니오</string>
     <string name="hash_tag_format">#%s</string>
     <string name="review_image_page_format">%d/%d</string>
+    <string name="image_page_format">%d / %d</string>
 </resources>

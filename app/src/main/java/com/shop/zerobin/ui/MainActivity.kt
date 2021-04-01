@@ -23,22 +23,5 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
         bottomNavigationView.setupWithNavController(navController)
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.navigation_review, R.id.navigation_home, R.id.navigation_my_page -> showBottomNav()
-                else -> hideBottomNav()
-            }
-        }
-    }
-
-    private fun showBottomNav() {
-        bottomNavigationView.translationY = 0f
-    }
-
-    private fun hideBottomNav() {
-        bottomNavigationView.animate()
-            .setDuration(500)
-            .translationY(bottomNavigationView.y)
     }
 }
