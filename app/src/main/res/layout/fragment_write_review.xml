@@ -176,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/select_hashtag_description"
+                    android:text="@string/review_text_length_description"
                     android:textColor="#272727"
                     android:textSize="13dp"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
