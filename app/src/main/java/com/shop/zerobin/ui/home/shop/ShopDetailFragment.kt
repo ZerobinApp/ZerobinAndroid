@@ -78,8 +78,8 @@ class ShopDetailFragment :
 
     private fun requestShopDetailData() {
         Log.d(TAG, "Shop >> $args")
-        args?.shop?.let {
-            shopDetailViewModel.requestShopDetailData(it.shopIndex)
+        args?.shopIndex?.let {
+            shopDetailViewModel.requestShopDetailData(it)
         } ?: run {
             Toast.makeText(requireContext(), "잘못된 접근입니다.", Toast.LENGTH_LONG).show()
             CoroutineScope(Dispatchers.Main).launch {
@@ -120,7 +120,7 @@ class ShopDetailFragment :
 
         shopDetailViewModel.zzimSuccess.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { zzim ->
-                args?.shop?.zzim = zzim
+                shopDetailViewModel.shopDetail.value?.zzim = zzim
                 if (zzim) {
                     binding.btnZzim.setImageResource(R.drawable.ic_entypo_heart)
                 } else {
@@ -154,7 +154,7 @@ class ShopDetailFragment :
 
         binding.btnZzim.setOnClickListener {
             if (shopDetailViewModel.isLogin.value == true) {
-                args?.shop?.let { shop ->
+                shopDetailViewModel.shopDetail.value?.let { shop ->
                     shopDetailViewModel.requestZzimShop(shop.shopIndex, shop.zzim.not())
                 }
             } else {
@@ -182,8 +182,8 @@ class ShopDetailFragment :
                         onClick = { clickType ->
                             when (clickType) {
                                 DialogArticleTap.ClickType.EDIT -> {
-                                    args?.shop?.let {
-                                        val list = mutableListOf(it.shopIndex, review.reviewIndex)
+                                    args?.shopIndex?.let {
+                                        val list = mutableListOf(it, review.reviewIndex)
                                         val bundle = bundleOf("list" to list)
 
                                         findNavController()
@@ -235,7 +235,7 @@ class ShopDetailFragment :
 
             val action =
                 ShopDetailFragmentDirections.actionNavigationShopDetailToNavigationWriteReviewSeed(
-                    args?.shop
+                    args?.shopIndex ?: 0
                 )
             findNavController().navigate(action)
         } else {

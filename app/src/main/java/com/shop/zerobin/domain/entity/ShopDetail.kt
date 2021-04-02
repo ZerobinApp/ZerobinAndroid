@@ -3,7 +3,7 @@ package com.shop.zerobin.domain.entity
 data class ShopDetail(
     val hashtagList: List<Hashtag>,
     val imageList: List<String>,
-    val zzim: Boolean,
+    var zzim: Boolean,
     val shopIndex: Int,
     val name: String,
     val location: String,
