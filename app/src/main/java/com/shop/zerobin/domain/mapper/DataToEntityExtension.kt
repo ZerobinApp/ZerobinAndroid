@@ -2,6 +2,7 @@ package com.shop.zerobin.domain.mapper
 
 import com.shop.zerobin.data.source.remote.mypage.MyPageShopResponse
 import com.shop.zerobin.data.source.remote.mypage.UserResponse
+import com.shop.zerobin.data.source.remote.review.ReviewDetailResponse
 import com.shop.zerobin.data.source.remote.review.ReviewResponse
 import com.shop.zerobin.data.source.remote.shop.HashtagResponse
 import com.shop.zerobin.data.source.remote.shop.ImageResponse
@@ -38,7 +39,10 @@ object DataToEntityExtension {
         Review(
             comment = review.comment ?: "",
             createdAt = review.createdAt ?: "",
-            hashtagList = review.hashtag?.map { it.name ?: "" } ?: emptyList(),
+            hashTagList = review.hashtag?.map { Hashtag(
+                it.hashtagIndex,
+                it.name ?:"",
+            )} ?: emptyList(),
             imageList = review.image?.map(::imageDataToEntity) ?: emptyList(),
             name = review.name ?: "",
             nickName = review.nickName ?: "",
@@ -49,6 +53,26 @@ object DataToEntityExtension {
         )
 
     private fun imageDataToEntity(image: ImageResponse) = image.pictureUrl ?: ""
+
+    fun ReviewDetailResponse.Result.map() =Review(
+        comment = this.comment ?: "",
+        createdAt = this.createdAt ?: "",
+        hashTagList = this.hashtag?.map {
+                Hashtag(
+                    it.hashtagIndex,
+                    it.name ?:"",
+                )
+
+        } ?: emptyList(),
+        imageList = this.image?.map(::imageDataToEntity) ?: emptyList(),
+        name = this.name ?: "",
+        nickName = this.nickName ?: "",
+        stamp = this.stamp == 1,
+        owner = this.owner == 1,
+        reviewIndex = this.reviewIndex,
+        shopIndex = this.shopIndex
+
+    )
 
     fun ShopDetailResponse.Result.map() = ShopDetail(
         hashtagList = this.hashtag?.map {
@@ -75,7 +99,10 @@ object DataToEntityExtension {
                 name = it.name ?: "",
                 imageList = it.image?.map { it.pictureUrl ?: "" } ?: emptyList(),
                 stamp = it.stamp == 1,
-                hashtagList = it.hashtag?.map { it.name ?: "" } ?: emptyList(),
+                hashTagList = it.hashtag?.map { Hashtag(
+                    it.hashtagIndex,
+                    it.name ?:"",
+                ) } ?: emptyList(),
                 owner = it.owner == 1
             )
         } ?: emptyList()

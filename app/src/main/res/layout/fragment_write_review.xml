@@ -32,13 +32,14 @@
             android:id="@+id/writeReviewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/make_review"
+            android:text="@{VM.isModifyState ? @string/modify_review : @string/make_review}"
             android:textColor="#000000"
             android:textSize="17dp"
             app:layout_constraintBottom_toBottomOf="@id/btnBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btnBack" />
+            app:layout_constraintTop_toTopOf="@id/btnBack"
+            tools:text="@string/make_review" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
@@ -75,10 +76,10 @@
                     app:layout_constraintGuide_end="30dp" />
 
                 <TextView
-                    android:id="@+id/pictureTitle"
+                    android:id="@+id/seedTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/picture"
+                    android:text="새싹 스탬프"
                     android:textColor="#272727"
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -86,15 +87,60 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/seedSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="친환경 스토어를 칭찬하는 새싹 스탬프를 찍어주세요!"
+                    android:textColor="#272727"
+                    android:textSize="13dp"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@+id/seedTitle" />
+
+                <ImageView
+                    android:id="@+id/imageSeed"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@{VM.seed ? @drawable/seed_bg_bloom : @drawable/seed_bg}"
+                    android:onClick="@{() -> VM.onSeedClick()}"
+                    android:padding="10dp"
+                    android:src="@{VM.seed ? @drawable/ic_pistachio_bloom : @drawable/ic_pistachio}"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@+id/seedSubTitle"
+                    tools:background="@drawable/seed_bg_bloom"
+                    tools:src="@drawable/ic_pistachio_bloom" />
+
+                <androidx.constraintlayout.widget.Group
+                    visible="@{VM.isModifyState}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="seedTitle, seedSubTitle, imageSeed" />
+
+                <TextView
+                    android:id="@+id/pictureTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/picture"
+                    android:textColor="#272727"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/imageSeed"
+                    app:layout_goneMarginTop="0dp" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="0/3"
+                    android:text='@{VM.imageCount.toString() + "/3"}'
                     android:textColor="#797979"
                     android:textSize="13dp"
                     app:layout_constraintBottom_toBottomOf="@id/pictureTitle"
                     app:layout_constraintStart_toEndOf="@id/pictureTitle"
-                    app:layout_constraintTop_toTopOf="@id/pictureTitle" />
+                    app:layout_constraintTop_toTopOf="@id/pictureTitle"
+                    tools:text="0/3" />
 
                 <ImageView
                     android:id="@+id/pictureIndex1"

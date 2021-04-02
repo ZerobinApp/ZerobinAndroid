@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseViewModel() {
     val inputNickName = MutableLiveData("")
 
+
     private val _nickNameChangeFinish = MutableLiveData<Event<Unit>>()
     val nickNameChangeFinish: LiveData<Event<Unit>> = _nickNameChangeFinish
 
@@ -70,6 +71,8 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
             response.collect { handleResultNickNameChange(it) }
         }
     }
+
+
 
     private fun handleResultNickNameChange(dataResult: DataResult<Unit>) {
         when (dataResult) {
@@ -130,6 +133,8 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
         }
     }
 
+
+
     private fun handleResultShop(dataResult: DataResult<List<Shop>>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccessShop(dataResult.data)
@@ -150,6 +155,8 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
         _isLoading.value = Event(false)
         _myUser.value = data
     }
+
+
 
     private fun handleSuccessReview(data: List<Review>) {
         _isLoading.value = Event(false)
