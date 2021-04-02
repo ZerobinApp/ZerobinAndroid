@@ -27,7 +27,7 @@ interface ZerobinApi {
     @GET("user/info")
     suspend fun getMyPageUser(): UserResponse
 
-    @GET("user/review/stamp")
+    @GET("user/shop/stamp")
     suspend fun getMyPageStamp(): MyPageStampResponse
 
     @POST("user")

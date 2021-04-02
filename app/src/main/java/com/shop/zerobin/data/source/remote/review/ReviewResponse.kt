@@ -15,7 +15,7 @@ data class ReviewResponse(
     val owner: Int?,
 ) {
     data class Hashtag(
-        val hashtagIndex: Int,
+        val hashtagIndex: Int?,
         val name: String?,
     )
 }
