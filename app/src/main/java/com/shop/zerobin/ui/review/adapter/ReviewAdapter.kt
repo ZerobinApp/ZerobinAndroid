@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ItemReviewBinding
+import com.shop.zerobin.domain.entity.Hashtag
 import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.domain.entity.ShopDetail
 
@@ -51,7 +52,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         fun bind(review: Review, position: Int) {
             reviewIndex = position
             setReviewImageAdapter(review.imageList)
-            drawHashTagList(review.hashtagList)
+            drawHashTagList(review.hashTagList)
 
             binding.review = review
 
@@ -62,6 +63,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
                 listener?.onMenuClick(review = review)
             }
         }
+
 
         private fun setReviewImageAdapter(imageList: List<String>) {
             val filteredImageList = imageList.filter { it.isNotBlank() }
@@ -85,14 +87,13 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
             }
             binding.reviewViewPager.registerOnPageChangeCallback(onPageSelectedCallback)
             reviewImageAdapter.setItem(filteredImageList)
-
             onPageSelectedCallback.onPageSelected(0)
         }
 
-        private fun drawHashTagList(hashTagList: List<String>) {
+        private fun drawHashTagList(hashTagList: List<Hashtag>) {
             var hashTagString = ""
             hashTagList.forEach {
-                hashTagString += binding.root.context.getString(R.string.hash_tag_format, it) + "  "
+                hashTagString += binding.root.context.getString(R.string.hash_tag_format, it.name) + "  "
             }
             binding.reviewHashTag.text = hashTagString
         }

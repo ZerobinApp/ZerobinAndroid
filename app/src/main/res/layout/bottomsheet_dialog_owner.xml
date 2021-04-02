@@ -21,7 +21,7 @@
         style="@style/ButtonDialogButtonText"
         android:background="@drawable/bottom_dialog_rounded_corner_button_end"
         android:text="삭제"
-        android:textColor="@color/colorError" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/btnCancelDialog"

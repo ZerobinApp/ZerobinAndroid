@@ -138,6 +138,7 @@ class MyPageRepository(val context: Context) {
         }
     }
 
+
     private fun getJWT() = pref.getString(PREF_JWT, "") ?: ""
 
     private fun saveJWT(jwt: String) {

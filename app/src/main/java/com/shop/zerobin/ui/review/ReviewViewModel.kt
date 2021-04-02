@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.shop.zerobin.data.repository.shop.ReviewRepository
 import com.shop.zerobin.domain.DataResult
+import com.shop.zerobin.domain.entity.Hashtag
 import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.ui.common.BaseViewModel
 import com.shop.zerobin.ui.common.Event
@@ -15,24 +16,19 @@ import kotlinx.coroutines.launch
 
 class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val _hashTagList = MutableLiveData<List<Hashtag>>()
+    val hashTagList: LiveData<List<Hashtag>> = _hashTagList
 
     private val _reviewList = MutableLiveData<List<Review>>()
     val reviewList: LiveData<List<Review>> = _reviewList
 
-
-    fun requestReviewList(hashtagList: List<Int>) {
-        //코루틴 사용....
+    fun requestReviewList(hashTagList: List<Int>) {
         viewModelScope.launch {
-            val response = reviewRepository.getReviewList(hashtagList)
+            val response = reviewRepository.getReviewList(hashTagList)
             Log.d(HomeViewModel.TAG, response.toString())
             response.collect { handleResult(it) }
         }
     }
-
 
     fun requestReviewReport(reviewIndex: Int) {
         viewModelScope.launch {
@@ -40,7 +36,6 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
             Log.d(TAG, response.toString())
             response.collect { handleResultReport(it) }
         }
-
     }
 
     fun requestReviewDelete(shopIndex: Int, reviewIndex: Int) {

@@ -1,13 +1,10 @@
 package com.shop.zerobin.domain.entity
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class Review(
     val comment: String,
     val createdAt: String,
-    val hashtagList: List<String>,
+    val hashTagList: List<Hashtag>,
     val imageList: List<String>,
     val name: String,
     val nickName: String,
@@ -15,4 +12,4 @@ data class Review(
     val shopIndex: Int,
     val stamp: Boolean,
     val owner: Boolean
-) : Parcelable
+)

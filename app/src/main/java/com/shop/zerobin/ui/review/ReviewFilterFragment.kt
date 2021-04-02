@@ -27,6 +27,8 @@ class ReviewFilterFragment :
         setListeners()
     }
 
+
+
     private fun setListeners() {
         binding.btnNext.setOnClickListener {
             val selectedHashTagList = mutableListOf<Int>()

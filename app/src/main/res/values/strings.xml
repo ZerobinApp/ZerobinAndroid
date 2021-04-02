@@ -8,6 +8,7 @@
     <string name="review">리뷰</string>
     <string name="hashtag">해시태그</string>
     <string name="make_review">리뷰작성</string>
+    <string name="modify_review">리뷰수정</string>
     <string name="review_picture_description">방문한 매장과 관련된\n사진을 업로드해주세요.</string>
     <string name="review_text_description">방문한 매장과 관련된\n리뷰를 작성해주세요.</string>
     <string name="review_picture_initial_count">0/3</string>
