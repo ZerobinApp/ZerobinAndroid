@@ -69,10 +69,14 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                         onClick = { clickType ->
                             when (clickType) {
                                 DialogArticleTap.ClickType.EDIT -> {
-                                    val list= mutableListOf<Int>(review.shopIndex,review.reviewIndex)
+                                    val list =
+                                        mutableListOf<Int>(review.shopIndex, review.reviewIndex)
                                     val bundle = bundleOf("list" to list)
 
-                                    findNavController().navigate(R.id.action_navigation_dialog_article_tap_to_navigation_review_modify_fragment,bundle)
+                                    findNavController()
+                                        .navigate(R.id.action_global_navigation_write_review,
+                                            bundle)
+
 
                                 }
                                 DialogArticleTap.ClickType.DELETE -> reviewViewModel.requestReviewDelete(

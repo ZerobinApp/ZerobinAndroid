@@ -5,20 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.shop.zerobin.data.repository.shop.ReviewRepository
-import com.shop.zerobin.data.repository.shop.ShopRepository
 import com.shop.zerobin.domain.DataResult
 import com.shop.zerobin.domain.entity.Hashtag
 import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.ui.common.BaseViewModel
 import com.shop.zerobin.ui.common.Event
 import com.shop.zerobin.ui.home.HomeViewModel
-import com.shop.zerobin.ui.home.shop.WriteReviewViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class ReviewViewModel(private val reviewRepository: ReviewRepository, private val shopRepository: ShopRepository,) : BaseViewModel() {
-
-
+class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseViewModel() {
 
     private val _hashTagList = MutableLiveData<List<Hashtag>>()
     val hashTagList: LiveData<List<Hashtag>> = _hashTagList
@@ -26,83 +22,13 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository, private va
     private val _reviewList = MutableLiveData<List<Review>>()
     val reviewList: LiveData<List<Review>> = _reviewList
 
-    private val _reviewDetail = MutableLiveData<Review>()
-    val reviewDetail: LiveData<Review> = _reviewDetail
-
-
-    fun setHashTagList() {
+    fun requestReviewList(hashTagList: List<Int>) {
         viewModelScope.launch {
-            val response = shopRepository.getHashTag()
-            response.collect { handleHashTagResult(it) }
-        }
-    }
-
-    fun postModifyReview(hashTagList: List<Int>,deleteHashTagList: List<Int>,updateImageList :List<String>,deleteImageList:List<String>,
-                         touchSeed:Boolean,shopIndex: Int,reviewIndex: Int,comment:String) {
-
-
-        viewModelScope.launch {
-
-                    val response = reviewRepository.setReviewDetail(
-                            shopIndex,
-                            reviewIndex,
-                            comment,
-                            deleteHashTagList,
-                            hashTagList,
-                            updateImageList,
-                            deleteImageList,
-                            touchSeed
-                        )
-                response.collect { handleResultModify(it) }
-
-
-            }
-    }
-
-    private fun handleHashTagResult(dataResult: DataResult<List<Hashtag>>) {
-        when (dataResult) {
-            is DataResult.Success -> handleHashTagSuccess(dataResult.data)
-            is DataResult.Error -> handleError(TAG, dataResult.exception)
-            is DataResult.Loading -> handleLoading()
-        }
-    }
-
-    private fun handleHashTagSuccess(data: List<Hashtag>) {
-        _isLoading.value = Event(false)
-        _hashTagList.value = data
-    }
-
-
-    fun requestGetReview(shopIndex: Int,reviewIndex: Int){
-        viewModelScope.launch {
-            val response= reviewRepository.getReviewDetail(shopIndex,reviewIndex)
-            response.collect { handleResultReviewDetail(it)
-            }
-        }
-    }
-
-    private fun handleResultReviewDetail(dataResult: DataResult<Review>) {
-        when (dataResult) {
-            is DataResult.Success -> handleSuccessReviewDetail(dataResult.data)
-            is DataResult.Error -> handleError(TAG, dataResult.exception)
-            DataResult.Loading -> handleLoading()
-        }
-    }
-
-    private fun handleSuccessReviewDetail(data: Review) {
-        _reviewDetail.value=data
-    }
-
-
-    fun requestReviewList(hashtagList: List<Int>) {
-        //코루틴 사용....
-        viewModelScope.launch {
-            val response = reviewRepository.getReviewList(hashtagList)
+            val response = reviewRepository.getReviewList(hashTagList)
             Log.d(HomeViewModel.TAG, response.toString())
             response.collect { handleResult(it) }
         }
     }
-
 
     fun requestReviewReport(reviewIndex: Int) {
         viewModelScope.launch {
@@ -110,9 +36,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository, private va
             Log.d(TAG, response.toString())
             response.collect { handleResultReport(it) }
         }
-
     }
-
 
     fun requestReviewDelete(shopIndex: Int, reviewIndex: Int) {
         viewModelScope.launch {
@@ -145,21 +69,6 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository, private va
             DataResult.Loading -> handleLoading()
         }
     }
-
-    private fun handleResultModify(dataResult: DataResult<Unit>) {
-        when (dataResult) {
-            is DataResult.Success -> handleSuccessModify()
-            is DataResult.Error -> handleError(TAG, dataResult.exception)
-            is DataResult.Loading -> handleLoading()
-        }
-    }
-
-    private fun handleSuccessModify() {
-        _isLoading.value = Event(false)
-        _isError.value = Event("리뷰 수정 성공")
-
-    }
-
 
     private fun handleSuccess(data: List<Review>) {
         _isLoading.value = Event(false)

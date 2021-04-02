@@ -39,7 +39,7 @@ object DataToEntityExtension {
         Review(
             comment = review.comment ?: "",
             createdAt = review.createdAt ?: "",
-            hashtagList = review.hashtag?.map { Hashtag(
+            hashTagList = review.hashtag?.map { Hashtag(
                 it.hashtagIndex,
                 it.name ?:"",
             )} ?: emptyList(),
@@ -57,7 +57,7 @@ object DataToEntityExtension {
     fun ReviewDetailResponse.Result.map() =Review(
         comment = this.comment ?: "",
         createdAt = this.createdAt ?: "",
-        hashtagList = this.hashtag?.map {
+        hashTagList = this.hashtag?.map {
                 Hashtag(
                     it.hashtagIndex,
                     it.name ?:"",
@@ -99,7 +99,7 @@ object DataToEntityExtension {
                 name = it.name ?: "",
                 imageList = it.image?.map { it.pictureUrl ?: "" } ?: emptyList(),
                 stamp = it.stamp == 1,
-                hashtagList = it.hashtag?.map { Hashtag(
+                hashTagList = it.hashtag?.map { Hashtag(
                     it.hashtagIndex,
                     it.name ?:"",
                 ) } ?: emptyList(),

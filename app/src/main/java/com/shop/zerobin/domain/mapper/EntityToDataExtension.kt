@@ -24,27 +24,27 @@ object EntityToDataExtension {
         imageUrlList: List<String>?,
         inputText: String?,
         hashTagList: List<Int>?,
-        stamp: Boolean,
+        stamp: Boolean?,
     ) = ReviewRequest(
         image = imageUrlList ?: emptyList(),
         comment = inputText ?: "",
         hashtag = hashTagList ?: emptyList(),
-        stamp = if (stamp) 1 else 0
+        stamp = if (stamp == true) 1 else 0
     )
 
     fun setReviewEntityToData(
-        comment:String,
-        deletehashtag:List<Int>,
-        updatehashtag:List<Int>,
-        deleteimage:List<String>,
-        updateimage:List<String>,
-        stamp: Boolean,
-    )= ReviewModifyRequest(
-        comment=comment,
-        deletehashtag = deletehashtag ?: emptyList(),
-        updatehashtag = updatehashtag,
-        deleteimage = deleteimage,
-        updateimage = updateimage,
-        stamp = if (stamp) 1 else 0,
+        comment: String?,
+        deletedHashTagList: List<Int>?,
+        updatedHashTagList: List<Int>?,
+        deletedImageList: List<String>?,
+        updatedImageList: List<String>?,
+        stamp: Boolean?,
+    ) = ReviewModifyRequest(
+        comment = comment ?: "",
+        deletedhashtag = deletedHashTagList ?: emptyList(),
+        updatedhashtag = updatedHashTagList ?: emptyList(),
+        deletedimage = deletedImageList ?: emptyList(),
+        updatedimage = updatedImageList ?: emptyList(),
+        stamp = if (stamp == true) 1 else 0,
     )
 }

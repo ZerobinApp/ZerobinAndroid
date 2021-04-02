@@ -4,7 +4,7 @@ package com.shop.zerobin.domain.entity
 data class Review(
     val comment: String,
     val createdAt: String,
-    val hashtagList: List<Hashtag>,
+    val hashTagList: List<Hashtag>,
     val imageList: List<String>,
     val name: String,
     val nickName: String,

@@ -57,7 +57,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         fun bind(review: Review, position: Int) {
             reviewIndex = position
             setReviewImageAdapter(review.imageList)
-            drawHashTagList(review.hashtagList)
+            drawHashTagList(review.hashTagList)
 
             binding.review = review
 

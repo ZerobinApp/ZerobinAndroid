@@ -3,7 +3,6 @@ package com.shop.zerobin.data.repository.shop
 import android.content.Context
 import com.shop.zerobin.data.repository.mypage.MyPageRepository
 import com.shop.zerobin.data.source.remote.RetrofitObject
-import com.shop.zerobin.data.source.remote.shop.ImageResponse
 import com.shop.zerobin.domain.DataResult
 import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.domain.mapper.DataToEntityExtension
@@ -77,7 +76,7 @@ class ReviewRepository(val context: Context) {
         imageUrlList: List<String>?,
         inputText: String?,
         hashTagList: List<Int>?,
-        stamp: Boolean,
+        stamp: Boolean?,
     ): Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
@@ -96,31 +95,45 @@ class ReviewRepository(val context: Context) {
         }
     }
 
-    suspend fun getReviewDetail(shopIndex: Int,reviewIndex: Int): Flow<DataResult<Review>>{
+    suspend fun getReviewDetail(shopIndex: Int, reviewIndex: Int): Flow<DataResult<Review>> {
         return flow {
             emit(DataResult.Loading)
 
-            val response = zerobinClient.getReviewDetail(shopIndex,reviewIndex)
+            val response = zerobinClient.getReviewDetail(shopIndex, reviewIndex)
 
             if (!response.isSuccess) {
                 emit(DataResult.Error(Exception(response.message)))
                 return@flow
             }
-            
+
             emit(DataResult.Success(response.result.map()))
         }
     }
 
-    suspend fun setReviewDetail(shopIndex: Int,reviewIndex: Int,comment:String,deletehastag:List<Int>,updatehashtag:List<Int>,
-                                deleteimage:List<String>,updateimage:List<String>,stamp: Boolean) :Flow<DataResult<Unit>> {
+    suspend fun setReviewDetail(
+        shopIndex: Int,
+        reviewIndex: Int,
+        comment: String?,
+        deletedHashTagList: List<Int>?,
+        updatedHashTagList: List<Int>?,
+        deletedImageList: List<String>?,
+        updatedImageList: List<String>?,
+        stamp: Boolean?,
+    ): Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
 
             val response = zerobinClient.setReviewDetail(
                 shopIndex,
                 reviewIndex,
-                setReviewEntityToData(comment,deletehastag,updatehashtag,deleteimage,updateimage,stamp)
-
+                setReviewEntityToData(
+                    comment,
+                    deletedHashTagList,
+                    updatedHashTagList,
+                    deletedImageList,
+                    updatedImageList,
+                    stamp
+                )
             )
 
             if (response.isSuccess != true) {

@@ -24,6 +24,7 @@ import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentWriteReviewBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.util.Extensions.px
+import com.shop.zerobin.util.GlideApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -80,9 +81,19 @@ class WriteReviewFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
 
+        requestGetReviewIfNeed()
         setViewModelData()
         setOnClickListener()
         observeLiveData()
+    }
+
+    private fun requestGetReviewIfNeed() {
+        val shopIndex = arguments?.getIntegerArrayList("list")?.get(0)
+        val reviewIndex = arguments?.getIntegerArrayList("list")?.get(1)
+
+        if (shopIndex != null && reviewIndex != null) {
+            viewModel.requestGetReview(shopIndex, reviewIndex)
+        }
     }
 
     private fun setViewModelData() {
@@ -111,21 +122,33 @@ class WriteReviewFragment :
         }
 
         binding.pictureCancel1.setOnClickListener {
+            viewModel.minusImageCount()
             binding.pictureCancel1.isVisible = false
             binding.pictureIndex1.setImageResource(R.drawable.ic_select_picture)
             binding.pictureIndex1.tag = null
+            viewModel.reviewDetail.value?.imageList?.get(0)?.let { imgUrl ->
+                viewModel.addDeleteImage(imgUrl)
+            }
         }
 
         binding.pictureCancel2.setOnClickListener {
+            viewModel.minusImageCount()
             binding.pictureCancel2.isVisible = false
             binding.pictureIndex2.setImageResource(R.drawable.ic_select_picture)
             binding.pictureIndex2.tag = null
+            viewModel.reviewDetail.value?.imageList?.get(1)?.let { imgUrl ->
+                viewModel.addDeleteImage(imgUrl)
+            }
         }
 
         binding.pictureCancel3.setOnClickListener {
+            viewModel.minusImageCount()
             binding.pictureCancel3.isVisible = false
             binding.pictureIndex3.setImageResource(R.drawable.ic_select_picture)
             binding.pictureIndex3.tag = null
+            viewModel.reviewDetail.value?.imageList?.get(2)?.let { imgUrl ->
+                viewModel.addDeleteImage(imgUrl)
+            }
         }
     }
 
@@ -161,11 +184,50 @@ class WriteReviewFragment :
 
         viewModel.successEvent.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
-                val action =
-                    WriteReviewFragmentDirections.actionNavigationWriteReviewToNavigationShopDetail(
-                        args?.shop
-                    )
-                findNavController().navigate(action)
+                if (viewModel.isModifyState.value == true) {
+                    findNavController().popBackStack()
+                } else {
+                    val action =
+                        WriteReviewFragmentDirections
+                            .actionNavigationWriteReviewToNavigationShopDetail(args?.shop)
+                    findNavController().navigate(action)
+                }
+            }
+        }
+
+        viewModel.reviewDetail.observe(viewLifecycleOwner) {
+            it.hashTagList.forEach { hashTag ->
+                view?.findViewWithTag<Chip>("${hashTag.hashtagIndex}")?.isChecked = true
+            }
+            it.imageList.forEachIndexed { index, imgUrl ->
+                setImageFromFirebase(index, imgUrl)
+            }
+        }
+    }
+
+    private fun setImageFromFirebase(index: Int, imgUrl: String) {
+        val spaceReference = Firebase.storage.reference.child(imgUrl)
+        when (index) {
+            0 -> {
+                GlideApp.with(requireContext())
+                    .load(spaceReference)
+                    .transform(CenterCrop(), RoundedCorners(15.px))
+                    .into(binding.pictureIndex1)
+                binding.pictureCancel1.isVisible = true
+            }
+            1 -> {
+                GlideApp.with(requireContext())
+                    .load(spaceReference)
+                    .transform(CenterCrop(), RoundedCorners(15.px))
+                    .into(binding.pictureIndex2)
+                binding.pictureCancel2.isVisible = true
+            }
+            2 -> {
+                GlideApp.with(requireContext())
+                    .load(spaceReference)
+                    .transform(CenterCrop(), RoundedCorners(15.px))
+                    .into(binding.pictureIndex3)
+                binding.pictureCancel3.isVisible = true
             }
         }
     }
@@ -183,6 +245,7 @@ class WriteReviewFragment :
     }
 
     private fun setImage(imgUri: Uri, index: Int) {
+        viewModel.plusImageCount()
         when (index) {
             1 -> {
                 Glide.with(requireContext())
@@ -223,9 +286,9 @@ class WriteReviewFragment :
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-            uploadImageToFirebase(imgUri1 ?: return@launch)
-            uploadImageToFirebase(imgUri2 ?: return@launch)
-            uploadImageToFirebase(imgUri3 ?: return@launch)
+            imgUri1?.let { uploadImageToFirebase(it) }
+            imgUri2?.let { uploadImageToFirebase(it) }
+            imgUri3?.let { uploadImageToFirebase(it) }
         }
     }
 
@@ -287,7 +350,11 @@ class WriteReviewFragment :
             hideLoading()
             return
         }
-        viewModel.postReview(selectedHashTagList)
+        if (viewModel.isModifyState.value == true) {
+            viewModel.requestModifyReview(selectedHashTagList)
+        } else {
+            viewModel.postReview(selectedHashTagList)
+        }
     }
 
     companion object {
