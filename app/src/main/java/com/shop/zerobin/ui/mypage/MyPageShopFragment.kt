@@ -3,6 +3,7 @@ package com.shop.zerobin.ui.mypage
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageShopBinding
@@ -36,6 +37,10 @@ class MyPageShopFragment :
     private fun observeLiveData() {
         myPageViewModel.myUserShop.observe(viewLifecycleOwner) {
             shopAdapter.setItem(it)
+            if (it.isEmpty()) {
+                binding.shopEmptyImageView.isVisible = true
+                binding.shopEmptyTextView.isVisible = true
+            }
         }
 
         myPageViewModel.isLoading.observe(viewLifecycleOwner) { event ->
@@ -63,6 +68,10 @@ class MyPageShopFragment :
         shopAdapter.onClick = { shop ->
             val action = ShopDetailFragmentDirections.actionGlobalNavigationShopDetail(shop)
             findNavController().navigate(action)
+        }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 }

@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="@string/delete_account"
             android:textColor="#272727"
-            android:textSize="18dp"
+            android:textSize="17dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

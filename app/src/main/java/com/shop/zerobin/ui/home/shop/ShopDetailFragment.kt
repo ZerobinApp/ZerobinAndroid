@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.shop.zerobin.R
@@ -87,10 +88,15 @@ class ShopDetailFragment :
 
     private fun observeLiveData() {
         shopDetailViewModel.shopDetail.observe(viewLifecycleOwner) {
-            reviewShopAdapter.setDetailReviewItem(it)
+            reviewShopAdapter.setItem(it.reviewList)
             featureAdapter.setItem(it.hashtagList)
             shopImageAdapter.setItem(it.imageList)
             drawHashTagList(it.hashtagList)
+
+            if (it.reviewList.isEmpty()) {
+                binding.reviewEmptyImageView.isVisible = true
+                binding.reviewEmptyTextView.isVisible = true
+            }
         }
 
         shopDetailViewModel.isLoading.observe(viewLifecycleOwner) { event ->

@@ -237,6 +237,30 @@
                     tools:itemCount="3"
                     tools:listitem="@layout/item_review" />
 
+                <ImageView
+                    android:id="@+id/reviewEmptyImageView"
+                    android:layout_width="110dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/detailReviewRecyclerView"
+                    app:srcCompat="@drawable/search_empty" />
+
+                <TextView
+                    android:id="@+id/reviewEmptyTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:paddingBottom="30dp"
+                    android:text="@string/review_empty_description"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                    app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                    app:layout_constraintTop_toBottomOf="@id/reviewEmptyImageView" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>

@@ -29,7 +29,10 @@
     <string name="login">로그인</string>
     <string name="delete_account">회원탈퇴</string>
     <string name="review_filter_description1">원하는 친환경 키워드를\n 자유롭게 골라보세요!</string>
-    <string name="search_description">앗, 찾으시는 스토어가 없어요.\n 다른 가게를 검색해 보는건 어떠세요?</string>
+    <string name="search_empty_description">앗, 찾으시는 스토어가 없어요.\n다른 가게를 검색해 보는건 어떠세요?</string>
+    <string name="review_empty_description">앗, 아직 리뷰가 없어요.\n방문하신 매장 리뷰를 남겨주세요!</string>
+    <string name="shop_empty_description">앗, 찜한 스토어가 없어요.\n방문하고 싶은 매장이 있다면 찜해주세요!</string>
+    <string name="stamp_empty_description">앗, 아직 스탬프가 없어요.\n방문하신 매장에 새싹스탬프를 남겨주세요!</string>
     <string name="my_page_guide_login_before">로그인하고 가치있는 친환경 소비를 경험하세요!</string>
     <string name="my_page_guide_login_after">오늘도 환경을 사랑하는 가치소비를 실천해볼까요?</string>
     <string name="need_login_description">먼저 로그인이 필요해요 :D\n로그인 페이지로 이동하시겠어요?</string>

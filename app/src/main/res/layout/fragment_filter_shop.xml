@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:text="키워드 선택"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="17dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
