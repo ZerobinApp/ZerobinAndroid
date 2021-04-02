@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "1043411734164",
-    "project_id": "zerobin-8f496",
-    "storage_bucket": "zerobin-8f496.appspot.com"
+    "project_number": "307861329022",
+    "project_id": "zerobin-764c8",
+    "storage_bucket": "zerobin-764c8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1043411734164:android:ec75189a8e496560d9ee81",
+        "mobilesdk_app_id": "1:307861329022:android:6adfdeeaba1b03a7d8b42f",
         "android_client_info": {
           "package_name": "com.shop.zerobin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1043411734164-bv7h6i1n13qep27md4poj675nu9icaap.apps.googleusercontent.com",
+          "client_id": "307861329022-irapkjg8grun5lfvul25b7dvjm98tor8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCVhbLPA-5gDx7GMoAi8beyl78R9JtuC4"
+          "current_key": "AIzaSyCIgueYT4UxoahVg0KFPXka8EZ_NwppoOU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1043411734164-bv7h6i1n13qep27md4poj675nu9icaap.apps.googleusercontent.com",
+              "client_id": "307861329022-irapkjg8grun5lfvul25b7dvjm98tor8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "307861329022-bs4c63o9i0d5oq6kl5kdvv7nn2941h45.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "shop.zerobin.Zerobin"
+              }
             }
           ]
         }
