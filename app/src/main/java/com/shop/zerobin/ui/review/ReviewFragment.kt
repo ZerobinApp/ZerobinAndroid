@@ -20,7 +20,6 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
 
     private val reviewViewModel: ReviewViewModel by viewModel()
 
-
     private val reviewAdapter by lazy {
         ReviewAdapter().apply {
             onImageClick = { reviewIndex, position ->
@@ -111,8 +110,6 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                 }
             }
         })
-
-
     }
 
     private fun setReviewAdapter() {
