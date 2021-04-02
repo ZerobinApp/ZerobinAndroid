@@ -112,7 +112,7 @@ class ReviewRepository(val context: Context) {
     }
 
     suspend fun setReviewDetail(shopIndex: Int,reviewIndex: Int,comment:String,deletehastag:List<Int>,updatehashtag:List<Int>,
-                                deleteimage:List<String>,updateimage:List<String>,stamp: Int) :Flow<DataResult<Unit>> {
+                                deleteimage:List<String>,updateimage:List<String>,stamp: Boolean) :Flow<DataResult<Unit>> {
         return flow {
             emit(DataResult.Loading)
 

@@ -38,13 +38,13 @@ object EntityToDataExtension {
         updatehashtag:List<Int>,
         deleteimage:List<String>,
         updateimage:List<String>,
-        stamp: Int,
+        stamp: Boolean,
     )= ReviewModifyRequest(
         comment=comment,
         deletehashtag = deletehashtag ?: emptyList(),
         updatehashtag = updatehashtag,
         deleteimage = deleteimage,
         updateimage = updateimage,
-        stamp = stamp,
+        stamp = if (stamp) 1 else 0,
     )
 }

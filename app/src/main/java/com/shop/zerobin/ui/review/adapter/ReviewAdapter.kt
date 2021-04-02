@@ -98,7 +98,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         private fun drawHashTagList(hashTagList: List<Hashtag>) {
             var hashTagString = ""
             hashTagList.forEach {
-                hashTagString += binding.root.context.getString(R.string.hash_tag_format, it) + "  "
+                hashTagString += binding.root.context.getString(R.string.hash_tag_format, it.name) + "  "
             }
             binding.reviewHashTag.text = hashTagString
         }

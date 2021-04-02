@@ -12,6 +12,7 @@ import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.ui.common.BaseViewModel
 import com.shop.zerobin.ui.common.Event
 import com.shop.zerobin.ui.home.HomeViewModel
+import com.shop.zerobin.ui.home.shop.WriteReviewViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -34,6 +35,28 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository, private va
             val response = shopRepository.getHashTag()
             response.collect { handleHashTagResult(it) }
         }
+    }
+
+    fun postModifyReview(hashTagList: List<Int>,deleteHashTagList: List<Int>,updateImageList :List<String>,deleteImageList:List<String>,
+                         touchSeed:Boolean,shopIndex: Int,reviewIndex: Int,comment:String) {
+
+
+        viewModelScope.launch {
+
+                    val response = reviewRepository.setReviewDetail(
+                            shopIndex,
+                            reviewIndex,
+                            comment,
+                            deleteHashTagList,
+                            hashTagList,
+                            updateImageList,
+                            deleteImageList,
+                            touchSeed
+                        )
+                response.collect { handleResultModify(it) }
+
+
+            }
     }
 
     private fun handleHashTagResult(dataResult: DataResult<List<Hashtag>>) {
@@ -121,6 +144,20 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository, private va
             is DataResult.Error -> handleError(TAG, dataResult.exception)
             DataResult.Loading -> handleLoading()
         }
+    }
+
+    private fun handleResultModify(dataResult: DataResult<Unit>) {
+        when (dataResult) {
+            is DataResult.Success -> handleSuccessModify()
+            is DataResult.Error -> handleError(TAG, dataResult.exception)
+            is DataResult.Loading -> handleLoading()
+        }
+    }
+
+    private fun handleSuccessModify() {
+        _isLoading.value = Event(false)
+        _isError.value = Event("리뷰 수정 성공")
+
     }
 
 

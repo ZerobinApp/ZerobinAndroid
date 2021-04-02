@@ -85,8 +85,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/seedSubTitle"
                     android:layout_width="70dp"
                     android:padding="10dp"
-                    android:background="@{VM.reviewDetail.stamp ? @drawable/seed_bg : @drawable/seed_bg_bloom}"
-                    android:src="@{VM.reviewDetail.stamp ? @drawable/ic_pistachio : @drawable/ic_pistachio_bloom}"
+                    android:background="@{VM.reviewDetail.stamp ? @drawable/seed_bg_bloom : @drawable/seed_bg}"
+                    android:src="@{VM.reviewDetail.stamp ? @drawable/ic_pistachio_bloom : @drawable/ic_pistachio}"
                     android:layout_height="70dp"
                     android:layout_marginTop="10dp"/>
 
@@ -181,23 +181,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@string/review"
+                    android:text="후기"
                     android:textColor="#272727"
                     android:textSize="15dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/pictureIndex1" />
 
-                <TextView
-                    android:id="@+id/reviewDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/select_hashtag_description"
-                    android:textColor="#272727"
-                    android:textSize="13dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reviewTitle" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/textLayout"
@@ -207,7 +197,7 @@
                     android:background="@drawable/bg_write_review_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reviewDescription">
+                    app:layout_constraintTop_toBottomOf="@id/reviewTitle">
 
 
 

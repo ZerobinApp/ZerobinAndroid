@@ -22,6 +22,7 @@
         <action
             android:id="@+id/action_navigation_dialog_article_tap_to_navigation_review_modify_fragment"
             app:destination="@id/navigation_review_modify"
+            app:popUpTo="@id/navigation_review"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/anim_nothing"
             app:popEnterAnim="@anim/anim_nothing"

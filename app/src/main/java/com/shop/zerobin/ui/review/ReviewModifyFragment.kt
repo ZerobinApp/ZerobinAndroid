@@ -4,15 +4,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentReviewModifyBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
+import com.shop.zerobin.ui.home.shop.WriteReviewFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ReviewModifyFragment: BaseBindingFragment<FragmentReviewModifyBinding>(R.layout.fragment_review_modify) {
 
     private val reviewViewModel: ReviewViewModel by viewModel()
+
+    var shop=0
+    var review=0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?
     ) {
@@ -25,19 +30,11 @@ class ReviewModifyFragment: BaseBindingFragment<FragmentReviewModifyBinding>(R.l
     }
 
     private fun requestGetReview(){
-        val shop=arguments?.getIntegerArrayList("list")?.get(0)
-        val review=arguments?.getIntegerArrayList("list")?.get(1)
-        if (review != null) {
-            if (shop != null) {
-                reviewViewModel.requestGetReview(shop,review)
-            }
-        }
+         shop= arguments?.getIntegerArrayList("list")?.get(0)!!
+         review=arguments?.getIntegerArrayList("list")?.get(1)!!
+        reviewViewModel.requestGetReview(shop,review)
 
     }
-
-
-
-
 
     fun observeLiveData(){
         reviewViewModel.hashTagList.observe(viewLifecycleOwner) { hashTagList ->
@@ -72,6 +69,8 @@ class ReviewModifyFragment: BaseBindingFragment<FragmentReviewModifyBinding>(R.l
         }
     }
 
+
+
     fun setListeners(){
         var touchSeed=true
         binding.imageSeed.setOnClickListener {
@@ -86,8 +85,29 @@ class ReviewModifyFragment: BaseBindingFragment<FragmentReviewModifyBinding>(R.l
                 true
             }
 
-
         }
+
+        binding.btnComplete.setOnClickListener {
+            val updateImageList = emptyList<String>()
+            val deleteImageList = emptyList<String>()
+            val selectedHashTagList = mutableListOf<Int>()
+            val deleteHashTagList= mutableListOf<Int>()
+            binding.hashTagContainer.chipGroup.checkedChipIds.forEach { checkedId ->
+                val chip = view?.findViewById<Chip>(checkedId)
+                val index = chip?.tag.toString().toInt()
+                selectedHashTagList.add(index)
+
+            }
+            for(i in 1..10){
+                if(!selectedHashTagList.contains(i)){
+                    deleteHashTagList.add(i)
+                }
+            }
+
+            reviewViewModel.postModifyReview(selectedHashTagList,deleteHashTagList,updateImageList,deleteImageList,touchSeed,shop,review,binding.inputReview.text.toString())
+            findNavController().popBackStack()
+        }
+
         //수정하기 버튼
     }
 }
