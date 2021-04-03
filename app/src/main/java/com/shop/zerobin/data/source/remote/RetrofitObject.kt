@@ -17,7 +17,7 @@ object RetrofitObject {
         getRetrofitBuild(jwt).create(ZerobinApi::class.java)
 
     private fun getRetrofitBuild(jwt: String) = Retrofit.Builder()
-        .baseUrl(devUrl)
+        .baseUrl(realUrl)
         .client(getOkhttpClient(jwt))
         .addConverterFactory(getGsonConverterFactory())
         .build()

@@ -78,13 +78,13 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : BaseView
     private fun handleSuccessReport(data: Unit) {
         _isLoading.value = Event(false)
         _isError.value = Event("신고 완료되었습니다.")
-        Log.d("신고", data.toString())
+        Log.d(TAG, data.toString())
     }
 
     private fun handleSuccessDelete(data: Unit) {
         _isLoading.value = Event(false)
         _isError.value = Event("삭제 완료되었습니다.")
-        Log.d("삭제", data.toString())
+        Log.d(TAG, data.toString())
         requestReviewList(emptyList())
     }
 

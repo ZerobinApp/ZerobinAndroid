@@ -39,10 +39,12 @@ object DataToEntityExtension {
         Review(
             comment = review.comment ?: "",
             createdAt = review.createdAt ?: "",
-            hashTagList = review.hashtag?.map { Hashtag(
-                it.hashtagIndex,
-                it.name ?:"",
-            )} ?: emptyList(),
+            hashTagList = review.hashtag?.map {
+                Hashtag(
+                    it.hashtagIndex ?: 0,
+                    it.name ?: "",
+                )
+            } ?: emptyList(),
             imageList = review.image?.map(::imageDataToEntity) ?: emptyList(),
             name = review.name ?: "",
             nickName = review.nickName ?: "",
@@ -54,14 +56,14 @@ object DataToEntityExtension {
 
     private fun imageDataToEntity(image: ImageResponse) = image.pictureUrl ?: ""
 
-    fun ReviewDetailResponse.Result.map() =Review(
+    fun ReviewDetailResponse.Result.map() = Review(
         comment = this.comment ?: "",
         createdAt = this.createdAt ?: "",
         hashTagList = this.hashtag?.map {
-                Hashtag(
-                    it.hashtagIndex,
-                    it.name ?:"",
-                )
+            Hashtag(
+                it.hashtagIndex,
+                it.name ?: "",
+            )
 
         } ?: emptyList(),
         imageList = this.image?.map(::imageDataToEntity) ?: emptyList(),
@@ -99,10 +101,12 @@ object DataToEntityExtension {
                 name = it.name ?: "",
                 imageList = it.image?.map { it.pictureUrl ?: "" } ?: emptyList(),
                 stamp = it.stamp == 1,
-                hashTagList = it.hashtag?.map { Hashtag(
-                    it.hashtagIndex,
-                    it.name ?:"",
-                ) } ?: emptyList(),
+                hashTagList = it.hashtag?.map {
+                    Hashtag(
+                        it.hashtagIndex ?: 0,
+                        it.name ?: "",
+                    )
+                } ?: emptyList(),
                 owner = it.owner == 1
             )
         } ?: emptyList()

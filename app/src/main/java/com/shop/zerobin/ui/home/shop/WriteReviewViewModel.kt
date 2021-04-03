@@ -60,8 +60,8 @@ class WriteReviewViewModel(
         _seed.value = true
     }
 
-    fun setShop(shop: Shop) {
-        _shopIndex.value = shop.shopIndex
+    fun setShopIndex(shopIndex: Int) {
+        _shopIndex.value = shopIndex
     }
 
     fun setHashTagList() {

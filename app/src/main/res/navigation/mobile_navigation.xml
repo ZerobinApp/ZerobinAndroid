@@ -82,7 +82,7 @@
     <fragment
         android:id="@+id/navigation_search_shop"
         android:name="com.shop.zerobin.ui.home.SearchShopFragment"
-        tools:layout="@layout/fragment_search_shop"/>
+        tools:layout="@layout/fragment_search_shop" />
 
     <fragment
         android:id="@+id/navigation_my_page"
@@ -124,7 +124,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/anim_nothing"
             app:popEnterAnim="@anim/anim_nothing"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -174,7 +174,7 @@
             android:id="@+id/action_navigation_sign_up_to_navigation_my_page"
             app:destination="@id/navigation_my_page"
             app:popUpTo="@id/navigation_my_page"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -183,10 +183,9 @@
         android:label="ShopDetailFragment"
         tools:layout="@layout/fragment_shop_detail">
         <argument
-            android:name="shop"
-            android:defaultValue="@null"
-            app:argType="com.shop.zerobin.domain.entity.Shop"
-            app:nullable="true" />
+            android:name="shopIndex"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/action_navigation_shop_detail_to_navigation_write_review_seed"
             app:destination="@id/navigation_write_review_seed"
@@ -226,10 +225,9 @@
         android:label="WriteReviewSeedFragment"
         tools:layout="@layout/fragment_write_review_seed">
         <argument
-            android:name="shop"
-            android:defaultValue="@null"
-            app:argType="com.shop.zerobin.domain.entity.Shop"
-            app:nullable="true" />
+            android:name="shopIndex"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/action_navigation_write_review_seed_to_navigation_write_review"
             app:destination="@id/navigation_write_review"
@@ -245,10 +243,9 @@
         android:label="WriteReviewFragment"
         tools:layout="@layout/fragment_write_review">
         <argument
-            android:name="shop"
-            android:defaultValue="@null"
-            app:argType="com.shop.zerobin.domain.entity.Shop"
-            app:nullable="true" />
+            android:name="shopIndex"
+            android:defaultValue="0"
+            app:argType="integer" />
         <argument
             android:name="seed"
             android:defaultValue="false"
@@ -268,6 +265,6 @@
         android:id="@+id/navigation_delete_account_fragment"
         android:name="com.shop.zerobin.ui.mypage.sign.DeleteUserFragment"
         android:label="DeleteAccountFragment"
-        tools:layout="@layout/fragment_delete_user"/>
+        tools:layout="@layout/fragment_delete_user" />
 
 </navigation>

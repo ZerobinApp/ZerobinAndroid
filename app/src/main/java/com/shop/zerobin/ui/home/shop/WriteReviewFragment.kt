@@ -99,8 +99,8 @@ class WriteReviewFragment :
     private fun setViewModelData() {
         viewModel.setHashTagList()
         if (args?.seed == true) viewModel.bloomSeed()
-        args?.shop?.let {
-            viewModel.setShop(it)
+        args?.shopIndex?.let {
+            viewModel.setShopIndex(it)
         }
     }
 
@@ -189,7 +189,7 @@ class WriteReviewFragment :
                 } else {
                     val action =
                         WriteReviewFragmentDirections
-                            .actionNavigationWriteReviewToNavigationShopDetail(args?.shop)
+                            .actionNavigationWriteReviewToNavigationShopDetail(args?.shopIndex ?: 0)
                     findNavController().navigate(action)
                 }
             }

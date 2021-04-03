@@ -41,7 +41,7 @@ class WriteReviewSeedFragment :
         binding.btnNext.setOnClickListener {
             val action =
                 WriteReviewSeedFragmentDirections.actionNavigationWriteReviewSeedToNavigationWriteReview(
-                    args?.shop, viewModel.seed.value!!
+                    args?.shopIndex ?: 0, viewModel.seed.value!!
                 )
             findNavController().navigate(action)
         }

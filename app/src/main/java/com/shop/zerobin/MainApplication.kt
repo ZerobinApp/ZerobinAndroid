@@ -41,7 +41,7 @@ val myViewModel = module {
     viewModel { MyPageViewModel(get()) }
     viewModel { SignInViewModel(get()) }
     viewModel { SignUpViewModel(get()) }
-    viewModel { ShopDetailViewModel(get()) }
+    viewModel { ShopDetailViewModel(get(), get()) }
     viewModel { FilterViewModel(get()) }
     viewModel { WriteReviewViewModel(get(), get()) }
     viewModel { DeleteUserViewModel(get()) }

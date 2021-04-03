@@ -66,7 +66,7 @@ class MyPageShopFragment :
 
     private fun setListener() {
         shopAdapter.onClick = { shop ->
-            val action = ShopDetailFragmentDirections.actionGlobalNavigationShopDetail(shop)
+            val action = ShopDetailFragmentDirections.actionGlobalNavigationShopDetail(shop.shopIndex)
             findNavController().navigate(action)
         }
 

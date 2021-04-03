@@ -19,15 +19,19 @@ class MyPageReviewFragment :
 
     private val myPageReviewViewModel: MyPageViewModel by viewModel()
 
-    private val reviewAdapter by lazy { ReviewAdapter().apply {
-        onImageClick = { reviewIndex, position ->
-            val intent = Intent(requireContext(), ImageViewPagerActivity::class.java)
-            val imageList : Array<String> = myPageReviewViewModel.myUserReview.value?.get(reviewIndex)?.imageList?.toTypedArray() ?: emptyArray()
-            intent.putExtra(ImageViewPagerActivity.EXTRA_IMAGE_LIST, imageList)
-            intent.putExtra(ImageViewPagerActivity.EXTRA_IMAGE_INDEX, position)
-            startActivity(intent)
+    private val reviewAdapter by lazy {
+        ReviewAdapter().apply {
+            onImageClick = { reviewIndex, position ->
+                val intent = Intent(requireContext(), ImageViewPagerActivity::class.java)
+                val imageList: Array<String> =
+                    myPageReviewViewModel.myUserReview.value?.get(reviewIndex)?.imageList?.toTypedArray()
+                        ?: emptyArray()
+                intent.putExtra(ImageViewPagerActivity.EXTRA_IMAGE_LIST, imageList)
+                intent.putExtra(ImageViewPagerActivity.EXTRA_IMAGE_INDEX, position)
+                startActivity(intent)
+            }
         }
-    } }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

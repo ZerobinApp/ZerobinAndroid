@@ -8,16 +8,19 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentShopDetailBinding
+import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.domain.entity.ShopDetail
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.common.ImageViewPagerActivity
 import com.shop.zerobin.ui.home.adapter.FeatureAdapter
 import com.shop.zerobin.ui.home.adapter.ShopImageAdapter
+import com.shop.zerobin.ui.review.DialogArticleTap
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -75,7 +78,7 @@ class ShopDetailFragment :
 
     private fun requestShopDetailData() {
         Log.d(TAG, "Shop >> $args")
-        args?.shop?.let {
+        args?.shopIndex?.let {
             shopDetailViewModel.requestShopDetailData(it)
         } ?: run {
             Toast.makeText(requireContext(), "잘못된 접근입니다.", Toast.LENGTH_LONG).show()
@@ -117,7 +120,7 @@ class ShopDetailFragment :
 
         shopDetailViewModel.zzimSuccess.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { zzim ->
-                args?.shop?.zzim = zzim
+                shopDetailViewModel.shopDetail.value?.zzim = zzim
                 if (zzim) {
                     binding.btnZzim.setImageResource(R.drawable.ic_entypo_heart)
                 } else {
@@ -151,7 +154,7 @@ class ShopDetailFragment :
 
         binding.btnZzim.setOnClickListener {
             if (shopDetailViewModel.isLogin.value == true) {
-                args?.shop?.let { shop ->
+                shopDetailViewModel.shopDetail.value?.let { shop ->
                     shopDetailViewModel.requestZzimShop(shop.shopIndex, shop.zzim.not())
                 }
             } else {
@@ -168,6 +171,56 @@ class ShopDetailFragment :
             clipboard.setPrimaryClip(clip)
             Toast.makeText(requireContext(), "주소가 복사되었습니다.", Toast.LENGTH_SHORT).show()
         }
+
+        reviewShopAdapter.setOnItemClickListener(object : ReviewAdapter.OnItemClickListener {
+            override fun onItemClick(review: Review) {}
+
+            override fun onMenuClick(review: Review) {
+                if (review.owner) {
+                    DialogArticleTap().apply {
+                        viewType = DialogArticleTap.ViewType.MINE
+                        onClick = { clickType ->
+                            when (clickType) {
+                                DialogArticleTap.ClickType.EDIT -> {
+                                    args?.shopIndex?.let {
+                                        val list = mutableListOf(it, review.reviewIndex)
+                                        val bundle = bundleOf("list" to list)
+
+                                        findNavController()
+                                            .navigate(R.id.action_global_navigation_write_review,
+                                                bundle)
+                                    }
+                                }
+                                DialogArticleTap.ClickType.DELETE -> {
+                                    shopDetailViewModel.requestReviewDelete(review.reviewIndex)
+                                }
+                                else -> Toast.makeText(
+                                    requireContext(),
+                                    "잘못된 접근",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }.show(childFragmentManager, "dialog.tag")
+                } else {
+                    DialogArticleTap().apply {
+                        viewType = DialogArticleTap.ViewType.OTHER
+                        onClick = { clickType ->
+                            when (clickType) {
+                                DialogArticleTap.ClickType.REPORT -> {
+                                    shopDetailViewModel.requestReviewReport(review.reviewIndex)
+                                }
+                                else -> Toast.makeText(
+                                    requireContext(),
+                                    "잘못된 접근",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }.show(childFragmentManager, "dialog.tag")
+                }
+            }
+        })
     }
 
     private fun writeReviewPage() {
@@ -182,7 +235,7 @@ class ShopDetailFragment :
 
             val action =
                 ShopDetailFragmentDirections.actionNavigationShopDetailToNavigationWriteReviewSeed(
-                    args?.shop
+                    args?.shopIndex ?: 0
                 )
             findNavController().navigate(action)
         } else {

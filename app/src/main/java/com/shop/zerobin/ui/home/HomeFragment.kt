@@ -62,7 +62,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
 
     private fun setListener() {
         shopAdapter.onClick = { shop ->
-            val action = ShopDetailFragmentDirections.actionGlobalNavigationShopDetail(shop)
+            val action = ShopDetailFragmentDirections.actionGlobalNavigationShopDetail(shop.shopIndex)
             findNavController().navigate(action)
         }
 

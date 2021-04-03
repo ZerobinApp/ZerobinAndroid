@@ -12,6 +12,7 @@ import com.shop.zerobin.databinding.FragmentReviewBinding
 import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.common.ImageViewPagerActivity
+import com.shop.zerobin.ui.home.shop.ShopDetailFragmentDirections
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -19,7 +20,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragment_review) {
 
     private val reviewViewModel: ReviewViewModel by viewModel()
-
 
     private val reviewAdapter by lazy {
         ReviewAdapter().apply {
@@ -60,7 +60,8 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
         reviewAdapter.setOnItemClickListener(object : ReviewAdapter.OnItemClickListener {
             //상점이름을 클릭시 상점 상세페이지로 넘어가기 ...
             override fun onItemClick(review: Review) {
-                Toast.makeText(context, review.name, Toast.LENGTH_SHORT).show()
+                val action = ShopDetailFragmentDirections.actionGlobalNavigationShopDetail(review.shopIndex)
+                findNavController().navigate(action)
             }
 
             override fun onMenuClick(review: Review) {
@@ -111,8 +112,6 @@ class ReviewFragment : BaseBindingFragment<FragmentReviewBinding>(R.layout.fragm
                 }
             }
         })
-
-
     }
 
     private fun setReviewAdapter() {
