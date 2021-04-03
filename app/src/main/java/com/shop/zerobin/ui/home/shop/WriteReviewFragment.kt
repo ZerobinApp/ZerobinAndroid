@@ -100,7 +100,9 @@ class WriteReviewFragment :
         viewModel.setHashTagList()
         if (args?.seed == true) viewModel.bloomSeed()
         args?.shopIndex?.let {
-            viewModel.setShopIndex(it)
+            if (it != 0) {
+                viewModel.setShopIndex(it)
+            }
         }
     }
 
