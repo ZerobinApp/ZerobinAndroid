@@ -30,7 +30,7 @@
             android:id="@+id/myShopTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="찜한가게"
+            android:text="@string/my_page_shop_title"
             android:textColor="#000000"
             android:textSize="17dp"
             android:textStyle="bold"

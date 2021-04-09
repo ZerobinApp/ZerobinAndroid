@@ -31,7 +31,7 @@
             android:id="@+id/myStampTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내가 남긴 새싹스탬프"
+            android:text="@string/my_page_stamp_title"
             android:textColor="#000000"
             android:textSize="17dp"
             android:textStyle="bold"
