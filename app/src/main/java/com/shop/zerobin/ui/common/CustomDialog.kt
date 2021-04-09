@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.DialogCustomBinding
@@ -25,6 +26,11 @@ class CustomDialog(context: Context, themeResId: Int) : Dialog(context, themeRes
             null,
             false)
         binding.dialogLoginDescription.text = description
+
+        if (onClickYes == null) {
+            binding.btnNo.isVisible = false
+            binding.btnYes.text = "확인"
+        }
 
         setContentView(binding.root)
 
