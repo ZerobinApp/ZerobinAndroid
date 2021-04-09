@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentSignInBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
+import com.shop.zerobin.ui.common.CustomDialog
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SignInFragment : BaseBindingFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
@@ -67,6 +68,12 @@ class SignInFragment : BaseBindingFragment<FragmentSignInBinding>(R.layout.fragm
                 findNavController().popBackStack()
             }
         }
+
+        signInViewModel.resetInputCheckComplete.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { email ->
+                resetPassword(email)
+            }
+        }
     }
 
     private fun signIn(email: String, password: String) {
@@ -87,6 +94,22 @@ class SignInFragment : BaseBindingFragment<FragmentSignInBinding>(R.layout.fragm
                         Toast.LENGTH_SHORT
                     ).show()
                     hideLoading()
+                }
+            }
+    }
+
+
+    private fun resetPassword(emailAddress: String) {
+        auth.sendPasswordResetEmail(emailAddress)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    CustomDialog(requireContext(), R.style.CustomDialog).apply {
+                        description = "입력하신 이메일로 비밀번호 재설정 메일을 보냈습니다."
+                    }.show()
+                } else {
+                    CustomDialog(requireContext(), R.style.CustomDialog).apply {
+                        description = "회원가입이 되지 않은 이메일입니다.\n다시 확인해주세요."
+                    }.show()
                 }
             }
     }

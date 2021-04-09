@@ -92,15 +92,6 @@ class SignUpFragment : BaseBindingFragment<FragmentSignUpBinding>(R.layout.fragm
             }
     }
 
-    private fun resetPassword(emailAddress: String) {
-        auth.sendPasswordResetEmail(emailAddress)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "Email sent.")
-                }
-            }
-    }
-
     companion object {
         private val TAG: String = SignUpFragment::class.java.simpleName
     }
