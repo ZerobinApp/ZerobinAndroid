@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageReviewBinding
+import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import com.shop.zerobin.ui.common.ImageViewPagerActivity
+import com.shop.zerobin.ui.home.shop.ShopDetailFragmentDirections
+import com.shop.zerobin.ui.review.DialogArticleTap
 import com.shop.zerobin.ui.review.adapter.ReviewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -84,6 +88,45 @@ class MyPageReviewFragment :
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        reviewAdapter.setOnItemClickListener(object : ReviewAdapter.OnItemClickListener {
+            override fun onItemClick(review: Review) {
+                val action =
+                    ShopDetailFragmentDirections.actionGlobalNavigationShopDetail(review.shopIndex)
+                findNavController().navigate(action)
+            }
+
+            override fun onMenuClick(review: Review) {
+                if (review.owner) {
+                    DialogArticleTap().apply {
+                        viewType = DialogArticleTap.ViewType.MINE
+                        onClick = { clickType ->
+                            when (clickType) {
+                                DialogArticleTap.ClickType.EDIT -> {
+                                    val list = mutableListOf(review.shopIndex, review.reviewIndex)
+                                    val bundle = bundleOf("list" to list)
+
+                                    findNavController()
+                                        .navigate(R.id.action_global_navigation_write_review,
+                                            bundle)
+                                }
+                                DialogArticleTap.ClickType.DELETE -> {
+                                    myPageReviewViewModel.requestReviewDelete(
+                                        review.shopIndex,
+                                        review.reviewIndex
+                                    )
+                                }
+                                else -> Toast.makeText(
+                                    requireContext(),
+                                    "잘못된 접근",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }.show(childFragmentManager, "dialog.tag")
+                }
+            }
+        })
     }
 
     private fun requestReviewList() {

@@ -6,19 +6,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.shop.zerobin.data.repository.mypage.MyPageRepository
+import com.shop.zerobin.data.repository.shop.ReviewRepository
 import com.shop.zerobin.domain.DataResult
 import com.shop.zerobin.domain.entity.Review
 import com.shop.zerobin.domain.entity.Shop
 import com.shop.zerobin.domain.entity.User
 import com.shop.zerobin.ui.common.BaseViewModel
 import com.shop.zerobin.ui.common.Event
-import com.shop.zerobin.ui.home.HomeViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseViewModel() {
+class MyPageViewModel(
+    private val myPageRepository: MyPageRepository,
+    private val reviewRepository: ReviewRepository,
+) : BaseViewModel() {
     val inputNickName = MutableLiveData("")
-
 
     private val _nickNameChangeFinish = MutableLiveData<Event<Unit>>()
     val nickNameChangeFinish: LiveData<Event<Unit>> = _nickNameChangeFinish
@@ -73,7 +75,6 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
     }
 
 
-
     private fun handleResultNickNameChange(dataResult: DataResult<Unit>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccessNickNameChange()
@@ -91,7 +92,7 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
     fun requestMyPageReview() {
         viewModelScope.launch {
             val response = myPageRepository.getMyPageReview()
-            Log.d(HomeViewModel.TAG, response.toString())
+            Log.d(TAG, response.toString())
             response.collect { handleResultReview(it) }
         }
     }
@@ -99,7 +100,7 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
     fun requestMyPageShop() {
         viewModelScope.launch {
             val response = myPageRepository.getMyPageShop()
-            Log.d(HomeViewModel.TAG, response.toString())
+            Log.d(TAG, response.toString())
             response.collect { handleResultShop(it) }
         }
     }
@@ -107,7 +108,7 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
     fun requestMyPageStamp() {
         viewModelScope.launch {
             val response = myPageRepository.getMyPageStamp()
-            Log.d(HomeViewModel.TAG, response.toString())
+            Log.d(TAG, response.toString())
             response.collect { handleResultStamp(it) }
         }
     }
@@ -133,8 +134,6 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
         }
     }
 
-
-
     private fun handleResultShop(dataResult: DataResult<List<Shop>>) {
         when (dataResult) {
             is DataResult.Success -> handleSuccessShop(dataResult.data)
@@ -157,7 +156,6 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
     }
 
 
-
     private fun handleSuccessReview(data: List<Review>) {
         _isLoading.value = Event(false)
         _myUserReview.value = data
@@ -171,6 +169,30 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
     private fun handleSuccessStamp(data: List<Review>?) {
         _isLoading.value = Event(false)
         _myUserStamp.value = data!!
+    }
+
+    fun requestReviewDelete(shopIndex: Int, reviewIndex: Int) {
+        viewModelScope.launch {
+            val response =
+                reviewRepository.deleteReview(shopIndex, reviewIndex)
+            Log.d(TAG, response.toString())
+            response.collect { handleResultDelete(it) }
+        }
+    }
+
+    private fun handleResultDelete(dataResult: DataResult<Unit>) {
+        when (dataResult) {
+            is DataResult.Success -> handleSuccessDelete(dataResult.data)
+            is DataResult.Error -> handleError(TAG, dataResult.exception)
+            DataResult.Loading -> handleLoading()
+        }
+    }
+
+    private fun handleSuccessDelete(data: Unit) {
+        _isLoading.value = Event(false)
+        _isError.value = Event("삭제 완료되었습니다.")
+        Log.d(TAG, data.toString())
+        requestMyPageReview()
     }
 
     companion object {

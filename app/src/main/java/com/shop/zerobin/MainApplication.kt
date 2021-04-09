@@ -38,7 +38,7 @@ class MainApplication : Application() {
 val myViewModel = module {
     viewModel { HomeViewModel(get()) }
     viewModel { ReviewViewModel(get()) }
-    viewModel { MyPageViewModel(get()) }
+    viewModel { MyPageViewModel(get(), get()) }
     viewModel { SignInViewModel(get()) }
     viewModel { SignUpViewModel(get()) }
     viewModel { ShopDetailViewModel(get(), get()) }
