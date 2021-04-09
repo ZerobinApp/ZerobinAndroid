@@ -30,22 +30,22 @@ class SignUpViewModel(private val myPageRepository: MyPageRepository) : BaseView
 
     private fun inputCheck(): Boolean {
         if (inputEmail.value?.isBlank() == true) {
-            _isError.value = Event("이메일을 입력하세요.")
+            _isError.value = Event("이메일을 입력해주세요.")
             return false
         }
 
         if (inputPassword.value?.isBlank() == true) {
-            _isError.value = Event("비밀번호를 입력하세요.")
+            _isError.value = Event("비밀번호를 입력해주세요.")
             return false
         }
 
         if (inputPasswordConfirm.value?.isBlank() == true) {
-            _isError.value = Event("비밀번호를 한번 더 입력하세요.")
+            _isError.value = Event("비밀번호를 한번 더 입력해주세요.")
             return false
         }
 
         if (inputNickname.value?.isBlank() == true) {
-            _isError.value = Event("닉네임을 입력하세요.")
+            _isError.value = Event("닉네임을 입력해주세요.")
             return false
         }
 

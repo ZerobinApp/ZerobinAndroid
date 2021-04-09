@@ -46,7 +46,7 @@ class MyPageViewModel(private val myPageRepository: MyPageRepository) : BaseView
 
     private fun inputCheck(): Boolean {
         if (inputNickName.value?.isBlank() == true) {
-            _isError.value = Event("닉네임을 입력하세요.")
+            _isError.value = Event("닉네임을 입력해주세요.")
             return false
         }
 
