@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageStampBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
@@ -39,6 +40,7 @@ class MyPageStampFragment :
         setReviewAdapter()
         observeLiveData()
         requestShopList()
+        setOnClickListeners()
     }
 
     private fun setReviewAdapter() {
@@ -68,6 +70,12 @@ class MyPageStampFragment :
             event.getContentIfNotHandled()?.let { message ->
                 Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    private fun setOnClickListeners() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
