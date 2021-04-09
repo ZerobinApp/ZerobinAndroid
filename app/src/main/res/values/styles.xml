@@ -52,7 +52,7 @@
         <item name="android:background">#BABAB8</item>
     </style>
 
-    <style name="LoginDialog" parent="Base.Theme.AppCompat.Dialog">
+    <style name="CustomDialog" parent="Base.Theme.AppCompat.Dialog">
         <item name="android:windowMinWidthMajor">80%</item>
         <item name="android:windowMinWidthMinor">80%</item>
         <item name="android:fontFamily">@font/noto_sans_kr_regular</item>

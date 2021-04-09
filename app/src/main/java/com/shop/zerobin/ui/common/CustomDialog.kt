@@ -7,21 +7,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import com.shop.zerobin.R
-import com.shop.zerobin.databinding.DialogLoginBinding
+import com.shop.zerobin.databinding.DialogCustomBinding
 
-class LoginDialog(context: Context, themeResId: Int) : Dialog(context, themeResId) {
+class CustomDialog(context: Context, themeResId: Int) : Dialog(context, themeResId) {
 
     var onClickYes: (() -> Unit)? = null
 
-    private lateinit var binding: DialogLoginBinding
+    var description: String? = null
+
+    private lateinit var binding: DialogCustomBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window?.setBackgroundDrawable(ColorDrawable())
         binding = DataBindingUtil.inflate(LayoutInflater.from(context),
-            R.layout.dialog_login,
+            R.layout.dialog_custom,
             null,
             false)
+        binding.dialogLoginDescription.text = description
 
         setContentView(binding.root)
 

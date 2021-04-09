@@ -55,11 +55,12 @@ abstract class BaseBindingFragment<B : ViewDataBinding>(@LayoutRes private val l
     }
 
     fun showLoginDialog() {
-        LoginDialog(requireContext(), R.style.LoginDialog).apply {
+        CustomDialog(requireContext(), R.style.CustomDialog).apply {
             onClickYes = {
                 val action = SignInFragmentDirections.actionGlobalNavigationSignIn()
                 findNavController().navigate(action)
             }
+            description = getString(R.string.need_login_description)
         }.show()
     }
 }
