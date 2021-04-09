@@ -26,18 +26,6 @@
         android:layout_marginBottom="20dp">
 
         <TextView
-            android:id="@+id/shopName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{review.name}"
-            android:textColor="#272727"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="알맹상점" />
-
-        <TextView
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,10 +34,20 @@
             android:textColor="#272727"
             android:textSize="15dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/shopName"
-            app:layout_constraintEnd_toStartOf="@+id/reviewMenu"
-            app:layout_constraintTop_toTopOf="@+id/shopName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="안나영" />
+
+        <TextView
+            android:id="@+id/shopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"@" + review.name}'
+            android:textColor="#272727"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userName"
+            tools:text="\@알맹상점" />
 
         <ImageView
             android:id="@+id/reviewMenu"
@@ -57,7 +55,6 @@
             android:layout_height="24dp"
             app:layout_constraintBottom_toBottomOf="@id/shopName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/shopName"
             app:srcCompat="@drawable/review_menu" />
 
         <androidx.viewpager2.widget.ViewPager2

@@ -35,6 +35,7 @@ class ShopDetailFragment :
 
     private val reviewShopAdapter by lazy {
         ReviewAdapter().apply {
+            viewType = ReviewAdapter.ViewType.SHOP
             onImageClick = { reviewIndex, position ->
                 val intent = Intent(requireContext(), ImageViewPagerActivity::class.java)
                 val imageList: Array<String> =

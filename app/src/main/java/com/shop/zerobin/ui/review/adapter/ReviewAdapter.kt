@@ -9,15 +9,20 @@ import com.shop.zerobin.R
 import com.shop.zerobin.databinding.ItemReviewBinding
 import com.shop.zerobin.domain.entity.Hashtag
 import com.shop.zerobin.domain.entity.Review
-import com.shop.zerobin.domain.entity.ShopDetail
 
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
+
+    var viewType: ViewType? = null
 
     private var item = emptyList<Review>()
 
     var onImageClick: ((Int, Int) -> Unit)? = null
 
     private var reviewIndex = 0
+
+    enum class ViewType {
+        ALL, SHOP, MINE
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewHolder {
         val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -56,14 +61,20 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
             binding.review = review
 
+            when(viewType) {
+                ViewType.SHOP -> binding.shopName.isVisible = false
+                ViewType.MINE -> binding.userName.isVisible = false
+                else -> {}
+            }
+
             binding.shopName.setOnClickListener {
                 listener?.onItemClick(review = review)
             }
+
             binding.reviewMenu.setOnClickListener {
                 listener?.onMenuClick(review = review)
             }
         }
-
 
         private fun setReviewImageAdapter(imageList: List<String>) {
             val filteredImageList = imageList.filter { it.isNotBlank() }
@@ -93,7 +104,8 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         private fun drawHashTagList(hashTagList: List<Hashtag>) {
             var hashTagString = ""
             hashTagList.forEach {
-                hashTagString += binding.root.context.getString(R.string.hash_tag_format, it.name) + "  "
+                hashTagString += binding.root.context.getString(R.string.hash_tag_format,
+                    it.name) + "  "
             }
             binding.reviewHashTag.text = hashTagString
         }
