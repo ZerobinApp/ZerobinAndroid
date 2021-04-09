@@ -36,6 +36,7 @@
     <string name="my_page_guide_login_before">로그인하고 가치있는 친환경 소비를 경험하세요!</string>
     <string name="my_page_guide_login_after">오늘도 환경을 사랑하는 가치소비를 실천해볼까요?</string>
     <string name="need_login_description">먼저 로그인이 필요해요 :D\n로그인 페이지로 이동하시겠어요?</string>
+    <string name="logout_description">정말로 로그아웃하시겠어요?</string>
     <string name="yes">예</string>
     <string name="no">아니오</string>
     <string name="hash_tag_format">#%s</string>

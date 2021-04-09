@@ -10,6 +10,7 @@ import com.google.firebase.ktx.Firebase
 import com.shop.zerobin.R
 import com.shop.zerobin.databinding.FragmentMyPageBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
+import com.shop.zerobin.ui.common.CustomDialog
 import com.shop.zerobin.ui.mypage.sign.SignInFragmentDirections
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -52,9 +53,14 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
 
         binding.btnLogin.setOnClickListener {
             if (myPageViewModel.isLogin.value == true) {
-                Firebase.auth.signOut()
-                myPageViewModel.requestLogout()
-                myPageViewModel.requestMyPage()
+                CustomDialog(requireContext(), R.style.CustomDialog).apply {
+                    onClickYes = {
+                        Firebase.auth.signOut()
+                        myPageViewModel.requestLogout()
+                        myPageViewModel.requestMyPage()
+                    }
+                    description = getString(R.string.logout_description)
+                }.show()
             } else {
                 val action = SignInFragmentDirections.actionGlobalNavigationSignIn()
                 findNavController().navigate(action)
@@ -68,7 +74,6 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
         }
 
         binding.btnDeleteAccount.setOnClickListener {
-
             if (myPageViewModel.isLogin.value == true) {
                 findNavController().navigate(R.id.action_navigation_my_page_to_navigation_delete_account_fragment)
             }
