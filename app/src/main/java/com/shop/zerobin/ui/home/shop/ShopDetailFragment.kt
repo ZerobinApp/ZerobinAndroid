@@ -122,9 +122,9 @@ class ShopDetailFragment :
             event.getContentIfNotHandled()?.let { zzim ->
                 shopDetailViewModel.shopDetail.value?.zzim = zzim
                 if (zzim) {
-                    binding.btnZzim.setImageResource(R.drawable.ic_entypo_heart)
+                    binding.btnZzim.setImageResource(R.drawable.heart_zzim)
                 } else {
-                    binding.btnZzim.setImageResource(R.drawable.ic_codicon_heart)
+                    binding.btnZzim.setImageResource(R.drawable.heart_zzim_not)
                 }
             }
         }

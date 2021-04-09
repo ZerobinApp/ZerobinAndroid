@@ -92,11 +92,11 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="20dp"
-                    android:src="@{VM.shopDetail.zzim ? @drawable/ic_entypo_heart : @drawable/ic_codicon_heart}"
+                    android:src="@{VM.shopDetail.zzim ? @drawable/heart_zzim : @drawable/heart_zzim_not}"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
-                    tools:src="@drawable/ic_codicon_heart" />
+                    tools:src="@drawable/heart_zzim_not" />
 
                 <TextView
                     android:id="@+id/shopName"
