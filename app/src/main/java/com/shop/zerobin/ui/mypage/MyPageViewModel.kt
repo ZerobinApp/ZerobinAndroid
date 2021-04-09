@@ -193,6 +193,7 @@ class MyPageViewModel(
         _isError.value = Event("삭제 완료되었습니다.")
         Log.d(TAG, data.toString())
         requestMyPageReview()
+        requestMyPageStamp()
     }
 
     companion object {
