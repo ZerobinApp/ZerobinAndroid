@@ -39,17 +39,59 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/mainDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="만나서 반가워요!"
+            android:layout_marginTop="20dp"
+            android:text="'Zerobin'과 함께할 가치있는 일상\n기대되지 않으세요?"
             android:textColor="#272727"
-            android:textSize="25dp"
+            android:textSize="22dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signUpTitle"
-            app:layout_constraintVertical_bias="0.1" />
+            app:layout_constraintTop_toBottomOf="@id/signUpTitle" />
+
+        <TextView
+            android:id="@+id/subDescription1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="회원가입을 하시면 이런 기능을 사용할 수 있어요!"
+            android:textColor="#1CD16A"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mainDescription" />
+
+        <TextView
+            android:id="@+id/subDescription2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="- 새싹 스탬프를 통해 친환경 가게 응원하기"
+            android:textColor="#1CD16A"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subDescription1" />
+
+        <TextView
+            android:id="@+id/subDescription3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- 내 맘에 쏙 든 가게 찜하기"
+            android:textColor="#1CD16A"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subDescription2" />
+
+        <TextView
+            android:id="@+id/subDescription4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- 방문한 가게 리뷰 작성하기"
+            android:textColor="#1CD16A"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subDescription3" />
 
         <EditText
             android:id="@+id/inputEmail"
@@ -65,7 +107,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintVertical_bias="0.6"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <EditText
