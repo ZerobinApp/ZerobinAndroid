@@ -56,8 +56,8 @@ class WriteReviewViewModel(
     private val _successEvent = MutableLiveData<Event<Unit>>()
     val successEvent: LiveData<Event<Unit>> = _successEvent
 
-    fun bloomSeed() {
-        _seed.value = true
+    fun setSeed(value: Boolean) {
+        _seed.value = value
     }
 
     fun setShopIndex(shopIndex: Int) {

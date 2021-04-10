@@ -98,7 +98,9 @@ class WriteReviewFragment :
 
     private fun setViewModelData() {
         viewModel.setHashTagList()
-        if (args?.seed == true) viewModel.bloomSeed()
+        args?.seed?.let {
+            viewModel.setSeed(it)
+        }
         args?.shopIndex?.let {
             if (it != 0) {
                 viewModel.setShopIndex(it)

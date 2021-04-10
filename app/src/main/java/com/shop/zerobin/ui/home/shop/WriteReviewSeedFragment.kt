@@ -35,7 +35,7 @@ class WriteReviewSeedFragment :
         }
 
         binding.seedImage.setOnClickListener {
-            viewModel.bloomSeed()
+            viewModel.setSeed(viewModel.seed.value?.not() ?: false)
         }
 
         binding.btnNext.setOnClickListener {
@@ -57,6 +57,10 @@ class WriteReviewSeedFragment :
                 binding.seedDescription1.visibility = View.GONE
                 binding.seedDescription2.text = getString(R.string.review_seed_description_bloom)
                 binding.seedImage.setImageResource(R.drawable.ic_pistachio_bloom)
+            } else {
+                binding.seedDescription1.visibility = View.VISIBLE
+                binding.seedDescription2.text = getString(R.string.review_seed_description2)
+                binding.seedImage.setImageResource(R.drawable.ic_pistachio)
             }
         }
     }
