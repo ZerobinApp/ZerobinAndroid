@@ -1,6 +1,7 @@
 package com.shop.zerobin.data.source.remote
 
 import com.google.gson.GsonBuilder
+import com.shop.zerobin.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,11 +14,13 @@ object RetrofitObject {
     private const val testUrl = "http://test.zerobin.shop/"
     private const val realUrl = "https://zerobin.shop/"
 
+    private val applyUrl = if (BuildConfig.DEBUG) devUrl else realUrl
+
     fun provideZerobinApi(jwt: String): ZerobinApi =
         getRetrofitBuild(jwt).create(ZerobinApi::class.java)
 
     private fun getRetrofitBuild(jwt: String) = Retrofit.Builder()
-        .baseUrl(realUrl)
+        .baseUrl(applyUrl)
         .client(getOkhttpClient(jwt))
         .addConverterFactory(getGsonConverterFactory())
         .build()
