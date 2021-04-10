@@ -9,6 +9,7 @@ import com.shop.zerobin.ui.home.shop.ShopDetailViewModel
 import com.shop.zerobin.ui.home.shop.WriteReviewViewModel
 import com.shop.zerobin.ui.mypage.MyPageViewModel
 import com.shop.zerobin.ui.mypage.sign.DeleteUserViewModel
+import com.shop.zerobin.ui.mypage.sign.ResetPasswordViewModel
 import com.shop.zerobin.ui.mypage.sign.SignInViewModel
 import com.shop.zerobin.ui.mypage.sign.SignUpViewModel
 import com.shop.zerobin.ui.review.ReviewViewModel
@@ -45,6 +46,7 @@ val myViewModel = module {
     viewModel { FilterViewModel(get()) }
     viewModel { WriteReviewViewModel(get(), get()) }
     viewModel { DeleteUserViewModel(get()) }
+    viewModel { ResetPasswordViewModel(get()) }
 }
 
 val myModule = module {

@@ -75,7 +75,7 @@ class MyPageFragment : BaseBindingFragment<FragmentMyPageBinding>(R.layout.fragm
 
         binding.btnDeleteAccount.setOnClickListener {
             if (myPageViewModel.isLogin.value == true) {
-                findNavController().navigate(R.id.action_navigation_my_page_to_navigation_delete_account_fragment)
+                findNavController().navigate(R.id.action_navigation_my_page_to_navigation_delete_account)
             }
         }
     }

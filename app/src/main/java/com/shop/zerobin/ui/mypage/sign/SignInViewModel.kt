@@ -22,28 +22,10 @@ class SignInViewModel(private val myPageRepository: MyPageRepository) : BaseView
     private val _signInFinish = MutableLiveData<Event<Unit>>()
     val signInFinish: LiveData<Event<Unit>> = _signInFinish
 
-    private val _resetInputCheckComplete = MutableLiveData<Event<String>>()
-    val resetInputCheckComplete: LiveData<Event<String>> = _resetInputCheckComplete
-
     fun onClickLogin() {
         if (!inputCheck()) return
 
         _inputCheckComplete.value = Event(Unit)
-    }
-
-    fun onClickResetPassword() {
-        val email = inputEmail.value ?: ""
-        if (email.isBlank()) {
-            _isError.value = Event("이메일을 입력해주시고 클릭해주세요.")
-            return
-        }
-        val patterns = Patterns.EMAIL_ADDRESS
-        if (!patterns.matcher(email).matches()) {
-            _isError.value = Event("이메일 형식으로 입력해주세요.")
-            return
-        }
-
-        _resetInputCheckComplete.value = Event(email)
     }
 
     private fun inputCheck(): Boolean {

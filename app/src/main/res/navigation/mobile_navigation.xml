@@ -119,8 +119,8 @@
             app:popExitAnim="@anim/slide_out_right" />
 
         <action
-            android:id="@+id/action_navigation_my_page_to_navigation_delete_account_fragment"
-            app:destination="@id/navigation_delete_account_fragment"
+            android:id="@+id/action_navigation_my_page_to_navigation_delete_account"
+            app:destination="@id/navigation_delete_account"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/anim_nothing"
             app:popEnterAnim="@anim/anim_nothing"
@@ -159,6 +159,14 @@
         <action
             android:id="@+id/action_navigation_sign_in_to_navigation_sign_up"
             app:destination="@id/navigation_sign_up"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/anim_nothing"
+            app:popEnterAnim="@anim/anim_nothing"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_navigation_sign_in_to_navigation_reset_password"
+            app:destination="@id/navigation_reset_password"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/anim_nothing"
             app:popEnterAnim="@anim/anim_nothing"
@@ -262,9 +270,15 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_delete_account_fragment"
+        android:id="@+id/navigation_delete_account"
         android:name="com.shop.zerobin.ui.mypage.sign.DeleteUserFragment"
         android:label="DeleteAccountFragment"
         tools:layout="@layout/fragment_delete_user" />
+
+    <fragment
+        android:id="@+id/navigation_reset_password"
+        android:name="com.shop.zerobin.ui.mypage.sign.ResetPasswordFragment"
+        android:label="ResetPasswordFragment"
+        tools:layout="@layout/fragment_reset_password" />
 
 </navigation>

@@ -9,7 +9,6 @@ import com.shop.zerobin.databinding.FragmentMyPageNickChangeBinding
 import com.shop.zerobin.ui.common.BaseBindingFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
 class MyPageNickChangeFragment :
     BaseBindingFragment<FragmentMyPageNickChangeBinding>(R.layout.fragment_my_page_nick_change) {
 
