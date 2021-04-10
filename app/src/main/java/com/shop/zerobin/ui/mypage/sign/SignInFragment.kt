@@ -36,6 +36,10 @@ class SignInFragment : BaseBindingFragment<FragmentSignInBinding>(R.layout.fragm
             findNavController().navigate(R.id.action_navigation_sign_in_to_navigation_sign_up)
         }
 
+        binding.signUpButtonBold.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_sign_in_to_navigation_sign_up)
+        }
+
         binding.resetPassword.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_sign_in_to_navigation_reset_password)
         }

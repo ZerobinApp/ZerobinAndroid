@@ -112,12 +112,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="계정이 없으신가요? 5초만에 끝나는 간편 회원가입"
+            android:text="계정이 없으신가요? 5초만에 끝나는 "
             android:textColor="#505050"
-            android:textSize="11dp"
+            android:textSize="12dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintBottom_toTopOf="@id/btnLogin"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/signUpButtonBold"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/signUpButtonBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="간편 회원가입"
+            android:textColor="#505050"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/signUpButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/signUpButton"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
