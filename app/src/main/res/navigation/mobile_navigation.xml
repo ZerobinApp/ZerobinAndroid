@@ -183,6 +183,14 @@
             app:destination="@id/navigation_my_page"
             app:popUpTo="@id/navigation_my_page"
             app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_navigation_sign_up_to_navigation_reset_password"
+            app:destination="@id/navigation_reset_password"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/anim_nothing"
+            app:popEnterAnim="@anim/anim_nothing"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment

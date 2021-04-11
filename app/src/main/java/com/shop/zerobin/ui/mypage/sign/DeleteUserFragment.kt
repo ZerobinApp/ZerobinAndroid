@@ -56,6 +56,10 @@ class DeleteUserFragment :
         binding.btnDelete.setOnClickListener {
             reAuthenticateFirebase()
         }
+
+        binding.resetPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_sign_up_to_navigation_reset_password)
+        }
     }
 
     private fun reAuthenticateFirebase() {
