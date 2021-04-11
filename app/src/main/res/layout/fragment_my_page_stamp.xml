@@ -72,7 +72,7 @@
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:paddingBottom="30dp"
-            android:text="@string/review_empty_description"
+            android:text="@string/stamp_empty_description"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
